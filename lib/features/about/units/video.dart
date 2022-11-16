@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class Video extends StatefulWidget {
   const Video({Key? key}) : super(key: key);
@@ -23,8 +23,6 @@ class _VideoState extends State<Video> {
   }
 
   @override
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,19 +30,17 @@ class _VideoState extends State<Video> {
         Container(
           height: 216.h,
           width: 1.sw,
-          child:
-          Center(
+          child: Center(
             child: _controller.value.isInitialized
                 ? AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
-            )
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  )
                 : Container(),
           ),
-
         ),
         InkWell(
-          onTap: (){
+          onTap: () {
             setState(() {
               _controller.value.isPlaying
                   ? _controller.pause()
@@ -52,11 +48,10 @@ class _VideoState extends State<Video> {
             });
           },
           child: Icon(
-
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,size: 30,
+            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+            size: 30,
           ),
         ),
-
       ],
     );
   }

@@ -35,11 +35,14 @@ class TabView extends StatelessWidget {
           child: Row(
             children: [
               const Image(image: AssetImage('assets/images/Vector.png')),
-              CustomText(
-                text: text1,
-                color: ColorManager.primaryColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
+              Expanded(
+                child:
+                CustomText(
+                  text: text1,
+                  color: ColorManager.primaryColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),

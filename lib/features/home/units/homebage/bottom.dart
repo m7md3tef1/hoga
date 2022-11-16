@@ -90,6 +90,7 @@ class _BottomState extends State<Bottom> {
               height: 25.h,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
                     onTap: () {
@@ -119,21 +120,18 @@ class _BottomState extends State<Bottom> {
                 SizedBox(
                   width: 4.h,
                 ),
-                Expanded(
-                    child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            i = 3;
-                          });
-                        },
-                        child: ButtonContainer(
-                            i == 3
-                                ? ColorManager.primaryColor
-                                : const Color(0xFFA9A9A9),
-                            'PRODUCTS'))),
-                SizedBox(
-                  width: 10.h,
-                ),
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        i = 3;
+                      });
+                    },
+                    child: ButtonContainer(
+                        i == 3
+                            ? ColorManager.primaryColor
+                            : const Color(0xFFA9A9A9),
+                        'PRODUCTS')),
+               
               ],
             ),
             SizedBox(

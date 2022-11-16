@@ -336,25 +336,25 @@ class Body extends StatelessWidget {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Shimmer.fromColors(
                                               enabled: true,
+                                              baseColor: Colors.grey[300]!,
+                                              highlightColor:
+                                                  Colors.grey[400]!,
                                               child: Container(
                                                   width: 0.2.sw,
                                                   height: 12.sp,
-                                                  color: Colors.grey[300]),
-                                              baseColor: Colors.grey[300]!,
-                                              highlightColor:
-                                                  Colors.grey[400]!),
+                                                  color: Colors.grey[300])),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Shimmer.fromColors(
                                               enabled: true,
+                                              baseColor: Colors.grey[300]!,
+                                              highlightColor:
+                                                  Colors.grey[400]!,
                                               child: Container(
                                                   width: 0.2.sw,
                                                   height: 12.sp,
-                                                  color: Colors.grey[300]),
-                                              baseColor: Colors.grey[300]!,
-                                              highlightColor:
-                                                  Colors.grey[400]!),
+                                                  color: Colors.grey[300])),
                                         ),
                                       ],
                                     ),
