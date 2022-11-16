@@ -22,12 +22,9 @@ String text;
               padding:  EdgeInsets.all(9.r),
               child: CustomText(
                 text: text,
-<<<<<<< HEAD
-                fontSize: 12.sp,
-=======
 
-                fontSize: 14.sp,
->>>>>>> b6858b9803a35ccae61312e3a1435e870a704322
+                fontSize: 12.sp,
+
                 fontWeight: FontWeight.w700,
                 color: const Color(0xFFFFFFFF),
               ),

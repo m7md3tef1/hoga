@@ -15,54 +15,47 @@ class CustomAppbar extends StatelessWidget {
   bool? hideIcons;
   CustomAppbar(
       {Key? key,
-      required this.title,
-      this.icon,
-      this.hideIcons,
-      this.scaffoldKey})
+        required this.title,
+        this.icon,
+        this.hideIcons,
+        this.scaffoldKey})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          color: Colors.white,
-          height: 65,
-          width: 1.sw,
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.sp),
-              child: Row(
+    return Container(
+      color: Colors.white,
+      height: 100.h,
+      width: 1.sw,
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.sp),
+          child: Column(
+            children: [
+              Center(child: Image(
+                  height: 60.h,
+                  width: 1.sw,
+                  image: const AssetImage(AppImages.logo))),
+              Row(
                 mainAxisAlignment:
-                    (hideIcons == null || !hideIcons!) && icon != null
-                        ? MainAxisAlignment.spaceBetween
-                        : (hideIcons == null || !hideIcons!)
-                            ? MainAxisAlignment.start
-                            : MainAxisAlignment.center,
+                (hideIcons == null || !hideIcons!) && icon != null
+                    ? MainAxisAlignment.spaceBetween
+                    : (hideIcons == null || !hideIcons!)
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.center,
                 children: [
                   if (hideIcons == null || !hideIcons!)
-                    Builder(
-                      builder: (context) {
-                        return InkWell(
-                            onTap: () {
-                              print('clicked');
-                              print(scaffoldKey);
-                              Scaffold.of(context).openDrawer();
+                    InkWell(
+                        onTap: () {
+                          print('clicked');
+                          if (scaffoldKey != null) {
+                            scaffoldKey!.currentState!.openDrawer();
+                          } else {
+                            Home.scaffoldStateKey.currentState!.openDrawer();
+                          }
 
-                              if (scaffoldKey != null) {
-                                print('clicked2');
-
-                                scaffoldKey!.currentState!.openDrawer();
-                              } else {
-
-                                Home.scaffoldStateKey.currentState!.openDrawer();
-
-                              }
-                              //MagicRouter.navigateTo( const OnDrawer());
-                            },
-                            child: SvgPicture.asset(AppImages.menu));
-                      }
-                    ),
+                        },
+                        child: SvgPicture.asset(AppImages.menu)),
                   Expanded(
                     flex: 1,
                     child: Center(
@@ -81,10 +74,10 @@ class CustomAppbar extends StatelessWidget {
                         child: const Icon(Icons.account_circle_outlined)),
                 ],
               ),
-            ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

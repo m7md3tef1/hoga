@@ -44,7 +44,12 @@ class GetSubscriptionFailed extends UpdateProfileStates {
   final String msg;
   GetSubscriptionFailed(this.msg);
 }
+class CancelSuccess extends UpdateProfileStates {
 
+}
+class CancelFailed extends UpdateProfileStates {
+
+}
 
 class FailedNetwork extends UpdateProfileStates {
   final String msg;

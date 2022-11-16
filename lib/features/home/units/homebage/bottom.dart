@@ -118,11 +118,10 @@ class _BottomState extends State<Bottom> {
                             : const Color(0xFFA9A9A9),
                         'JOBS')),
                 SizedBox(
-<<<<<<< HEAD
+
                   width: 4.w,
-=======
-                  width: 4.h,
->>>>>>> b6858b9803a35ccae61312e3a1435e870a704322
+
+
                 ),
                 InkWell(
                     onTap: () {
@@ -135,13 +134,12 @@ class _BottomState extends State<Bottom> {
                             ? ColorManager.primaryColor
                             : const Color(0xFFA9A9A9),
                         'PRODUCTS')),
-<<<<<<< HEAD
+
 //                SizedBox(
 //                  width: 10.h,
 //                ),
-=======
+
                
->>>>>>> b6858b9803a35ccae61312e3a1435e870a704322
               ],
             ),
             SizedBox(
