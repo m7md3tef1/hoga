@@ -117,23 +117,22 @@ class _BottomState extends State<Bottom> {
                             : const Color(0xFFA9A9A9),
                         'JOBS')),
                 SizedBox(
-                  width: 4.h,
+                  width: 4.w,
                 ),
-                Expanded(
-                    child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            i = 3;
-                          });
-                        },
-                        child: ButtonContainer(
-                            i == 3
-                                ? ColorManager.primaryColor
-                                : const Color(0xFFA9A9A9),
-                            'PRODUCTS'))),
-                SizedBox(
-                  width: 10.h,
-                ),
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        i = 3;
+                      });
+                    },
+                    child: ButtonContainer(
+                        i == 3
+                            ? ColorManager.primaryColor
+                            : const Color(0xFFA9A9A9),
+                        'PRODUCTS')),
+//                SizedBox(
+//                  width: 10.h,
+//                ),
               ],
             ),
             SizedBox(

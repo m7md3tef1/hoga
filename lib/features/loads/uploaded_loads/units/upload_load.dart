@@ -23,7 +23,7 @@ class _UploadedLoadState extends State<UploadedLoad> {
           print("is access token ${LoadsCubit.get(context).isAccessToken}");
 
           return LoadsCubit.get(context).testLoading
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(
                   color: ColorManager.yellow,
                 ))

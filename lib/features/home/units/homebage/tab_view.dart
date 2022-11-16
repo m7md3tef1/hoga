@@ -33,13 +33,19 @@ class TabView extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 15.w, right: 15.w),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+
             children: [
               const Image(image: AssetImage('assets/images/Vector.png')),
-              CustomText(
-                text: text1,
-                color: ColorManager.primaryColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
+              Expanded(
+                child: CustomText(
+                  align: TextAlign.start,
+
+                  text: text1,
+                  color: ColorManager.primaryColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),
@@ -63,22 +69,18 @@ class TabView extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 15.w, right: 15.w),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Image(image: AssetImage('assets/images/Vector.png')),
-              text2.length>30?
               Expanded(
                 child: CustomText(
+                  align: TextAlign.start,
                   text: text2,
                   color: ColorManager.primaryColor,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                 ),
-              ):CustomText(
-                text: text2,
-                color: ColorManager.primaryColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-              ),
+              )
             ],
           ),
         ),
@@ -96,7 +98,7 @@ class TabView extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 25.h,
+          height: 15.h,
         ),
       ],
     );

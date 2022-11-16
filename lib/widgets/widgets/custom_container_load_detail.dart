@@ -22,97 +22,61 @@ class CustomContainerLoad extends StatelessWidget {
       widget: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+
           Padding(
-            padding: EdgeInsets.only(
-              top: 15.h,
-              left: 8.sp,
-              right: 8.sp,
-            ),
-            child: Container(
-              height: 100.h,
-              width: 1.sw,
-              child: Column(
-                //  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      CustomText(
-                        text: load.originCity == null
-                            ? 'other'
-                            : load.originCity!.title.toString(),
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorManager.primaryColor,
-                      ),
-                      CustomText(
-                        text: load.originState == null
-                            ? 'other'
-                            : ' (${'${load.originState!.title!.toString()},${load.originCountry!.title!.toString()}'})',
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorManager.primaryColor,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.arrow_right_alt,
-                        color: ColorManager.primaryColor,
-                      ),
-                      CustomText(
-                        text: load.destinationCity == null
-                            ? 'other'
-                            : '${load.destinationCity!.title!.toString()} City ',
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorManager.primaryColor,
-                      ),
-                      Expanded(
-                        child: CustomText(
-                         // height: 38.h,
-                          text: load.destinationState == null
-                              ? 'other'
-                              : '(${'${load.destinationState!.title!.toString()},${load.destinationCountry!.title!.toString()}'})',
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w600,
-                          color: ColorManager.primaryColor,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+      padding: EdgeInsets.only(
+      top: 15.h,
+        left: 8.sp,
+        right: 8.sp,
+      bottom: 10.sp
+      ),
+        child: CustomText(
+          text:   "${load.originCity == null ? "other" : load.originCity!.title}"
+              " (${load.originState == null ? "other" : load.originState!.title} , "
+              "${load.originCountry == null ? "other" : load.originCountry!.title}) "
+              " → "
+              "${load.destinationCity == null ? "other" : load.destinationCity!.title}"
+              " (${load.destinationState == null ? "other" : load.destinationState!.title} , "
+              "${load.destinationCountry == null ? "other" : load.destinationCountry!.title}) ",
+          fontSize: 17.sp,
+          fontWeight: FontWeight.w600,
+          color: ColorManager.primaryColor,
+        ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.person_outline,
-                      color: ColorManager.primaryColor,
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                    CustomText(
-                      text: load.user == null
-                          ? 'other'
-                          : load.user!.username.toString(),
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                  ],
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.person_outline,
+                        color: ColorManager.primaryColor,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Expanded(
+                        child: CustomText(
+                          text: load.user == null
+                              ? 'other'
+                              : load.user!.username.toString(),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
+                  flex: 2,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -123,7 +87,7 @@ class CustomContainerLoad extends StatelessWidget {
                       Expanded(
                         child: CustomText(
                           align: TextAlign.start,
-                          text: 'createdAt ',
+                          text: '${load.availabilityDate}',
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,
@@ -133,6 +97,7 @@ class CustomContainerLoad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
+                  flex: 2,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -220,16 +185,15 @@ class CustomContainerLoad extends StatelessWidget {
                           const SizedBox(
                             width: 6,
                           ),
-                          CustomText(
-                            text: load.user == null
-                                ? 'other'
-                                : load.user!.email.toString(),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(
-                            width: 6,
+                          Expanded(
+                            child: CustomText(
+                              text: load.user == null
+                                  ? 'other'
+                                  : load.user!.email.toString(),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       ),

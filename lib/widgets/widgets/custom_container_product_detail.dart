@@ -241,12 +241,14 @@ class CustomContainerProduct extends StatelessWidget {
                                 color: Colors.black87,
                                 text: ' Email',
                               ),
-                              CustomText(
-                                  align: TextAlign.center,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black38,
-                                  text: ': ${product.user!.email}'),
+                              Expanded(
+                                child: CustomText(
+                                    align: TextAlign.center,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black38,
+                                    text: ': ${product.user!.email}'),
+                              ),
                             ],
                           ),
                         ),
@@ -261,12 +263,14 @@ class CustomContainerProduct extends StatelessWidget {
                                 color: Colors.black87,
                                 text: ' Contact Number',
                               ),
-                              CustomText(
-                                  align: TextAlign.center,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black38,
-                                  text: ': ${product.user!.contactNumber}'),
+                              Expanded(
+                                child: CustomText(
+                                    align: TextAlign.center,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black38,
+                                    text: ': ${product.user!.contactNumber}'),
+                              ),
                             ],
                           ),
                         ),

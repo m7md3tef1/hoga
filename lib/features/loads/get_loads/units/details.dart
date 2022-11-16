@@ -25,7 +25,6 @@ class Detail extends StatelessWidget {
           children: [
             CustomAppbar(title: 'View Loads',scaffoldKey: scaffoldKey,),
             CustomContainerLoad(load!),
-            SizedBox(height: 22.h,)
           ],
         ),
       ),

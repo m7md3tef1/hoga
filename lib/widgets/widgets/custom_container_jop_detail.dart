@@ -150,13 +150,15 @@ class CustomContainerJop extends StatelessWidget {
                         const SizedBox(
                           width: 6,
                         ),
-                        CustomText(
-                          text: jop.user == null
-                              ? 'other'
-                              : jop.user!.email.toString(),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
+                        Expanded(
+                          child: CustomText(
+                            text: jop.user == null
+                                ? 'other'
+                                : jop.user!.email.toString(),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(
                           width: 6,

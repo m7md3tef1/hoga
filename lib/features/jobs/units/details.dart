@@ -26,13 +26,12 @@ class _DetailState extends State<Detail> {
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomAppbar(title: 'View Jop',scaffoldKey:widget.scaffoldKey ,),
+          CustomAppbar(title: 'View Job',scaffoldKey:widget.scaffoldKey ,),
           Expanded(child: Column(
             children: [
               Expanded(child: CustomContainerJop(widget.jop!)),
             ],
           )),
-          SizedBox(height: 22.h,)
         ],
       ),
     ));
