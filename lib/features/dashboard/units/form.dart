@@ -30,7 +30,7 @@ class FormView extends StatelessWidget {
               ? Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  child: Center(
+                  child: const Center(
                       child: CircularProgressIndicator(
                     color: Colors.orange,
                   )),

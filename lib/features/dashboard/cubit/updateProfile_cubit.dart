@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/data/api/api.dart';
 import '../../../core/data/local/cacheHelper.dart';
+import '../../../core/data/models/subscribtion/Subscribtion_model.dart';
 import '../../../core/data/models/vehicle/user.dart';
 import '../../../core/data/repository/vehicle_repo.dart';
 import '../../../core/dialoges/toast.dart';
@@ -17,10 +18,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   Connectivity connectivity = Connectivity();
   List<User>? profileList = [];
   User profileData = User();
-
-  updateProfile(
-    updateProfileModel,
-  ) async {
+  SubscriptionModel subscriptionData = SubscriptionModel();
+  updateProfile(updateProfileModel,) async {
     var token = await CacheHelper.getString(SharedKeys.token);
     var response = Api().postHttp(
         url: 'profile/update',
@@ -79,6 +78,27 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
             .onError((error, stackTrace) =>
                 {emit(GetProfileFailed(error.toString())), print(error)});
       }
+    });
+  }
+
+  getSubscriptionData() async {
+    var token = await CacheHelper.getString(SharedKeys.token);
+    var response = Api().getHttp(
+      url: 'profile/current-subscription',
+      authToken: token,
+    );
+    emit(GetSubscriptionLoading());
+    print(response);
+    response
+        .then((value) => {
+      print('**********'),
+      print(value),
+      subscriptionData = SubscriptionModel.fromJson(value),
+      emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
+    })
+        .onError((error, stackTrace) => {
+      emit(GetSubscriptionFailed(error.toString())),
+      print(error),
     });
   }
 }

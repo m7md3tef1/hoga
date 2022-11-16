@@ -1,3 +1,4 @@
+import '../../../core/data/models/subscribtion/Subscribtion_model.dart';
 import '../../../core/data/models/vehicle/user.dart';
 
 abstract class UpdateProfileStates {}
@@ -8,6 +9,7 @@ class UpdateProfileLoading extends UpdateProfileStates {}
 
 class GetUserProfileLoading extends UpdateProfileStates {}
 
+class GetSubscriptionLoading extends UpdateProfileStates {}
 class UpdateProfileSuccess extends UpdateProfileStates {
   User profileList = User();
   UpdateProfileSuccess(this.profileList);
@@ -34,6 +36,15 @@ class GetUserProfileFailed extends UpdateProfileStates {
   final String msg;
   GetUserProfileFailed(this.msg);
 }
+class GetSubscriptionSuccess extends UpdateProfileStates {
+  SubscriptionModel profileList = SubscriptionModel();
+  GetSubscriptionSuccess(this.profileList);
+}
+class GetSubscriptionFailed extends UpdateProfileStates {
+  final String msg;
+  GetSubscriptionFailed(this.msg);
+}
+
 
 class FailedNetwork extends UpdateProfileStates {
   final String msg;
