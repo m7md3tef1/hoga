@@ -4,7 +4,8 @@
     lastName,
     email,
     token,
-    userId
+    userId,
+    isLogin
 
   }
   enum SqlKeys{

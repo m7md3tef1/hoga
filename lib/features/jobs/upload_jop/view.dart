@@ -12,10 +12,13 @@ import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/upgrade_member_ship.dart';
 
+import '../../../core/data/local/cacheHelper.dart';
+import '../../../core/keys/keys.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_card_title.dart';
 import '../../../core/widgets/custom_no_container.dart';
 import '../../../widgets/widgets/upgrade_member.dart';
+import '../../auth/units/cant_login.dart';
 import '../../loads/uploaded_loads/view.dart';
 import '../cubit/getJop_cubit.dart';
 import '../cubit/getJop_states.dart';
@@ -54,7 +57,7 @@ class _UploadJobsViewState extends State<UploadJobsView> {
               title: 'Uploaded Jobs',
               scaffoldKey: uploadedJobsScaffoldKey,
             ),
-            const Expanded(child: Uploaded()),
+            !CacheHelper.getBool(SharedKeys.isLogin)?NotLogged(): const Expanded(child: Uploaded()),
           ],
         ),
       ),

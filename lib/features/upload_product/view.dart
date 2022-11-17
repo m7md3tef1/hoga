@@ -9,9 +9,12 @@ import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/upgrade_member_ship.dart';
 import '../../core/color_manager/color_manager.dart';
+import '../../core/data/local/cacheHelper.dart';
+import '../../core/keys/keys.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../core/widgets/custom_card_title.dart';
 import '../../core/widgets/custom_no_container.dart';
+import '../auth/units/cant_login.dart';
 import '../search_product/cubit/getProduct__states.dart';
 part 'units/uploaded.dart';
 
@@ -47,7 +50,7 @@ class _UploadProductsViewState extends State<UploadProductsView> {
               title: 'Uploaded Products',
               scaffoldKey: uploadedProductsScaffoldKey,
             ),
-            const Expanded(child: Uploaded()),
+           ! CacheHelper.getBool(SharedKeys.isLogin)?NotLogged(): const Expanded(child: Uploaded()),
           ],
         ),
       ),

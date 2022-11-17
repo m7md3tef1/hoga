@@ -7,10 +7,13 @@ import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_package.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 
+import '../../core/data/local/cacheHelper.dart';
+import '../../core/keys/keys.dart';
 import '../../core/router/router.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_button.dart';
 import '../add_update_card/view.dart';
+import '../auth/units/cant_login.dart';
 import 'cubit/package_cubit.dart';
 import 'cubit/package_states.dart';
 
@@ -36,7 +39,7 @@ class PackagesView extends StatelessWidget {
                 title: 'Packages',
                 scaffoldKey: packagesScaffoldKey,
               ),
-              Body(),
+              !CacheHelper.getBool(SharedKeys.isLogin)?NotLogged():  Body(),
             ],
           ),
         ),

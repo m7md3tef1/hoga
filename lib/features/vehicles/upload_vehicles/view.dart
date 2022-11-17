@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
+import 'package:hoga_load/core/data/local/cacheHelper.dart';
+import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/core/router/router.dart';
+import 'package:hoga_load/features/auth/units/cant_login.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/features/plans/view.dart';
 import 'package:hoga_load/widgets/widgets/upgrade_member_ship.dart';
@@ -52,7 +55,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
               title: 'Uploaded VEHICLES'.toUpperCase(),
               scaffoldKey: uploadedVehiclesScaffoldKey,
             ),
-            const Expanded(child: Uploaded()),
+          ! CacheHelper.getBool(SharedKeys.isLogin)?NotLogged(): const Expanded(child: Uploaded()),
             //MyTable(),
           ],
         ),

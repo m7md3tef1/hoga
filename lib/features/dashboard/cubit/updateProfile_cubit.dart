@@ -30,17 +30,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     print(response);
     response
         .then((value) => {
-              print(value),
-              profileData = User.fromJson(value['record']),
-              emit(UpdateProfileSuccess(User.fromJson(value['record']))),
-              showToast(
-                  msg: 'update Profile successfully',
-                  state: ToastedStates.SUCCESS),
-            })
+      print(value),
+      profileData = User.fromJson(value['record']),
+      emit(UpdateProfileSuccess(User.fromJson(value['record']))),
+      showToast(
+          msg: 'update Profile successfully',
+          state: ToastedStates.SUCCESS),
+    })
         .onError((error, stackTrace) => {
-              emit(UpdateProfileFailed()),
-              print(error),
-            });
+      emit(UpdateProfileFailed()),
+      print(error),
+    });
   }
 
   getUserProfileData() async {
@@ -53,15 +53,15 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     print(response);
     response
         .then((value) => {
-              print('**********'),
-              print(value),
-              profileData = User.fromJson(value['record']),
-              emit(GetUserProfileSuccess(User.fromJson(value['record']))),
-            })
+      print('**********'),
+      print(value),
+      profileData = User.fromJson(value['record']),
+      emit(GetUserProfileSuccess(User.fromJson(value['record']))),
+    })
         .onError((error, stackTrace) => {
-              emit(GetUserProfileFailed(error.toString())),
-              print(error),
-            });
+      emit(GetUserProfileFailed(error.toString())),
+      print(error),
+    });
   }
 
   getVehicleTypesCubit() {
@@ -71,13 +71,13 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
       } else {
         VehicleRepo.getProfile('profile')
             .then((value) => {
-                  print('..................................'),
-                  print(value),
-                  profileList = value,
-                  emit(GetProfileSuccess(value))
-                })
+          print('..................................'),
+          print(value),
+          profileList = value,
+          emit(GetProfileSuccess(value))
+        })
             .onError((error, stackTrace) =>
-                {emit(GetProfileFailed(error.toString())), print(error)});
+        {emit(GetProfileFailed(error.toString())), print(error)});
       }
     });
   }
@@ -87,11 +87,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
         emit(FailedNetwork("Check your internet connection and try again"));
       } else {
         emit(GetSubscriptionLoading());
-        VehicleRepo.getSubscription('profile/current-subscription')
+        var token = await CacheHelper.getString(SharedKeys.token);
+
+        var response = Api().getHttp(
+          url: 'profile/current-subscription',
+          authToken: token,
+        );
+        response
             .then((value) => {
-          print('..................................'),
+          print('subscriptionData'),
           print(value),
-          subscriptionData = SubscriptionModel.fromJson(value),
+         subscriptionData = SubscriptionModel.fromJson(value['record']),
           emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
         })
             .onError((error, stackTrace) =>
@@ -101,7 +107,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     });
   }
 
- /*
+  /*
   getSubscriptionData() async {
     var token = await CacheHelper.getString(SharedKeys.token);
     var response = Api().getHttp(
