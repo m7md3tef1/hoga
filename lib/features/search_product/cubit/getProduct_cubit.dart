@@ -43,6 +43,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
   getProduct({self, val,page}) {
     emit(AddProductLoading());
+    //myProductList=[];
     myVehiclesLoading = true;
 
     connectivity.checkConnectivity().then((value) async {
@@ -56,8 +57,9 @@ class ProductsCubit extends Cubit<AddProductStates> {
                   print(value),
                   if (self == 1)
                     {
-                      myVehiclesLoading = false,
                       myProductList = value,
+                      myVehiclesLoading = false,
+                      emit(GetProductsSuccess(value)),
                       print('Get My Product Response'),
                       print(myProductList.length),
                     }

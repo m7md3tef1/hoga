@@ -36,6 +36,8 @@ class _UploadedLoadsViewState extends State<UploadedLoadsView> {
   void initState() {
     super.initState();
     LoadsCubit.get(context).getLoad(self: 1, isFilter: false);
+    LoadsCubit.get(context).page=1;
+
   }
 
   @override
@@ -47,7 +49,7 @@ class _UploadedLoadsViewState extends State<UploadedLoadsView> {
         child: Column(
           children: [
             CustomAppbar(
-                title: 'Uploaded Products',
+                title: 'Uploaded Loads',
                 scaffoldKey: uploadProductScaffoldKey),
             const Expanded(child: UploadedLoad()),
           ],

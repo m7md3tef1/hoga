@@ -37,6 +37,8 @@ class _UploadJobsViewState extends State<UploadJobsView> {
   void initState() {
     super.initState();
     JopCubit.get(context).getJops(self: 1, isFilter: false, context: context);
+    JopCubit.get(context).page=1;
+
   }
 
   @override

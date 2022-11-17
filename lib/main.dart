@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(create: (_) => HomeCubit()),
-        BlocProvider(create: (_) => PlansCubit()..getPlansCubit()),
+        BlocProvider(create: (_) => PlansCubit()..checkPlansCubit()..getPlansCubit()),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(
             create: (_) => VehiclesCubit()

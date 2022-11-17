@@ -61,6 +61,7 @@ class JopCubit extends Cubit<AddJopStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         ProductRepo.getJop('jobs', self,
+            titleController:titleController,
                 productModel: productModel,
                 city2: city2,
                 country2: country2,
@@ -77,6 +78,7 @@ class JopCubit extends Cubit<AddJopStates> {
                     {
                       myJopLoading = false,
                       myJopList = value,
+                      emit(GetJopSuccess(value)),
                       print('Get My Product Response'),
                       print(myJopList.length),
                     }

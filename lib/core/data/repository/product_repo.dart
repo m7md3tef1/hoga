@@ -9,6 +9,7 @@ import '../models/product/GetProduct_model.dart';
 class ProductRepo {
   static Future<List<GetJop>> getJop(url, self,
       {GetJop? productModel,
+        titleController,
         page,
       city2,
       country2,
@@ -36,6 +37,7 @@ class ProductRepo {
         "state": state2,
         "job_types": jopTypeId,
         "categories": jopCategortId,
+            "search":titleController.text
       });
     } else {
       response = await Api().getHttp(url: url, authToken: token, self: self,data: {"per_page":10,"page":page});

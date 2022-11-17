@@ -534,6 +534,7 @@ class _FormInfoState extends State<FormInfo> {
                                 print(
                                     '$jopCategoryId --$jopTypeId1 --$countryId --$stateId --$cityId');
                                 JopCubit.get(context).getJops(
+
                                   jopCategortId: jopCategoryId,
                                   isFilter: true,
                                   context: context,

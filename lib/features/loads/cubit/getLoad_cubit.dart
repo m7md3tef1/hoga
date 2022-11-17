@@ -74,6 +74,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                     {
                       myloadList = value,
                       //myVehicleLoadList=value,
+                      emit(GetLoadsSuccess(value)),
 
                       print('Get Vehice Response'),
                       print(myloadList.length),

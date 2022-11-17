@@ -23,7 +23,7 @@ class _UploadedState extends State<Uploaded> {
           print("is access token ${VehiclesCubit.get(context).isAccessToken}");
 
           return VehiclesCubit.get(context).testLoading
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(
                   color: ColorManager.yellow,
                 ))

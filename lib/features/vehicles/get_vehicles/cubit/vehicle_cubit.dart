@@ -204,6 +204,8 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   if (self == 1)
                     {
                       myVehicleList = value,
+                      emit(GetVehicleSuccess(value)),
+
                       print('Get Vehice Response'),
                       print(myVehicleList.length),
                       vehicleClearData(Home.scaffoldStateKey.currentContext)

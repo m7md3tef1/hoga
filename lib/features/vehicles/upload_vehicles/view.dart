@@ -36,6 +36,8 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
   void initState() {
     super.initState();
     VehiclesCubit.get(context).getVehicleCubit(self: 1);
+    VehiclesCubit.get(context).page=1;
+
   }
 
   @override
@@ -43,7 +45,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
     return SafeArea(
       child: Scaffold(
         key: uploadedVehiclesScaffoldKey,
-        drawer: OnDrawer(),
+        drawer: const OnDrawer(),
         body: Column(
           children: [
             CustomAppbar(

@@ -5,6 +5,9 @@ abstract class PlansStates{}
 
 class PlansLoading extends PlansStates{}
 
+class NotFreeTrial extends PlansStates{}
+
+
 class GetPlansSuccess extends PlansStates{
 
   final List<PlansModel>plansList;

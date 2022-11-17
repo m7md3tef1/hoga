@@ -88,8 +88,11 @@ class VehicleRepo {
             url: 'vehicles',
             authToken: token,
             self: self,
-            data: {"search": val,            "per_page":10,"page":page,
+            data: {"search": val,"per_page":10,"page":page,
             });
+    print(response['records'].length);
+    print("length");
+
 
     List<Vehicles> blogsList = [];
     for (int i = 0; i < response['records'].length; i++) {
