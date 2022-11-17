@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/core/data/models/blogs/blogs.dart';
+import 'package:hoga_load/core/router/router.dart';
+import 'package:hoga_load/features/home/units/homebage/blog.dart';
 
 import '../../../core/widgets/custom_card_title.dart';
 import '../../../widgets/widgets/custom_button.dart';
 import '../../../widgets/widgets/custom_text.dart';
 import '../../dashboard/cubit/UpdateProfile_state.dart';
 import '../../dashboard/cubit/updateProfile_cubit.dart';
+import '../../plans/view.dart';
 
 class Plans extends StatelessWidget {
   @override
@@ -149,11 +153,16 @@ class Plans extends StatelessWidget {
                 SizedBox(
                   height: 12.h,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 12.w, right: 16.w),
-                  child: CustomButton(
-                      text: 'Upgrade to "Gold Plan"',
-                      color: const Color(0xFFFDC52F)),
+                InkWell(
+                  onTap: (){
+                    MagicRouter.navigateTo( PlanView());
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 12.w, right: 16.w),
+                    child: CustomButton(
+                        text: 'Upgrade to "Gold Plan"',
+                        color: const Color(0xFFFDC52F)),
+                  ),
                 ),
                 SizedBox(
                   height: 15.h,
