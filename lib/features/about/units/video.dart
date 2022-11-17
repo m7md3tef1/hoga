@@ -50,12 +50,7 @@ class _VideoState extends State<Video> {
     _seekToController = TextEditingController();
     _videoMetaData = const YoutubeMetaData();
     _playerState = PlayerState.unknown;
-//    _controller = VideoPlayerController.network(
-//        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
-//      ..initialize().then((_) {
-//        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-//        setState(() {});
-//      });
+
   }
 
   @override

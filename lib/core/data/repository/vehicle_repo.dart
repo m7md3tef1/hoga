@@ -9,6 +9,7 @@ import '../models/jobs/GetJop_model.dart';
 import '../models/jobs/get_jop.dart';
 import '../models/loads/GetLoads_model.dart';
 import '../models/product/GetProduct_model.dart';
+import '../models/subscribtion/Subscribtion_model.dart';
 import '../models/vehicle/Addvehicle_model.dart';
 import '../models/vehicle/user.dart';
 import '../models/vehicle/vehicles.dart';
@@ -20,6 +21,18 @@ class VehicleRepo {
     List<AddVehicle> attributesList = [];
     for (int i = 0; i < response['records'].length; i++) {
       AddVehicle blogModel = AddVehicle.fromJson(response['records'][i]);
+      attributesList.add(blogModel);
+    }
+    return attributesList;
+  }
+
+  static Future<List<SubscriptionModel>> getSubscription(url) async {
+   String token=await CacheHelper.getString(SharedKeys.token);
+    var response = await Api().getHttp(url: url,authToken: token);
+
+    List<SubscriptionModel> attributesList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      SubscriptionModel blogModel = SubscriptionModel.fromJson(response['records'][i]);
       attributesList.add(blogModel);
     }
     return attributesList;
@@ -373,6 +386,11 @@ class VehicleRepo {
       "weight": VehiclesCubit.get(context).weightController,
       "instructions": VehiclesCubit.get(context).instructionsController,
     });
+  }
+  static cancel() async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(
+        url: "profile/current-subscription/cancel", authToken: token);
   }
 
   static addJopTest({context}) async {

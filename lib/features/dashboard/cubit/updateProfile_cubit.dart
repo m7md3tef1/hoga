@@ -18,6 +18,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   Connectivity connectivity = Connectivity();
   List<User>? profileList = [];
   User profileData = User();
+
   SubscriptionModel subscriptionData = SubscriptionModel();
   updateProfile(updateProfileModel,) async {
     var token = await CacheHelper.getString(SharedKeys.token);
@@ -80,7 +81,27 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
       }
     });
   }
+  getSubscriptionData() {
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(FailedNetwork("Check your internet connection and try again"));
+      } else {
+        emit(GetSubscriptionLoading());
+        VehicleRepo.getSubscription('profile/current-subscription')
+            .then((value) => {
+          print('..................................'),
+          print(value),
+          subscriptionData = SubscriptionModel.fromJson(value),
+          emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
+        })
+            .onError((error, stackTrace) =>
+        {emit(GetSubscriptionFailed(error.toString())), print(error)});
 
+      }
+    });
+  }
+
+ /*
   getSubscriptionData() async {
     var token = await CacheHelper.getString(SharedKeys.token);
     var response = Api().getHttp(
@@ -93,12 +114,36 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
         .then((value) => {
       print('**********'),
       print(value),
-      subscriptionData = SubscriptionModel.fromJson(value),
+      subscriptionData = value,
       emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
     })
         .onError((error, stackTrace) => {
       emit(GetSubscriptionFailed(error.toString())),
       print(error),
+    });
+  }
+  */
+
+  cancelSubscriptionCubit() {
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(FailedNetwork("Check your internet connection and try again"));
+      } else {
+        VehicleRepo.cancel()
+            .then((value) => {
+          print('Cancel Success'),
+          print(value),
+          emit(CancelSuccess()),
+          showToast(
+              msg: 'Cancel Success', state: ToastedStates.SUCCESS),
+        })
+            .catchError((error, stackTrace) => {
+          emit(CancelFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Cancel  Failed'),
+        });
+      }
     });
   }
 }

@@ -72,7 +72,9 @@ class MyApp extends StatelessWidget {
             create: (_) => UpdateProfileCubit()
               ..updateProfile
               ..getUserProfileData()
-              ..getVehicleTypesCubit()..getSubscriptionData()),
+              ..getVehicleTypesCubit()
+              ..getSubscriptionData()
+              ),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))

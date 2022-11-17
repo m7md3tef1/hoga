@@ -118,7 +118,10 @@ class _BottomState extends State<Bottom> {
                             : const Color(0xFFA9A9A9),
                         'JOBS')),
                 SizedBox(
+
+
                   width: 4.w,
+
 
                 ),
                 InkWell(
@@ -133,6 +136,12 @@ class _BottomState extends State<Bottom> {
                             : const Color(0xFFA9A9A9),
                         'PRODUCTS')),
 
+
+//                SizedBox(
+//                  width: 10.h,
+//                ),
+
+               
               ],
             ),
             SizedBox(
