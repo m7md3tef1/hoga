@@ -27,7 +27,7 @@ class VehicleRepo {
   }
 
   static Future<List<SubscriptionModel>> getSubscription(url) async {
-   String token=await CacheHelper.getString(SharedKeys.token);
+    String token=await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(url: url,authToken: token);
 
     List<SubscriptionModel> attributesList = [];
@@ -56,40 +56,40 @@ class VehicleRepo {
   static Future<List<Vehicles>> getVehicles(self,
       {val,
         page,
-      equipmentSize,
-      attributes,
-      vehicleSize,
-      vehicleType,
-      context,
-      isFilter}) async {
+        equipmentSize,
+        attributes,
+        vehicleSize,
+        vehicleType,
+        context,
+        isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     print(token);
     print(self);
     var response;
     isFilter == true
         ? response =
-            await Api().getHttp(url: 'vehicles', authToken: token, data: {
-              "per_page":10,"page":page,
+    await Api().getHttp(url: 'vehicles', authToken: token, data: {
+      "per_page":10,"page":page,
 
-              "equipment_types": equipmentSize,
-            "vehicle_attributes": attributes,
-            "vehicle_sizes": vehicleSize,
-            "vehicle_types": vehicleType,
-            "origin_country_id": DataFormCubit.get(context).countryOriginID,
-            "origin_state_id": DataFormCubit.get(context).stateOriginID,
-            "origin_city_id": DataFormCubit.get(context).cityOriginID,
-            "destination_country_id":
-                DataFormCubit.get(context).countryDestinationID,
-            "destination_state_id":
-                DataFormCubit.get(context).stateDestinationID,
-            "destination_city_id": DataFormCubit.get(context).cityDestinationID,
-          })
+      "equipment_types": equipmentSize,
+      "vehicle_attributes": attributes,
+      "vehicle_sizes": vehicleSize,
+      "vehicle_types": vehicleType,
+      "origin_country_id": DataFormCubit.get(context).countryOriginID,
+      "origin_state_id": DataFormCubit.get(context).stateOriginID,
+      "origin_city_id": DataFormCubit.get(context).cityOriginID,
+      "destination_country_id":
+      DataFormCubit.get(context).countryDestinationID,
+      "destination_state_id":
+      DataFormCubit.get(context).stateDestinationID,
+      "destination_city_id": DataFormCubit.get(context).cityDestinationID,
+    })
         : response = await Api().getHttp(
-            url: 'vehicles',
-            authToken: token,
-            self: self,
-            data: {"search": val,            "per_page":10,"page":page,
-            });
+        url: 'vehicles',
+        authToken: token,
+        self: self,
+        data: {"search": val,            "per_page":10,"page":page,
+        });
 
     List<Vehicles> blogsList = [];
     for (int i = 0; i < response['records'].length; i++) {
@@ -147,7 +147,7 @@ class VehicleRepo {
   static Future<List<Packages>> getPackage() async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response =
-        await Api().getHttp(url: 'advertisement-packages', authToken: token);
+    await Api().getHttp(url: 'advertisement-packages', authToken: token);
 
     List<Packages> packageList = [];
     for (int i = 0; i < response['records'].length; i++) {
@@ -331,12 +331,12 @@ class VehicleRepo {
           "origin_state": DataFormCubit.get(context).stateOriginID,
           "origin_city": DataFormCubit.get(context).cityOriginID,
           "destination_country":
-              DataFormCubit.get(context).countryDestinationID,
+          DataFormCubit.get(context).countryDestinationID,
           "destination_state": DataFormCubit.get(context).stateDestinationID,
           "destination_city": DataFormCubit.get(context).cityDestinationID,
           "weight": VehiclesCubit.get(context).weightController.text,
           "instructions":
-              VehiclesCubit.get(context).instructionsController.text,
+          VehiclesCubit.get(context).instructionsController.text,
         });
   }
 
