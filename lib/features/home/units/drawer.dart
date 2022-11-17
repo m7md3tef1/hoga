@@ -47,6 +47,7 @@ class OnDrawer extends StatelessWidget {
               icon: Icons.all_inbox_rounded,
               navigatename: PackagesView(),
             ),
+
             CustomRowDrawer(
               text: 'Subscription Details',
               icon: Icons.details_outlined,
