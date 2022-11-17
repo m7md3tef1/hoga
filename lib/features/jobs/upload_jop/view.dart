@@ -17,6 +17,7 @@ import '../../../core/keys/keys.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_card_title.dart';
 import '../../../core/widgets/custom_no_container.dart';
+import '../../../widgets/widgets/custom_notloggedin.dart';
 import '../../../widgets/widgets/upgrade_member.dart';
 import '../../auth/units/cant_login.dart';
 import '../../loads/uploaded_loads/view.dart';
@@ -57,7 +58,7 @@ class _UploadJobsViewState extends State<UploadJobsView> {
               title: 'Uploaded Jobs',
               scaffoldKey: uploadedJobsScaffoldKey,
             ),
-            !CacheHelper.getBool(SharedKeys.isLogin)?NotLogged(): const Expanded(child: Uploaded()),
+            !CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn(): const Expanded(child: Uploaded()),
           ],
         ),
       ),

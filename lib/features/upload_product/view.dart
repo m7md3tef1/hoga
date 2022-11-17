@@ -14,6 +14,7 @@ import '../../core/keys/keys.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../core/widgets/custom_card_title.dart';
 import '../../core/widgets/custom_no_container.dart';
+import '../../widgets/widgets/custom_notloggedin.dart';
 import '../auth/units/cant_login.dart';
 import '../search_product/cubit/getProduct__states.dart';
 part 'units/uploaded.dart';
@@ -50,7 +51,7 @@ class _UploadProductsViewState extends State<UploadProductsView> {
               title: 'Uploaded Products',
               scaffoldKey: uploadedProductsScaffoldKey,
             ),
-           ! CacheHelper.getBool(SharedKeys.isLogin)?NotLogged(): const Expanded(child: Uploaded()),
+           ! CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn(): const Expanded(child: Uploaded()),
           ],
         ),
       ),

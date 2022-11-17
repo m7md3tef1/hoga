@@ -12,6 +12,7 @@ import 'package:hoga_load/widgets/widgets/upgrade_member_ship.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_card_title.dart';
 import '../../../core/widgets/custom_no_container.dart';
+import '../../../widgets/widgets/custom_notloggedin.dart';
 import '../add_vehicle/view.dart';
 import '../get_vehicles/cubit/vehicle_cubit.dart';
 import '../get_vehicles/cubit/vehicle_states.dart';
@@ -55,7 +56,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
               title: 'Uploaded VEHICLES'.toUpperCase(),
               scaffoldKey: uploadedVehiclesScaffoldKey,
             ),
-          ! CacheHelper.getBool(SharedKeys.isLogin)?NotLogged(): const Expanded(child: Uploaded()),
+          ! CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn(): const Expanded(child: Uploaded()),
             //MyTable(),
           ],
         ),

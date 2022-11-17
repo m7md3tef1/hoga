@@ -12,6 +12,7 @@ import '../../core/keys/keys.dart';
 import '../../core/router/router.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_button.dart';
+import '../../widgets/widgets/custom_notloggedin.dart';
 import '../add_update_card/view.dart';
 import '../auth/units/cant_login.dart';
 import 'cubit/package_cubit.dart';
@@ -39,7 +40,7 @@ class PackagesView extends StatelessWidget {
                 title: 'Packages',
                 scaffoldKey: packagesScaffoldKey,
               ),
-              !CacheHelper.getBool(SharedKeys.isLogin)?NotLogged():  Body(),
+              !CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn():  Body(),
             ],
           ),
         ),

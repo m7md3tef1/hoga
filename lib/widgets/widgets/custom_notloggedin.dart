@@ -28,36 +28,34 @@ class CustomNotLoggedIn extends StatelessWidget {
             CustomCardTitle(
               text: 'Not Logged IN',
             ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                Container(
-                height:135.h ,
-                width: 1.sw,
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(253, 197, 47, 0.3),
-                    borderRadius: BorderRadius.circular(10.r)),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: CustomText(
-                      align: TextAlign.center,
-                      text:"you  must log in first",
-                      fontSize: 16.sp,
-                      textHeight: 1.5,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xFF664D03),
-                    ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+              Container(
+              height:135.h ,
+              width: 1.sw,
+              decoration: BoxDecoration(
+                  color: const Color.fromRGBO(253, 197, 47, 0.3),
+                  borderRadius: BorderRadius.circular(10.r)),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: CustomText(
+                    align: TextAlign.center,
+                    text:"you  must log in first",
+                    fontSize: 16.sp,
+                    textHeight: 1.5,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF664D03),
                   ),
                 ),
-              )
-                ],
               ),
+            )
+              ],
             ),
 
         Padding(
-          padding:  EdgeInsets.only(bottom: 27.h),
+          padding:  EdgeInsets.only(bottom: 27.h,top: 27.h),
           child: Align(
             alignment: Alignment.bottomCenter,
             child: CustomButton(text: 'Login',icon: Icons.add, color: ColorManager.yellow,

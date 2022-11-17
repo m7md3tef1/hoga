@@ -11,13 +11,13 @@ class PlansRepo{
 
     for(int i =0;i<response['records'].length;i++){
       print('freeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-      print(response['records']['name']);
-      print(response['records']['name'].contains('Free Trial'));
+      print(response['records'][i]['name']);
+      print(response['records'][i]['name'].contains('Free Trial'));
       print(isFreeTrial);
 
 
 
-      if(isFreeTrial==false&&!response['records']['name'].contains('Free Trial')){
+      if(isFreeTrial==false&&!response['records'][i]['name'].contains('Free Trial')){
         print('freeeeeeeeeeeeeeeeeeeeeeeeeeeeee22');
         PlansModel plansModel=PlansModel.fromJson(response['records'][i]);
         plansList.add(plansModel);
