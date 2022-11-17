@@ -26,6 +26,7 @@ import 'features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+  CacheHelper.putBool(SharedKeys.isLogin, false);
   BlocOverrides.runZoned(() {
     runApp(const MyApp());
   }, blocObserver: SimpleBlocObserver());

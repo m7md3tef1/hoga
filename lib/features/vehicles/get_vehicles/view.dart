@@ -33,25 +33,38 @@ class _VehiclesViewState extends State<VehiclesView> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomAppbar(title: 'Vehicles'),
-          SizedBox(
-            height: 22.h,
+      body:RefreshIndicator(
+        color: Colors.orange,
+        backgroundColor: Colors.white,
+        onRefresh: ()async{
+          print('refresh');
+          await VehiclesCubit.get(context).getPage();
+          print("page is "+'${VehiclesCubit.get(context).page}');
+          await VehiclesCubit.get(context).getVehicleCubit(page:VehiclesCubit.get(context).page,isFilter: false );
+        },
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppbar(title: 'Vehicles'),
+              SizedBox(
+                height: 22.h,
+              ),
+              CustomSearchRow(
+                1,
+                function: () {
+                  MagicRouter.navigateTo(FilterVehicle());
+                },
+              ),
+              SizedBox(
+                height: 21.h,
+              ),
+              Body()
+            ],
           ),
-          CustomSearchRow(
-            1,
-            function: () {
-              MagicRouter.navigateTo(FilterVehicle());
-            },
-          ),
-          SizedBox(
-            height: 21.h,
-          ),
-          Body()
-        ],
+        ),
       ),
     );
   }

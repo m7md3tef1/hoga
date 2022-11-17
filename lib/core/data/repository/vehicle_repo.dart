@@ -66,31 +66,34 @@ class VehicleRepo {
     print(token);
     print(self);
     var response;
-    isFilter == true
-        ? response =
-            await Api().getHttp(url: 'vehicles', authToken: token, data: {
-              "per_page":10,"page":page,
-
-              "equipment_types": equipmentSize,
-            "vehicle_attributes": attributes,
-            "vehicle_sizes": vehicleSize,
-            "vehicle_types": vehicleType,
-            "origin_country_id": DataFormCubit.get(context).countryOriginID,
-            "origin_state_id": DataFormCubit.get(context).stateOriginID,
-            "origin_city_id": DataFormCubit.get(context).cityOriginID,
-            "destination_country_id":
-                DataFormCubit.get(context).countryDestinationID,
-            "destination_state_id":
-                DataFormCubit.get(context).stateDestinationID,
-            "destination_city_id": DataFormCubit.get(context).cityDestinationID,
-          })
-        : response = await Api().getHttp(
+//    isFilter == true
+//        ? response =
+//            await Api().getHttp(url: 'vehicles', authToken: token, data: {
+//              "per_page":10,"page":page,
+//
+//              "equipment_types": equipmentSize,
+//            "vehicle_attributes": attributes,
+//            "vehicle_sizes": vehicleSize,
+//            "vehicle_types": vehicleType,
+//            "origin_country_id": DataFormCubit.get(context).countryOriginID,
+//            "origin_state_id": DataFormCubit.get(context).stateOriginID,
+//            "origin_city_id": DataFormCubit.get(context).cityOriginID,
+//            "destination_country_id":
+//                DataFormCubit.get(context).countryDestinationID,
+//            "destination_state_id":
+//                DataFormCubit.get(context).stateDestinationID,
+//            "destination_city_id": DataFormCubit.get(context).cityDestinationID,
+//          })
+//        :
+    response = await Api().getHttp(
             url: 'vehicles',
-            authToken: token,
-            self: self,
-            data: {"search": val,            "per_page":10,"page":page,
+            //authToken: token,
+           // self: self,
+            data: {"search": val,"per_page":5,"page":1,
             });
+    print("length");
 
+    print(response['records'].length);
     List<Vehicles> blogsList = [];
     for (int i = 0; i < response['records'].length; i++) {
       debugPrint('vehcle response');

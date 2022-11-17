@@ -12,10 +12,13 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
+import '../../core/data/local/cacheHelper.dart';
 import '../../core/data/models/card_model.dart';
+import '../../core/keys/keys.dart';
 import '../../core/master_cubit/getDataForm_cubit.dart';
 import '../../core/master_cubit/getDataForm_state.dart';
 import '../../core/widgets/custom_card.dart';
+import '../auth/units/cant_login.dart';
 import 'cubit/addCard_cubit.dart';
 
 part 'units/form.dart';
@@ -31,7 +34,7 @@ class AddUpdateCardView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomAppbar(title: 'Add / Update Card Details'),
-            const Expanded(
+            CacheHelper.getBool(SharedKeys.isLogin)?NotLogged():const Expanded(
                 child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Padding(

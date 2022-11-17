@@ -29,7 +29,9 @@ class AuthCubit extends Cubit<AuthStates> {
               print(value),
               emit(SignInSuccess()),
               CacheHelper.putString(SharedKeys.token, value['auth_token']),
-              print(value['auth_token']),
+             CacheHelper.putBool(SharedKeys.isLogin, true),
+
+        print(value['auth_token']),
               print(response),
               print('Success'),
               showToast(
@@ -51,7 +53,9 @@ class AuthCubit extends Cubit<AuthStates> {
         .then((value) => {
               print(value),
               emit(SignUpSuccess()),
-              showToast(
+    CacheHelper.putBool(SharedKeys.isLogin, true),
+
+        showToast(
                   msg: 'Sign up successfully', state: ToastedStates.SUCCESS),
             })
         .onError((error, stackTrace) => {

@@ -211,6 +211,8 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   else
                     {
                       vehicleList = value,
+                      print('length >>>> ${vehicleList.length}'),
+
                       emit(GetVehicleSuccess(value)),
                       vehicleClearData(Home.scaffoldStateKey.currentContext),
                     },

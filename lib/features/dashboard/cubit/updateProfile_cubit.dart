@@ -87,11 +87,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
         emit(FailedNetwork("Check your internet connection and try again"));
       } else {
         emit(GetSubscriptionLoading());
-        VehicleRepo.getSubscription('profile/current-subscription')
+        var token = await CacheHelper.getString(SharedKeys.token);
+
+        var response = Api().getHttp(
+          url: 'profile/current-subscription',
+          authToken: token,
+        );
+        response
             .then((value) => {
-          print('..................................'),
+          print('subscriptionData'),
           print(value),
-          subscriptionData = SubscriptionModel.fromJson(value),
+         subscriptionData = SubscriptionModel.fromJson(value['record']),
           emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
         })
             .onError((error, stackTrace) =>

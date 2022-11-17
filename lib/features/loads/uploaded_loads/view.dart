@@ -12,9 +12,12 @@ import 'package:hoga_load/features/vehicles/add_vehicle/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
+import '../../../core/data/local/cacheHelper.dart';
+import '../../../core/keys/keys.dart';
 import '../../../widgets/widgets/upgrade_member_ship.dart';
 import '../../../widgets/widgets/uploaded_table_row.dart';
 import '../../../widgets/widgets/uploaded_table_title.dart';
+import '../../auth/units/cant_login.dart';
 import '../../plans/view.dart';
 import '../add_load/add_load_view.dart';
 import '../cubit/getLoad_cubit.dart';
@@ -49,7 +52,7 @@ class _UploadedLoadsViewState extends State<UploadedLoadsView> {
             CustomAppbar(
                 title: 'Uploaded Products',
                 scaffoldKey: uploadProductScaffoldKey),
-            const Expanded(child: UploadedLoad()),
+            !CacheHelper.getBool(SharedKeys.isLogin)?NotLogged():  const Expanded(child: UploadedLoad()),
           ],
         ),
       ),

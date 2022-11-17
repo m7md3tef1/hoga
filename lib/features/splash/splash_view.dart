@@ -24,9 +24,9 @@ class SplashScreen extends StatelessWidget {
 //                    CacheHelper.getString(SharedKeys.token)
 //                        .toString()
 //                        .isNotEmpty
-//                ? const Home()
+             const Home(),
 //                :
-            Login(),
+//            Login(),
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.white));
   }
