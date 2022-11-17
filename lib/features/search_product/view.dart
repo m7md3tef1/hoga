@@ -8,7 +8,6 @@ import 'package:hoga_load/features/search_product/model.dart';
 import 'package:hoga_load/features/search_product/units/details.dart';
 import 'package:hoga_load/features/upload_product/add_view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
-import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_row.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
@@ -19,33 +18,56 @@ import 'cubit/getProduct__states.dart';
 
 part 'units/body.dart';
 
-class SearchView extends StatelessWidget {
+class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
 
   @override
+  State<SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ProductsCubit.get(context).page=1;
+
+  }
+  @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppbar(title: 'Search Product'),
-            SizedBox(
-              height: 22.h,
-            ),
-            CustomSearchRow(
-              3,
-              function: () {
-                MagicRouter.navigateTo(AddProductsView(
-                  isFilter: true,
-                ));
-              },
-            ),
-            SizedBox(
-              height: 21.h,
-            ),
-            Body()
-          ],
+      body:RefreshIndicator(
+        color: Colors.orange,
+        backgroundColor: Colors.white,
+        onRefresh: ()async{
+          print('refresh');
+          await ProductsCubit.get(context).getPage();
+          print("page is "+'${ProductsCubit.get(context).page}');
+          await ProductsCubit.get(context).getProduct(page:ProductsCubit.get(context).page );
+        },
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppbar(title: 'Search Product'),
+              SizedBox(
+                height: 22.h,
+              ),
+              CustomSearchRow(
+                3,
+                function: () {
+                  MagicRouter.navigateTo(AddProductsView(
+                    isFilter: true,
+                  ));
+                },
+              ),
+              SizedBox(
+                height: 21.h,
+              ),
+              Body()
+            ],
+          ),
         ),
       ),
     );

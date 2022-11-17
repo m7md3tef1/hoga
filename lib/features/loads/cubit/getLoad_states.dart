@@ -10,6 +10,8 @@ class AddingLoad extends AddLoadStates {}
 class AddSuccess extends AddLoadStates {}
 
 class AddFailed extends AddLoadStates {}
+class AddPage extends AddLoadStates {}
+
 
 class GetLoadsSuccess extends AddLoadStates {
   List<Vehicles> loadList = [];

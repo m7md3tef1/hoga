@@ -14,33 +14,60 @@ import '../../core/router/router.dart';
 
 part 'units/body.dart';
 
-class JobsView extends StatelessWidget {
-  const JobsView({Key? key}) : super(key: key);
+class JobsView extends StatefulWidget {
+   JobsView({Key? key}) : super(key: key);
 
+  @override
+  State<JobsView> createState() => _JobsViewState();
+}
+
+class _JobsViewState extends State<JobsView> {
+ @override
+ void initState() {
+   // TODO: implement initState
+   super.initState();
+   JopCubit.get(context).page=1;
+
+ }
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppbar(title: 'Jobs'),
-            SizedBox(
-              height: 22.h,
+      body:
+      Container(
+        child: RefreshIndicator(
+          color: Colors.orange,
+          backgroundColor: Colors.white,
+          onRefresh: ()async{
+            print('refresh');
+            await JopCubit.get(context).getPage();
+            print("page is "+'${JopCubit.get(context).page}');
+          await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomAppbar(title: 'Jobs'),
+                SizedBox(
+                  height: 22.h,
+                ),
+                CustomSearchRow(
+                  4,
+                  function: () {
+                    MagicRouter.navigateTo(AddJopView(
+                      isFilter: true,
+                    ));
+                  },
+                ),
+                SizedBox(
+                  height: 21.h,
+                ),
+                Body()
+              ],
             ),
-            CustomSearchRow(
-              4,
-              function: () {
-                MagicRouter.navigateTo(AddJopView(
-                  isFilter: true,
-                ));
-              },
-            ),
-            SizedBox(
-              height: 21.h,
-            ),
-            Body()
-          ],
+          ),
         ),
       ),
     );

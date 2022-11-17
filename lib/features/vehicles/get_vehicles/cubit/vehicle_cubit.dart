@@ -161,9 +161,20 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
     print('+++++++++++++++++++++++++++++++++++');
   }
+  int page =1;
+  getPage(){
+    if(vehicleList.length==10){
+      page++;
+      emit(AddPage());
+    }else{
+      page=1;
+      emit(AddPage());
 
+    }
+  }
   getVehicleCubit(
       {self,
+        page,
       val,
       equipmentSize2,
       attributes2,
@@ -178,6 +189,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         VehicleRepo.getVehicles(self,
+                page:page,
                 val: val,
                 context: context,
                 isFilter: isFilter,

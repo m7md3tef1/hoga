@@ -10,6 +10,8 @@ class ChangeBox extends VehicleStates {}
 class AddingLoad extends VehicleStates {}
 
 class AddSuccess extends VehicleStates {}
+class AddPage extends VehicleStates {}
+
 
 class AddFailed extends VehicleStates {
   String? error;

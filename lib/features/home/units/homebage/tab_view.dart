@@ -38,14 +38,10 @@ class TabView extends StatelessWidget {
             children: [
               const Image(image: AssetImage('assets/images/Vector.png')),
               Expanded(
-<<<<<<< HEAD
                 child: CustomText(
                   align: TextAlign.start,
 
-=======
-                child:
-                CustomText(
->>>>>>> b6858b9803a35ccae61312e3a1435e870a704322
+
                   text: text1,
                   color: ColorManager.primaryColor,
                   fontSize: 14.sp,

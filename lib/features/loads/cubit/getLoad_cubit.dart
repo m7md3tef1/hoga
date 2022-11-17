@@ -30,9 +30,22 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   bool isAccessToken = true;
   bool testLoading = true;
   bool myVehiclesLoading = true;
+
+  int page =1;
+  getPage(){
+    if(loadList.length==10){
+      page++;
+      emit(AddPage());
+    }else{
+      page=1;
+      emit(AddPage());
+
+    }
+  }
   getLoad(
       {self,
       val,
+        page,
       equipmentSize2,
       attributes2,
       vehicleSize2,
@@ -46,6 +59,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         LoadsRepo.getLoads(self,
+                page:page,
                 val: val,
                 context: context,
                 isFilter: isFilter,

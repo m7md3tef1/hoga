@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:hoga_load/core/data/local/cacheHelper.dart';
 import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/core/master_cubit/getDataForm_cubit.dart';
@@ -41,6 +42,7 @@ class VehicleRepo {
 
   static Future<List<Vehicles>> getVehicles(self,
       {val,
+        page,
       equipmentSize,
       attributes,
       vehicleSize,
@@ -54,7 +56,9 @@ class VehicleRepo {
     isFilter == true
         ? response =
             await Api().getHttp(url: 'vehicles', authToken: token, data: {
-            "equipment_types": equipmentSize,
+              "per_page":10,"page":page,
+
+              "equipment_types": equipmentSize,
             "vehicle_attributes": attributes,
             "vehicle_sizes": vehicleSize,
             "vehicle_types": vehicleType,
@@ -71,12 +75,23 @@ class VehicleRepo {
             url: 'vehicles',
             authToken: token,
             self: self,
-            data: {"search": val});
+            data: {"search": val,            "per_page":10,"page":page,
+            });
 
     List<Vehicles> blogsList = [];
     for (int i = 0; i < response['records'].length; i++) {
-      Vehicles blogModel = Vehicles.fromJson(response['records'][i]);
+      debugPrint('vehcle response');
+      print(response['records'][i]['user']);
+      print(response['records'][i]['user'].runtimeType);
+      print(response['records'][i]['user'].toString());
 
+
+      Vehicles blogModel;
+      blogModel = Vehicles.fromJson(response['records'][i]);
+      if(response['records'][i]['user'].toString()=='[]'){
+        print('nullllllll');
+        blogModel.user=null;
+      }
       for (var element in blogModel.equipmentTypes!) {
         blogModel.equipmentTypes2!.add(element.title!);
         print('oooooo${element.title}');

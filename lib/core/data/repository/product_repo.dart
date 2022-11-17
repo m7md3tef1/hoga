@@ -9,11 +9,13 @@ import '../models/product/GetProduct_model.dart';
 class ProductRepo {
   static Future<List<GetJop>> getJop(url, self,
       {GetJop? productModel,
+        page,
       city2,
       country2,
       state2,
       jopTypeId,
       jopCategortId,
+
       isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response;
@@ -28,6 +30,7 @@ class ProductRepo {
     if (isFilter) {
       response =
           await Api().getHttp(url: url, authToken: token, self: self, data: {
+            "per_page":10,"page":page,
         "city": city2,
         "country": country2,
         "state": state2,
@@ -35,7 +38,7 @@ class ProductRepo {
         "categories": jopCategortId,
       });
     } else {
-      response = await Api().getHttp(url: url, authToken: token, self: self);
+      response = await Api().getHttp(url: url, authToken: token, self: self,data: {"per_page":10,"page":page});
     }
 
     List<GetJop> productsList = [];
@@ -50,10 +53,11 @@ class ProductRepo {
   }
 
   static Future<List<GetProductModel>> getProducts(url, self,
-      {GetProductModel? productModel, val}) async {
+      {GetProductModel? productModel, val,page}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response = await Api()
-        .getHttp(url: url, authToken: token, self: self, data: {"search": val});
+        .getHttp(url: url, authToken: token, self: self, data: {"search": val, "per_page":10,"page":page,
+    });
 
     List<GetProductModel> productsList = [];
     for (int i = 0; i < response['records'].length; i++) {

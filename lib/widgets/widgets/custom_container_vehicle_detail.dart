@@ -12,98 +12,72 @@ import '../../core/data/models/vehicle/vehicles.dart';
 import '../../core/router/router.dart';
 
 class CustomContainerVehicle extends StatelessWidget {
-  final Vehicles vehicle;
-  CustomContainerVehicle(this.vehicle, {Key? key}) : super(key: key);
+  final Vehicles load;
+  CustomContainerVehicle(this.load, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      paddingInEnd: 0,
-      paddingInStart: 0,
-      bottomPadding: 0,
+
       widget: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+
           Padding(
-            padding: EdgeInsets.only(top: 25.h,left: 8.r,right: 8.r,),
-            child: Container(
-              height: 80.h,
-              width: 1.sw,
-              child: Column(
-                children: [
-
-                  Row(
-                    children: [
-                      CustomText(
-                        text: vehicle.originCity ==null ?'other':'${vehicle.originCity!.title}',
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorManager.primaryColor,
-                      ),
-                      Expanded(
-                        child: CustomText(
-                          text:  vehicle.originState ==null ?'other':' (${vehicle.originState!.title},${vehicle.originCountry!.title})' ,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: ColorManager.primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.arrow_right_alt,color:  ColorManager.primaryColor,),
-                      CustomText(
-                        text: vehicle.destinationCity ==null ? 'other':vehicle.destinationCity!.title.toString(),
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorManager.primaryColor,
-                      ),
-
-                      Expanded(
-                        child: CustomText(
-                          text: vehicle.destinationState ==null ? 'other':' (${vehicle.destinationState!.title}, ${vehicle.destinationCountry!.title})',
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-
-                          color: ColorManager.primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            padding: EdgeInsets.only(
+                top: 15.h,
+                left: 8.sp,
+                right: 8.sp,
+                bottom: 10.sp
+            ),
+            child: CustomText(
+              text:
+              "${load.originCity == null ? "other" : load.originCity!.title}"
+                  " (${load.originState == null ? "other" : load.originState!.title} , "
+                  "${load.originCountry == null ? "other" : load.originCountry!.title}) "
+                  " → "
+                  "${load.destinationCity == null ? "other" : load.destinationCity!.title}"
+                  " (${load.destinationState == null ? "other" : load.destinationState!.title} , "
+                  "${load.destinationCountry == null ? "other" : load.destinationCountry!.title}) ",
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w600,
+              color: ColorManager.primaryColor,
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.person_outline,
-                      color: ColorManager.primaryColor,
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                    CustomText(
-                      text: vehicle.user == null
-                          ? 'other'
-                          : vehicle.user!.username.toString(),
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                  ],
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.person_outline,
+                        color: ColorManager.primaryColor,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Expanded(
+                        child: CustomText(
+                          text: load.user == null
+                              ? 'other'
+                              : load.user!.username.toString(),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                    ],
+                  ),
                 ),
                 Expanded(
+                  flex: 2,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -114,8 +88,7 @@ class CustomContainerVehicle extends StatelessWidget {
                       Expanded(
                         child: CustomText(
                           align: TextAlign.start,
-                          text: vehicle.createdAt!
-                              .substring(0, vehicle.createdAt!.indexOf('T')),
+                          text: '${load.availabilityDate}',
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,
@@ -125,6 +98,7 @@ class CustomContainerVehicle extends StatelessWidget {
                   ),
                 ),
                 Expanded(
+                  flex: 2,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -137,7 +111,7 @@ class CustomContainerVehicle extends StatelessWidget {
                       ),
                       Expanded(
                         child: CustomText(
-                          text: '${vehicle.weight} Kg(s)'??'other Kg(s)',
+                          text: '${load.weight} Kg(s)' ?? 'other',
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,
@@ -149,7 +123,6 @@ class CustomContainerVehicle extends StatelessWidget {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: SizedBox(
@@ -158,14 +131,13 @@ class CustomContainerVehicle extends StatelessWidget {
               child: const Divider(),
             ),
           ),
-
           Padding(
-            padding:  EdgeInsets.only(top: 15.h),
+            padding: EdgeInsets.only(top: 15.h),
             child: Column(
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding:  EdgeInsets.only(left: 33.w,bottom: 15.h,top: 15.h),
+                  padding: EdgeInsets.only(left: 33.w, bottom: 15.h, top: 15.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -173,13 +145,13 @@ class CustomContainerVehicle extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+
                     Padding(
-                      padding:  EdgeInsets.only(bottom: 15.h,top: 15.h),
+                      padding: EdgeInsets.only(
+                          left: 5.w, bottom: 15.h, right: 5.w, top: 15.h),
                       child: Row(
                         children: [
                           const Icon(
@@ -190,36 +162,42 @@ class CustomContainerVehicle extends StatelessWidget {
                             width: 6,
                           ),
                           CustomText(
-                            text: vehicle.user == null
+                            text: load.user == null
                                 ? 'other'
-                                : vehicle.user!.contactNumber.toString(),
+                                : load.user!.contactNumber.toString(),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey,
                           ),
-
+                          const SizedBox(
+                            width: 6,
+                          ),
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.email_outlined,
-                          color: ColorManager.primaryColor,
-                        ),
 
-                        CustomText(
-                          text: vehicle.user == null
-                              ? 'other'
-                              : vehicle.user!.email.toString(),
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                      ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.email_outlined,
+                            color: ColorManager.primaryColor,
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Expanded(
+                            child: CustomText(
+                              text: load.user == null
+                                  ? 'other'
+                                  : load.user!.email.toString(),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 )
@@ -229,5 +207,6 @@ class CustomContainerVehicle extends StatelessWidget {
         ],
       ),
     );
+
   }
 }

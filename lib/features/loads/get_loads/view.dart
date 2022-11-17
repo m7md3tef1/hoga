@@ -16,32 +16,55 @@ import '../cubit/getLoad_states.dart';
 
 part 'units/body.dart';
 
-class LoadsView extends StatelessWidget {
+class LoadsView extends StatefulWidget {
   const LoadsView({Key? key}) : super(key: key);
 
   @override
+  State<LoadsView> createState() => _LoadsViewState();
+}
+
+class _LoadsViewState extends State<LoadsView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    LoadsCubit.get(context).page=1;
+
+  }
+  @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppbar(title: 'Loads'),
-            SizedBox(
-              height: 22.h,
-            ),
-            CustomSearchRow(
-              2,
-              function: () {
-                VehiclesCubit.get(context).vehicleClearData(context);
-                MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
-              },
-            ),
-            SizedBox(
-              height: 21.h,
-            ),
-            Body()
-          ],
+      body:   RefreshIndicator(
+      color: Colors.orange,
+      backgroundColor: Colors.white,
+      onRefresh: ()async{
+        print('refresh');
+        await LoadsCubit.get(context).getPage();
+        print("page is "+'${LoadsCubit.get(context).page}');
+        await LoadsCubit.get(context).getLoad(page:LoadsCubit.get(context).page,isFilter: false );
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppbar(title: 'Loads'),
+              SizedBox(
+                height: 22.h,
+              ),
+              CustomSearchRow(
+                2,
+                function: () {
+                  VehiclesCubit.get(context).vehicleClearData(context);
+                  MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
+                },
+              ),
+              SizedBox(
+                height: 21.h,
+              ),
+              Body()
+            ],
+          ),
         ),
       ),
     );

@@ -4,6 +4,8 @@ import '../../../core/data/models/jobs/get_jop.dart';
 abstract class AddJopStates {}
 
 class AddJopLoading extends AddJopStates {}
+class AddPage extends AddJopStates {}
+
 
 class AddSuccessJop extends AddJopStates {}
 

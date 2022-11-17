@@ -59,7 +59,6 @@ class _VideoState extends State<Video> {
   }
 
   @override
-<<<<<<< HEAD
   void deactivate() {
     // Pauses video while navigating to next page.
     _controller.pause();
@@ -99,44 +98,3 @@ class _VideoState extends State<Video> {
 
 
 }
-=======
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 216.h,
-          width: 1.sw,
-          child: Center(
-            child: _controller.value.isInitialized
-                ? AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  )
-                : Container(),
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
-          },
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-            size: 30,
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-}
->>>>>>> b6858b9803a35ccae61312e3a1435e870a704322

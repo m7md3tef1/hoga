@@ -74,7 +74,7 @@ class Vehicles {
     weight = json['weight'];
     instructions = json['instructions'];
 
-    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
+   //user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
 
     if (json['viewd_by'] != null) {
       viewdBy = [];

@@ -24,7 +24,7 @@ class HomeCubit extends Cubit<HomeStates> {
     const SearchView(),
     const LoadsView(),
     const VehiclesView(),
-    const JobsView()
+     JobsView()
   ];
 
   void changeBottom(int index, context) {
@@ -33,7 +33,7 @@ class HomeCubit extends Cubit<HomeStates> {
     if (currentIndex == 2)
       LoadsCubit.get(context).getLoad(self: 0, isFilter: false);
     if (currentIndex == 1) ProductsCubit.get(context).getProduct();
-    if (currentIndex == 4) JopCubit.get(context).getJop();
+    if (currentIndex == 4) JopCubit.get(context).getJops(isFilter: false);
 
     emit(ChangeBottomNavState());
   }

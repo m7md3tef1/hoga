@@ -10,6 +10,7 @@ class User {
     this.profilePicture,
     this.id,});
 
+
   User.fromJson(dynamic json) {
     firstName =json['first_name']==null?'': json['first_name'];
     lastName = json['last_name']??'';

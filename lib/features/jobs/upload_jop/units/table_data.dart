@@ -16,33 +16,41 @@ class MyJopTable extends StatelessWidget {
       child: BlocConsumer<JopCubit, AddJopStates>(
           listener: (BuildContext context, Object? state) {},
           builder: (context, state) {
-            return ListView.builder(
-                itemCount: JopCubit.get(context).jopList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    color: index.isEven ? Colors.grey[300] : Colors.white,
-                    child: UploadedTableDataRow(
-                      flex: 2,
-                      origin: "${JopCubit.get(context).jopList[index].title}",
-                      editFunc: () {
-                        MagicRouter.navigateTo(AddJopView(
-                            isEdit: true,
-                            jopModel: JopCubit.get(context).jopList[index],
-                            index: index));
-                      },
-                      deleteFunc: () {
-                        JopCubit.get(context).deleteJopCubit(
-                            JopCubit.get(context).jopList[index].id);
-                      },
-                      flex2: 5,
-                      tableWeight:
-                          " (${JopCubit.get(context).jopList[index].state == null ? "other" : JopCubit.get(context).jopList[index].state!.title}, "
-                          " → "
-                          "${JopCubit.get(context).jopList[index].city == null ? "other" : JopCubit.get(context).jopList[index].city!.title})",
-                      tableNumber: "${index + 1}",
-                    ),
-                  );
-                });
+            return     RefreshIndicator(
+            color: Colors.orange,
+            backgroundColor: Colors.blue,
+            onRefresh: ()async{
+            print('refresh');
+            JopCubit.get(context).getJops(self: 1, isFilter: false, context: context);
+            },
+              child: ListView.builder(
+                  itemCount: JopCubit.get(context).jopList.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      color: index.isEven ? Colors.grey[300] : Colors.white,
+                      child: UploadedTableDataRow(
+                        flex: 2,
+                        origin: "${JopCubit.get(context).jopList[index].title}",
+                        editFunc: () {
+                          MagicRouter.navigateTo(AddJopView(
+                              isEdit: true,
+                              jopModel: JopCubit.get(context).jopList[index],
+                              index: index));
+                        },
+                        deleteFunc: () {
+                          JopCubit.get(context).deleteJopCubit(
+                              JopCubit.get(context).jopList[index].id);
+                        },
+                        flex2: 5,
+                        tableWeight:
+                            " (${JopCubit.get(context).jopList[index].state == null ? "other" : JopCubit.get(context).jopList[index].state!.title}, "
+                            " → "
+                            "${JopCubit.get(context).jopList[index].city == null ? "other" : JopCubit.get(context).jopList[index].city!.title})",
+                        tableNumber: "${index + 1}",
+                      ),
+                    );
+                  }),
+            );
           }),
     );
   }

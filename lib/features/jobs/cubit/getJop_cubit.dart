@@ -29,6 +29,18 @@ class JopCubit extends Cubit<AddJopStates> {
   bool isAccessToken = true;
   bool testLoading = false;
   bool myJopLoading = false;
+
+  int page =1;
+  getPage(){
+    if(jopList.length==10){
+      page++;
+      emit(AddPage());
+    }else{
+      page=1;
+      emit(AddPage());
+
+    }
+  }
   getJops(
       {self,
       GetJop? productModel,
@@ -38,7 +50,8 @@ class JopCubit extends Cubit<AddJopStates> {
       jopTypeId,
       jopCategortId,
       isFilter,
-      context}) {
+      context,
+      page}) {
     myJopLoading = true;
 
     emit(AddJopLoading());
@@ -54,6 +67,7 @@ class JopCubit extends Cubit<AddJopStates> {
                 state2: state2,
                 jopTypeId: jopTypeId,
                 jopCategortId: jopCategortId,
+                page:page,
                 isFilter: isFilter)
             .then((value) => {
                   myJopLoading = false,

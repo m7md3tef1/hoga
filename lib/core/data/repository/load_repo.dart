@@ -11,6 +11,7 @@ import '../local/cacheHelper.dart';
 class LoadsRepo {
   static Future<List<Vehicles>> getLoads(self,
       {val,
+        page,
       equipmentSize,
       attributes,
       vehicleSize,
@@ -25,7 +26,9 @@ class LoadsRepo {
     isFilter
         ? response = await Api()
             .getHttp(url: 'loads', authToken: token, self: self, data: {
-            "equipment_types": equipmentSize,
+      "per_page":10,"page":page,
+
+      "equipment_types": equipmentSize,
             "vehicle_attributes": attributes,
             "vehicle_sizes": vehicleSize,
             "vehicle_types": vehicleType,
@@ -39,7 +42,8 @@ class LoadsRepo {
             "destination_city_id": DataFormCubit.get(context).cityDestinationID,
           })
         : response = await Api().getHttp(
-            url: 'loads', authToken: token, self: self, data: {"search": val});
+            url: 'loads', authToken: token, self: self, data: {"search": val,            "per_page":10,"page":page,
+    });
 
     List<Vehicles> loadsList = [];
     for (int i = 0; i < response['records'].length; i++) {

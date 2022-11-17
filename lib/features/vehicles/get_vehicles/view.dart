@@ -15,9 +15,21 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 part 'units/body.dart';
 
-class VehiclesView extends StatelessWidget {
+class VehiclesView extends StatefulWidget {
   const VehiclesView({Key? key}) : super(key: key);
 
+  @override
+  State<VehiclesView> createState() => _VehiclesViewState();
+}
+
+class _VehiclesViewState extends State<VehiclesView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    VehiclesCubit.get(context).page=1;
+
+  }
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

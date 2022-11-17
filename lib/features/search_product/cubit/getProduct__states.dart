@@ -7,6 +7,8 @@ class AddProductLoading extends AddProductStates {}
 class AddSuccess extends AddProductStates {}
 
 class AddFailed extends AddProductStates {}
+class AddPage extends AddProductStates {}
+
 
 
 

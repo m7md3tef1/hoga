@@ -31,7 +31,8 @@ class CustomContainerLoad extends StatelessWidget {
       bottom: 10.sp
       ),
         child: CustomText(
-          text:   "${load.originCity == null ? "other" : load.originCity!.title}"
+          text:
+          "${load.originCity == null ? "other" : load.originCity!.title}"
               " (${load.originState == null ? "other" : load.originState!.title} , "
               "${load.originCountry == null ? "other" : load.originCountry!.title}) "
               " → "

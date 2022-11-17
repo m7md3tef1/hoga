@@ -30,6 +30,8 @@ class _UploadProductsViewState extends State<UploadProductsView> {
   void initState() {
     super.initState();
     ProductsCubit.get(context).getProduct(self: 1);
+    ProductsCubit.get(context).page=1;
+
   }
 
   @override
