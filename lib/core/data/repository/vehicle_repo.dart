@@ -65,33 +65,7 @@ class VehicleRepo {
     String token = await CacheHelper.getString(SharedKeys.token);
 
     var response;
-//    isFilter == true
-//        ? response =
-//            await Api().getHttp(url: 'vehicles', authToken: token, data: {
-//              "per_page":10,"page":page,
-//
-//              "equipment_types": equipmentSize,
-//            "vehicle_attributes": attributes,
-//            "vehicle_sizes": vehicleSize,
-//            "vehicle_types": vehicleType,
-//            "origin_country_id": DataFormCubit.get(context).countryOriginID,
-//            "origin_state_id": DataFormCubit.get(context).stateOriginID,
-//            "origin_city_id": DataFormCubit.get(context).cityOriginID,
-//            "destination_country_id":
-//                DataFormCubit.get(context).countryDestinationID,
-//            "destination_state_id":
-//                DataFormCubit.get(context).stateDestinationID,
-//            "destination_city_id": DataFormCubit.get(context).cityDestinationID,
-//          })
-//        :
-//    response = await Api().getHttp(
-//            url: 'vehicles',
-//            //authToken: token,
-//           // self: self,
-//            data: {"search": val,"per_page":5,"page":1,
-//            });
-//    print("length");
-//=======
+
     isFilter == true
         ? response =
     await Api().getHttp(url: 'vehicles', authToken: token, data: {
@@ -189,69 +163,6 @@ class VehicleRepo {
     return packageList;
   }
 
-//  static Future<List<Vehicles>> searchVehicles(
-//      {search,
-//      equipmentSize,
-//      attributes,
-//      vehicleSize,
-//      vehicleType,
-//      context}) async {
-//    String token = await CacheHelper.getString(SharedKeys.token);
-//    print("repooo");
-//    print(search);
-////    print("equipment_types" + equipmentSize);
-////    print("vehicle_attributes" + attributes);
-////    print("vehicleSize" + vehicleSize);
-////    print("vehicleType" + vehicleType);
-////    print("origin_country_id" +
-////        DataFormCubit.get(context).countryOriginID.toString());
-////    print("origin_country_id" +
-////        DataFormCubit.get(context).stateOriginID.toString());
-////    print("origin_country_id" +
-////        DataFormCubit.get(context).cityOriginID.toString());
-////    print("origin_country_id" +
-////        DataFormCubit.get(context).countryDestinationID.toString());
-////    print("origin_country_id" +
-////        DataFormCubit.get(context).stateDestinationID.toString());
-//
-//    var response =
-//        await Api().getHttp(url: 'vehicles', authToken: token, data: {
-////      "search": search??'',
-////      "equipment_types": equipmentSize,
-////      "vehicle_attributes": attributes,
-////      "vehicle_sizes": vehicleSize,
-////      "vehicle_types": vehicleType,
-////      "origin_country_id": DataFormCubit.get(context).countryOriginID,
-////      "origin_state_id": DataFormCubit.get(context).stateOriginID,
-////      "origin_city_id": DataFormCubit.get(context).cityOriginID,
-////      "destination_country_id": DataFormCubit.get(context).countryDestinationID,
-////      "destination_state_id": DataFormCubit.get(context).stateDestinationID,
-////      "destination_city_id": DataFormCubit.get(context).cityDestinationID,
-//    });
-//
-//    List<Vehicles> searchList = [];
-//
-//    for (int i = 0; i < response['records'].length; i++) {
-//      Vehicles blogModel = Vehicles.fromJson(response['records'][i]);
-//
-//      for (var element in blogModel.equipmentTypes!) {
-//        blogModel.equipmentTypes2!.add(element.title!);
-//        print('oooooo${element.title}');
-//        print(blogModel.equipmentTypes2);
-//      }
-//      for (var element in blogModel.vehicleSizes!) {
-//        blogModel.vehicleSizes2!.add(element.title!);
-//        print('oooooo${element.title}');
-//        print(blogModel.vehicleSizes2);
-//      }
-//      searchList.add(blogModel);
-//    }
-//
-//    print(response.length);
-//    print(searchList.length);
-//
-//    return searchList;
-//  }
 
   static deleteVehicle(vehicleId) async {
     String token = await CacheHelper.getString(SharedKeys.token);

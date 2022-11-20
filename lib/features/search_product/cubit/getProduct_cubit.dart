@@ -30,18 +30,18 @@ class ProductsCubit extends Cubit<AddProductStates> {
   bool isAccessToken = true;
   bool testLoading = false;
   bool myVehiclesLoading = false;
-  int page =1;
-  getPage(){
-    if(productList.length==10){
+  int page = 1;
+  getPage() {
+    if (productList.length == 10) {
       page++;
       emit(AddPage());
-    }else{
-      page=1;
+    } else {
+      page = 1;
       emit(AddPage());
-
     }
   }
-  getProduct({self, val,page}) {
+
+  getProduct({self, val, page}) {
     emit(AddProductLoading());
     //myProductList=[];
     myVehiclesLoading = true;
@@ -50,7 +50,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        ProductRepo.getProducts('products', self, val: val,page: page)
+        ProductRepo.getProducts('products', self, val: val, page: page)
             .then((value) => {
                   myVehiclesLoading = false,
                   print('..................................'),

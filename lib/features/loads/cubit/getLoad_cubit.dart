@@ -20,7 +20,6 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   List<Vehicles> searchList = [];
   List<Vehicles> loadList = [];
   List<Vehicles> myloadList = [];
-  // List<Vehicles>myVehicleLoadList=[];
 
   List equipmentType = [];
   List attributes = [];
@@ -31,21 +30,21 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   bool testLoading = true;
   bool myVehiclesLoading = true;
 
-  int page =1;
-  getPage(){
-    if(loadList.length==10){
+  int page = 1;
+  getPage() {
+    if (loadList.length == 10) {
       page++;
       emit(AddPage());
-    }else{
-      page=1;
+    } else {
+      page = 1;
       emit(AddPage());
-
     }
   }
+
   getLoad(
       {self,
       val,
-        page,
+      page,
       equipmentSize2,
       attributes2,
       vehicleSize2,
@@ -59,7 +58,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         LoadsRepo.getLoads(self,
-                page:page,
+                page: page,
                 val: val,
                 context: context,
                 isFilter: isFilter,
@@ -100,25 +99,6 @@ class LoadsCubit extends Cubit<AddLoadStates> {
       }
     });
   }
-//  getLoad({self}){
-//    connectivity.checkConnectivity().then((value)async{
-//      if(ConnectivityResult.none == value){
-//        emit(NetworkFailed("Check your internet connection and try again"));
-//      }else{
-//        LoadsRepo.getLoads(self).then((value) => {
-//          print('..................................'),
-//          print(value),
-//          loadList=value,
-//          emit(GetLoadsSuccess(value))
-//        }).onError((error, stackTrace) => {
-//          emit(GetLoadsFailed(error.toString())),
-//          print(error)
-//
-//        });
-//      }
-//
-//    });
-//  }
 
   deleteLoadsCubit(vehicleId) {
     connectivity.checkConnectivity().then((value) async {

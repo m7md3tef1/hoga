@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
 import '../../../../core/color_manager/color_manager.dart';
 
 class VehicleContainer extends StatelessWidget {
-   VehicleContainer(this.image,this.text,this.hint,this.more,this.color) ;
+   VehicleContainer(this.image,this.fun,this.text,this.hint,this.more,this.color) ;
 var image;
 String text;
 String hint;
 String more;
 Color color;
+var fun;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -61,11 +63,16 @@ Color color;
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomText(
-                    text:  more,
-                    color: color,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap:(){
+                      MagicRouter.navigateTo(fun);
+                    },
+                    child: CustomText(
+                      text:  more,
+                      color: color,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                    Icon(
                     Icons.arrow_right_alt,

@@ -12,6 +12,7 @@ import '../../core/data/local/cacheHelper.dart';
 import '../../core/keys/keys.dart';
 import '../../core/validator/validator.dart';
 import '../../core/widgets/custom_card.dart';
+import '../../widgets/widgets/custom_notloggedin.dart';
 import 'cubit/UpdateProfile_state.dart';
 import 'cubit/updateProfile_cubit.dart';
 
@@ -27,7 +28,7 @@ class DashboardView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomAppbar(title: 'Dashboard'),
-             FormView(),
+            !CacheHelper.getBool(SharedKeys.isLogin)?const CustomNotLoggedIn(): FormView(),
           ],
         ),
       ),

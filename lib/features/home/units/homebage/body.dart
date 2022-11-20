@@ -1,12 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 import '../../../../core/color_manager/color_manager.dart';
 import '../../../../widgets/widgets/custom_text.dart';
 
 class body extends StatelessWidget {
-  const body({Key? key}) : super(key: key);
+   body({Key? key}) : super(key: key);
+  var text=['MANAGE YOUR LOADS AND VEHICLE ON SINGLE PLACE','POST JOBS AND ITEMS FOR SALE SEAMLESSLY'];
+
+  var hint=['Find users available with list of Vehicles or Loads they need to move from one place to another',
+    'We provide system to list items for sale and purchase along with current job opening'
+  ];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,53 +27,64 @@ class body extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage('assets/images/Rectangle 18.png')),
           ),
-          child: Center(
-              child: Padding(
-            padding: EdgeInsets.only(left: 15.r, right: 15.r),
-            child: Container(
-              height: 135.h,
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(0, 0, 0, 0.7),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(10.r),
-                child: Container(
-                  height: 115.h,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: const Color(0xFFFDC52F))),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: .5.r, right: .5.r),
-                          child: CustomText(
-                            align: TextAlign.center,
-                            text:
-                                'Manage your Loads and Vehicles on single place',
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFFFFFFFF),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 23.r, right: 23.r),
-                          child: CustomText(
-                            align: TextAlign.center,
-                            text:
-                                'Find users available with list of Vehicles or Loads they need to move from one place to another',
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFFFFFFFF),
-                          ),
-                        ),
-                      ],
-                    ),
+          child: Padding(
+            padding: EdgeInsets.only(left: 15.r, right: 15.r,top: 15.h,bottom: 15.h),
+            child: Center(
+                child: Swiper(
+                  pagination: const SwiperPagination(
+                    builder: SwiperPagination.rect,
+                    alignment: Alignment.bottomCenter,
                   ),
+                  itemCount: text.length,
+                itemBuilder: (context, index) => Container(
+                    height: 130.h,
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(0, 0, 0, 0.7),
+                    ),
+                    child: Container(
+                      height: 20.h,
+
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 23.r, right: 23.r,bottom: 8.h,top: 8.h),
+                              child: CustomText(
+                                align: TextAlign.start,
+                                text:
+                                    text[index],
+                                fontSize: 19.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFFFFFFFF),
+                              ),
+                            ),
+
+                            Padding(
+                              padding: EdgeInsets.only(left: 23.r, right: 23.r),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: const Color(0xFFFDC52F))),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CustomText(
+                                    align: TextAlign.start,
+                                    text:
+                                        hint[index],
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w700,
+                                    color: const Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                 ),
-              ),
-            ),
-          )),
+                )),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(left: 15.w),

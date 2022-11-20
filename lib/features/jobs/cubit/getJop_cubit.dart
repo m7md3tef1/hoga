@@ -185,40 +185,7 @@ class JopCubit extends Cubit<AddJopStates> {
       }
     });
 
-    //searchList.clear();
-//    JopCubit.get(context).jopList.forEach((i) {
-//      if (i.title!.toLowerCase().contains(val) || i.title!.contains(val)) {
-//        searchList.add(i);
-//      }  else if (i.id!.toString().contains(val)) {
-//        searchList.add(i);
-//      } else if (i.state!.title!.toString().toLowerCase().contains(val) ||
-//          i.state!.title!.toString().contains(val)) {
-//        searchList.add(i);
-//      } else if (i.salary!.contains(val) ||
-//          i.salary!.toString().contains(val)) {
-//        searchList.add(i);
-//      } else if (i.category!.title!.contains(val) ||
-//          i.category!.title!.toLowerCase().contains(val)) {
-//        searchList.add(i);
-//      } else if (i.jobType!.title!.toString().contains(val) ||
-//          i.jobType!.title!.toString().toLowerCase().contains(val)) {
-//        searchList.add(i);
-//      } else if (i.noOfPosts!.toString().contains(val) ||
-//          i.noOfPosts!.toString().contains(val)) {
-//        searchList.add(i);
-//      }  else if (i.shiftTime.toString().toLowerCase().contains(val) ||
-//          i.shiftTime.toString().contains(val)) {
-//        searchList.add(i);
-//      } else {
-//        null;
-//      }
-//
-//      if (searchList != null || searchList.length != 0) {
-//        emit(GetSearchSuccess(searchList));
-//      } else {
-//        emit(GetSearchFailed('list is empty'));
-//      }
-//    });
+
   }
 
   jopClearData(context) {

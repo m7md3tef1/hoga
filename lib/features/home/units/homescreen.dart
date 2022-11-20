@@ -23,14 +23,14 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  const body(),
+                   body(),
                   SizedBox(
                     height: 38.h,
                   ),
-                   Video(),
+                   const Video(),
                   const Values(),
                   const Contact(),
-                   Bottom(),
+                   const Bottom(),
 
 
                 ],

@@ -70,8 +70,7 @@ class ProductRepo {
     return productsList;
   }
 
-  static Future<List<GetProductModel>> searchProduct(url, self,
-      {GetProductModel? productModel}) async {
+  static Future<List<GetProductModel>> searchProduct(url, self, {GetProductModel? productModel}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(
         url: url, authToken: token, self: self, data: productModel!.toJson());

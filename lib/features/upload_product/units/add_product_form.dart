@@ -34,16 +34,7 @@ class _FormState extends State<Form> {
   void initState() {
     super.initState();
     if (widget.isEdit) {
-      //print(widget.productModel!.city);
-      // print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
-      // country = widget.productModel!.country!.title??'';
-//      city = widget.productModel!.city!.title!;
-//      state = widget.productModel!.state!.title!;
-//      countryId = widget.productModel!.country!.id!;
-//      cityId = widget.productModel!.city!.id!;
-//      stateId = widget.productModel!.state!.id!;
       buyOrSell = widget.productModel!.buyOrSell;
-
       ProductsCubit.get(context).priceController.text =
           widget.productModel!.price!;
       ProductsCubit.get(context).nameController.text =
