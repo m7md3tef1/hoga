@@ -88,7 +88,7 @@ class body extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 15.w),
+          padding: EdgeInsets.only(left: 15.w,top: 6.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

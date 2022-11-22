@@ -16,12 +16,11 @@ class blog extends StatelessWidget {
         listener: (BuildContext context, state) {
       print(BlogsCubit.get(context).blogList.length);
     }, builder: (BuildContext context, Object? state) {
-      if (state is GetSearchFailed) {
-        return Center(child: CustomText(text: state.msg));
-      } else {
+
         return Container(
-          height: (BlogsCubit.get(context).blogList.length * 166.h * 2.25).h,
+         // height: (BlogsCubit.get(context).blogList.length * 166.h * 2.25).h,
           child: ListView.builder(
+            shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: BlogsCubit.get(context).blogList.length,
               itemBuilder: (context, index) {
@@ -29,7 +28,7 @@ class blog extends StatelessWidget {
                     BlogsCubit.get(context).blogList[index]);
               }),
         );
-      }
+
     });
   }
 }

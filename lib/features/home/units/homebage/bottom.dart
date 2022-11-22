@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
+import 'package:hoga_load/features/home/units/homebage/body.dart';
 import 'package:hoga_load/features/home/units/homebage/buttonContainer.dart';
 import 'package:hoga_load/features/home/units/homebage/swiper1.dart';
 import 'package:hoga_load/features/home/units/homebage/swiper2.dart';
@@ -374,7 +375,9 @@ class _BottomState extends State<Bottom> {
             ),
           ]),
         ),
-        const blog()
+        const blog(),
+
+
       ],
     );
   }
