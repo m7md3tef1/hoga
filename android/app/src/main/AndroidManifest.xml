@@ -2,9 +2,9 @@
     package="com.example.hoga_load">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="hoga_load"
+        android:label="Hega Load"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -19,6 +19,7 @@ class CustomContainerBlog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+
       paddingInEnd: 0,
       paddingInStart: 0,
       bottomPadding: 0,
@@ -27,7 +28,7 @@ class CustomContainerBlog extends StatelessWidget {
         children: [
           Container(
             //height: 166.h,
-            width: 1.sw,
+            //width: 1.sw,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12.r),
@@ -58,7 +59,7 @@ class CustomContainerBlog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Row(
                         children: [
                           const Icon(
@@ -68,11 +69,13 @@ class CustomContainerBlog extends StatelessWidget {
                           const SizedBox(
                             width: 2,
                           ),
-                          CustomText(
-                            text: 'Admin',
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          Expanded(
+                            child: CustomText(
+                              text: 'Admin',
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       ),
@@ -80,6 +83,7 @@ class CustomContainerBlog extends StatelessWidget {
                     Expanded(
                       flex: orientation == Orientation.portrait?2:1,
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(
@@ -89,13 +93,15 @@ class CustomContainerBlog extends StatelessWidget {
                           const SizedBox(
                             width: 2,
                           ),
-                          CustomText(
-                            align: TextAlign.start,
-                            text: blogs.createdAt!
-                                .substring(0, blogs.createdAt!.indexOf('T')),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          Expanded(
+                            child: CustomText(
+                              align: TextAlign.start,
+                              text: blogs.createdAt!
+                                  .substring(0, blogs.createdAt!.indexOf('T')),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           )
                         ],
                       ),
@@ -103,6 +109,7 @@ class CustomContainerBlog extends StatelessWidget {
                     Expanded(
                       flex: orientation == Orientation.portrait?2:1,
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SvgPicture.asset(
@@ -115,11 +122,17 @@ class CustomContainerBlog extends StatelessWidget {
                           const SizedBox(
                             width: 2,
                           ),
-                          CustomText(
-                            text: '${blogs.enableComment} Comment(s)',
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: CustomText(
+                                align: TextAlign.start,
+                                text: '${blogs.enableComment} Comment(s)',
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey,
+                              ),
+                            ),
                           )
                         ],
                       ),

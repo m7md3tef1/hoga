@@ -16,6 +16,7 @@ String? desc;
         header: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(text: text,align:TextAlign.start,fontSize: 16.sp,fontWeight: FontWeight.w600,color: const Color(0xFF000000),),
               SizedBox(

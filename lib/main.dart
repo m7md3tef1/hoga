@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,13 @@ void main() async {
   await CacheHelper.init();
   CacheHelper.putBool(SharedKeys.isLogin, false);
   BlocOverrides.runZoned(() {
-    runApp(const MyApp());
+
+    runApp( DevicePreview(
+    enabled: true,
+    builder:  (context) {
+        return const MyApp();
+      }
+    ));
   }, blocObserver: SimpleBlocObserver());
 }
 
@@ -88,6 +95,9 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (BuildContext context, _) => MaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
           theme: ThemeData(fontFamily: 'Montserrat'),
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,

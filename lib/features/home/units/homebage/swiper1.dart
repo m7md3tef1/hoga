@@ -10,13 +10,16 @@ class swiper1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(30),
       child: Container(
         height: 300.h,
         child: Swiper(
+          
           autoplay: true,
           pagination: const SwiperPagination(
+
             alignment: Alignment.bottomCenter,
+
           ),
           itemCount: swiperList.length,
           itemBuilder: (context, index) {

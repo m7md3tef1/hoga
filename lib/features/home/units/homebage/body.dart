@@ -29,7 +29,7 @@ class body extends StatelessWidget {
                 image: AssetImage('assets/images/Rectangle 18.png'),fit: BoxFit.fill),
           ),
           child: Padding(
-            padding: EdgeInsets.only(left: 15.r, right: 15.r,top: 15.h,bottom: 15.h),
+            padding: EdgeInsets.only(top: 15.h,bottom: 15.h),
             child: Center(
                 child: Swiper(
                   pagination: const SwiperPagination(

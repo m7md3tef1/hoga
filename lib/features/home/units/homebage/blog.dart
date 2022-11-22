@@ -17,17 +17,14 @@ class blog extends StatelessWidget {
       print(BlogsCubit.get(context).blogList.length);
     }, builder: (BuildContext context, Object? state) {
 
-        return Container(
-         // height: (BlogsCubit.get(context).blogList.length * 166.h * 2.25).h,
-          child: ListView.builder(
-            shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: BlogsCubit.get(context).blogList.length,
-              itemBuilder: (context, index) {
-                return CustomContainerBlog(
-                    BlogsCubit.get(context).blogList[index]);
-              }),
-        );
+        return ListView.builder(
+          shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: BlogsCubit.get(context).blogList.length,
+            itemBuilder: (context, index) {
+              return CustomContainerBlog(
+                  BlogsCubit.get(context).blogList[index]);
+            });
 
     });
   }
