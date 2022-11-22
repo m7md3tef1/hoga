@@ -9,6 +9,7 @@ import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../home/view.dart';
 import 'units/small_container.dart';
 part 'units/body.dart';
 part 'units/contact.dart';
@@ -22,10 +23,11 @@ class AboutUsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: passScaffoldKey,
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        drawer: const OnDrawer(),
+        key: passScaffoldKey,
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomAppbar(title: 'About Us',scaffoldKey: passScaffoldKey,),
