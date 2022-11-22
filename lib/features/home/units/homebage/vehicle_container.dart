@@ -6,7 +6,7 @@ import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import '../../../../core/color_manager/color_manager.dart';
 
 class VehicleContainer extends StatelessWidget {
-   VehicleContainer(this.image,this.fun,this.text,this.hint,this.more,this.color) ;
+   VehicleContainer(this.image,this.fun,this.text,this.hint,this.more,this.color, {super.key}) ;
 var image;
 String text;
 String hint;

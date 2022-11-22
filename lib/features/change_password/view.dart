@@ -16,6 +16,7 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
+import '../home/view.dart';
 import 'cubit/changePass_cubit.dart';
 part 'units/form.dart';
 class ChangePassView extends StatelessWidget {
@@ -24,10 +25,11 @@ class ChangePassView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: passScaffoldKey,
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        drawer: const OnDrawer(),
+        key: passScaffoldKey,
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

@@ -29,10 +29,11 @@ class AddUpdateCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: passScaffoldKey,
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        key: passScaffoldKey,
+        drawer: const OnDrawer(),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomAppbar(title: 'Add / Update Card Details',scaffoldKey: passScaffoldKey,),
