@@ -24,16 +24,18 @@ import 'cubit/addCard_cubit.dart';
 part 'units/form.dart';
 
 class AddUpdateCardView extends StatelessWidget {
-  const AddUpdateCardView({Key? key}) : super(key: key);
+   AddUpdateCardView({Key? key}) : super(key: key);
+  GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return Scaffold(
+      key: passScaffoldKey,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'Add / Update Card Details'),
+            CustomAppbar(title: 'Add / Update Card Details',scaffoldKey: passScaffoldKey,),
             CacheHelper.getBool(SharedKeys.isLogin)?NotLogged():const Expanded(
                 child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),

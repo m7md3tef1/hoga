@@ -68,7 +68,7 @@ class Body extends StatelessWidget {
                                         child: CustomButton(
                                           function: () =>
                                               MagicRouter.navigateTo(
-                                                  const AddUpdateCardView()),
+                                                   AddUpdateCardView()),
                                           text: 'BUY NOW',
                                           colortext: const Color(0xFFFDC52F),
                                           colorborder: const Color(0xFFFDC52F),

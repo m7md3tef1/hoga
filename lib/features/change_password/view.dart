@@ -19,19 +19,24 @@ import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 import 'cubit/changePass_cubit.dart';
 part 'units/form.dart';
 class ChangePassView extends StatelessWidget {
-  const ChangePassView({Key? key}) : super(key: key);
+   ChangePassView({Key? key}) : super(key: key);
+  GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return Scaffold(
+      key: passScaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomAppbar(title: 'Change Password'),
+              CustomAppbar(title: 'Change Password',scaffoldKey: passScaffoldKey,),
               SizedBox(height: 22.h,),
-               form(),
+               Padding(
+                 padding: const EdgeInsets.all(20),
+                 child: form(),
+               ),
 
             ],
           ),

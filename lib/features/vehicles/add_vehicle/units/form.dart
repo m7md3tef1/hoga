@@ -96,7 +96,14 @@ class _FormInfoState extends State<FormInfo> {
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const Icon(Icons.arrow_back_sharp),
+
+                          InkWell(
+                            onTap:(){
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.arrow_back_sharp),
+
+                          ),
                           Expanded(
                             child: CustomText(
                               text: 'ADD VEHICLE',

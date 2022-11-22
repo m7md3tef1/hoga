@@ -34,6 +34,7 @@ class OnDrawer extends StatelessWidget {
             ),
             CustomRowDrawer(
               text: 'Home',
+              isHome: true,
               icon: Icons.home,
               navigatename: const Home(),
             ),
@@ -41,17 +42,6 @@ class OnDrawer extends StatelessWidget {
               text: 'Upload Load',
               icon: Icons.railway_alert_outlined,
               navigatename: const UploadedLoadsView(),
-            ),
-            CustomRowDrawer(
-              text: 'Packages',
-              icon: Icons.all_inbox_rounded,
-              navigatename: PackagesView(),
-            ),
-
-            CustomRowDrawer(
-              text: 'Subscription Details',
-              icon: Icons.details_outlined,
-              navigatename: const SubscriptionDetailsView(),
             ),
             CustomRowDrawer(
               text: 'Upload Product',
@@ -73,24 +63,38 @@ class OnDrawer extends StatelessWidget {
               navigatename: const BlogsView(),
             ),
             CustomRowDrawer(
+              text: 'Packages',
+              icon: Icons.all_inbox_rounded,
+              navigatename: PackagesView(),
+            ),
+
+            CustomRowDrawer(
+              text: 'Subscription Details',
+              icon: Icons.details_outlined,
+              navigatename: const SubscriptionDetailsView(),
+            ),
+
+
+
+            CustomRowDrawer(
               text: 'Change Pass',
               icon: Icons.change_circle,
-              navigatename: const ChangePassView(),
+              navigatename:  ChangePassView(),
             ),
             CustomRowDrawer(
               text: 'ContactUs',
               icon: Icons.contact_support_outlined,
-              navigatename: const ContactUsView(),
+              navigatename:  ContactUsView(),
             ),
             CustomRowDrawer(
               text: 'Add / Update Card Details',
               icon: Icons.update,
-              navigatename: const AddUpdateCardView(),
+              navigatename:  AddUpdateCardView(),
             ),
             CustomRowDrawer(
               text: 'AboutUs',
               icon: Icons.info_outline,
-              navigatename: const AboutUsView(),
+              navigatename:  AboutUsView(),
             ),
             CustomRowDrawer(
               text: 'Logout',

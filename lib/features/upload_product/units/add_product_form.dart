@@ -66,8 +66,15 @@ class _FormState extends State<Form> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.arrow_back_sharp,
+                            InkWell(
+                              onTap:(){
+                            Navigator.pop(context);
+
+                            },
+
+                              child: const Icon(
+                                Icons.arrow_back_sharp,
+                              ),
                             ),
                             Expanded(
                               child: CustomText(

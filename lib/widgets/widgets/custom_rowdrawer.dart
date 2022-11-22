@@ -9,10 +9,12 @@ class CustomRowDrawer extends StatelessWidget {
       required this.text,
       this.beforeNavigate,
       this.icon,
+        this.isHome=false,
       this.navigatename})
       : super(key: key);
   String text;
   Function? beforeNavigate;
+  bool isHome=false;
   var icon;
   var navigatename;
   @override
@@ -21,6 +23,9 @@ class CustomRowDrawer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
+          if(isHome){
+            Navigator.pop(context);
+          }
           if (beforeNavigate != null) {
             beforeNavigate!();
           }

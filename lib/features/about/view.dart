@@ -17,16 +17,18 @@ part 'units/video.dart';
 
 
 class AboutUsView extends StatelessWidget {
-  const AboutUsView({Key? key}) : super(key: key);
+   AboutUsView({Key? key}) : super(key: key);
+  GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return Scaffold(
+      key: passScaffoldKey,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'About Us'),
+            CustomAppbar(title: 'About Us',scaffoldKey: passScaffoldKey,),
             SizedBox(
               height: 22.h,
             ),

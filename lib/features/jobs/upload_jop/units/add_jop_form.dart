@@ -68,9 +68,15 @@ class _FormInfoState extends State<FormInfo> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(
-                        Icons.arrow_back_sharp,
+                        InkWell(
+
+                         child: Icon(
+                          Icons.arrow_back_sharp,
                       ),
+                         onTap: (){
+                           Navigator.pop(context);
+                         },
+                       ),
                       Expanded(
                         child: CustomText(
                           text: 'ADD JOB',

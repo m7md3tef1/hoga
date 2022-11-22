@@ -49,6 +49,8 @@ class CustomAppbar extends StatelessWidget {
                         onTap: () {
                           print('clicked');
                           if (scaffoldKey != null) {
+                            print('clicked2');
+
                             scaffoldKey!.currentState!.openDrawer();
                           } else {
                             Home.scaffoldStateKey.currentState!.openDrawer();

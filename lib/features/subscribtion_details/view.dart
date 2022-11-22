@@ -20,7 +20,7 @@ class SubscriptionDetailsView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         key: subscriptionScaffoldKey,
-        drawer: OnDrawer(),
+        drawer: const OnDrawer(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

@@ -22,10 +22,11 @@ class body extends StatelessWidget {
       children: [
         Container(
           height: 249.h,
+          width: 1.sw,
           decoration: const BoxDecoration(
-            color: ColorManager.whiteColor,
+            color: ColorManager.primaryColor,
             image: DecorationImage(
-                image: AssetImage('assets/images/Rectangle 18.png')),
+                image: AssetImage('assets/images/Rectangle 18.png'),fit: BoxFit.fill),
           ),
           child: Padding(
             padding: EdgeInsets.only(left: 15.r, right: 15.r,top: 15.h,bottom: 15.h),
