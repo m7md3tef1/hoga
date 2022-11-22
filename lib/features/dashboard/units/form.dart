@@ -112,7 +112,21 @@ class FormView extends StatelessWidget {
                                 text: 'Update Profile',
                                 color: ColorManager.secondaryColor,
                               ),
-                            )
+                            ),
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(top: 17, bottom: 27),
+                            child: CustomButton(
+                              function: () {
+                                CacheHelper.putString(SharedKeys.token, '');
+                                MagicRouter.navigateTo(Login());
+
+                              },
+                              text: 'Log out',
+                              color: ColorManager.secondaryColor,
+                            ),
+                          )
+
                         ],
                       ),
                     ),
