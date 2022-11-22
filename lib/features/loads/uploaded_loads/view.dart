@@ -50,6 +50,7 @@ class _UploadedLoadsViewState extends State<UploadedLoadsView> {
       key: uploadProductScaffoldKey,
       drawer: OnDrawer(),
       body: SafeArea(
+
         child: Column(
           children: [
             CustomAppbar(

@@ -51,6 +51,7 @@ class _UploadJobsViewState extends State<UploadJobsView> {
       child: Scaffold(
         drawer: OnDrawer(),
         key: uploadedJobsScaffoldKey,
+
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

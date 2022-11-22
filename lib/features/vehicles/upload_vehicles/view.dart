@@ -50,6 +50,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
       child: Scaffold(
         key: uploadedVehiclesScaffoldKey,
         drawer: const OnDrawer(),
+
         body: Column(
           children: [
             CustomAppbar(

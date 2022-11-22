@@ -44,6 +44,7 @@ class _UploadProductsViewState extends State<UploadProductsView> {
       child: Scaffold(
         key: uploadedProductsScaffoldKey,
         drawer: OnDrawer(),
+
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

@@ -129,7 +129,7 @@ class Body extends StatelessWidget {
                                               (context, error, stackTrace) {
                                             return Container(
                                               width: 0.2.sw,
-                                              child: Center(
+                                              child: const Center(
                                                   child: Icon(Icons.error)),
                                             );
                                           },
