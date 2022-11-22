@@ -43,29 +43,31 @@ class _LoadsViewState extends State<LoadsView> {
         print("page is "+'${LoadsCubit.get(context).page}');
         await LoadsCubit.get(context).getLoad(page:LoadsCubit.get(context).page,isFilter: false );
       },
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomAppbar(title: 'Loads'),
-              SizedBox(
-                height: 22.h,
-              ),
-              CustomSearchRow(
-                2,
-                function: () {
-                  VehiclesCubit.get(context).vehicleClearData(context);
-                  MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
-                },
-              ),
-              SizedBox(
-                height: 21.h,
-              ),
-              Body()
-            ],
+      child: SafeArea(
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomAppbar(title: 'Loads'),
+                SizedBox(
+                  height: 22.h,
+                ),
+                CustomSearchRow(
+                  2,
+                  function: () {
+                    VehiclesCubit.get(context).vehicleClearData(context);
+                    MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
+                  },
+                ),
+                SizedBox(
+                  height: 21.h,
+                ),
+                Body()
+              ],
+            ),
           ),
-        ),
+      ),
       ),
     );
   }

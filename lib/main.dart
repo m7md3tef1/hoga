@@ -26,6 +26,7 @@ import 'features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+
   CacheHelper.putBool(SharedKeys.isLogin, false);
   BlocOverrides.runZoned(() {
     runApp(const MyApp());
@@ -86,17 +87,22 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
+
         splitScreenMode: true,
         builder: (BuildContext context, _) => MaterialApp(
-          theme: ThemeData(fontFamily: 'Montserrat'),
+          theme: ThemeData(fontFamily: 'Montserrat',),
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           onGenerateRoute: onGenerateRoute,
+
           home: const AnnotatedRegion<SystemUiOverlayStyle>(
+
               value: SystemUiOverlayStyle(
+
                   statusBarColor: Colors.white,
                   statusBarBrightness: Brightness.dark,
                   statusBarIconBrightness: Brightness.dark),
+
               child: SplashScreen()),
         ),
       ),

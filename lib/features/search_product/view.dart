@@ -46,11 +46,11 @@ class _SearchViewState extends State<SearchView> {
           await ProductsCubit.get(context).getProduct(page:ProductsCubit.get(context).page );
         },
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomAppbar(title: 'Search Product'),
+              CustomAppbar(title: 'Products'),
               SizedBox(
                 height: 22.h,
               ),

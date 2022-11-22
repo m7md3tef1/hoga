@@ -15,7 +15,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Container(
-        height: 0.7.sh,
+        height: 1.sh,
 
           child: Scrollbar(
             thickness: 15,

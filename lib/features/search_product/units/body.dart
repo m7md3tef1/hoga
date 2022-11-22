@@ -5,8 +5,8 @@ class Body extends StatelessWidget {
   List titlesList = ['Buy / Sell', 'Product', 'Type', 'Price', ' '];
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 0.7.sh,
+    return Container(
+      height: 1.sh*3,
       child: Scrollbar(
         thickness: 15,
         trackVisibility: true,
@@ -45,7 +45,7 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 0.6.sh,
+                  height: 0.9.sh*3,
                   width: 0.2.sw * 7,
                   child: BlocConsumer<ProductsCubit, AddProductStates>(
                     builder: (context, state) {
