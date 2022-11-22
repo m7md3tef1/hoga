@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             CustomAppbar(title: 'Home Screen'),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.symmetric(vertical: 8.sp,horizontal: 15.sp),
               child: Column(
                 children: [
                    body(),
@@ -31,7 +31,6 @@ class HomeScreen extends StatelessWidget {
                   const Values(),
                   const Contact(),
                    const Bottom(),
-                  SizedBox(height: 10.h,)
 
 
                 ],

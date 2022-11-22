@@ -6,12 +6,14 @@ import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import '../../../../core/color_manager/color_manager.dart';
 
 class VehicleContainer extends StatelessWidget {
-   VehicleContainer(this.image,this.fun,this.text,this.hint,this.more,this.color, {super.key}) ;
+   VehicleContainer(this.image,this.fun,this.text,this.hint,this.more,this.color,
+    {this.isColor=false}) ;
 var image;
 String text;
 String hint;
 String more;
 Color color;
+bool isColor;
 var fun;
   @override
   Widget build(BuildContext context) {
@@ -38,10 +40,17 @@ var fun;
               height: 20.h,
             ),
 
-            Image(
-                height: 80.h,
-                width: 80.w,
-                image:  AssetImage(image)),
+            Container(
+              decoration: BoxDecoration(
+                color: isColor?const Color(0xFFff8c09).withOpacity(0.3):Colors.transparent,
+                borderRadius: BorderRadius.circular(10)
+
+              ),
+              child: Image(
+                  height: 80.h,
+                  width: 80.w,
+                  image:  AssetImage(image)),
+            ),
             Expanded(
               child: CustomText(
                 text: text,

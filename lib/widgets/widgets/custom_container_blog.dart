@@ -19,6 +19,7 @@ class CustomContainerBlog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+
       paddingInEnd: 0,
       paddingInStart: 0,
       bottomPadding: 0,
@@ -26,8 +27,8 @@ class CustomContainerBlog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 166.h,
-            width: 1.sw,
+            //height: 166.h,
+            //width: 1.sw,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12.r),
@@ -50,80 +51,96 @@ class CustomContainerBlog extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 8.h, left: 10, right: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 0,
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.person_outline,
-                        color: Colors.grey,
+          OrientationBuilder(
+            builder: (context, orientation) {
+              return Padding(
+                padding: EdgeInsets.only(top: 8.h, left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.person_outline,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Expanded(
+                            child: CustomText(
+                              text: 'Admin',
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        width: 2,
+                    ),
+                    Expanded(
+                      flex: orientation == Orientation.portrait?2:1,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.access_time_outlined,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Expanded(
+                            child: CustomText(
+                              align: TextAlign.start,
+                              text: blogs.createdAt!
+                                  .substring(0, blogs.createdAt!.indexOf('T')),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
+                          )
+                        ],
                       ),
-                      CustomText(
-                        text: 'Admin',
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey,
+                    ),
+                    Expanded(
+                      flex: orientation == Orientation.portrait?2:1,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/Chat_Circle_Dots.svg',
+                            height: 25.h,
+                            width: 25.w,
+                            fit: BoxFit.cover,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: CustomText(
+                                align: TextAlign.start,
+                                text: '${blogs.enableComment} Comment(s)',
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  flex: 4,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.access_time_outlined,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(
-                        width: 2,
-                      ),
-                      CustomText(
-                        align: TextAlign.start,
-                        text: blogs.createdAt!
-                            .substring(0, blogs.createdAt!.indexOf('T')),
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey,
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/images/Chat_Circle_Dots.svg',
-                        height: 25.h,
-                        width: 25.w,
-                        fit: BoxFit.cover,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(
-                        width: 2,
-                      ),
-                      CustomText(
-                        text: '${blogs.enableComment} Comment(s)',
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              );
+            }
           ),
           SizedBox(
             height: 7.h,

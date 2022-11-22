@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,10 +27,15 @@ import 'features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-
   CacheHelper.putBool(SharedKeys.isLogin, false);
   BlocOverrides.runZoned(() {
-    runApp(const MyApp());
+
+    runApp( DevicePreview(
+        enabled: true,
+        builder:  (context) {
+          return const MyApp();
+        }
+    ));
   }, blocObserver: SimpleBlocObserver());
 }
 
@@ -43,7 +49,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => HomeCubit()),
         BlocProvider(create: (_) => PlansCubit()..getPlansCubit()
-        //  ..checkPlansCubit()
+          //  ..checkPlansCubit()
         ),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(
@@ -52,9 +58,9 @@ class MyApp extends StatelessWidget {
               ..getEquipmentsCubit()
               ..getVehicleSizesCubit()
               ..getVehicleTypesCubit()
-            //   ..getVehicleCubit()
+          //   ..getVehicleCubit()
 
-            ),
+        ),
         BlocProvider(
             create: (_) => DataFormCubit()
               ..getCountry()
@@ -68,7 +74,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(
             create: (_) => JopCubit()
-             // ..getJop()
+            // ..getJop()
               ..addJopCubit),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
         BlocProvider(create: (_) => ChangePassCubit()),
@@ -78,7 +84,7 @@ class MyApp extends StatelessWidget {
               ..getUserProfileData()
               ..getVehicleTypesCubit()
               ..getSubscriptionData()..profileData
-              ),
+        ),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))
@@ -87,22 +93,20 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
-
         splitScreenMode: true,
         builder: (BuildContext context, _) => MaterialApp(
-          theme: ThemeData(fontFamily: 'Montserrat',),
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          theme: ThemeData(fontFamily: 'Montserrat'),
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           onGenerateRoute: onGenerateRoute,
-
           home: const AnnotatedRegion<SystemUiOverlayStyle>(
-
               value: SystemUiOverlayStyle(
-
                   statusBarColor: Colors.white,
                   statusBarBrightness: Brightness.dark,
                   statusBarIconBrightness: Brightness.dark),
-
               child: SplashScreen()),
         ),
       ),

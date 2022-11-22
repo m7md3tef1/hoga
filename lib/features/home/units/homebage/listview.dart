@@ -28,19 +28,20 @@ class listView extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.only(top: 30.h),
       child: Container(
-        height: 1800.h,
+       // height: 1800.h,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.r ),
         ),
         child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
             itemCount: list.length,
             itemBuilder: (context, index) => Column(
                   children: [
                 ClipPath(
                 clipper: WaveShape(),
-          child: Container(
+          child: SizedBox(
             width: 1.sw,
             height: 315.h,
             child:Image(image: AssetImage(list[index].img)) ,
@@ -72,6 +73,9 @@ class listView extends StatelessWidget {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xFF858585),
+                    ),
+                    SizedBox(
+                      height:14.h ,
                     ),
                   ],
                 )),
