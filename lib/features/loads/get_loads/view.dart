@@ -63,6 +63,7 @@ class _LoadsViewState extends State<LoadsView> {
                 SizedBox(
                   height: 21.h,
                 ),
+
                 Body()
               ],
             ),

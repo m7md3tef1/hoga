@@ -27,8 +27,8 @@ class CustomContainerBlog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            //height: 166.h,
-            //width: 1.sw,
+            height: 166.h,
+            width: 1.sw,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12.r),

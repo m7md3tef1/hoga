@@ -11,10 +11,14 @@ import 'package:hoga_load/features/vehicles/get_vehicles/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
 import '../../../blogs/view.dart';
+import '../../../jobs/cubit/getJop_cubit.dart';
 import '../../../jobs/view.dart';
+import '../../../loads/cubit/getLoad_cubit.dart';
 import '../../../loads/get_loads/view.dart';
 import '../../../plans/view.dart';
+import '../../../search_product/cubit/getProduct_cubit.dart';
 import '../../../search_product/view.dart';
+import '../../../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import 'blog.dart';
 import 'expandable.dart';
 import 'features_container.dart';
@@ -194,7 +198,10 @@ class _BottomState extends State<Bottom> {
               'Loads',
               'Go through our available list of loads.',
               'Read More',
-              const Color(0xFF2DB6FA)),
+              const Color(0xFF2DB6FA),
+          function: LoadsCubit.get(context).getLoad(self: 0, isFilter: false),
+          ),
+
           VehicleContainer(
 
               'assets/images/vehicle_icon.png',
@@ -204,6 +211,8 @@ class _BottomState extends State<Bottom> {
               'Read More',
               const Color(0xFFF68C09),
           isColor: true,
+            function: VehiclesCubit.get(context).getVehicleCubit(self: 0),
+
 
           ),
           VehicleContainer(
@@ -212,7 +221,9 @@ class _BottomState extends State<Bottom> {
               'Products',
               'Checkout available item for sale and purchase.',
               'Read More',
-              const Color(0xFF08DA4E)),
+              const Color(0xFF08DA4E),
+
+          function: ProductsCubit.get(context).getProduct(),),
           VehicleContainer(
             'assets/images/jop.png',
             JobsView(),
@@ -220,6 +231,7 @@ class _BottomState extends State<Bottom> {
             'Upload your jobs here.',
             'Read More',
             const Color(0xFFE9222C),
+            function:  JopCubit.get(context).getJops(isFilter: false),
           ),
           PlanBody(),
           SizedBox(

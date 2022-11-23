@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
             builder: (context, state) {
               if (state is GetPackageSuccess) {
                 return SizedBox(
-                  height: .69.sh,
+                  height: .57.sh,
                   width: 1.sw,
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),

@@ -6,7 +6,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1.sh*3,
+      height: 1.sh,
       child: Scrollbar(
         thickness: 15,
         trackVisibility: true,
@@ -45,7 +45,7 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 0.9.sh*3,
+                  height: 0.7.sh,
                   width: 0.2.sw * 7,
                   child: BlocConsumer<ProductsCubit, AddProductStates>(
                     builder: (context, state) {

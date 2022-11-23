@@ -16,6 +16,8 @@ class MyTable extends StatelessWidget {
               LoadsCubit.get(context).getLoad(self: 1, isFilter: false, context: context);
             },
             child: ListView.builder(
+                physics: AlwaysScrollableScrollPhysics(),
+
                 itemCount: LoadsCubit.get(context).myloadList.length,
 
                 itemBuilder: (context, index) {

@@ -184,7 +184,6 @@ class Body extends StatelessWidget {
                                   print('this');
                                   print(state.vehicleList[index].equipmentTypes2!
                                       .toString());
-                                  print('nnnnnnnnnnnnn');
                                   final vehicle = state.vehicleList[index];
                                   return Container(
                                     color: index.isEven

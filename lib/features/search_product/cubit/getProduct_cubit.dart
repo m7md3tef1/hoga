@@ -3,21 +3,25 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/repository/product_repo.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct__states.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/data/api/api.dart';
+import '../../../core/data/local/cacheHelper.dart';
 import '../../../core/data/models/product/GetProduct_model.dart';
 import '../../../core/dialoges/toast.dart';
+import '../../../core/keys/keys.dart';
 
 class ProductsCubit extends Cubit<AddProductStates> {
   ProductsCubit() : super(AddProductLoading());
   TextEditingController priceController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
-  var image;
+  File? image;
   static ProductsCubit get(context) => BlocProvider.of(context);
   Connectivity connectivity = Connectivity();
 
@@ -111,16 +115,60 @@ class ProductsCubit extends Cubit<AddProductStates> {
     });
   }
 
-  addProductCubit({context, GetProductModel? productModel}) {
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(NetworkFailed("Check your internet connection and try again"));
-        showToast(
-            msg: "Check your internet connection and try again",
-            state: ToastedStates.ERROR);
-      } else {
-        emit(AddProductLoading());
-        ProductRepo.addProduct(context: context, productModel: productModel)
+  addProductCubit({context, GetProductModel? productModel})async {
+//
+//    var request = MultipartRequest();
+//
+//    request.setUrl("https://hegaload.com/api/products/add");
+//    request.addFile("image", image);
+//    request.addField("buy_or_sell", productModel!.buyOrSell);
+//    request.addField("product_name", productModel.productName);
+//    request.addField("product_type", productModel.productTypeId);
+//    request.addField("country", productModel.countryPost);
+//    request.addField("city", productModel.cityPost);
+//    request.addField("state", productModel.statePost);
+//    request.addField("price", productModel.priceInt);
+//    request.addField("description", productModel.description);
+//
+//
+//    Response response = request.send();
+//
+//    response.onError = () {
+//      print("Error");
+//    };
+//
+//    response.onComplete = (response) {
+//      print("Success");
+//
+//      print(response);
+//    };
+
+    String fileName = image!.path.split('/').last;
+
+    FormData formData = FormData.fromMap({
+      "product_image":
+      await MultipartFile.fromFile(image!.path, filename:fileName),
+     "buy_or_sell":productModel!.buyOrSell,
+    "product_name": productModel.productName,
+    "product_type": productModel.productTypeId,
+    "country": productModel.countryPost,
+    "city":productModel.cityPost,
+    "state": productModel.statePost,
+    "price": productModel.priceInt,
+    "description": productModel.description
+    });
+    String token = await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(
+        url: "products/add", authToken: token, data: formData)
+//    connectivity.checkConnectivity().then((value) async {
+//      if (ConnectivityResult.none == value) {
+//        emit(NetworkFailed("Check your internet connection and try again"));
+//        showToast(
+//            msg: "Check your internet connection and try again",
+//            state: ToastedStates.ERROR);
+//      } else {
+//        emit(AddProductLoading());
+//        ProductRepo.addProduct(context: context, productModel: productModel)
             .then((value) => {
                   print('Add Product Success'),
                   print(value),
@@ -140,19 +188,19 @@ class ProductsCubit extends Cubit<AddProductStates> {
           print(error);
           showToast(msg: error.toString(), state: ToastedStates.ERROR);
         });
-      }
-    });
+
   }
 
   pickFromGallery(BuildContext context) async {
     var img = await ImagePicker().pickImage(source: ImageSource.gallery);
-    image = File(
+     image = File(
       img!.path,
     );
+
     print(image
         .toString()
         .split('/data/user/0/com.example.hoga_load/cache/image_picker'));
-    final bytes = image.readAsBytesSync();
+    final bytes = image!.readAsBytesSync();
     img64 = "data:image/png;base64," + base64Encode(bytes);
     emit(ImageGallery());
     print('img64' + img64!);

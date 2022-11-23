@@ -10,15 +10,16 @@ import '../../about/view.dart';
 import 'homebage/body.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
+  static GlobalKey<ScaffoldState> scaffoldStateKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'Home Screen'),
+            SizedBox(height: 30,),
+            CustomAppbar(title: 'Home Screen',),
             Padding(
               padding:  EdgeInsets.symmetric(vertical: 8.sp,horizontal: 15.sp),
               child: Column(
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
+
     );
   }
 }

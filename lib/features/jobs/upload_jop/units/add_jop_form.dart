@@ -79,7 +79,7 @@ class _FormInfoState extends State<FormInfo> {
                        ),
                       Expanded(
                         child: CustomText(
-                          text: 'ADD JOB',
+                          text: widget.isFilter?"Search Job":'ADD JOB',
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                         ),

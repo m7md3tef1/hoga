@@ -20,6 +20,7 @@ class MyTable extends StatelessWidget {
                 await VehiclesCubit.get(context).getVehicleCubit(page:VehiclesCubit.get(context).page,self: 1 );
               },
               child: ListView.builder(
+                physics: AlwaysScrollableScrollPhysics(),
                   itemCount: VehiclesCubit.get(context).myVehicleList.length,
                   itemBuilder: (context, index) {
                     return Container(

@@ -30,7 +30,7 @@ class MyProductTable extends StatelessWidget {
 
             }, builder: (context, state) {
             return ListView.builder(
-              physics: AlwaysScrollableScrollPhysics(),
+                physics: AlwaysScrollableScrollPhysics(),
                       itemCount: ProductsCubit.get(context).myProductList.length,
 
                       itemBuilder: (context, index) {

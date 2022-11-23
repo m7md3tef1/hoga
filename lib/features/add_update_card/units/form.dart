@@ -60,7 +60,7 @@ class _FormState extends State<Form> {
                   ],
                 ),
                 SizedBox(
-                  width: 322.w,
+                  width: 1.sw,
                   child: const Divider(
                     thickness: 1,
                   ),
@@ -79,8 +79,8 @@ class _FormState extends State<Form> {
                     children: [
                       Expanded(
                         child: Container(
-                          height: 55.h,
-                          width: 155.w,
+                         // height: 55.h,
+                         // width: 155.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
                               border:
@@ -122,8 +122,8 @@ class _FormState extends State<Form> {
                       ),
                       Expanded(
                         child: Container(
-                          height: 55.h,
-                          width: 155.w,
+                          //height: 55.h,
+                          //width: 155.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
                               border:
@@ -171,8 +171,8 @@ class _FormState extends State<Form> {
                     children: [
                       Expanded(
                         child: Container(
-                          height: 55.h,
-                          width: 155.w,
+                          //height: 55.h,
+                          //width: 155.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.r),
                               border:
@@ -221,9 +221,10 @@ class _FormState extends State<Form> {
                               'assets/images/Credit_Card_01.svg',
                               color: const Color(0xFF3D3D3D),
                             ),
-                            Container(
-                              height: 24.h,
-                              width: 114.w,
+                            SizedBox(width: 5,),
+                            Expanded(
+                              //height: 24.h,
+                              //width: 114.w,
                               child: CustomText(
                                 color: const Color(0xFF3D3D3D),
                                 align: TextAlign.start,

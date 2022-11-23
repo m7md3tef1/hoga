@@ -18,12 +18,13 @@ class MyJopTable extends StatelessWidget {
           builder: (context, state) {
             return     RefreshIndicator(
             color: Colors.orange,
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.white,
             onRefresh: ()async{
             print('refresh');
             JopCubit.get(context).getJops(self: 1, isFilter: false, context: context);
             },
               child: ListView.builder(
+                physics: AlwaysScrollableScrollPhysics(),
                   itemCount: JopCubit.get(context).jopList.length,
                   itemBuilder: (context, index) {
                     return Container(

@@ -87,7 +87,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))
-              ..blogList),
+              ..blogList
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

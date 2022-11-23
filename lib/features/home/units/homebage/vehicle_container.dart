@@ -6,15 +6,16 @@ import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import '../../../../core/color_manager/color_manager.dart';
 
 class VehicleContainer extends StatelessWidget {
-   VehicleContainer(this.image,this.fun,this.text,this.hint,this.more,this.color,
-    {this.isColor=false}) ;
+   VehicleContainer(this.image,this.pageRoute,this.text,this.hint,this.more,this.color,
+    {this.isColor=false,this.function}) ;
 var image;
 String text;
 String hint;
 String more;
 Color color;
 bool isColor;
-var fun;
+var pageRoute;
+var function;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,8 +74,9 @@ var fun;
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap:(){
-                      MagicRouter.navigateTo(fun);
+                    onTap:()async{
+                      await function;
+                      MagicRouter.navigateTo(pageRoute);
                     },
                     child: CustomText(
                       text:  more,

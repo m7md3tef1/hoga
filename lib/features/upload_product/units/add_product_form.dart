@@ -701,7 +701,7 @@ class _FormState extends State<Form> {
                                                     statePost: stateId,
                                                     cityPost: cityId,
                                                     description: ProductsCubit.get(context).descController.text,
-                                                    productImage: ProductsCubit.get(context).img64));
+                                                    productImage: ProductsCubit.get(context).image));
                                   },
                                 ),
                         ),

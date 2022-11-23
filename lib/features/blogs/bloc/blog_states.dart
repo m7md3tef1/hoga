@@ -5,6 +5,9 @@ import '../../../core/data/models/blogs/blogs.dart';
 abstract class BlogsState{}
 
 class BlogLoading extends BlogsState{}
+class BlogCategory extends BlogsState{}
+//class BlogLoading extends BlogsState{}
+
 
 class GetBlogSuccess extends BlogsState{
 

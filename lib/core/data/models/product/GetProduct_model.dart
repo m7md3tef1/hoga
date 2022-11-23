@@ -56,7 +56,7 @@ class GetProductModel {
   User? user;
   String? description;
   String? price;
-  String? productImage;
+  var productImage;
   int? status;
   int? productTypeId;
   int? priceInt;
@@ -72,7 +72,7 @@ class GetProductModel {
     map['city'] = cityPost;
     map['description'] = description;
     map['price'] = priceInt;
-    map['product_image'] = productImage;
+   // map['product_image'] = productImage;
     map['search'] = search;
     map['id'] = id;
 

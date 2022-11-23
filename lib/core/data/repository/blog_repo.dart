@@ -41,4 +41,15 @@ class BlogRepo {
     print("blog repo");
     return blogsList;
   }
+
+  static Future<String> getCategory(id) async {
+
+    var response = await Api().getHttp(url: 'blogs/categories/get', data: {"id":id});
+
+String category=response['records']['title'];
+     print("category $category");
+
+    return category;
+  }
+
 }
