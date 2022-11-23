@@ -71,7 +71,7 @@ class CustomAppbar extends StatelessWidget {
                   if ((hideIcons == null || !hideIcons!))
                     InkWell(
                         onTap: () {
-                          MagicRouter.navigateTo(const DashboardView());
+                          MagicRouter.navigateTo( DashboardView());
                         },
                         child: const Icon(Icons.account_circle_outlined)),
                 ],

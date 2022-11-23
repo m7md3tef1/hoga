@@ -15,25 +15,35 @@ import '../../core/keys/keys.dart';
 import '../../core/validator/validator.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
+import '../home/view.dart';
 import 'cubit/UpdateProfile_state.dart';
 import 'cubit/updateProfile_cubit.dart';
 
 part 'units/form.dart';
 class DashboardView extends StatelessWidget {
-  const DashboardView({Key? key}) : super(key: key);
-
+   DashboardView({Key? key}) : super(key: key);
+  GlobalKey<ScaffoldState> uploadProductScaffoldKey =
+  GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: SingleChildScrollView(
+    return Scaffold(
+        key: uploadProductScaffoldKey,
+        drawer: const OnDrawer(),
+      body:!CacheHelper.getBool(SharedKeys.isLogin)? Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomAppbar(title: 'Dashboard' ,scaffoldKey: uploadProductScaffoldKey),
+          const CustomNotLoggedIn()
+        ],
+      ):SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'Dashboard'),
-            !CacheHelper.getBool(SharedKeys.isLogin)?const CustomNotLoggedIn(): FormView(),
+            CustomAppbar(title: 'Dashboard', scaffoldKey: uploadProductScaffoldKey),
+            FormView(),
           ],
         ),
-      ),
+      )
     );
   }
 }

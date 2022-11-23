@@ -76,10 +76,10 @@ class FormView extends StatelessWidget {
                             keyboardType: TextInputType.streetAddress,
                           ),
                           if (state is UpdateLoading)
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.only(top: 17, bottom: 27),
-                              child: const Center(
+                                  EdgeInsets.only(top: 17, bottom: 27),
+                              child: Center(
                                 child: CircularProgressIndicator(
                                     color: ColorManager.primaryColor),
                               ),
@@ -87,7 +87,7 @@ class FormView extends StatelessWidget {
                           else
                             Padding(
                               padding:
-                                  const EdgeInsets.only(top: 17, bottom: 27),
+                                  const EdgeInsets.only(top: 17, bottom: 20),
                               child: CustomButton(
                                 function: () {
                                   if (formKey.currentState!.validate()) {
@@ -115,7 +115,7 @@ class FormView extends StatelessWidget {
                             ),
                           Padding(
                             padding:
-                            const EdgeInsets.only(top: 17, bottom: 27),
+                            const EdgeInsets.only(top: 10, bottom: 27),
                             child: CustomButton(
                               function: () {
                                 CacheHelper.putString(SharedKeys.token, '');

@@ -52,7 +52,7 @@ class _UploadProductsViewState extends State<UploadProductsView> {
               title: 'Uploaded Products',
               scaffoldKey: uploadedProductsScaffoldKey,
             ),
-           ! CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn(): const Expanded(child: Uploaded()),
+           ! CacheHelper.getBool(SharedKeys.isLogin)?const CustomNotLoggedIn(): const Expanded(child: Uploaded()),
           ],
         ),
       ),
