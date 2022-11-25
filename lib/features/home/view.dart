@@ -36,12 +36,14 @@ class Home extends StatelessWidget {
       key: scaffoldStateKey,
       bottomNavigationBar: const _BottomBar(),
       drawer: const OnDrawer(),
-      body: BlocConsumer<HomeCubit, HomeStates>(
-        listener: (_, s) {},
-        builder: (context, s) {
-          return HomeCubit.get(context)
-              .bottomScreens[HomeCubit.get(context).currentIndex];
-        },
+      body: SafeArea(
+        child: BlocConsumer<HomeCubit, HomeStates>(
+          listener: (_, s) {},
+          builder: (context, s) {
+            return HomeCubit.get(context)
+                .bottomScreens[HomeCubit.get(context).currentIndex];
+          },
+        ),
       ),
     );
   }

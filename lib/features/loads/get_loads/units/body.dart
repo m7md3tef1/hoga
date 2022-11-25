@@ -13,9 +13,12 @@ class Body extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 1.sh,
-      child: Scrollbar(
+    return
+      SizedBox(
+      height: 0.6.sh,
+      child:
+
+      Scrollbar(
         thickness: 15,
         trackVisibility: true,
         child: ListView(
@@ -24,6 +27,7 @@ class Body extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: [
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0.w),
@@ -36,6 +40,7 @@ class Body extends StatelessWidget {
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15))),
                     child: ListView.builder(
+                      shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 7,
@@ -52,8 +57,8 @@ class Body extends StatelessWidget {
                         }),
                   ),
                 ),
-                Container(
-                  height: 0.6.sh,
+                Expanded(child: SizedBox(
+                  //height: 0.5.sh,
                   width: 0.2.sw * 7,
                   child: BlocConsumer<LoadsCubit, AddLoadStates>(
                     builder: (context, state) {
@@ -61,10 +66,10 @@ class Body extends StatelessWidget {
                         return Center(child: CustomText(text: state.msg));
                       } else if (state is GetSearchSuccess) {
                         return ListView.builder(
+                          shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.loadList.length,
                             itemBuilder: (context, index) {
-                              print('lllllllllll');
                               final load = state.loadList[index];
                               return Container(
                                 color: index.isEven
@@ -72,14 +77,14 @@ class Body extends StatelessWidget {
                                     : Colors.white,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
+                                  const EdgeInsets.symmetric(vertical: 5),
                                   child: InkWell(
                                     onTap: () {
                                       MagicRouter.navigateTo(Detail(load));
                                     },
                                     child: Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         CustomText(
                                           width: 0.2.sw,
@@ -93,7 +98,7 @@ class Body extends StatelessWidget {
 //                                height: 20.h,o
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                    .originCountry!.title! ??
+                                                .originCountry!.title! ??
                                                 'other',
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
@@ -102,22 +107,22 @@ class Body extends StatelessWidget {
 //                                  height: 20.h,
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                        .originState ==
-                                                    null
+                                                .originState ==
+                                                null
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .originState!.title!,
+                                                .originState!.title!,
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
                                         CustomText(
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                        .destinationCity ==
-                                                    null
+                                                .destinationCity ==
+                                                null
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .destinationCity!.title!,
+                                                .destinationCity!.title!,
                                             fontSize: 8.sp,
                                             align: TextAlign.start,
                                             fontWeight: FontWeight.w500),
@@ -125,11 +130,11 @@ class Body extends StatelessWidget {
                                             width: 0.2.sw,
 //                                  height: 20.h,
                                             text: state.loadList[index]
-                                                        .destinationState ==
-                                                    null
+                                                .destinationState ==
+                                                null
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .destinationState!.title!,
+                                                .destinationState!.title!,
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
@@ -160,6 +165,7 @@ class Body extends StatelessWidget {
                             });
                       } else if (state is GetLoadsSuccess) {
                         return ListView.builder(
+                          shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.loadList.length,
                             itemBuilder: (context, index) {
@@ -171,14 +177,14 @@ class Body extends StatelessWidget {
                                     : Colors.white,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
+                                  const EdgeInsets.symmetric(vertical: 5),
                                   child: InkWell(
                                     onTap: () {
                                       MagicRouter.navigateTo(Detail(load));
                                     },
                                     child: Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         CustomText(
                                           width: 0.2.sw,
@@ -192,7 +198,7 @@ class Body extends StatelessWidget {
 //                                height: 20.h,o
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                    .originCountry!.title! ??
+                                                .originCountry!.title! ??
                                                 'other',
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
@@ -201,22 +207,22 @@ class Body extends StatelessWidget {
 //                                  height: 20.h,
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                        .originState ==
-                                                    null
+                                                .originState ==
+                                                null
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .originState!.title!,
+                                                .originState!.title!,
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
                                         CustomText(
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                        .destinationCity ==
-                                                    null
+                                                .destinationCity ==
+                                                null
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .destinationCity!.title!,
+                                                .destinationCity!.title!,
                                             fontSize: 8.sp,
                                             align: TextAlign.start,
                                             fontWeight: FontWeight.w500),
@@ -224,11 +230,11 @@ class Body extends StatelessWidget {
                                             width: 0.2.sw,
 //                                  height: 20.h,
                                             text: state.loadList[index]
-                                                        .destinationState ==
-                                                    null
+                                                .destinationState ==
+                                                null
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .destinationState!.title!,
+                                                .destinationState!.title!,
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
@@ -236,11 +242,11 @@ class Body extends StatelessWidget {
 //                                  height: 30.h,
                                             width: 0.2.sw,
                                             text: state.loadList[index]
-                                                    .equipmentTypes2!.isEmpty
+                                                .equipmentTypes2!.isEmpty
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .equipmentTypes2!
-                                                    .toString(),
+                                                .equipmentTypes2!
+                                                .toString(),
                                             align: TextAlign.end,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
@@ -248,11 +254,11 @@ class Body extends StatelessWidget {
                                             width: 0.2.sw,
 //                                  height: 20.h,
                                             text: state.loadList[index]
-                                                    .vehicleSizes2!.isEmpty
+                                                .vehicleSizes2!.isEmpty
                                                 ? 'other'
                                                 : state.loadList[index]
-                                                    .vehicleSizes2!
-                                                    .toString(),
+                                                .vehicleSizes2!
+                                                .toString(),
                                             align: TextAlign.end,
                                             color: Colors.green,
                                             fontSize: 8.sp,
@@ -265,6 +271,7 @@ class Body extends StatelessWidget {
                             });
                       } else if (state is AddLoadLoading) {
                         return ListView.builder(
+                          shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: 6,
                             itemBuilder: (context, index) {
@@ -276,12 +283,12 @@ class Body extends StatelessWidget {
                                     : Colors.white,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
+                                  const EdgeInsets.symmetric(vertical: 5),
                                   child: InkWell(
                                     onTap: () {},
                                     child: Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -301,7 +308,7 @@ class Body extends StatelessWidget {
                                               enabled: true,
                                               baseColor: Colors.grey[300]!,
                                               highlightColor:
-                                                  Colors.grey[400]!,
+                                              Colors.grey[400]!,
                                               child: Container(
                                                   width: 0.2.sw,
                                                   height: 12.sp,
@@ -313,7 +320,7 @@ class Body extends StatelessWidget {
                                               enabled: true,
                                               baseColor: Colors.grey[300]!,
                                               highlightColor:
-                                                  Colors.grey[400]!,
+                                              Colors.grey[400]!,
                                               child: Container(
                                                   width: 0.2.sw,
                                                   height: 12.sp,
@@ -325,7 +332,7 @@ class Body extends StatelessWidget {
                                               enabled: true,
                                               baseColor: Colors.grey[300]!,
                                               highlightColor:
-                                                  Colors.grey[400]!,
+                                              Colors.grey[400]!,
                                               child: Container(
                                                   width: 0.2.sw,
                                                   height: 12.sp,
@@ -337,7 +344,7 @@ class Body extends StatelessWidget {
                                               enabled: true,
                                               baseColor: Colors.grey[300]!,
                                               highlightColor:
-                                                  Colors.grey[400]!,
+                                              Colors.grey[400]!,
                                               child: Container(
                                                   width: 0.2.sw,
                                                   height: 12.sp,
@@ -351,26 +358,27 @@ class Body extends StatelessWidget {
                             });
                       } else {
                         return ListView.builder(
+                          shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: LoadsCubit.get(context).loadList.length,
                             itemBuilder: (context, index) {
                               print('llllllll');
                               final load =
-                                  LoadsCubit.get(context).loadList[index];
+                              LoadsCubit.get(context).loadList[index];
                               return Container(
                                 color: index.isEven
                                     ? Colors.grey[300]
                                     : Colors.white,
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
+                                  const EdgeInsets.symmetric(vertical: 5),
                                   child: InkWell(
                                     onTap: () {
                                       MagicRouter.navigateTo(Detail(load));
                                     },
                                     child: Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         CustomText(
                                           width: 0.2.sw,
@@ -385,15 +393,15 @@ class Body extends StatelessWidget {
 //                                height: 20.h,o
                                             width: 0.2.sw,
                                             text: LoadsCubit.get(context)
-                                                        .loadList[index]
-                                                        .originCity ==
-                                                    null
+                                                .loadList[index]
+                                                .originCity ==
+                                                null
                                                 ? 'other'
                                                 : LoadsCubit.get(context)
-                                                    .loadList[index]
-                                                    .originCity!
-                                                    .title!
-                                                    .toString(),
+                                                .loadList[index]
+                                                .originCity!
+                                                .title!
+                                                .toString(),
                                             //   text: '',
 
                                             align: TextAlign.start,
@@ -403,30 +411,30 @@ class Body extends StatelessWidget {
 //                                  height: 20.h,
                                             width: 0.2.sw,
                                             text: LoadsCubit.get(context)
-                                                        .loadList[index]
-                                                        .originState ==
-                                                    null
+                                                .loadList[index]
+                                                .originState ==
+                                                null
                                                 ? 'other'
                                                 : LoadsCubit.get(context)
-                                                    .loadList[index]
-                                                    .originState!
-                                                    .title!
-                                                    .toString(),
+                                                .loadList[index]
+                                                .originState!
+                                                .title!
+                                                .toString(),
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
                                         CustomText(
                                             width: 0.2.sw,
                                             text: LoadsCubit.get(context)
-                                                        .loadList[index]
-                                                        .destinationCity ==
-                                                    null
+                                                .loadList[index]
+                                                .destinationCity ==
+                                                null
                                                 ? 'other'
                                                 : LoadsCubit.get(context)
-                                                    .loadList[index]
-                                                    .destinationCity!
-                                                    .title!
-                                                    .toString(),
+                                                .loadList[index]
+                                                .destinationCity!
+                                                .title!
+                                                .toString(),
                                             fontSize: 8.sp,
                                             align: TextAlign.start,
                                             fontWeight: FontWeight.w500),
@@ -434,15 +442,15 @@ class Body extends StatelessWidget {
                                             width: 0.2.sw,
 //                                  height: 20.h,
                                             text: LoadsCubit.get(context)
-                                                        .loadList[index]
-                                                        .destinationState ==
-                                                    null
+                                                .loadList[index]
+                                                .destinationState ==
+                                                null
                                                 ? 'other'
                                                 : LoadsCubit.get(context)
-                                                    .loadList[index]
-                                                    .destinationState!
-                                                    .title!
-                                                    .toString(),
+                                                .loadList[index]
+                                                .destinationState!
+                                                .title!
+                                                .toString(),
                                             align: TextAlign.start,
                                             fontSize: 8.sp,
                                             fontWeight: FontWeight.w500),
@@ -450,10 +458,10 @@ class Body extends StatelessWidget {
 //                                  height: 30.h,
                                             width: 0.2.sw,
                                             text: LoadsCubit.get(context)
-                                                    .loadList[index]
-                                                    .equipmentTypes!
-                                                    .first
-                                                    .title ??
+                                                .loadList[index]
+                                                .equipmentTypes!
+                                                .first
+                                                .title ??
                                                 'other',
                                             align: TextAlign.end,
                                             fontSize: 8.sp,
@@ -462,18 +470,18 @@ class Body extends StatelessWidget {
                                             width: 0.2.sw,
 //                                  height: 20.h,
                                             text: LoadsCubit.get(context)
-                                                            .loadList[index]
-                                                            .vehicleSizes !=
-                                                        null &&
-                                                    LoadsCubit.get(context)
-                                                        .loadList[index]
-                                                        .vehicleSizes!
-                                                        .isNotEmpty
-                                                ? LoadsCubit.get(context)
+                                                .loadList[index]
+                                                .vehicleSizes !=
+                                                null &&
+                                                LoadsCubit.get(context)
                                                     .loadList[index]
                                                     .vehicleSizes!
-                                                    .first
-                                                    .title
+                                                    .isNotEmpty
+                                                ? LoadsCubit.get(context)
+                                                .loadList[index]
+                                                .vehicleSizes!
+                                                .first
+                                                .title
                                                 : 'other',
                                             align: TextAlign.end,
                                             color: Colors.green,
@@ -489,13 +497,14 @@ class Body extends StatelessWidget {
                     },
                     listener: (BuildContext context, Object? state) {},
                   ),
-                )
+                ),)
               ],
             ),
           ],
         ),
       ),
-    );
+    )
+      ;
   }
 }
 /*

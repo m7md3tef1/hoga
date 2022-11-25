@@ -33,43 +33,42 @@ class _LoadsViewState extends State<LoadsView> {
   }
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body:   RefreshIndicator(
-      color: Colors.orange,
-      backgroundColor: Colors.white,
-      onRefresh: ()async{
-        print('refresh');
-        await LoadsCubit.get(context).getPage();
-        print("page is "+'${LoadsCubit.get(context).page}');
-        await LoadsCubit.get(context).getLoad(page:LoadsCubit.get(context).page,isFilter: false );
-      },
-      child: SafeArea(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomAppbar(title: 'Loads'),
-                SizedBox(
-                  height: 22.h,
-                ),
-                CustomSearchRow(
-                  2,
-                  function: () {
-                    VehiclesCubit.get(context).vehicleClearData(context);
-                    MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
-                  },
-                ),
-                SizedBox(
-                  height: 21.h,
-                ),
+    return    Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomAppbar(title: 'Loads'),
+        SizedBox(
+          height: 22.h,
+        ),
+        CustomSearchRow(
+          2,
+          function: () {
+            VehiclesCubit.get(context).vehicleClearData(context);
+            MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
+          },
+        ),
+        SizedBox(
+          height: 21.h,
+        ),
 
-                Body()
-              ],
-            ),
-          ),
-      ),
-      ),
-    );
+        Expanded(
+          child: RefreshIndicator(
+              color: Colors.orange,
+              backgroundColor: Colors.white,
+              onRefresh: ()async{
+                print('refresh');
+                await LoadsCubit.get(context).getPage();
+                print("page is "+'${LoadsCubit.get(context).page}');
+                await LoadsCubit.get(context).getLoad(page:LoadsCubit.get(context).page,isFilter: false );
+              },
+              child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),child: Padding(
+                    padding:  EdgeInsets.only(bottom: 20.sp),
+                    child: Body(),
+                  ))),
+        )
+      ],
+    )
+    ;
   }
 }

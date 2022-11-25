@@ -35,41 +35,38 @@ class _SearchViewState extends State<SearchView> {
   }
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body:RefreshIndicator(
-        color: Colors.orange,
-        backgroundColor: Colors.white,
-        onRefresh: ()async{
-          print('refresh');
-          await ProductsCubit.get(context).getPage();
-          print("page is "+'${ProductsCubit.get(context).page}');
-          await ProductsCubit.get(context).getProduct(page:ProductsCubit.get(context).page );
-        },
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomAppbar(title: 'Products'),
-              SizedBox(
-                height: 22.h,
-              ),
-              CustomSearchRow(
-                3,
-                function: () {
-                  MagicRouter.navigateTo(AddProductsView(
-                    isFilter: true,
-                  ));
-                },
-              ),
-              SizedBox(
-                height: 21.h,
-              ),
-              Body()
-            ],
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomAppbar(title: 'Products'),
+        SizedBox(
+          height: 22.h,
         ),
-      ),
-    );
+        CustomSearchRow(
+          3,
+          function: () {
+            MagicRouter.navigateTo(AddProductsView(
+              isFilter: true,
+            ));
+          },
+        ),
+        SizedBox(
+          height: 21.h,
+        ),
+        Expanded(child:
+        RefreshIndicator(
+            color: Colors.orange,
+            backgroundColor: Colors.white,
+            onRefresh: ()async{
+              print('refresh');
+              await ProductsCubit.get(context).getPage();
+              print("page is "+'${ProductsCubit.get(context).page}');
+              await ProductsCubit.get(context).getProduct(page:ProductsCubit.get(context).page );
+            },
+            child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),child: Body())))
+      ],
+    )
+    ;
   }
 }
