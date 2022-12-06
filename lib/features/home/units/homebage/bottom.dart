@@ -194,7 +194,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/load.png',
-            const SafeArea(child: Scaffold(body: LoadsView())),
+            const LoadsView(),
             'Loads',
             'Go through our available list of loads.',
             'Read More',
@@ -203,7 +203,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/vehicle_icon.png',
-            const SafeArea(child: Scaffold(body: VehiclesView())),
+            const VehiclesView(),
             'Vehicles',
             'Choose your desired vehicle from our system.',
             'Read More',
@@ -213,7 +213,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/product.png',
-            const SafeArea(child: Scaffold(body: SearchView())),
+            const SearchView(),
             'Products',
             'Checkout available item for sale and purchase.',
             'Read More',
@@ -222,7 +222,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/jop.png',
-            SafeArea(child: Scaffold(body: JobsView())),
+            JobsView(),
             'Jobs',
             'Upload your jobs here.',
             'Read More',

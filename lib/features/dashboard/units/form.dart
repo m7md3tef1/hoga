@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class FormView extends StatelessWidget {
   FormView({Key? key}) : super(key: key);
@@ -77,8 +77,7 @@ class FormView extends StatelessWidget {
                           ),
                           if (state is UpdateLoading)
                             const Padding(
-                              padding:
-                                  EdgeInsets.only(top: 17, bottom: 27),
+                              padding: EdgeInsets.only(top: 17, bottom: 27),
                               child: Center(
                                 child: CircularProgressIndicator(
                                     color: ColorManager.primaryColor),
@@ -114,19 +113,17 @@ class FormView extends StatelessWidget {
                               ),
                             ),
                           Padding(
-                            padding:
-                            const EdgeInsets.only(top: 10, bottom: 27),
+                            padding: const EdgeInsets.only(top: 10, bottom: 27),
                             child: CustomButton(
                               function: () {
                                 CacheHelper.putString(SharedKeys.token, '');
+                                CacheHelper.putBool(SharedKeys.isLogin, false);
                                 MagicRouter.navigateTo(Login());
-
                               },
                               text: 'Log out',
                               color: ColorManager.secondaryColor,
                             ),
                           )
-
                         ],
                       ),
                     ),

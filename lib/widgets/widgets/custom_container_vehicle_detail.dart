@@ -7,7 +7,6 @@ import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/features/blogs/blog_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
-
 import '../../core/data/models/vehicle/vehicles.dart';
 import '../../core/router/router.dart';
 
@@ -18,21 +17,15 @@ class CustomContainerVehicle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-
       widget: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-
           Padding(
             padding: EdgeInsets.only(
-                top: 15.h,
-                left: 8.sp,
-                right: 8.sp,
-                bottom: 10.sp
-            ),
+                top: 15.h, left: 8.sp, right: 8.sp, bottom: 10.sp),
             child: CustomText(
               text:
-              "${load.originCity == null ? "other" : load.originCity!.title}"
+                  "${load.originCity == null ? "other" : load.originCity!.title}"
                   " (${load.originState == null ? "other" : load.originState!.title} , "
                   "${load.originCountry == null ? "other" : load.originCountry!.title}) "
                   " → "
@@ -47,28 +40,26 @@ class CustomContainerVehicle extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 0,
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.person_outline,
                         color: ColorManager.primaryColor,
+                        size: 20.h,
                       ),
                       const SizedBox(
-                        width: 6,
+                        width: 5,
                       ),
-                      Expanded(
-                        child: CustomText(
-                          text: load.user == null
-                              ? 'other'
-                              : load.user!.username.toString(),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
+                      CustomText(
+                        text: load.user == null
+                            ? 'other'
+                            : load.user!.username.toString(),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
                       ),
                       const SizedBox(
                         width: 6,
@@ -77,45 +68,44 @@ class CustomContainerVehicle extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.access_time_outlined,
                         color: ColorManager.primaryColor,
+                        size: 20.h,
                       ),
-                      Expanded(
-                        child: CustomText(
-                          align: TextAlign.start,
-                          text: '${load.availabilityDate}',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
+                      SizedBox(width: 5),
+                      CustomText(
+                        align: TextAlign.start,
+                        text: '${load.availabilityDate}',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
                       )
                     ],
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       SvgPicture.asset(
                         'assets/images/Chat_Circle_Dots.svg',
-                        height: 25.h,
-                        width: 25.w,
+                        height: 20.h,
+                        width: 20.w,
                         fit: BoxFit.cover,
                         color: ColorManager.primaryColor,
                       ),
-                      Expanded(
-                        child: CustomText(
-                          text: '${load.weight} Kg(s)' ?? 'other',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
+                      SizedBox(width: 5),
+                      CustomText(
+                        text: '${load.weight} Kg(s)' ?? 'other',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
                       )
                     ],
                   ),
@@ -132,12 +122,12 @@ class CustomContainerVehicle extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 15.h),
+            padding: EdgeInsets.only(top: 15.h, left: 8, right: 8),
             child: Column(
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 33.w, bottom: 15.h, top: 15.h),
+                  padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -146,12 +136,10 @@ class CustomContainerVehicle extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     Padding(
-                      padding: EdgeInsets.only(
-                          left: 5.w, bottom: 15.h, right: 5.w, top: 15.h),
+                      padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
                       child: Row(
                         children: [
                           const Icon(
@@ -159,7 +147,7 @@ class CustomContainerVehicle extends StatelessWidget {
                             color: ColorManager.primaryColor,
                           ),
                           const SizedBox(
-                            width: 6,
+                            width: 5,
                           ),
                           CustomText(
                             text: load.user == null
@@ -175,29 +163,24 @@ class CustomContainerVehicle extends StatelessWidget {
                         ],
                       ),
                     ),
-
-                    Expanded(
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.email_outlined,
-                            color: ColorManager.primaryColor,
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Expanded(
-                            child: CustomText(
-                              text: load.user == null
-                                  ? 'other'
-                                  : load.user!.email.toString(),
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.email_outlined,
+                          color: ColorManager.primaryColor,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        CustomText(
+                          text: load.user == null
+                              ? 'other'
+                              : load.user!.email.toString(),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ],
                     ),
                   ],
                 )
@@ -207,6 +190,5 @@ class CustomContainerVehicle extends StatelessWidget {
         ],
       ),
     );
-
   }
 }

@@ -30,17 +30,29 @@ class JopCubit extends Cubit<AddJopStates> {
   bool testLoading = false;
   bool myJopLoading = false;
 
-  int page =1;
-  getPage(){
-    if(jopList.length==10){
+  int page = 1;
+  getPage() {
+    if (jopList.length == 10) {
       page++;
       emit(AddPage());
-    }else{
-      page=1;
+    } else {
+      page = 1;
       emit(AddPage());
-
     }
   }
+
+  resetPage() {
+    page = 1;
+  }
+
+  changePage(int pag) {
+    page = pag;
+  }
+
+  setSearchVal(String value) {
+    titleController.text = value;
+  }
+
   getJops(
       {self,
       GetJop? productModel,
@@ -61,14 +73,14 @@ class JopCubit extends Cubit<AddJopStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         ProductRepo.getJop('jobs', self,
-            titleController:titleController,
+                titleController: titleController,
                 productModel: productModel,
                 city2: city2,
                 country2: country2,
                 state2: state2,
                 jopTypeId: jopTypeId,
                 jopCategortId: jopCategortId,
-                page:page,
+                page: page,
                 isFilter: isFilter)
             .then((value) => {
                   myJopLoading = false,
@@ -131,8 +143,8 @@ class JopCubit extends Cubit<AddJopStates> {
       } else if (i.state!.title!.toString().toLowerCase().contains(val) ||
           i.state!.title!.toString().contains(val)) {
         searchList.add(i);
-      } else if (i.salary!.contains(val) ||
-          i.salary!.toString().contains(val)) {
+      } else if (i.salary != null && i.salary!.contains(val) ||
+          (i.salary != null && i.salary!.toString().contains(val))) {
         searchList.add(i);
       } else if (i.category!.title!.contains(val) ||
           i.category!.title!.toLowerCase().contains(val)) {
@@ -184,8 +196,6 @@ class JopCubit extends Cubit<AddJopStates> {
         showToast(msg: 'Failed', state: ToastedStates.ERROR);
       }
     });
-
-
   }
 
   jopClearData(context) {

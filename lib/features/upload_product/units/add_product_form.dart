@@ -34,6 +34,7 @@ class _FormState extends State<Form> {
   void initState() {
     super.initState();
     if (widget.isEdit) {
+      print('@@@@@@@@@@@@@@@@${widget.productModel!.toJson()}');
       buyOrSell = widget.productModel!.buyOrSell;
       ProductsCubit.get(context).priceController.text =
           widget.productModel!.price!;
@@ -45,8 +46,6 @@ class _FormState extends State<Form> {
               : widget.productModel!.description!;
 
       ProductsCubit.get(context).img64 = widget.productModel!.productImage!;
-
-      ProductsCubit.get(context).image = widget.productModel!.productImage!;
     }
   }
 
@@ -67,11 +66,9 @@ class _FormState extends State<Form> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             InkWell(
-                              onTap:(){
-                            Navigator.pop(context);
-
-                            },
-
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
                               child: const Icon(
                                 Icons.arrow_back_sharp,
                               ),
@@ -595,10 +592,8 @@ class _FormState extends State<Form> {
                                       Expanded(
                                         child: Center(
                                           child: Text(
-                                            ProductsCubit.get(context)
-                                                    .image
-                                                    .toString()
-                                                    .isNotEmpty
+                                            ProductsCubit.get(context).image !=
+                                                    null
                                                 ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
                                                 : '    No File chosen',
                                             style: TextStyle(
@@ -657,51 +652,88 @@ class _FormState extends State<Form> {
                                           : 'Add new product',
                                   color: ColorManager.yellow,
                                   function: () async {
-                                    widget.isEdit
-                                        ? await ProductsCubit.get(context)
-                                            .editProductCubit(GetProductModel(
-                                                id: widget.productModel!.id,
-                                                buyOrSell: buyOrSell,
-                                                productName:
-                                                    ProductsCubit.get(context)
-                                                        .nameController
-                                                        .text,
-                                                priceInt: int.parse(
-                                                    ProductsCubit.get(context)
-                                                        .priceController
-                                                        .text),
-                                                productTypeId: productId,
-                                                countryPost: countryId,
-                                                statePost: stateId,
-                                                cityPost: cityId,
-                                                description:
-                                                    ProductsCubit.get(context)
-                                                        .descController
-                                                        .text,
-                                                productImage:
-                                                    ProductsCubit.get(context)
-                                                        .img64))
-                                        : widget.isFilter
-                                            ? await ProductsCubit.get(context)
-                                                .searchProducts(GetProductModel(
-                                                buyOrSell: buyOrSell,
-                                                productTypeId: productId,
-                                                countryPost: countryId,
-                                                statePost: stateId,
-                                                cityPost: cityId,
-                                              ))
-                                            : await ProductsCubit.get(context).addProductCubit(
-                                                context: context,
-                                                productModel: GetProductModel(
-                                                    buyOrSell: buyOrSell,
-                                                    productName: ProductsCubit.get(context).nameController.text,
-                                                    priceInt: int.parse(ProductsCubit.get(context).priceController.text),
-                                                    productTypeId: productId,
-                                                    countryPost: countryId,
-                                                    statePost: stateId,
-                                                    cityPost: cityId,
-                                                    description: ProductsCubit.get(context).descController.text,
-                                                    productImage: ProductsCubit.get(context).image));
+                                    if (widget.isEdit) {
+                                      await ProductsCubit.get(context)
+                                          .editProductCubit(GetProductModel(
+                                              id: widget.productModel!.id,
+                                              buyOrSell: buyOrSell,
+                                              productName:
+                                                  ProductsCubit.get(context)
+                                                      .nameController
+                                                      .text,
+                                              priceInt: int.parse(
+                                                  ProductsCubit.get(context)
+                                                      .priceController
+                                                      .text),
+                                              productTypeId: productId,
+                                              countryPost: countryId,
+                                              statePost: stateId,
+                                              cityPost: cityId,
+                                              description:
+                                                  ProductsCubit.get(context)
+                                                      .descController
+                                                      .text,
+                                              productImage:
+                                                  ProductsCubit.get(context)
+                                                      .img64));
+                                    } else if (widget.isFilter) {
+                                      await ProductsCubit.get(context)
+                                          .searchProducts(GetProductModel(
+                                        buyOrSell: buyOrSell,
+                                        productTypeId: productId,
+                                        countryPost: countryId,
+                                        statePost: stateId,
+                                        cityPost: cityId,
+                                      ));
+                                    } else {
+                                      print('!!!!!!!!!!!!!!!!!!!!!!!');
+                                      print(GetProductModel(
+                                              buyOrSell: buyOrSell,
+                                              productName:
+                                                  ProductsCubit.get(context)
+                                                      .nameController
+                                                      .text,
+                                              priceInt: int.parse(
+                                                  ProductsCubit.get(context)
+                                                      .priceController
+                                                      .text),
+                                              productTypeId: productId,
+                                              countryPost: countryId,
+                                              statePost: stateId,
+                                              cityPost: cityId,
+                                              description:
+                                                  ProductsCubit.get(context)
+                                                      .descController
+                                                      .text,
+                                              productImage:
+                                                  ProductsCubit.get(context)
+                                                      .image)
+                                          .toJson());
+                                      await ProductsCubit.get(context)
+                                          .addProductCubit(
+                                              context: context,
+                                              productModel: GetProductModel(
+                                                  buyOrSell: buyOrSell,
+                                                  productName:
+                                                      ProductsCubit.get(context)
+                                                          .nameController
+                                                          .text,
+                                                  priceInt: int.parse(
+                                                      ProductsCubit.get(context)
+                                                          .priceController
+                                                          .text),
+                                                  productTypeId: productId,
+                                                  countryPost: countryId,
+                                                  statePost: stateId,
+                                                  cityPost: cityId,
+                                                  description:
+                                                      ProductsCubit.get(context)
+                                                          .descController
+                                                          .text,
+                                                  productImage:
+                                                      ProductsCubit.get(context)
+                                                          .image));
+                                    }
                                   },
                                 ),
                         ),

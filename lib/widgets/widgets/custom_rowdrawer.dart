@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/router/router.dart';
+import '../../features/home/view.dart';
 
 class CustomRowDrawer extends StatelessWidget {
   CustomRowDrawer(
@@ -9,12 +10,12 @@ class CustomRowDrawer extends StatelessWidget {
       required this.text,
       this.beforeNavigate,
       this.icon,
-        this.isHome=false,
+      this.isHome = false,
       this.navigatename})
       : super(key: key);
   String text;
   Function? beforeNavigate;
-  bool isHome=false;
+  bool isHome = false;
   var icon;
   var navigatename;
   @override
@@ -23,8 +24,8 @@ class CustomRowDrawer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          if(isHome){
-            Navigator.pop(context);
+          if (isHome) {
+            Home.scaffoldStateKey.currentState!.closeDrawer();
           }
           if (beforeNavigate != null) {
             beforeNavigate!();

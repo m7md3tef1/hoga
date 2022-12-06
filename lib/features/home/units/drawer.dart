@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class OnDrawer extends StatelessWidget {
   const OnDrawer({Key? key}) : super(key: key);
@@ -67,34 +67,30 @@ class OnDrawer extends StatelessWidget {
               icon: Icons.all_inbox_rounded,
               navigatename: PackagesView(),
             ),
-
             CustomRowDrawer(
               text: 'Subscription Details',
               icon: Icons.details_outlined,
               navigatename: const SubscriptionDetailsView(),
             ),
-
-
-
             CustomRowDrawer(
               text: 'Change Pass',
               icon: Icons.change_circle,
-              navigatename:  ChangePassView(),
+              navigatename: ChangePassView(),
             ),
             CustomRowDrawer(
               text: 'ContactUs',
               icon: Icons.contact_support_outlined,
-              navigatename:  ContactUsView(),
+              navigatename: ContactUsView(),
             ),
             CustomRowDrawer(
               text: 'Add / Update Card Details',
               icon: Icons.update,
-              navigatename:  AddUpdateCardView(),
+              navigatename: AddUpdateCardView(),
             ),
             CustomRowDrawer(
               text: 'AboutUs',
               icon: Icons.info_outline,
-              navigatename:  AboutUsView(),
+              navigatename: AboutUsView(),
             ),
             CustomRowDrawer(
               text: 'Logout',
@@ -102,6 +98,7 @@ class OnDrawer extends StatelessWidget {
               navigatename: Login(),
               beforeNavigate: () {
                 CacheHelper.putString(SharedKeys.token, '');
+                CacheHelper.putBool(SharedKeys.isLogin, false);
                 print('hellooooooo');
               },
             ),

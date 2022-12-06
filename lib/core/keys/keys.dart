@@ -22,5 +22,6 @@
     attributes,
     vehicleSize,
     vehicleTypes,
+    value,
 
   }

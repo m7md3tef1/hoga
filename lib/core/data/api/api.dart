@@ -14,12 +14,15 @@ class Api {
 
       if (response.statusCode == 200) {
         return response.data;
+      } else {
+        return '';
       }
     } on DioError catch (e) {
       //  ResponseModel responseModel=ResponseModel.fromJson(e.response!.data);
       print('------------------------');
       print(e.error);
       print('------------------------');
+      return e.error;
     }
   }
 

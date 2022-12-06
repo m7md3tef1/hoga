@@ -33,7 +33,9 @@ class CustomSearchRow extends StatelessWidget {
                     onFieldSubmitted: (val) {
                       print('hhhhhhhhhhhhhhhhhhhhhhhhh');
                       print(val);
-
+                      if (index == 3) {
+                        ProductsCubit.get(context).setSearchVal(val.trim());
+                      }
                       index == 1
                           ? VehiclesCubit.get(context)
                               .getVehicleCubit(val: val.trim())

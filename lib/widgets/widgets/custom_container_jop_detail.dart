@@ -6,7 +6,6 @@ import 'package:hoga_load/core/data/models/jobs/get_jop.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
-
 class CustomContainerJop extends StatelessWidget {
   final GetJop jop;
   const CustomContainerJop(this.jop, {Key? key}) : super(key: key);
@@ -41,12 +40,13 @@ class CustomContainerJop extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.person_outline,
                       color: ColorManager.primaryColor,
+                      size: 20,
                     ),
                     const SizedBox(
-                      width: 2,
+                      width: 5,
                     ),
                     CustomText(
                       text: jop.user == null
@@ -60,20 +60,20 @@ class CustomContainerJop extends StatelessWidget {
                 ),
                 Expanded(
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.access_time_outlined,
                         color: ColorManager.primaryColor,
+                        size: 20,
                       ),
-                      Expanded(
-                        child: CustomText(
-                          align: TextAlign.start,
-                          text: 'createdAt ',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
+                      SizedBox(width: 5),
+                      CustomText(
+                        align: TextAlign.start,
+                        text: 'createdAt ',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
                       )
                     ],
                   ),
@@ -84,11 +84,12 @@ class CustomContainerJop extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         'assets/images/Chat_Circle_Dots.svg',
-                        height: 25.h,
-                        width: 25.w,
+                        height: 20.h,
+                        width: 20.w,
                         fit: BoxFit.cover,
                         color: ColorManager.primaryColor,
                       ),
+                      SizedBox(width: 5),
                       Expanded(
                         child: CustomText(
                           text:
@@ -105,16 +106,16 @@ class CustomContainerJop extends StatelessWidget {
               ],
             ),
           ),
-          if(jop.description !=null)
-          Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8, top: 8),
-              child: CustomText(
-                text: jop.description,
-                color: Colors.black45,
-                fontWeight: FontWeight.w500,
-                align: TextAlign.start,
-                fontSize: 16.sp,
-              )),
+          if (jop.description != null)
+            Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
+                child: CustomText(
+                  text: jop.description,
+                  color: Colors.black45,
+                  fontWeight: FontWeight.w500,
+                  align: TextAlign.start,
+                  fontSize: 16.sp,
+                )),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: SizedBox(
@@ -124,12 +125,12 @@ class CustomContainerJop extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 15.h),
+            padding: EdgeInsets.only(top: 15.h, left: 8, right: 8),
             child: Column(
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 33.w, bottom: 15.h, top: 15.h),
+                  padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -142,36 +143,38 @@ class CustomContainerJop extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Row(
-                      children: [
-                        const Icon(
-                          Icons.email_outlined,
-                          color: ColorManager.primaryColor,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Expanded(
-                          child: CustomText(
-                            text: jop.user == null
-                                ? 'other'
-                                : jop.user!.email.toString(),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                        children: [
+                          Icon(
+                            Icons.email_outlined,
+                            color: ColorManager.primaryColor,
+                            size: 20.h,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                      ],
-                  ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Expanded(
+                            child: CustomText(
+                              text: jop.user == null
+                                  ? 'other'
+                                  : jop.user!.email.toString(),
+                              align: TextAlign.left,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                        ],
+                      ),
                     ),
-                    
                     Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.phone_callback,
                           color: ColorManager.primaryColor,
+                          size: 20.h,
                         ),
                         const SizedBox(
                           width: 6,
@@ -189,7 +192,6 @@ class CustomContainerJop extends StatelessWidget {
                         ),
                       ],
                     ),
-
                   ],
                 )
               ],

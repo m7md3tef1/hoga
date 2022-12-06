@@ -11,6 +11,7 @@ import '../../core/data/local/cacheHelper.dart';
 import '../../core/data/models/ChangePass_model.dart';
 import '../../core/keys/keys.dart';
 import '../../core/validator/validator.dart';
+import '../../widgets/widgets/custom_notloggedin.dart';
 import '../about/units/small_container.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
@@ -19,8 +20,9 @@ import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 import '../home/view.dart';
 import 'cubit/changePass_cubit.dart';
 part 'units/form.dart';
+
 class ChangePassView extends StatelessWidget {
-   ChangePassView({Key? key}) : super(key: key);
+  ChangePassView({Key? key}) : super(key: key);
   GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,19 +31,26 @@ class ChangePassView extends StatelessWidget {
       child: Scaffold(
         drawer: const OnDrawer(),
         key: passScaffoldKey,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomAppbar(title: 'Change Password',scaffoldKey: passScaffoldKey,),
-              SizedBox(height: 22.h,),
-               Padding(
-                 padding: const EdgeInsets.all(20),
-                 child: form(),
-               ),
-
-            ],
-          ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomAppbar(
+              title: 'Change Password',
+              scaffoldKey: passScaffoldKey,
+            ),
+            SizedBox(
+              height: 22.h,
+            ),
+            !CacheHelper.getBool(SharedKeys.isLogin)
+                ? CustomNotLoggedIn()
+                : Expanded(
+                    child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: form(),
+                        ))),
+          ],
         ),
       ),
     );
