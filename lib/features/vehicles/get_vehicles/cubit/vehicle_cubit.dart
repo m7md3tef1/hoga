@@ -161,20 +161,35 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
     print('+++++++++++++++++++++++++++++++++++');
   }
-  int page =1;
-  getPage(){
-    if(vehicleList.length==10){
+
+  int page = 1;
+  getPage() {
+    if (vehicleList.length == 10) {
       page++;
       emit(AddPage());
-    }else{
-      page=1;
+    } else {
+      page = 1;
       emit(AddPage());
-
     }
   }
+
+  String searchValue = '';
+
+  resetPage() {
+    page = 1;
+  }
+
+  changePage(int pag) {
+    page = pag;
+  }
+
+  setSearchVal(String value) {
+    searchValue = value;
+  }
+
   getVehicleCubit(
       {self,
-        page,
+      page,
       val,
       equipmentSize2,
       attributes2,
@@ -189,7 +204,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         VehicleRepo.getVehicles(self,
-                page:page,
+                page: page,
                 val: val,
                 context: context,
                 isFilter: isFilter,
@@ -205,7 +220,6 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                     {
                       myVehicleList = value,
                       emit(GetVehicleSuccess(value)),
-
                       print('Get Vehice Response'),
                       print(myVehicleList.length),
                       vehicleClearData(Home.scaffoldStateKey.currentContext)
@@ -214,7 +228,6 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                     {
                       vehicleList = value,
                       print('length >>>> ${vehicleList.length}'),
-
                       emit(GetVehicleSuccess(value)),
                       vehicleClearData(Home.scaffoldStateKey.currentContext),
                     },

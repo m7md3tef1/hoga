@@ -193,37 +193,33 @@ class _BottomState extends State<Bottom> {
             ),
           ),
           VehicleContainer(
-              'assets/images/load.png',
-              const LoadsView(),
-              'Loads',
-              'Go through our available list of loads.',
-              'Read More',
-              const Color(0xFF2DB6FA),
-          function: LoadsCubit.get(context).getLoad(self: 0, isFilter: false),
+            'assets/images/load.png',
+            const LoadsView(),
+            'Loads',
+            'Go through our available list of loads.',
+            'Read More',
+            const Color(0xFF2DB6FA),
+            function: LoadsCubit.get(context).getLoad(self: 0, isFilter: false),
           ),
-
           VehicleContainer(
-
-              'assets/images/vehicle_icon.png',
-              const VehiclesView(),
-              'Vehicles',
-              'Choose your desired vehicle from our system.',
-              'Read More',
-              const Color(0xFFF68C09),
-          isColor: true,
+            'assets/images/vehicle_icon.png',
+            const VehiclesView(),
+            'Vehicles',
+            'Choose your desired vehicle from our system.',
+            'Read More',
+            const Color(0xFFF68C09),
+            isColor: true,
             function: VehiclesCubit.get(context).getVehicleCubit(self: 0),
-
-
           ),
           VehicleContainer(
-              'assets/images/product.png',
-              const SearchView(),
-              'Products',
-              'Checkout available item for sale and purchase.',
-              'Read More',
-              const Color(0xFF08DA4E),
-
-          function: ProductsCubit.get(context).getProduct(),),
+            'assets/images/product.png',
+            const SearchView(),
+            'Products',
+            'Checkout available item for sale and purchase.',
+            'Read More',
+            const Color(0xFF08DA4E),
+            function: ProductsCubit.get(context).getProduct(),
+          ),
           VehicleContainer(
             'assets/images/jop.png',
             JobsView(),
@@ -231,7 +227,7 @@ class _BottomState extends State<Bottom> {
             'Upload your jobs here.',
             'Read More',
             const Color(0xFFE9222C),
-            function:  JopCubit.get(context).getJops(isFilter: false),
+            function: JopCubit.get(context).getJops(isFilter: false),
           ),
           PlanBody(),
           SizedBox(
@@ -383,8 +379,6 @@ class _BottomState extends State<Bottom> {
           ),
         ]),
         const blog(),
-
-
       ],
     );
   }

@@ -18,31 +18,25 @@ class CustomContainerLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-
       widget: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-
           Padding(
-      padding: EdgeInsets.only(
-      top: 15.h,
-        left: 8.sp,
-        right: 8.sp,
-      bottom: 10.sp
-      ),
-        child: CustomText(
-          text:
-          "${load.originCity == null ? "other" : load.originCity!.title}"
-              " (${load.originState == null ? "other" : load.originState!.title} , "
-              "${load.originCountry == null ? "other" : load.originCountry!.title}) "
-              " → "
-              "${load.destinationCity == null ? "other" : load.destinationCity!.title}"
-              " (${load.destinationState == null ? "other" : load.destinationState!.title} , "
-              "${load.destinationCountry == null ? "other" : load.destinationCountry!.title}) ",
-          fontSize: 17.sp,
-          fontWeight: FontWeight.w600,
-          color: ColorManager.primaryColor,
-        ),
+            padding: EdgeInsets.only(
+                top: 15.h, left: 8.sp, right: 8.sp, bottom: 10.sp),
+            child: CustomText(
+              text:
+                  "${load.originCity == null ? "other" : load.originCity!.title}"
+                  " (${load.originState == null ? "other" : load.originState!.title} , "
+                  "${load.originCountry == null ? "other" : load.originCountry!.title}) "
+                  " → "
+                  "${load.destinationCity == null ? "other" : load.destinationCity!.title}"
+                  " (${load.destinationState == null ? "other" : load.destinationState!.title} , "
+                  "${load.destinationCountry == null ? "other" : load.destinationCountry!.title}) ",
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w600,
+              color: ColorManager.primaryColor,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -50,25 +44,24 @@ class CustomContainerLoad extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 0,
                   child: Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.person_outline,
                         color: ColorManager.primaryColor,
+                        size: 20.h,
                       ),
                       const SizedBox(
                         width: 6,
                       ),
-                      Expanded(
-                        child: CustomText(
-                          text: load.user == null
-                              ? 'other'
-                              : load.user!.username.toString(),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
+                      CustomText(
+                        text: load.user == null
+                            ? 'other'
+                            : load.user!.username.toString(),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
                       ),
                       const SizedBox(
                         width: 6,
@@ -81,9 +74,10 @@ class CustomContainerLoad extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.access_time_outlined,
                         color: ColorManager.primaryColor,
+                        size: 20.h,
                       ),
                       Expanded(
                         child: CustomText(
@@ -104,8 +98,8 @@ class CustomContainerLoad extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         'assets/images/Chat_Circle_Dots.svg',
-                        height: 25.h,
-                        width: 25.w,
+                        height: 20.h,
+                        width: 20.w,
                         fit: BoxFit.cover,
                         color: ColorManager.primaryColor,
                       ),
@@ -137,7 +131,7 @@ class CustomContainerLoad extends StatelessWidget {
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 33.w, bottom: 15.h, top: 15.h),
+                  padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -146,18 +140,15 @@ class CustomContainerLoad extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     Padding(
                       padding: EdgeInsets.only(
                           left: 5.w, bottom: 15.h, right: 5.w, top: 15.h),
                       child: Row(
                         children: [
-                          const Icon(
-                            Icons.phone_callback,
-                            color: ColorManager.primaryColor,
-                          ),
+                          Icon(Icons.phone_callback,
+                              color: ColorManager.primaryColor, size: 20.h),
                           const SizedBox(
                             width: 6,
                           ),
@@ -175,29 +166,25 @@ class CustomContainerLoad extends StatelessWidget {
                         ],
                       ),
                     ),
-                    
-                    Expanded(
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.email_outlined,
-                            color: ColorManager.primaryColor,
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Expanded(
-                            child: CustomText(
-                              text: load.user == null
-                                  ? 'other'
-                                  : load.user!.email.toString(),
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.email_outlined,
+                          color: ColorManager.primaryColor,
+                          size: 20.h,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        CustomText(
+                          text: load.user == null
+                              ? 'other'
+                              : load.user!.email.toString(),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ],
                     ),
                   ],
                 )

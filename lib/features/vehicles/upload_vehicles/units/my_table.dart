@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class MyTable extends StatelessWidget {
   const MyTable({super.key});
@@ -6,21 +6,20 @@ class MyTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UploadedTableTitle(
-
       child: BlocConsumer<VehiclesCubit, VehicleStates>(
           listener: (BuildContext context, Object? state) {},
           builder: (context, state) {
-            return  RefreshIndicator(
+            return RefreshIndicator(
               color: Colors.orange,
               backgroundColor: Colors.white,
-              onRefresh: ()async{
+              onRefresh: () async {
                 print('refresh');
-                await VehiclesCubit.get(context).getPage();
-                print("page is "+'${VehiclesCubit.get(context).page}');
-                await VehiclesCubit.get(context).getVehicleCubit(page:VehiclesCubit.get(context).page,self: 1 );
+                await VehiclesCubit.get(context).resetPage();
+                await VehiclesCubit.get(context).getVehicleCubit(
+                    page: VehiclesCubit.get(context).page, self: 1);
               },
               child: ListView.builder(
-                physics: AlwaysScrollableScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   itemCount: VehiclesCubit.get(context).myVehicleList.length,
                   itemBuilder: (context, index) {
                     return Container(
@@ -37,14 +36,16 @@ class MyTable extends StatelessWidget {
                         editFunc: () {
                           MagicRouter.navigateTo(AddVehiclesView(
                               isEdit: true,
-                              vehiclesModel:
-                                  VehiclesCubit.get(context).myVehicleList[index],
+                              vehiclesModel: VehiclesCubit.get(context)
+                                  .myVehicleList[index],
                               index: index));
                           //VehiclesCubit.get(context).editVehicleCubit(context:context,vehicleId:VehiclesCubit.get(context).vehicleList[index].id);
                         },
                         deleteFunc: () {
                           VehiclesCubit.get(context).deleteVehicleCubit(
-                              VehiclesCubit.get(context).myVehicleList[index].id);
+                              VehiclesCubit.get(context)
+                                  .myVehicleList[index]
+                                  .id);
                         },
                         tableWeight:
                             "${VehiclesCubit.get(context).myVehicleList[index].weight}",
@@ -54,7 +55,6 @@ class MyTable extends StatelessWidget {
                   }),
             );
           }),
-
     );
   }
 }

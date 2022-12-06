@@ -20,30 +20,40 @@ import 'cubit/UpdateProfile_state.dart';
 import 'cubit/updateProfile_cubit.dart';
 
 part 'units/form.dart';
+
 class DashboardView extends StatelessWidget {
-   DashboardView({Key? key}) : super(key: key);
+  DashboardView({Key? key}) : super(key: key);
   GlobalKey<ScaffoldState> uploadProductScaffoldKey =
-  GlobalKey<ScaffoldState>();
+      GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        key: uploadProductScaffoldKey,
-        drawer: const OnDrawer(),
-      body:!CacheHelper.getBool(SharedKeys.isLogin)? Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomAppbar(title: 'Dashboard' ,scaffoldKey: uploadProductScaffoldKey),
-          const CustomNotLoggedIn()
-        ],
-      ):SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppbar(title: 'Dashboard', scaffoldKey: uploadProductScaffoldKey),
-            FormView(),
-          ],
-        ),
-      )
+    print(
+        '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${CacheHelper.getBool(SharedKeys.isLogin)}');
+    return SafeArea(
+      child: Scaffold(
+          key: uploadProductScaffoldKey,
+          drawer: const OnDrawer(),
+          body: !CacheHelper.getBool(SharedKeys.isLogin)
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomAppbar(
+                        title: 'Dashboard',
+                        scaffoldKey: uploadProductScaffoldKey),
+                    const CustomNotLoggedIn()
+                  ],
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomAppbar(
+                          title: 'Dashboard',
+                          scaffoldKey: uploadProductScaffoldKey),
+                      FormView(),
+                    ],
+                  ),
+                )),
     );
   }
 }

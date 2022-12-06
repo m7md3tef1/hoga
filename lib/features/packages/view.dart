@@ -28,23 +28,24 @@ class PackagesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: packagesScaffoldKey,
-      drawer: const OnDrawer(),
-      body: SafeArea(
-        child: SingleChildScrollView
-          (
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomAppbar(
-                title: 'Packages',
-                scaffoldKey: packagesScaffoldKey,
-              ),
-              // ignore: prefer_const_constructors
-              !CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn():  Body(),
-            ],
-          ),
+    return SafeArea(
+      child: Scaffold(
+        key: packagesScaffoldKey,
+        drawer: const OnDrawer(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomAppbar(
+              title: 'Packages',
+              scaffoldKey: packagesScaffoldKey,
+            ),
+            // ignore: prefer_const_constructors
+            !CacheHelper.getBool(SharedKeys.isLogin)
+                ? CustomNotLoggedIn()
+                : Expanded(
+                    child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(), child: Body())),
+          ],
         ),
       ),
     );

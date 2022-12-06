@@ -27,45 +27,46 @@ class _VehiclesViewState extends State<VehiclesView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    VehiclesCubit.get(context).page=1;
-
+    VehiclesCubit.get(context).page = 1;
   }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        CustomAppbar(title: 'Vehicles'),
-        SizedBox(
-          height: 22.h,
+    return CustomScaffold(
+      body: RefreshIndicator(
+        color: Colors.orange,
+        backgroundColor: Colors.white,
+        onRefresh: () async {
+          print('refresh');
+          await VehiclesCubit.get(context).resetPage();
+          print("page is " + '${VehiclesCubit.get(context).page}');
+          await VehiclesCubit.get(context).getVehicleCubit(
+              page: VehiclesCubit.get(context).page, isFilter: false);
+        },
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppbar(title: 'Vehicles'),
+              SizedBox(
+                height: 22.h,
+              ),
+              CustomSearchRow(
+                1,
+                function: () {
+                  MagicRouter.navigateTo(FilterVehicle());
+                },
+              ),
+              SizedBox(
+                height: 21.h,
+              ),
+              Body()
+            ],
+          ),
         ),
-        CustomSearchRow(
-          1,
-          function: () {
-            MagicRouter.navigateTo(FilterVehicle());
-          },
-        ),
-        SizedBox(
-          height: 21.h,
-        ),
-        Expanded(
-          child: RefreshIndicator(
-              color: Colors.orange,
-              backgroundColor: Colors.white,
-              onRefresh: ()async{
-                print('refresh');
-                await VehiclesCubit.get(context).getPage();
-                print("page is "+'${VehiclesCubit.get(context).page}');
-                await VehiclesCubit.get(context).getVehicleCubit(page:VehiclesCubit.get(context).page,isFilter: false );
-              },
-              child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),child: Padding(
-                    padding:  EdgeInsets.only(bottom: 20.sp),
-                    child: Body(),
-                  ))),
-        )
-      ],
+      ),
     );
   }
 }

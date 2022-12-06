@@ -9,7 +9,7 @@ class Video extends StatefulWidget {
 
 class _VideoState extends State<Video> {
 //https://youtu.be/LCskCHft2Lk
- // late VideoPlayerController _controller;
+  // late VideoPlayerController _controller;
   late YoutubePlayerController _controller;
   late TextEditingController _idController;
   late TextEditingController _seekToController;
@@ -19,7 +19,7 @@ class _VideoState extends State<Video> {
   double _volume = 100;
   bool _muted = false;
   bool _isPlayerReady = false;
- late String videoId;
+  late String videoId;
   void listener() {
     if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
       setState(() {
@@ -28,10 +28,12 @@ class _VideoState extends State<Video> {
       });
     }
   }
+
   @override
   void initState() {
     super.initState();
-    videoId = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=LCskCHft2Lk")!;
+    videoId = YoutubePlayer.convertUrlToId(
+        "https://www.youtube.com/watch?v=LCskCHft2Lk")!;
     print(videoId);
 
     _controller = YoutubePlayerController(
@@ -50,7 +52,6 @@ class _VideoState extends State<Video> {
     _seekToController = TextEditingController();
     _videoMetaData = const YoutubeMetaData();
     _playerState = PlayerState.unknown;
-
   }
 
   @override
@@ -68,15 +69,12 @@ class _VideoState extends State<Video> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 216.h,
       width: 1.sw,
-      child:
-      YoutubePlayer(
+      child: YoutubePlayer(
         controller: _controller,
         showVideoProgressIndicator: true,
         progressIndicatorColor: Colors.amber,
@@ -84,12 +82,10 @@ class _VideoState extends State<Video> {
           playedColor: Colors.amber,
           handleColor: Colors.amberAccent,
         ),
-        onReady:  () {
-      _controller.addListener(listener);
-      },
+        onReady: () {
+          _controller.addListener(listener);
+        },
       ),
     );
   }
-
-
 }

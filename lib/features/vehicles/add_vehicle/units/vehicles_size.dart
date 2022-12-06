@@ -1,9 +1,14 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class VehiclesSize extends StatefulWidget {
   Vehicles? vehiclesModel;
   bool? isEdit;
-  VehiclesSize({super.key, this.vehiclesModel, this.isEdit = false});
+  bool isLoadEdit;
+  VehiclesSize(
+      {super.key,
+      this.vehiclesModel,
+      this.isLoadEdit = false,
+      this.isEdit = false});
 
   @override
   State<VehiclesSize> createState() => _VehiclesSizeState();
@@ -43,7 +48,7 @@ class _VehiclesSizeState extends State<VehiclesSize> {
                   crossAxisCount: 2, childAspectRatio: 5),
               itemCount: VehiclesCubit.get(context).vehicleSizeList.length,
               itemBuilder: (BuildContext context, int index) {
-                widget.isEdit! &&
+                (widget.isEdit! || widget.isLoadEdit) &&
                         widget.vehiclesModel!.vehicleSizes2!.contains(
                             VehiclesCubit.get(context)
                                 .vehicleSizeList[index]
@@ -58,7 +63,7 @@ class _VehiclesSizeState extends State<VehiclesSize> {
                     index: index,
                     boxKey: MasterKeys.vehicleSize.name,
                     // value: VehiclesCubit.get(context).vehcleSizeBoxValue![index],
-                    value: widget.isEdit!
+                    value: (widget.isEdit! || widget.isLoadEdit)
                         ? widget.vehiclesModel!.vehicleSizes2!.contains(
                                 VehiclesCubit.get(context)
                                     .vehicleSizeList[index]

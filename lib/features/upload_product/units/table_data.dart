@@ -9,121 +9,142 @@ import '../../../core/dialoges/delete_dialoge.dart';
 import '../../../core/router/router.dart';
 import '../../../widgets/widgets/custom_text.dart';
 import '../../search_product/cubit/getProduct__states.dart';
+
 class MyProductTable extends StatelessWidget {
   const MyProductTable({super.key});
 
   @override
   Widget build(BuildContext context) {
     return UploadedTableProduct(
-      child:  RefreshIndicator(
-        color: Colors.orange,
-        backgroundColor: Colors.white,
-        onRefresh: ()async{
-          print('refresh');
-          await ProductsCubit.get(context).getPage();
-          print("page is "+'${ProductsCubit.get(context).page}');
-          await ProductsCubit.get(context).getProduct(page:ProductsCubit.get(context).page,self: 1 );
-        },
-        child: BlocConsumer<ProductsCubit, AddProductStates>(
-            listener: (BuildContext context, Object? state) {
-
-
-            }, builder: (context, state) {
+        child: RefreshIndicator(
+      color: Colors.orange,
+      backgroundColor: Colors.white,
+      onRefresh: () async {
+        print('refresh');
+        await ProductsCubit.get(context).resetPage();
+        print("page is " + '${ProductsCubit.get(context).page}');
+        await ProductsCubit.get(context)
+            .getProduct(page: ProductsCubit.get(context).page, self: 1);
+      },
+      child: BlocConsumer<ProductsCubit, AddProductStates>(
+          listener: (BuildContext context, Object? state) {},
+          builder: (context, state) {
             return ListView.builder(
                 physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: ProductsCubit.get(context).myProductList.length,
-
-                      itemBuilder: (context, index) {
-                        return Container(
-                          color: index.isEven ? Colors.grey[300] : Colors.white,
-                          child: Padding(
-                            padding:  const EdgeInsets.symmetric(vertical: 5),
+                itemCount: ProductsCubit.get(context).myProductList.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    color: index.isEven ? Colors.grey[300] : Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: CustomText(
+                              text: '${index + 1}',
+                              align: TextAlign.start,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: CustomText(
+                              text: ProductsCubit.get(context)
+                                  .myProductList[index]
+                                  .productName,
+                              align: TextAlign.start,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: CustomText(
+                              text: ProductsCubit.get(context)
+                                  .myProductList[index]
+                                  .productType!
+                                  .title,
+                              align: TextAlign.start,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  flex: 1,
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => DeleteEditDialog(
+                                              function: () {
+                                                Navigator.pop(context);
+                                                MagicRouter.navigateTo(
+                                                    AddProductsView(
+                                                        isEdit: true,
+                                                        productModel:
+                                                            ProductsCubit.get(
+                                                                        context)
+                                                                    .myProductList[
+                                                                index],
+                                                        index: index));
+                                              },
+                                              btnText: 'Edit',
+                                            ));
+                                  },
                                   child: CustomText(
-                                    text:'${index+1}',
+                                    text: 'Edit',
                                     align: TextAlign.start,
-                                    fontSize: 8.sp,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w200,
+                                    color: ColorManager.primaryColor,
                                   ),
                                 ),
-                                Expanded(
-                                  flex: 2,
+                                SizedBox(
+                                  width: 5.sp,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    print('id');
+                                    print(ProductsCubit.get(context)
+                                        .myProductList[index]
+                                        .id);
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => DeleteEditDialog(
+                                              function: () {
+                                                ProductsCubit.get(context)
+                                                    .deleteProductCubit(
+                                                        ProductsCubit.get(
+                                                                context)
+                                                            .myProductList[
+                                                                index]
+                                                            .id);
+                                              },
+                                              btnText: 'Delete',
+                                            ));
+                                  },
                                   child: CustomText(
-                                    text: ProductsCubit.get(context).myProductList[index].productName,
+                                    text: 'Delete',
                                     align: TextAlign.start,
-                                    fontSize: 8.sp,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w200,
+                                    color: Colors.red,
                                   ),
                                 ),
-                                Expanded(
-                                  flex:2,
-                                  child: CustomText(
-                                    text: ProductsCubit.get(context).myProductList[index].productType!.title,
-                                    align: TextAlign.start,
-                                    fontSize: 8.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex:2,
-                                  child: Row(
-                                    children: [
-                                      InkWell(
-                                        onTap:(){
-                                          showDialog(context: context, builder:(context)=> DeleteEditDialog(function: (){
-                                            Navigator.pop(context);
-                                            MagicRouter.navigateTo( AddProductsView(isEdit: true,productModel:
-                                            ProductsCubit.get(context).myProductList[index],index:index));
-                                          },btnText: 'Edit',));
-
-                                        },
-                                        child: CustomText(
-                                          text: 'Edit',
-                                          align: TextAlign.start,
-                                          fontSize: 8.sp,
-                                          fontWeight: FontWeight.w200,
-                                          color: ColorManager.primaryColor,
-                                        ),
-                                      ),
-                                      SizedBox(width: 5.sp,),
-                                      InkWell(
-                                        onTap:(){
-                                          print('id');
-                                          print(ProductsCubit.get(context).myProductList[index].id);
-                                          showDialog(context: context, builder:(context)=> DeleteEditDialog(function: (){
-
-                                            ProductsCubit.get(context).deleteProductCubit(
-                                                ProductsCubit.get(context).myProductList[index].id);
-
-                                          },btnText: 'Delete',));
-                                        },
-                                        child: CustomText(
-                                          text: 'Delete',
-                                          align: TextAlign.start,
-                                          fontSize: 8.sp,
-                                          fontWeight: FontWeight.w200,
-                                          color: Colors.red,
-                                        ),
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-
                               ],
                             ),
                           ),
-                        );
-                      }
+                        ],
+                      ),
+                    ),
                   );
-          }
-        ),
-      )
-
-    );
+                });
+          }),
+    ));
   }
 }

@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class Body extends StatelessWidget {
   Body({Key? key}) : super(key: key);
@@ -13,289 +13,528 @@ class Body extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return
-      SizedBox(
-        height: 0.8.sh,
-
-        child: Scrollbar(
-          thickness: 15,
-          trackVisibility: true,
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                    child: Container(
-                      height: 43.h,
-                      width: 0.2.sw * 7,
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15))),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 7,
-                          itemBuilder: (context, index) {
-                            return SizedBox(
-                              width: 0.2.sw,
-                              child: CustomText(
-                                text: titlesList[index],
-                                fontSize: 9.sp,
-                                align: TextAlign.center,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            );
-                          }),
-                    ),
+    return Container(
+      height: 1.sh,
+      child: Scrollbar(
+        thickness: 15,
+        trackVisibility: true,
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                  child: Container(
+                    height: 43.h,
+                    width: 0.2.sw * 7,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 7,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 0.2.sw,
+                            child: CustomText(
+                              text: titlesList[index],
+                              fontSize: 12.sp,
+                              align: TextAlign.center,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                        }),
                   ),
-                  Expanded(child: SizedBox(
-                    //height: 0.5.sh,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
                     width: 0.2.sw * 7,
                     child: BlocConsumer<VehiclesCubit, VehicleStates>(
                       builder: (context, state) {
                         if (state is GetSearchFailed) {
                           return Center(
                               child: CustomText(
-                                text: state.msg,
-                                fontSize: 30,
-                              ));
+                            text: state.msg,
+                            fontSize: 30,
+                          ));
                         } else if (state is GetSearchSuccess) {
                           return ListView.builder(
-                              shrinkWrap: true,
-
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.vehicleList.length,
+                              itemCount: state.vehicleList.length + 1,
                               itemBuilder: (context, index) {
-                                print(state.vehicleList[index].equipmentTypes2!
-                                    .toString());
-                                final vehicle = state.vehicleList[index];
-                                return Container(
-                                  color: index.isEven
-                                      ? Colors.grey[300]
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                    child: InkWell(
-                                      onTap: () {
-                                        MagicRouter.navigateTo(Detail(vehicle));
-                                      },
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          CustomText(
-                                            width: 0.2.sw,
-                                            text: state.vehicleList[index]
-                                                .availabilityDate,
-                                            align: TextAlign.center,
-                                            fontSize: 8.sp,
-                                            fontWeight: FontWeight.w500,
+                                if (index == state.vehicleList.length) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            if (VehiclesCubit.get(context)
+                                                    .page >
+                                                1) {
+                                              VehiclesCubit.get(context)
+                                                  .resetPage();
+                                              VehiclesCubit.get(context)
+                                                  .getVehicleCubit(
+                                                      page: VehiclesCubit.get(
+                                                              context)
+                                                          .page,
+                                                      val: VehiclesCubit.get(
+                                                              context)
+                                                          .searchValue);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.skip_previous_rounded,
+                                            color: VehiclesCubit.get(context)
+                                                        .page >
+                                                    1
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
                                           ),
-                                          CustomText(
-//                                height: 20.h,o
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .originCity ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .originCity!.title,
-                                              //   text: '',
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            if (VehiclesCubit.get(context)
+                                                    .page >
+                                                1) {
+                                              VehiclesCubit.get(context)
+                                                  .changePage(
+                                                      VehiclesCubit.get(context)
+                                                              .page -
+                                                          1);
+                                              VehiclesCubit.get(context)
+                                                  .getVehicleCubit(
+                                                      page: VehiclesCubit.get(
+                                                              context)
+                                                          .page,
+                                                      val: VehiclesCubit.get(
+                                                              context)
+                                                          .searchValue);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_left_outlined,
+                                            color: VehiclesCubit.get(context)
+                                                        .page >
+                                                    1
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Container(
+                                          height: 24,
+                                          width: 24,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[400],
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                          ),
+                                          child: Text(
+                                            VehiclesCubit.get(context)
+                                                .page
+                                                .toString(),
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        InkWell(
+                                          onTap: () {
+                                            int page =
+                                                VehiclesCubit.get(context).page;
 
+                                            if (VehiclesCubit.get(context)
+                                                    .vehicleList
+                                                    .length
+                                                    .remainder(10) ==
+                                                0) {
+                                              VehiclesCubit.get(context)
+                                                  .changePage(page + 1);
+
+                                              VehiclesCubit.get(context)
+                                                  .getVehicleCubit(
+                                                      page: VehiclesCubit.get(
+                                                              context)
+                                                          .page,
+                                                      val: VehiclesCubit.get(
+                                                              context)
+                                                          .searchValue);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_right_outlined,
+                                            color: VehiclesCubit.get(context)
+                                                        .vehicleList
+                                                        .length
+                                                        .remainder(10) ==
+                                                    0
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.skip_next,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  final vehicle = state.vehicleList[index];
+                                  return Container(
+                                    color: index.isEven
+                                        ? Colors.grey[300]
+                                        : Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: InkWell(
+                                        onTap: () {
+                                          MagicRouter.navigateTo(
+                                              Detail(vehicle));
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomText(
+                                              width: 0.2.sw,
+                                              text: state.vehicleList[index]
+                                                  .availabilityDate,
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            CustomText(
+//                                height: 20.h,o
+                                                width: 0.2.sw,
+                                                text: state.vehicleList[index]
+                                                            .originCity ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .originCity!.title,
+                                                //   text: '',
+
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 20.h,
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .originState ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .originState!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .destinationCity ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .destinationCity!.title,
-                                              fontSize: 8.sp,
-                                              align: TextAlign.center,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state.vehicleList[index]
+                                                            .originState ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .originState!.title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
+                                                text: state.vehicleList[index]
+                                                            .destinationCity ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .destinationCity!.title,
+                                                fontSize: 12.sp,
+                                                align: TextAlign.center,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.vehicleList[index]
-                                                  .destinationState ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .destinationState!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                text: state.vehicleList[index]
+                                                            .destinationState ==
+                                                        null
+                                                    ? 'other'
+                                                    : state
+                                                        .vehicleList[index]
+                                                        .destinationState!
+                                                        .title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 30.h,
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .equipmentTypes2!.isEmpty
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .equipmentTypes2!
-                                                  .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state
+                                                        .vehicleList[index]
+                                                        .equipmentTypes2!
+                                                        .isEmpty
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .equipmentTypes2!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.vehicleList[index]
-                                                  .vehicleSizes2!.isEmpty
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .vehicleSizes2!
-                                                  .toString(),
-                                              align: TextAlign.center,
-                                              color: Colors.green,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ],
+                                                text: state.vehicleList[index]
+                                                        .vehicleSizes2!.isEmpty
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .vehicleSizes2!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                color: Colors.green,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               });
                         } else if (state is GetVehicleSuccess) {
                           return ListView.builder(
-                              shrinkWrap: true,
-
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.vehicleList.length,
+                              itemCount: state.vehicleList.length + 1,
                               itemBuilder: (context, index) {
-                                print('this');
-                                print(state.vehicleList[index].equipmentTypes2!
-                                    .toString());
-                                final vehicle = state.vehicleList[index];
-                                return Container(
-                                  color: index.isEven
-                                      ? Colors.grey[300]
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                    child: InkWell(
-                                      onTap: () {
-                                        MagicRouter.navigateTo(Detail(vehicle));
-                                      },
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          CustomText(
-                                            width: 0.2.sw,
-                                            text: state.vehicleList[index]
-                                                .availabilityDate,
-                                            align: TextAlign.center,
-                                            fontSize: 8.sp,
-                                            fontWeight: FontWeight.w500,
+                                if (index == state.vehicleList.length) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            if (VehiclesCubit.get(context)
+                                                    .page >
+                                                1) {
+                                              VehiclesCubit.get(context)
+                                                  .resetPage();
+                                              VehiclesCubit.get(context)
+                                                  .getVehicleCubit(
+                                                      page: VehiclesCubit.get(
+                                                              context)
+                                                          .page);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.skip_previous_rounded,
+                                            color: VehiclesCubit.get(context)
+                                                        .page >
+                                                    1
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
                                           ),
-                                          CustomText(
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            if (VehiclesCubit.get(context)
+                                                    .page >
+                                                1) {
+                                              VehiclesCubit.get(context)
+                                                  .changePage(
+                                                      VehiclesCubit.get(context)
+                                                              .page -
+                                                          1);
+                                              VehiclesCubit.get(context)
+                                                  .getVehicleCubit(
+                                                      page: VehiclesCubit.get(
+                                                              context)
+                                                          .page);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_left_outlined,
+                                            color: VehiclesCubit.get(context)
+                                                        .page >
+                                                    1
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Container(
+                                          height: 24,
+                                          width: 24,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[400],
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                          ),
+                                          child: Text(
+                                            VehiclesCubit.get(context)
+                                                .page
+                                                .toString(),
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        InkWell(
+                                          onTap: () {
+                                            int page =
+                                                VehiclesCubit.get(context).page;
+
+                                            if (VehiclesCubit.get(context)
+                                                    .vehicleList
+                                                    .length
+                                                    .remainder(10) ==
+                                                0) {
+                                              VehiclesCubit.get(context)
+                                                  .changePage(page + 1);
+
+                                              VehiclesCubit.get(context)
+                                                  .getVehicleCubit(
+                                                      page: VehiclesCubit.get(
+                                                              context)
+                                                          .page);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_right_outlined,
+                                            color: VehiclesCubit.get(context)
+                                                        .vehicleList
+                                                        .length
+                                                        .remainder(10) ==
+                                                    0
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.skip_next,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  final vehicle = state.vehicleList[index];
+                                  return Container(
+                                    color: index.isEven
+                                        ? Colors.grey[300]
+                                        : Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: InkWell(
+                                        onTap: () {
+                                          MagicRouter.navigateTo(
+                                              Detail(vehicle));
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomText(
+                                              width: 0.2.sw,
+                                              text: state.vehicleList[index]
+                                                  .availabilityDate,
+                                              align: TextAlign.center,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            CustomText(
 //                                height: 20.h,o
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .originCity ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .originCity!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                width: 0.2.sw,
+                                                text: state.vehicleList[index]
+                                                            .originCity ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .originCity!.title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 20.h,
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .originState ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .originState!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .destinationCity ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .destinationCity!.title,
-                                              fontSize: 8.sp,
-                                              align: TextAlign.center,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state.vehicleList[index]
+                                                            .originState ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .originState!.title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
+                                                text: state.vehicleList[index]
+                                                            .destinationCity ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .destinationCity!.title,
+                                                fontSize: 12.sp,
+                                                align: TextAlign.center,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.vehicleList[index]
-                                                  .destinationState ==
-                                                  null
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .destinationState!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                text: state.vehicleList[index]
+                                                            .destinationState ==
+                                                        null
+                                                    ? 'other'
+                                                    : state
+                                                        .vehicleList[index]
+                                                        .destinationState!
+                                                        .title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 30.h,
-                                              width: 0.2.sw,
-                                              text: state.vehicleList[index]
-                                                  .equipmentTypes2!.isEmpty
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .equipmentTypes2!
-                                                  .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state
+                                                        .vehicleList[index]
+                                                        .equipmentTypes2!
+                                                        .isEmpty
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .equipmentTypes2!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.vehicleList[index]
-                                                  .equipmentTypes2!.isEmpty
-                                                  ? 'other'
-                                                  : state.vehicleList[index]
-                                                  .equipmentTypes2!
-                                                  .toString(),
-                                              align: TextAlign.center,
-                                              color: Colors.green,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ],
+                                                text: state
+                                                        .vehicleList[index]
+                                                        .equipmentTypes2!
+                                                        .isEmpty
+                                                    ? 'other'
+                                                    : state.vehicleList[index]
+                                                        .equipmentTypes2!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                color: Colors.green,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               });
                         } else if (state is VehicleLoading) {
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 6,
+                              itemCount: 10,
                               itemBuilder: (context, index) {
                                 print('loading');
 
@@ -305,12 +544,12 @@ class Body extends StatelessWidget {
                                       : Colors.white,
                                   child: Padding(
                                     padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
+                                        const EdgeInsets.symmetric(vertical: 5),
                                     child: InkWell(
                                       onTap: () {},
                                       child: Row(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -330,7 +569,7 @@ class Body extends StatelessWidget {
                                                 enabled: true,
                                                 baseColor: Colors.grey[300]!,
                                                 highlightColor:
-                                                Colors.grey[400]!,
+                                                    Colors.grey[400]!,
                                                 child: Container(
                                                     width: 0.2.sw,
                                                     height: 12.sp,
@@ -342,7 +581,7 @@ class Body extends StatelessWidget {
                                                 enabled: true,
                                                 baseColor: Colors.grey[300]!,
                                                 highlightColor:
-                                                Colors.grey[400]!,
+                                                    Colors.grey[400]!,
                                                 child: Container(
                                                     width: 0.2.sw,
                                                     height: 12.sp,
@@ -354,7 +593,7 @@ class Body extends StatelessWidget {
                                                 enabled: true,
                                                 baseColor: Colors.grey[300]!,
                                                 highlightColor:
-                                                Colors.grey[400]!,
+                                                    Colors.grey[400]!,
                                                 child: Container(
                                                     width: 0.2.sw,
                                                     height: 12.sp,
@@ -366,7 +605,7 @@ class Body extends StatelessWidget {
                                                 enabled: true,
                                                 baseColor: Colors.grey[300]!,
                                                 highlightColor:
-                                                Colors.grey[400]!,
+                                                    Colors.grey[400]!,
                                                 child: Container(
                                                     width: 0.2.sw,
                                                     height: 12.sp,
@@ -380,11 +619,9 @@ class Body extends StatelessWidget {
                               });
                         } else {
                           return ListView.builder(
-                              shrinkWrap: true,
-
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount:
-                              VehiclesCubit.get(context).vehicleList.length,
+                                  VehiclesCubit.get(context).vehicleList.length,
                               itemBuilder: (context, index) {
                                 print(VehiclesCubit.get(context)
                                     .vehicleList[index]
@@ -397,7 +634,7 @@ class Body extends StatelessWidget {
                                       : Colors.white,
                                   child: Padding(
                                     padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
+                                        const EdgeInsets.symmetric(vertical: 5),
                                     child: InkWell(
                                       onTap: () {
                                         MagicRouter.navigateTo(Detail(
@@ -406,7 +643,7 @@ class Body extends StatelessWidget {
                                       },
                                       child: Row(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           CustomText(
                                             width: 0.2.sw,
@@ -414,100 +651,100 @@ class Body extends StatelessWidget {
                                                 .vehicleList[index]
                                                 .availabilityDate,
                                             align: TextAlign.center,
-                                            fontSize: 8.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w500,
                                           ),
                                           CustomText(
 //                                height: 20.h,o
                                               width: 0.2.sw,
                                               text: VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .originCity ==
-                                                  null
+                                                          .vehicleList[index]
+                                                          .originCity ==
+                                                      null
                                                   ? 'other'
                                                   : VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .originCity!
-                                                  .title,
+                                                      .vehicleList[index]
+                                                      .originCity!
+                                                      .title,
                                               //   text: '',
 
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
 //                                  height: 20.h,
                                               width: 0.2.sw,
                                               text: VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .originState ==
-                                                  null
+                                                          .vehicleList[index]
+                                                          .originState ==
+                                                      null
                                                   ? 'other'
                                                   : VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .originState!
-                                                  .title,
+                                                      .vehicleList[index]
+                                                      .originState!
+                                                      .title,
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
                                               text: VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .destinationCity ==
-                                                  null
+                                                          .vehicleList[index]
+                                                          .destinationCity ==
+                                                      null
                                                   ? 'other'
                                                   : VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .destinationCity!
-                                                  .title,
-                                              fontSize: 8.sp,
+                                                      .vehicleList[index]
+                                                      .destinationCity!
+                                                      .title,
+                                              fontSize: 12.sp,
                                               align: TextAlign.center,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
 //                                  height: 20.h,
                                               text: VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .destinationState ==
-                                                  null
+                                                          .vehicleList[index]
+                                                          .destinationState ==
+                                                      null
                                                   ? 'other'
                                                   : VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .destinationState!
-                                                  .title,
+                                                      .vehicleList[index]
+                                                      .destinationState!
+                                                      .title,
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
 //                                  height: 30.h,
                                               width: 0.2.sw,
                                               text: VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .equipmentTypes2!
-                                                  .isEmpty
+                                                      .vehicleList[index]
+                                                      .equipmentTypes2!
+                                                      .isEmpty
                                                   ? 'other'
                                                   : VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .equipmentTypes2!
-                                                  .toString(),
+                                                      .vehicleList[index]
+                                                      .equipmentTypes2!
+                                                      .toString(),
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
 //                                  height: 20.h,
                                               text: VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .vehicleSizes2!
-                                                  .isEmpty
+                                                      .vehicleList[index]
+                                                      .vehicleSizes2!
+                                                      .isEmpty
                                                   ? 'other'
                                                   : VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .vehicleSizes2!
-                                                  .toString(),
+                                                      .vehicleList[index]
+                                                      .vehicleSizes2!
+                                                      .toString(),
                                               align: TextAlign.center,
                                               color: Colors.green,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                         ],
                                       ),
@@ -519,15 +756,13 @@ class Body extends StatelessWidget {
                       },
                       listener: (BuildContext context, Object? state) {},
                     ),
-                  ) ,)
-
-                ],
-              ),
-            ],
-          ),
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
-
-      ) ;
-
+      ),
+    );
   }
 }

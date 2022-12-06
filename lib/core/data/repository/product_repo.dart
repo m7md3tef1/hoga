@@ -9,14 +9,13 @@ import '../models/product/GetProduct_model.dart';
 class ProductRepo {
   static Future<List<GetJop>> getJop(url, self,
       {GetJop? productModel,
-        titleController,
-        page,
+      titleController,
+      page,
       city2,
       country2,
       state2,
       jopTypeId,
       jopCategortId,
-
       isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response;
@@ -31,16 +30,21 @@ class ProductRepo {
     if (isFilter) {
       response =
           await Api().getHttp(url: url, authToken: token, self: self, data: {
-            "per_page":10,"page":page,
+        "per_page": 10,
+        "page": page,
         "city": city2,
         "country": country2,
         "state": state2,
         "job_types": jopTypeId,
         "categories": jopCategortId,
-            "search":titleController.text
+        "search": titleController.text
       });
     } else {
-      response = await Api().getHttp(url: url, authToken: token, self: self,data: {"per_page":10,"page":page});
+      response = await Api().getHttp(
+          url: url,
+          authToken: token,
+          self: self,
+          data: {"per_page": 10, "page": page});
     }
 
     List<GetJop> productsList = [];
@@ -55,10 +59,14 @@ class ProductRepo {
   }
 
   static Future<List<GetProductModel>> getProducts(url, self,
-      {GetProductModel? productModel, val,page}) async {
+      {GetProductModel? productModel, val, page}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    var response = await Api()
-        .getHttp(url: url, authToken: token, self: self, data: {"search": val, "per_page":10,"page":page,
+    print(token);
+    var response =
+        await Api().getHttp(url: url, authToken: token, self: self, data: {
+      "search": val,
+      "per_page": 10,
+      "page": page,
     });
 
     List<GetProductModel> productsList = [];
@@ -70,7 +78,8 @@ class ProductRepo {
     return productsList;
   }
 
-  static Future<List<GetProductModel>> searchProduct(url, self, {GetProductModel? productModel}) async {
+  static Future<List<GetProductModel>> searchProduct(url, self,
+      {GetProductModel? productModel}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(
         url: url, authToken: token, self: self, data: productModel!.toJson());

@@ -1,35 +1,37 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class _BottomBar extends StatelessWidget {
-  const _BottomBar({Key? key}) : super(key: key);
-
+   _BottomBar({Key? key}) : super(key: key);
+ int index=0;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (_, s) {},
       builder: (context, state) => BottomNavigationBar(
-
           currentIndex: HomeCubit.get(context).currentIndex,
           onTap: (i) {
-            HomeCubit.get(context).changeBottom(i,context);
+            index=i;
+            HomeCubit.get(context).changeBottom(i, context);
           },
           showUnselectedLabels: true,
           selectedLabelStyle: TextStyle(
-              color:  Colors.black,
+              color: Colors.black,
               fontWeight: FontWeight.w500,
-              fontSize: 15.sp),
+              fontSize: 16.sp),
           unselectedLabelStyle: TextStyle(
-              color: Colors.grey, fontSize: 12.sp, fontWeight: FontWeight.w400),
+              color: Colors.grey, fontSize: 13.sp, fontWeight: FontWeight.w400),
           unselectedItemColor: Colors.grey,
-          selectedItemColor:  Colors.black,
+          selectedItemColor:index==0? Colors.purple:
+          index==1? Colors.green:index==2? Colors.blue:
+          index==3? Colors.orange:Colors.red,
           items: [
             BottomNavigationBarItem(
-              backgroundColor: Colors.white,
-              icon: buildColumn(context,  0),
-              label: 'Home'),
+                backgroundColor: Colors.white,
+                icon: buildColumn(context, 0),
+                label: 'Home'),
             BottomNavigationBarItem(
                 backgroundColor: Colors.white,
-                icon: buildColumn(context,  1),
+                icon: buildColumn(context, 1),
                 label: 'Market'),
             BottomNavigationBarItem(
                 backgroundColor: Colors.white,
@@ -37,7 +39,7 @@ class _BottomBar extends StatelessWidget {
                 label: 'Loads'),
             BottomNavigationBarItem(
                 backgroundColor: Colors.white,
-                icon: buildColumn(context,  3),
+                icon: buildColumn(context, 3),
                 label: 'Vehicles'),
             BottomNavigationBarItem(
               backgroundColor: Colors.white,

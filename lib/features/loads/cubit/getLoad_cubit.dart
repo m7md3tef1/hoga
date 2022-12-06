@@ -41,10 +41,24 @@ class LoadsCubit extends Cubit<AddLoadStates> {
     }
   }
 
+  String searchValue = '';
+
+  resetPage() {
+    page = 1;
+  }
+
+  changePage(int pag) {
+    page = pag;
+  }
+
+  setSearchVal(String value) {
+    searchValue = value;
+  }
+
   getLoad(
       {self,
       val,
-      page,
+      pag,
       equipmentSize2,
       attributes2,
       vehicleSize2,
@@ -57,6 +71,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
+        print('^^^^^^^^^^^^^^^^^^^^$page');
         LoadsRepo.getLoads(self,
                 page: page,
                 val: val,
@@ -68,7 +83,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                 equipmentSize: equipmentSize2)
             .then((value) => {
                   myVehiclesLoading = false,
-                  print(value),
+                  print('value'),
                   if (self == 1)
                     {
                       myloadList = value,
@@ -76,11 +91,14 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                       emit(GetLoadsSuccess(value)),
 
                       print('Get Vehice Response'),
+                      print('**********************'),
                       print(myloadList.length),
                     }
                   else
                     {
                       loadList = value,
+                      print('**********************'),
+                      print(loadList.length),
                       emit(GetLoadsSuccess(value)),
                       if (isFilter = true)
                         {
