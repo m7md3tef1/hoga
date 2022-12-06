@@ -49,11 +49,11 @@ class PlansCubit extends Cubit<PlansStates> {
         print(response);
         print('==============================');
 
-        if (response != null &&
-            response['record'] != null &&
-            response['record']['package_details']['name'] != null) {
-          isFreeTrial = false;
-          emit(NotFreeTrial());
+//        if (response != null &&
+//            response['record'] != null &&
+//            response['record']['package_details']['name'] != null) {
+//          isFreeTrial = false;
+//          emit(NotFreeTrial());
         }
         // response.then((value) => {
         //   print(value),
@@ -67,7 +67,7 @@ class PlansCubit extends Cubit<PlansStates> {
         //   print(error)
         //
         // });
-      }
+    //  }
     });
   }
 }

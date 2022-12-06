@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/features/home/units/homebage/bottom.dart';
+import 'package:hoga_load/features/home/units/homebage/expandable.dart';
 import 'package:hoga_load/features/plans/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
-
 import '../../about/view.dart';
 
 import 'homebage/body.dart';
@@ -14,15 +14,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 30,),
-            CustomAppbar(title: 'Home Screen',),
-            Padding(
-              padding:  EdgeInsets.symmetric(vertical: 8.sp,horizontal: 15.sp),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(height: 30,),
+        CustomAppbar(title: 'Home Screen',),
+        Expanded(
+          child: Padding(
+            padding:  EdgeInsets.symmetric(vertical: 8.sp,horizontal: 15.sp),
+            child:
+            SingleChildScrollView(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                    body(),
                   SizedBox(
@@ -37,9 +40,9 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
+          ),
         ),
-
+      ],
     );
   }
 }
