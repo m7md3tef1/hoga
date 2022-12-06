@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class FormInfo extends StatefulWidget {
   FormInfo(
@@ -6,11 +6,13 @@ class FormInfo extends StatefulWidget {
       this.isFilter = false,
       this.vehiclesModel,
       this.isEdit = false,
+      this.isLoadEdit = false,
       this.index})
       : super(key: key);
   bool isFilter;
   Vehicles? vehiclesModel;
   bool isEdit;
+  bool isLoadEdit;
   int? index;
   @override
   State<FormInfo> createState() => _FormInfoState();
@@ -31,9 +33,11 @@ class _FormInfoState extends State<FormInfo> {
   @override
   void initState() {
     super.initState();
-    if (widget.isEdit) {
+    if (widget.isEdit || widget.isLoadEdit) {
       date = widget.vehiclesModel!.availabilityDate!;
-      cityDestination = widget.vehiclesModel!.destinationCity!.title!;
+      cityDestination = widget.vehiclesModel!.destinationCity != null
+          ? widget.vehiclesModel!.destinationCity!.title!
+          : '';
       cityOrigin = widget.vehiclesModel!.originCity!.title!;
       countryDestination = widget.vehiclesModel!.destinationCountry!.title!;
       countryOrigin = widget.vehiclesModel!.originCountry!.title!;
@@ -41,7 +45,9 @@ class _FormInfoState extends State<FormInfo> {
       stateOrigin = widget.vehiclesModel!.originState!.title!;
 
       DataFormCubit.get(context).cityDestinationID =
-          widget.vehiclesModel!.destinationCity!.id!.toString();
+          widget.vehiclesModel!.destinationCity != null
+              ? widget.vehiclesModel!.destinationCity!.id!.toString()
+              : '';
       DataFormCubit.get(context).cityOriginID =
           widget.vehiclesModel!.originCity!.id!.toString();
       DataFormCubit.get(context).cityDestinationID =
@@ -96,17 +102,17 @@ class _FormInfoState extends State<FormInfo> {
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-
                           InkWell(
-                            onTap:(){
+                            onTap: () {
                               Navigator.pop(context);
                             },
                             child: Icon(Icons.arrow_back_sharp),
-
                           ),
                           Expanded(
                             child: CustomText(
-                              text: 'ADD VEHICLE',
+                              text: widget.isLoadEdit
+                                  ? 'Edit Load'
+                                  : 'ADD VEHICLE',
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w700,
                             ),

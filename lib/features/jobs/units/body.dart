@@ -14,7 +14,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.6.sh,
+      height: 1.sh,
       child: Scrollbar(
         thickness: 15,
         trackVisibility: true,
@@ -44,7 +44,7 @@ class Body extends StatelessWidget {
                             width: 0.2.sw,
                             child: CustomText(
                               text: titlesList[index],
-                              fontSize: 9.sp,
+                              fontSize: 12.sp,
                               align: TextAlign.start,
                               fontWeight: FontWeight.w700,
                             ),
@@ -53,8 +53,8 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 Expanded(
+                  flex: 1,
                   child: Container(
-                    //height: 0.5.sh,
                     width: 0.2.sw * 7,
                     child: BlocConsumer<JopCubit, AddJopStates>(
                       builder: (context, state) {
@@ -63,224 +63,442 @@ class Body extends StatelessWidget {
                         } else if (state is GetSearchSuccess) {
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.jopList.length,
+                              itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
                                 print('jjjjjjjjjjj');
+                                print('~~~~~~~~~~~~ ${state.jopList.length}');
 
-                                return Container(
-                                  color: index.isEven
-                                      ? Colors.grey[300]
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: InkWell(
-                                      onTap: () {
-                                        MagicRouter.navigateTo(
-                                            Detail(state.jopList[index]));
-                                      },
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomText(
-                                            width: 0.2.sw,
-                                            text: state.jopList[index].title,
-                                            align: TextAlign.center,
-                                            fontSize: 8.sp,
-                                            fontWeight: FontWeight.w500,
+                                if (index == state.jopList.length) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            if (JopCubit.get(context).page >
+                                                1) {
+                                              JopCubit.get(context).resetPage();
+                                              JopCubit.get(context).getJops(
+                                                page:
+                                                    JopCubit.get(context).page,
+                                              );
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.skip_previous_rounded,
+                                            color:
+                                                JopCubit.get(context).page > 1
+                                                    ? Colors.grey[600]
+                                                    : Colors.grey[400],
                                           ),
-                                          CustomText(
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            if (JopCubit.get(context).page >
+                                                1) {
+                                              JopCubit.get(context).changePage(
+                                                  JopCubit.get(context).page -
+                                                      1);
+                                              JopCubit.get(context).getJops(
+                                                page:
+                                                    JopCubit.get(context).page,
+                                              );
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_left_outlined,
+                                            color:
+                                                JopCubit.get(context).page > 1
+                                                    ? Colors.grey[600]
+                                                    : Colors.grey[400],
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Container(
+                                          height: 24,
+                                          width: 24,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[400],
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                          ),
+                                          child: Text(
+                                            JopCubit.get(context)
+                                                .page
+                                                .toString(),
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        InkWell(
+                                          onTap: () {
+                                            int page =
+                                                JopCubit.get(context).page;
+
+                                            if (JopCubit.get(context)
+                                                    .jopList
+                                                    .length
+                                                    .remainder(10) ==
+                                                0) {
+                                              JopCubit.get(context)
+                                                  .changePage(page + 1);
+
+                                              JopCubit.get(context).getJops(
+                                                page:
+                                                    JopCubit.get(context).page,
+                                              );
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_right_outlined,
+                                            color: JopCubit.get(context)
+                                                            .searchList
+                                                            .length >=
+                                                        10 &&
+                                                    JopCubit.get(context)
+                                                            .searchList
+                                                            .length
+                                                            .remainder(10) ==
+                                                        0
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.skip_next,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  return Container(
+                                    color: index.isEven
+                                        ? Colors.grey[300]
+                                        : Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: InkWell(
+                                        onTap: () {
+                                          MagicRouter.navigateTo(
+                                              Detail(state.jopList[index]));
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomText(
+                                              width: 0.2.sw,
+                                              text: state.jopList[index].title,
+                                              align: TextAlign.center,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            CustomText(
 //                                height: 20.h,o
-                                              width: 0.2.sw,
-                                              text:
-                                                  state.jopList[index].category ==
-                                                          null
-                                                      ? 'other'
-                                                      : state.jopList[index]
-                                                          .category!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .category ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .category!.title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 20.h,
-                                              width: 0.2.sw,
-                                              text:
-                                                  state.jopList[index].jobType ==
-                                                          null
-                                                      ? 'other'
-                                                      : state.jopList[index]
-                                                          .jobType!.title,
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
-                                              text: state.jopList[index].salary ==
-                                                      null
-                                                  ? 'other'
-                                                  : state.jopList[index].salary!,
-                                              fontSize: 8.sp,
-                                              align: TextAlign.center,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .jobType ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .jobType!.title,
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .salary ==
+                                                        null
+                                                    ? 'other'
+                                                    : state
+                                                        .jopList[index].salary!,
+                                                fontSize: 12.sp,
+                                                align: TextAlign.center,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.jopList[index]
-                                                          .noOfPosts ==
-                                                      null
-                                                  ? 'other'
-                                                  : state
-                                                      .jopList[index].noOfPosts!
-                                                      .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                text: state.jopList[index]
+                                                            .noOfPosts ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .noOfPosts!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 30.h,
-                                              width: 0.2.sw,
-                                              text: state.jopList[index].state ==
-                                                      null
-                                                  ? 'other'
-                                                  : state
-                                                      .jopList[index].state!.title
-                                                      .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .state ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .state!.title
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.jopList[index]
-                                                          .shiftTime ==
-                                                      null
-                                                  ? 'other'
-                                                  : state
-                                                      .jopList[index].shiftTime!,
-                                              align: TextAlign.center,
-                                              color: Colors.green,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ],
+                                                text: state.jopList[index]
+                                                            .shiftTime ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .shiftTime!,
+                                                align: TextAlign.center,
+                                                color: Colors.green,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               });
                         } else if (state is GetJopSuccess) {
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: state.jopList.length,
+                              itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
                                 print('llllllll');
 
-                                return Container(
-                                  color: index.isEven
-                                      ? Colors.grey[300]
-                                      : Colors.white,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: InkWell(
-                                      onTap: () {
-                                        MagicRouter.navigateTo(
-                                            Detail(state.jopList[index]));
-                                      },
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomText(
-                                            width: 0.2.sw,
-                                            text: state.jopList[index].title
-                                                .toString(),
-                                            align: TextAlign.center,
-                                            fontSize: 8.sp,
-                                            fontWeight: FontWeight.w500,
+                                if (index == state.jopList.length) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            if (JopCubit.get(context).page >
+                                                1) {
+                                              JopCubit.get(context).resetPage();
+                                              JopCubit.get(context).getJops(
+                                                  page: JopCubit.get(context)
+                                                      .page);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.skip_previous_rounded,
+                                            color:
+                                                JopCubit.get(context).page > 1
+                                                    ? Colors.grey[600]
+                                                    : Colors.grey[400],
                                           ),
-                                          CustomText(
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            if (JopCubit.get(context).page >
+                                                1) {
+                                              JopCubit.get(context).changePage(
+                                                  JopCubit.get(context).page -
+                                                      1);
+                                              JopCubit.get(context).getJops(
+                                                  page: JopCubit.get(context)
+                                                      .page);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_left_outlined,
+                                            color:
+                                                JopCubit.get(context).page > 1
+                                                    ? Colors.grey[600]
+                                                    : Colors.grey[400],
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Container(
+                                          height: 24,
+                                          width: 24,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[400],
+                                            borderRadius:
+                                                BorderRadius.circular(3),
+                                          ),
+                                          child: Text(
+                                            JopCubit.get(context)
+                                                .page
+                                                .toString(),
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        InkWell(
+                                          onTap: () {
+                                            int page =
+                                                JopCubit.get(context).page;
+
+                                            if (JopCubit.get(context)
+                                                    .jopList
+                                                    .length
+                                                    .remainder(10) ==
+                                                0) {
+                                              JopCubit.get(context)
+                                                  .changePage(page + 1);
+
+                                              JopCubit.get(context).getJops(
+                                                  page: JopCubit.get(context)
+                                                      .page);
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.chevron_right_outlined,
+                                            color: JopCubit.get(context)
+                                                        .jopList
+                                                        .length
+                                                        .remainder(10) ==
+                                                    0
+                                                ? Colors.grey[600]
+                                                : Colors.grey[400],
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.skip_next,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  return Container(
+                                    color: index.isEven
+                                        ? Colors.grey[300]
+                                        : Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: InkWell(
+                                        onTap: () {
+                                          MagicRouter.navigateTo(
+                                              Detail(state.jopList[index]));
+                                        },
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomText(
+                                              width: 0.2.sw,
+                                              text: state.jopList[index].title
+                                                  .toString(),
+                                              align: TextAlign.center,
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            CustomText(
 //                                height: 20.h,o
-                                              width: 0.2.sw,
-                                              text:
-                                                  state.jopList[index].category ==
-                                                          null
-                                                      ? 'other'
-                                                      : state.jopList[index]
-                                                          .category!.title
-                                                          .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .category ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .category!.title
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 20.h,
-                                              width: 0.2.sw,
-                                              text:
-                                                  state.jopList[index].jobType ==
-                                                          null
-                                                      ? 'other'
-                                                      : state.jopList[index]
-                                                          .jobType!.title
-                                                          .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
-                                              text: state.jopList[index].salary ==
-                                                      null
-                                                  ? 'other'
-                                                  : state.jopList[index].salary!,
-                                              fontSize: 8.sp,
-                                              align: TextAlign.center,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
-                                              text: state.jopList[index]
-                                                          .noOfPosts ==
-                                                      null
-                                                  ? 'other'
-                                                  : state
-                                                      .jopList[index].noOfPosts!
-                                                      .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .jobType ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .jobType!.title
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .salary ==
+                                                        null
+                                                    ? 'other'
+                                                    : state
+                                                        .jopList[index].salary!,
+                                                fontSize: 12.sp,
+                                                align: TextAlign.center,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .noOfPosts ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .noOfPosts!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
 //                                  height: 30.h,
-                                              width: 0.2.sw,
-                                              text: state.jopList[index].state ==
-                                                      null
-                                                  ? 'other'
-                                                  : state
-                                                      .jopList[index].state!.title
-                                                      .toString(),
-                                              align: TextAlign.center,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                          CustomText(
-                                              width: 0.2.sw,
+                                                width: 0.2.sw,
+                                                text: state.jopList[index]
+                                                            .state ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .state!.title
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                            CustomText(
+                                                width: 0.2.sw,
 //                                  height: 20.h,
-                                              text: state.jopList[index]
-                                                          .shiftTime ==
-                                                      null
-                                                  ? 'other'
-                                                  : state
-                                                      .jopList[index].shiftTime!
-                                                      .toString(),
-                                              align: TextAlign.center,
-                                              color: Colors.green,
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ],
+                                                text: state.jopList[index]
+                                                            .shiftTime ==
+                                                        null
+                                                    ? 'other'
+                                                    : state.jopList[index]
+                                                        .shiftTime!
+                                                        .toString(),
+                                                align: TextAlign.center,
+                                                color: Colors.green,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               });
                         } else if (state is AddJopLoading) {
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 6,
+                              itemCount: 10,
                               itemBuilder: (context, index) {
                                 print('llllllll');
 
@@ -393,7 +611,7 @@ class Body extends StatelessWidget {
                                                 .jopList[index]
                                                 .title,
                                             align: TextAlign.center,
-                                            fontSize: 8.sp,
+                                            fontSize: 12.sp,
                                             fontWeight: FontWeight.w500,
                                           ),
                                           CustomText(
@@ -411,7 +629,7 @@ class Body extends StatelessWidget {
                                               //   text: '',
 
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
 //                                  height: 20.h,
@@ -426,7 +644,7 @@ class Body extends StatelessWidget {
                                                       .jobType!
                                                       .title,
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
@@ -438,7 +656,7 @@ class Body extends StatelessWidget {
                                                   : JopCubit.get(context)
                                                       .jopList[index]
                                                       .salary!,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               align: TextAlign.center,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
@@ -454,7 +672,7 @@ class Body extends StatelessWidget {
                                                       .noOfPosts!
                                                       .toString(),
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
 //                                  height: 30.h,
@@ -469,7 +687,7 @@ class Body extends StatelessWidget {
                                                       .state!
                                                       .title,
                                               align: TextAlign.center,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
@@ -485,7 +703,7 @@ class Body extends StatelessWidget {
                                                       .toString(),
                                               align: TextAlign.center,
                                               color: Colors.green,
-                                              fontSize: 8.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                         ],
                                       ),
@@ -509,3 +727,240 @@ class Body extends StatelessWidget {
     );
   }
 }
+/*
+
+BlocConsumer<JopCubit, AddJopStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is GetSearchFailed) {
+            return Center(child: CustomText(text: state.msg));
+          } else if (state is GetSearchSuccess) {
+            return Container(
+              height: .9.sh,
+              width: 1.sw,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: DataTable2(
+                    columnSpacing: 1,
+                    horizontalMargin: 0,
+                    dataRowHeight: state.jopList.length >= 10 ? .06.sh : .09.sh,
+                    minWidth: 900,
+                    columns: const [
+                      DataColumn2(
+                        label: Center(child: Text('Title')),
+                        size: ColumnSize.L,
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Category')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Type')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Salary')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Vacancy')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Location')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Shift')),
+                      ),
+                    ],
+                    rows: List<DataRow>.generate(
+                        state.jopList.length,
+                        (index) => DataRow(
+                                color: MaterialStateColor.resolveWith(
+                                    (states) => index.isEven
+                                        ? const Color(0xFFE0E0E0)
+                                        : Colors.white),
+                                cells: [
+                                  DataCell(Center(
+                                      child: Text(
+                                          state.jopList[index].title == null
+                                              ? 'other'
+                                              : state.jopList[index].title
+                                                  .toString()))),
+                                  DataCell(Center(
+                                      child: Text(
+                                          state.jopList[index].category == null
+                                              ? 'other'
+                                              : state.jopList[index].category!
+                                                  .title
+                                                  .toString()))),
+                                  DataCell(Center(
+                                      child: Text(
+                                          state.jopList[index].jobType == null
+                                              ? 'other'
+                                              : state
+                                                  .jopList[index].jobType!.title
+                                                  .toString()))),
+                                  DataCell(Center(
+                                      child: Text(
+                                          state.jopList[index].salary == null
+                                              ? 'other'
+                                              : state.jopList[index].salary!
+                                                  .toString()))),
+                                  DataCell(Center(
+                                      child: Text(
+                                          state.jopList[index].noOfPosts == null
+                                              ? 'other'
+                                              : state.jopList[index].noOfPosts!
+                                                  .toString()))),
+                                  DataCell(Center(
+                                      child: Text(state.jopList[index].state ==
+                                              null
+                                          ? 'other'
+                                          : state.jopList[index].state!.title
+                                              .toString()))),
+                                  DataCell(Center(
+                                      child: Text(
+                                          state.jopList[index].shiftTime == null
+                                              ? 'other'
+                                              : state
+                                                  .jopList[index].shiftTime!))),
+                                ]))),
+              ),
+            );
+          } else if (state is AddJopLoading) {
+            return  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.orange,
+                  ),
+                ),
+              ],
+            );
+          }else if (state is GetJopSuccess)  {
+            return Container(
+              height: .9.sh,
+              width: 1.sw,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: DataTable2(
+                    columnSpacing: 1,
+                    horizontalMargin: 0,
+                    dataRowHeight: JopCubit.get(context).jopList.length >= 10
+                        ? .06.sh
+                        : .09.sh,
+                    minWidth: 890,
+                    columns: const [
+                      DataColumn2(
+                        label: Center(child: Text('Title')),
+                        size: ColumnSize.L,
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Category')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Type')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Salary')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Vacancy')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Location')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Shift')),
+                      ),
+                    ],
+                    rows: List<DataRow>.generate(
+                        JopCubit.get(context).jopList.length,
+                            (index) => DataRow(
+                            color: MaterialStateColor.resolveWith(
+                                    (states) => index.isEven
+                                    ? const Color(0xFFE0E0E0)
+                                    : Colors.white),
+                            cells: [
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].title ==null?'other':JopCubit.get(context).jopList[index].title!.toString()))),
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].category ==null?'other':JopCubit.get(context).jopList[index].category!.title.toString()))),
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].jobType ==null?'other':JopCubit.get(context).jopList[index].jobType!.title!.toString()))),
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].salary ==null?'other':JopCubit.get(context).jopList[index].salary!.toString()))),
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].noOfPosts ==null?'other':JopCubit.get(context).jopList[index].noOfPosts!.toString()))),
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].state ==null?'other':JopCubit.get(context).jopList[index].state!.title.toString()))),
+                              DataCell(Center(
+                                  child: Text(JopCubit.get(context).jopList[index].shiftTime ==null?'other':JopCubit.get(context).jopList[index].shiftTime!.toString()))),
+                            ]))),
+              ),
+            );
+          }
+          else  {
+            return Container(
+              height: .9.sh,
+              width: 1.sw,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: DataTable2(
+                    columnSpacing: 1,
+                    horizontalMargin: 0,
+                    dataRowHeight: JopCubit.get(context).jopList.length >= 10
+                        ? .06.sh
+                        : .09.sh,
+                    minWidth: 890,
+                    columns: const [
+                      DataColumn2(
+                        label: Center(child: Text('Title')),
+                        size: ColumnSize.L,
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Category')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Type')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Salary')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Vacancy')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Location')),
+                      ),
+                      DataColumn(
+                        label: Center(child: Text('Shift')),
+                      ),
+                    ],
+                    rows: List<DataRow>.generate(
+                        JopCubit.get(context).jopList.length,
+                        (index) => DataRow(
+                                color: MaterialStateColor.resolveWith(
+                                    (states) => index.isEven
+                                        ? const Color(0xFFE0E0E0)
+                                        : Colors.white),
+                                cells: [
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].title ==null?'other':JopCubit.get(context).jopList[index].title!.toString()))),
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].category ==null?'other':JopCubit.get(context).jopList[index].category!.title.toString()))),
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].jobType ==null?'other':JopCubit.get(context).jopList[index].jobType!.title!.toString()))),
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].salary ==null?'other':JopCubit.get(context).jopList[index].salary!.toString()))),
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].noOfPosts ==null?'other':JopCubit.get(context).jopList[index].noOfPosts!.toString()))),
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].state ==null?'other':JopCubit.get(context).jopList[index].state!.title.toString()))),
+                                  DataCell(Center(
+                                      child: Text(JopCubit.get(context).jopList[index].shiftTime ==null?'other':JopCubit.get(context).jopList[index].shiftTime!.toString()))),
+                                ]))),
+              ),
+            );
+          }
+        });
+
+ */

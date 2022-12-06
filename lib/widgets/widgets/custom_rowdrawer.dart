@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/core/color_manager/color_manager.dart';
 
 import '../../core/router/router.dart';
+import '../../features/home/view.dart';
 
 class CustomRowDrawer extends StatelessWidget {
   CustomRowDrawer(
@@ -9,12 +11,12 @@ class CustomRowDrawer extends StatelessWidget {
       required this.text,
       this.beforeNavigate,
       this.icon,
-        this.isHome=false,
+      this.isHome = false,
       this.navigatename})
       : super(key: key);
   String text;
   Function? beforeNavigate;
-  bool isHome=false;
+  bool isHome = false;
   var icon;
   var navigatename;
   @override
@@ -23,8 +25,8 @@ class CustomRowDrawer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          if(isHome){
-            Navigator.pop(context);
+          if (isHome) {
+            Home.scaffoldStateKey.currentState!.closeDrawer();
           }
           if (beforeNavigate != null) {
             beforeNavigate!();
@@ -42,14 +44,14 @@ class CustomRowDrawer extends StatelessWidget {
                       image: const AssetImage(
                         'assets/images/blog.png',
                       ),
-                      color: Colors.orange,
+                      color: ColorManager.yellow,
                     ),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
                       icon,
-                      color: Colors.orange,
+                      color: ColorManager.yellow,
                     ),
                   ),
             Expanded(

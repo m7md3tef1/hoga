@@ -6,7 +6,10 @@ import 'package:hoga_load/features/subscribtion_details/units/plans.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 
+import '../../core/data/local/cacheHelper.dart';
+import '../../core/keys/keys.dart';
 import '../../core/widgets/custom_card.dart';
+import '../../widgets/widgets/custom_notloggedin.dart';
 
 part 'units/body.dart';
 
@@ -28,9 +31,11 @@ class SubscriptionDetailsView extends StatelessWidget {
               title: 'Subscription Details',
               scaffoldKey: subscriptionScaffoldKey,
             ),
-            Expanded(
-                child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(), child: Body())),
+            !CacheHelper.getBool(SharedKeys.isLogin)
+                ? CustomNotLoggedIn()
+                : Expanded(
+                    child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(), child: Body())),
           ],
         ),
       ),

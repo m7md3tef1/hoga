@@ -31,43 +31,45 @@ class _JobsViewState extends State<JobsView> {
  }
   @override
   Widget build(BuildContext context) {
-    return
+    return CustomScaffold(
+      body:
+      Container(
+        child: RefreshIndicator(
+          color: Colors.orange,
+          backgroundColor: Colors.white,
+          onRefresh: ()async{
+            print('refresh');
+            await JopCubit.get(context).getPage();
+            print("page is "+'${JopCubit.get(context).page}');
+          await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
 
-      Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-
-          CustomAppbar(title: 'Jobs'),
-          SizedBox(
-            height: 22.h,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomAppbar(title: 'Jobs'),
+                SizedBox(
+                  height: 22.h,
+                ),
+                CustomSearchRow(
+                  4,
+                  function: () {
+                    MagicRouter.navigateTo(AddJopView(
+                      isFilter: true,
+                    ));
+                  },
+                ),
+                SizedBox(
+                  height: 21.h,
+                ),
+                Body()
+              ],
+            ),
           ),
-          CustomSearchRow(
-            4,
-            function: () {
-              MagicRouter.navigateTo(AddJopView(
-                isFilter: true,
-              ));
-            },
-          ),
-          SizedBox(
-            height: 21.h,
-          ),
-          Expanded(child:
-
-          RefreshIndicator(
-              color: Colors.orange,
-              backgroundColor: Colors.white,
-              onRefresh: ()async{
-                print('refresh');
-                await JopCubit.get(context).getPage();
-                print("page is "+'${JopCubit.get(context).page}');
-                await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
-              },
-              child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),child: Body())))
-        ],
-      )
-    ;
+        ),
+      ),
+    );
   }
 }

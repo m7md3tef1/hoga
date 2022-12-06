@@ -6,11 +6,11 @@ class AddProductLoading extends AddProductStates {}
 
 class AddSuccess extends AddProductStates {}
 
+class AddingProduct extends AddProductStates {}
+
 class AddFailed extends AddProductStates {}
+
 class AddPage extends AddProductStates {}
-
-
-
 
 class GetProductsSuccess extends AddProductStates {
   List<GetProductModel> productList = [];
@@ -21,6 +21,7 @@ class GetProductsFailed extends AddProductStates {
   final String msg;
   GetProductsFailed(this.msg);
 }
+
 class AddTestFailed extends AddProductStates {
   final String msg;
   AddTestFailed(this.msg);
@@ -40,12 +41,15 @@ class NetworkFailed extends AddProductStates {
   final String msg;
   NetworkFailed(this.msg);
 }
+
 class ImageGallery extends AddProductStates {
   ImageGallery();
 }
-class DeleteSuccess extends AddProductStates {
-}class DeleteFailed extends AddProductStates {
-}
-class EditSuccess extends AddProductStates {
-}class EditFailed extends AddProductStates {
-}
+
+class DeleteSuccess extends AddProductStates {}
+
+class DeleteFailed extends AddProductStates {}
+
+class EditSuccess extends AddProductStates {}
+
+class EditFailed extends AddProductStates {}

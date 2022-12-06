@@ -7,54 +7,58 @@ import '../../../core/data/models/plans/plans_model.dart';
 import '../../../core/keys/keys.dart';
 import 'plans_states.dart';
 
-class PlansCubit  extends Cubit<PlansStates> {
+class PlansCubit extends Cubit<PlansStates> {
   PlansCubit() : super(PlansLoading());
 
   static PlansCubit get(context) => BlocProvider.of(context);
-  Connectivity connectivity =  Connectivity();
-  List<PlansModel>plansList=[];
-  bool isFreeTrial=true;
-  getPlansCubit(){
+  Connectivity connectivity = Connectivity();
+  List<PlansModel> plansList = [];
+  bool isFreeTrial = true;
+  getPlansCubit() {
     emit(PlansLoading());
-    connectivity.checkConnectivity().then((value)async{
-      if(ConnectivityResult.none == value){
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
-      }else{
-        PlansRepo.getPlans(isFreeTrial).then((value) => {
-          print('..................................'),
-          plansList=value,
-          print("this value--------Plans"),
-          print(value),
-          emit(GetPlansSuccess(value))
-        }).onError((error, stackTrace) => {
-          emit(GetPlansFailed(error.toString())),
-          print(error)
-
-        });
+      } else {
+        PlansRepo.getPlans(isFreeTrial)
+            .then((value) => {
+                  print('..................................'),
+                  plansList = value,
+                  print("this value--------Plans"),
+                  print(value),
+                  emit(GetPlansSuccess(value))
+                })
+            .onError((error, stackTrace) =>
+                {emit(GetPlansFailed(error.toString())), print(error)});
       }
-
     });
   }
 
-  checkPlansCubit()async{
+  checkPlansCubit() async {
     print('kkkkkkkkkkkkkkkkkkkkkkkkk');
 
     var token = await CacheHelper.getString(SharedKeys.token);
 
     emit(PlansLoading());
-    connectivity.checkConnectivity().then((value)async{
-      if(ConnectivityResult.none == value){
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
-      }else{
-
-        var response= await Api().getHttp(url: 'profile/current-subscription',authToken: token);
+      } else {
+        var response = await Api()
+            .getHttp(url: 'profile/current-subscription', authToken: token);
         print(response);
         print('==============================');
 
-        print(response['record']['package_details']['name']);
-        if(response['record']['package_details']['name']!=null){
-          isFreeTrial=false;
-          emit(NotFreeTrial());
+//        if (response != null &&
+//            response['record'] != null &&
+//            response['record']['package_details']['name'] != null) {
+//          isFreeTrial = false;
+//          emit(NotFreeTrial());
+//        if (response != null &&
+//            response['record'] != null &&
+//            response['record']['package_details']['name'] != null) {
+//          isFreeTrial = false;
+//          emit(NotFreeTrial());
         }
         // response.then((value) => {
         //   print(value),
@@ -68,11 +72,8 @@ class PlansCubit  extends Cubit<PlansStates> {
         //   print(error)
         //
         // });
-      }
-
+     // }
+    //  }
     });
   }
-
-
-
 }

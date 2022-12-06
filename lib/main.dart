@@ -26,15 +26,12 @@ import 'features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  CacheHelper.putBool(SharedKeys.isLogin, false);
   BlocOverrides.runZoned(() {
-
-    runApp( DevicePreview(
-        enabled: true,
-        builder:  (context) {
+    runApp(DevicePreview(
+        enabled: false,
+        builder: (context) {
           return const MyApp();
-        }
-    ));
+        }));
   }, blocObserver: SimpleBlocObserver());
 }
 
@@ -48,8 +45,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => HomeCubit()),
         BlocProvider(create: (_) => PlansCubit()..getPlansCubit()
-          //  ..checkPlansCubit()
-        ),
+            //  ..checkPlansCubit()
+            ),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(
             create: (_) => VehiclesCubit()
@@ -57,9 +54,9 @@ class MyApp extends StatelessWidget {
               ..getEquipmentsCubit()
               ..getVehicleSizesCubit()
               ..getVehicleTypesCubit()
-          //   ..getVehicleCubit()
+            //   ..getVehicleCubit()
 
-        ),
+            ),
         BlocProvider(
             create: (_) => DataFormCubit()
               ..getCountry()
@@ -73,22 +70,21 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(
             create: (_) => JopCubit()
-            // ..getJop()
+              // ..getJop()
               ..addJopCubit),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()
-              ..updateProfile
+              //..updateProfile
               ..getUserProfileData()
               ..getVehicleTypesCubit()
-              ..getSubscriptionData()..profileData
-        ),
+              ..getSubscriptionData()
+              ..profileData),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))
-              ..blogList
-        ),
+              ..blogList),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -98,8 +94,7 @@ class MyApp extends StatelessWidget {
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
-          theme: ThemeData(fontFamily: 'Montserrat',primaryColor: Color(0xffFF9200)),
-
+          theme: ThemeData(fontFamily: 'Montserrat'),
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           onGenerateRoute: onGenerateRoute,

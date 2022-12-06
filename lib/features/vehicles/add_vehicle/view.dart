@@ -80,30 +80,42 @@ class AddVehiclesView extends StatelessWidget {
                             child: FormInfo(
                               vehiclesModel: vehiclesModel,
                               isEdit: isEdit,
+                              isLoadEdit: isLoadEdit,
                               index: index,
                               isFilter: isLoadFilter,
-
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 22),
                             child: Equipment(
-                                vehiclesModel: vehiclesModel, isEdit: isEdit),
+                              vehiclesModel: vehiclesModel,
+                              isEdit: isEdit,
+                              isLoadEdit: isLoadEdit,
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 22),
                             child: Attributes(
-                                vehiclesModel: vehiclesModel, isEdit: isEdit),
+                              vehiclesModel: vehiclesModel,
+                              isEdit: isEdit,
+                              isLoadEdit: isLoadEdit,
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 22),
                             child: VehicleType(
-                                vehiclesModel: vehiclesModel, isEdit: isEdit),
+                              vehiclesModel: vehiclesModel,
+                              isEdit: isEdit,
+                              isLoadEdit: isLoadEdit,
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 22),
                             child: VehiclesSize(
-                                vehiclesModel: vehiclesModel, isEdit: isEdit),
+                              vehiclesModel: vehiclesModel,
+                              isEdit: isEdit,
+                              isLoadEdit: isLoadEdit,
+                            ),
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top: 22),

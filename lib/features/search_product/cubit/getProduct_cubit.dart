@@ -35,6 +35,16 @@ class ProductsCubit extends Cubit<AddProductStates> {
   bool testLoading = false;
   bool myVehiclesLoading = false;
   int page = 1;
+  String searchValue = '';
+
+  resetPage() {
+    page = 1;
+  }
+
+  changePage(int pag) {
+    page = pag;
+  }
+
   getPage() {
     if (productList.length == 10) {
       page++;
@@ -45,11 +55,15 @@ class ProductsCubit extends Cubit<AddProductStates> {
     }
   }
 
+  setSearchVal(String value) {
+    searchValue = value;
+  }
+
   getProduct({self, val, page}) {
     emit(AddProductLoading());
     //myProductList=[];
     myVehiclesLoading = true;
-
+    print('%%%%%%%%%%%%% $page');
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -115,7 +129,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
     });
   }
 
-  addProductCubit({context, GetProductModel? productModel})async {
+  addProductCubit({context, GetProductModel? productModel}) async {
 //
 //    var request = MultipartRequest();
 //
@@ -142,24 +156,25 @@ class ProductsCubit extends Cubit<AddProductStates> {
 //
 //      print(response);
 //    };
-
-    String fileName = image!.path.split('/').last;
+    emit(AddProductLoading());
+    String fileName = image != null ? image!.path.split('/').last : '';
 
     FormData formData = FormData.fromMap({
-      "product_image":
-      await MultipartFile.fromFile(image!.path, filename:fileName),
-     "buy_or_sell":productModel!.buyOrSell,
-    "product_name": productModel.productName,
-    "product_type": productModel.productTypeId,
-    "country": productModel.countryPost,
-    "city":productModel.cityPost,
-    "state": productModel.statePost,
-    "price": productModel.priceInt,
-    "description": productModel.description
+      "product_image": image != null
+          ? await MultipartFile.fromFile(image!.path, filename: fileName)
+          : '',
+      "buy_or_sell": productModel!.buyOrSell,
+      "product_name": productModel.productName,
+      "product_type": productModel.productTypeId,
+      "country": productModel.countryPost,
+      "city": productModel.cityPost,
+      "state": productModel.statePost,
+      "price": productModel.priceInt,
+      "description": productModel.description
     });
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(
-        url: "products/add", authToken: token, data: formData)
+    return await Api()
+        .postHttp(url: "products/add", authToken: token, data: formData)
 //    connectivity.checkConnectivity().then((value) async {
 //      if (ConnectivityResult.none == value) {
 //        emit(NetworkFailed("Check your internet connection and try again"));
@@ -169,31 +184,30 @@ class ProductsCubit extends Cubit<AddProductStates> {
 //      } else {
 //        emit(AddProductLoading());
 //        ProductRepo.addProduct(context: context, productModel: productModel)
-            .then((value) => {
-                  print('Add Product Success'),
-                  print(value),
-                  emit(AddSuccess()),
-                  priceController.text = '',
-                  descController.text = '',
-                  nameController.text = '',
-                  img64 = '',
-                  image = null,
-                  showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
-                })
-            .catchError((error) {
-          emit(AddFailed());
-          if (error.toString().contains('Unauthorized Access') ||
-              error.toString().contains('no credit left')) {}
-          print('Add Product Failed');
-          print(error);
-          showToast(msg: error.toString(), state: ToastedStates.ERROR);
-        });
-
+        .then((value) => {
+              print('Add Product Success'),
+              print(value),
+              emit(AddSuccess()),
+              priceController.clear(),
+              descController.clear(),
+              nameController.clear(),
+              img64 = '',
+              image = null,
+              showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
+            })
+        .catchError((error) {
+      emit(AddFailed());
+      if (error.toString().contains('Unauthorized Access') ||
+          error.toString().contains('no credit left')) {}
+      print('Add Product Failed');
+      print(error);
+      showToast(msg: error.toString(), state: ToastedStates.ERROR);
+    });
   }
 
   pickFromGallery(BuildContext context) async {
     var img = await ImagePicker().pickImage(source: ImageSource.gallery);
-     image = File(
+    image = File(
       img!.path,
     );
 
@@ -251,9 +265,9 @@ class ProductsCubit extends Cubit<AddProductStates> {
                   print(value),
                   emit(EditSuccess()),
                   showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
-                  priceController.text = '',
-                  descController.text = '',
-                  nameController.text = '',
+                  priceController.clear(),
+                  descController.clear(),
+                  nameController.clear(),
                   img64 = '',
                   image = null,
                 })

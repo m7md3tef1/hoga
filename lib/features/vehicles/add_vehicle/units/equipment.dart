@@ -1,10 +1,15 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class Equipment extends StatelessWidget {
-  var value=false;
+  var value = false;
   Vehicles? vehiclesModel;
   bool? isEdit;
-  Equipment({super.key,this.vehiclesModel,this.isEdit=false});
+  bool isLoadEdit;
+  Equipment(
+      {super.key,
+      this.vehiclesModel,
+      this.isLoadEdit = false,
+      this.isEdit = false});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +17,16 @@ class Equipment extends StatelessWidget {
       children: [
         Row(
           children: [
-            CustomText(text: '  EQUIPMENT TYPES', fontSize: 14.sp,fontWeight: FontWeight.w600,)
+            CustomText(
+              text: '  EQUIPMENT TYPES',
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+            )
           ],
         ),
-        SizedBox(height: 14.h,),
+        SizedBox(
+          height: 14.h,
+        ),
         SizedBox(
           child: GridView.builder(
             shrinkWrap: true,
@@ -25,13 +36,16 @@ class Equipment extends StatelessWidget {
             itemCount: VehiclesCubit.get(context).equipmentList.length,
             itemBuilder: (BuildContext context, int index) {
               return CustomCheckBox(
-
                   index: index,
                   boxKey: MasterKeys.equipmentTypes.name,
-                  value:isEdit!?
-                  vehiclesModel!.equipmentTypes2!
-                      .contains(VehiclesCubit.get(context).equipmentList[index].title)
-                      ?true:value: value,
+                  value: (isEdit! || isLoadEdit)
+                      ? vehiclesModel!.equipmentTypes2!.contains(
+                              VehiclesCubit.get(context)
+                                  .equipmentList[index]
+                                  .title)
+                          ? true
+                          : value
+                      : value,
                   text: VehiclesCubit.get(context).equipmentList[index].title);
             },
           ),

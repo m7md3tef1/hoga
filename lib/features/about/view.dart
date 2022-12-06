@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/features/about/units/value_container.dart';
@@ -8,7 +7,7 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../home/view.dart';
 import 'units/small_container.dart';
 part 'units/body.dart';

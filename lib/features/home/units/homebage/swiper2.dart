@@ -23,7 +23,9 @@ List image=[
         height: 150.h,
         child: Swiper(
           autoplay: true,
+
           pagination: const SwiperPagination(
+
             alignment: Alignment.bottomCenter,
           ),
           itemCount: image.length,

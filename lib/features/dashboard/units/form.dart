@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class FormView extends StatelessWidget {
   FormView({Key? key}) : super(key: key);
@@ -13,6 +13,9 @@ class FormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
         builder: (context, state) {
+          print(firstnameController.text);
+          print("firstnameController");
+
           firstnameController.text =
               UpdateProfileCubit.get(context).profileData.firstName ?? '';
 
@@ -77,8 +80,7 @@ class FormView extends StatelessWidget {
                           ),
                           if (state is UpdateLoading)
                             const Padding(
-                              padding:
-                                  EdgeInsets.only(top: 17, bottom: 27),
+                              padding: EdgeInsets.only(top: 17, bottom: 27),
                               child: Center(
                                 child: CircularProgressIndicator(
                                     color: ColorManager.primaryColor),
@@ -110,23 +112,21 @@ class FormView extends StatelessWidget {
                                   }
                                 },
                                 text: 'Update Profile',
-                                color: ColorManager.secondaryColor,
+                                color: ColorManager.yellow,
                               ),
                             ),
                           Padding(
-                            padding:
-                            const EdgeInsets.only(top: 10, bottom: 27),
+                            padding: const EdgeInsets.only(top: 10, bottom: 27),
                             child: CustomButton(
                               function: () {
                                 CacheHelper.putString(SharedKeys.token, '');
+                                CacheHelper.putBool(SharedKeys.isLogin, false);
                                 MagicRouter.navigateTo(Login());
-
                               },
                               text: 'Log out',
-                              color: ColorManager.secondaryColor,
+                              color: ColorManager.yellow,
                             ),
                           )
-
                         ],
                       ),
                     ),

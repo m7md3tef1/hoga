@@ -63,8 +63,8 @@ class _BottomState extends State<Bottom> {
             height: 8.h,
           ),
           Container(
-            height: 190.h,
-            width: 1.sw,
+            height: MediaQuery.of(context).orientation == Orientation.portrait? 190.h:250,
+            width: MediaQuery.of(context).orientation == Orientation.portrait? 0.9.sw:270.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 image: const DecorationImage(
@@ -161,10 +161,13 @@ class _BottomState extends State<Bottom> {
                       ' Mention your required items',
                       'A user can also post items that he needs to purchase with description and approximate price.'),
           Container(
+            height: MediaQuery.of(context).orientation == Orientation.portrait? 190.h:250,
+            width: MediaQuery.of(context).orientation == Orientation.portrait? 0.9.sw:270.w,
             decoration:
+
                 BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
             child: const Image(
-                image: AssetImage('assets/images/Rectangle 26.png')),
+                image: AssetImage('assets/images/Rectangle 26.png',),fit: BoxFit.fill,),
           ),
           SizedBox(
             height: 50.h,
@@ -194,7 +197,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/load.png',
-            const SafeArea(child: Scaffold(body: LoadsView())),
+            const LoadsView(),
             'Loads',
             'Go through our available list of loads.',
             'Read More',
@@ -203,7 +206,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/vehicle_icon.png',
-            const SafeArea(child: Scaffold(body: VehiclesView())),
+            const VehiclesView(),
             'Vehicles',
             'Choose your desired vehicle from our system.',
             'Read More',
@@ -213,7 +216,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/product.png',
-            const SafeArea(child: Scaffold(body: SearchView())),
+            const SearchView(),
             'Products',
             'Checkout available item for sale and purchase.',
             'Read More',
@@ -222,7 +225,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/jop.png',
-            SafeArea(child: Scaffold(body: JobsView())),
+            JobsView(),
             'Jobs',
             'Upload your jobs here.',
             'Read More',
@@ -320,7 +323,7 @@ class _BottomState extends State<Bottom> {
               color: const Color(0xFF000000),
             ),
           ),
-          const listView(),
+          const TeamList(),
           SizedBox(
             height: 30.h,
           ),
