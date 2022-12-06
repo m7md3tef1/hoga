@@ -27,82 +27,90 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: SingleChildScrollView(
-      child: BlocConsumer<AuthCubit, AuthStates>(
-        listener: (BuildContext context, state) {
-          if (state is SignInSuccess) {
-            MagicRouter.navigateAndReplacement(const Home());
-          }
-        },
-        builder: (context, state) => Column(
-          children: [
-            CustomAppbar(title: 'Login', hideIcons: true),
-            const SizedBox(
-              height: 18,
-            ),
-            CustomCard(
-              widget: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Logo(),
-                    TitleText(
-                      title: 'Login',
-                    ),
-                    CustomTextFormField(
-                      hintText: 'Enter E-mail',
-                      controller: emailController,
-                      validate: Validator.validateEmail,
-                    ),
-                    CustomTextFormField(
-                      hintText: 'Enter Password',
-                      controller: passwordController,
-                      validate: Validator.validatePassword,
-                      obs: true,
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    if (state is SignInLoading)
-                      Column(
+
+        body: BlocConsumer<AuthCubit, AuthStates>(
+          listener: (BuildContext context, state) {
+            if (state is SignInSuccess) {
+              MagicRouter.navigateAndReplacement(const Home());
+            }
+          },
+          builder: (context, state) => Column(
+            children: [
+              CustomAppbar(title: 'Login', hideIcons: true),
+              const SizedBox(
+                height: 18,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: CustomCard(
+                    widget: Form(
+                      key: formKey,
+                      child: Column(
                         children: [
-                          const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.orange,
-                            ),
+                          const SizedBox(
+                            height: 15,
                           ),
-                          SizedBox(
-                            height: 14,
-                          )
+                          const Logo(),
+                          const Logo(),
+                          const Logo(),
+                          const Logo(),
+
+                          TitleText(
+                            title: 'Login',
+                          ),
+                          CustomTextFormField(
+                            hintText: 'Enter E-mail',
+                            controller: emailController,
+                            validate: Validator.validateEmail,
+                          ),
+                          CustomTextFormField(
+                            hintText: 'Enter Password',
+                            controller: passwordController,
+                            validate: Validator.validatePassword,
+                            obs: true,
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          if (state is SignInLoading)
+                            Column(
+                              children: const [
+                                Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 14,
+                                )
+                              ],
+                            )
+                          else
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: CustomButton(
+                                function: () {
+                                  if (formKey.currentState!.validate()) {
+                                    AuthCubit.get(context).signIn(LoginModel(
+                                        password: passwordController.text.trim(),
+                                        userName: emailController.text.trim()));
+                                  }
+                                },
+                                text: 'Login',
+                                color: ColorManager.yellow,
+                              ),
+                            ),
+                          NoAccount(),
+                          NotLogged()
                         ],
-                      )
-                    else
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 12.0),
-                        child: CustomButton(
-                          function: () {
-                            if (formKey.currentState!.validate()) {
-                              AuthCubit.get(context).signIn(LoginModel(
-                                  password: passwordController.text.trim(),
-                                  userName: emailController.text.trim()));
-                            }
-                          },
-                          text: 'Login',
-                          color: ColorManager.yellow,
-                        ),
                       ),
-                    NoAccount(),
-                    NotLogged()
-                  ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    ));
+
+            ],
+          ),
+        ));
   }
 }

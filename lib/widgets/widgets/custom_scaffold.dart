@@ -17,6 +17,8 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        endDrawerEnableOpenDragGesture: true,
         key: scaffoldKey,
         backgroundColor: ColorManager.backgroundColor,
         bottomNavigationBar: navBar,
