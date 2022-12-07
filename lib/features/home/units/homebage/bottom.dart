@@ -8,6 +8,7 @@ import 'package:hoga_load/features/home/units/homebage/swiper2.dart';
 import 'package:hoga_load/features/home/units/homebage/tab_view.dart';
 import 'package:hoga_load/features/home/units/homebage/vehicle_container.dart';
 import 'package:hoga_load/features/vehicles/get_vehicles/view.dart';
+import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
 import '../../../blogs/view.dart';
@@ -225,7 +226,7 @@ class _BottomState extends State<Bottom> {
           ),
           VehicleContainer(
             'assets/images/jop.png',
-            JobsView(),
+            CustomScaffold(body: JobsView()),
             'Jobs',
             'Upload your jobs here.',
             'Read More',

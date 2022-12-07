@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/features/auth/units/cant_login.dart';
@@ -30,105 +31,104 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: SingleChildScrollView(
-
-      child: BlocConsumer<AuthCubit, AuthStates>(
-        listener: (BuildContext context, state) {
-          if (state is SignInSuccess) {
-            MagicRouter.navigateAndReplacement(const Home());
-          }
-        },
-        builder: (context, state) => 
-            SingleChildScrollView(
-              child: 
+        body: BlocConsumer<AuthCubit, AuthStates>(
+          listener: (BuildContext context, state) {
+            if (state is SignInSuccess) {
+              MagicRouter.navigateAndReplacement(const Home());
+            }
+          },
+          builder: (context, state) =>
               SafeArea(
                 child: Column(
-          children: [
+            children: [
                 CustomAppbar(title: 'Login', hideIcons: true),
                 const SizedBox(
                   height: 18,
                 ),
-                SingleChildScrollView(
-                  child:
-                  SafeArea(
-                    child: CustomCard(
-                      widget: Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const Logo(),
-                            TitleText(
-                              title: 'Login',
-                            ),
-                            CustomTextFormField(
-                              hintText: 'Enter E-mail',
-                              controller: emailController,
-                              validate: Validator.validateEmail,
-                            ),
-                            CustomTextFormField(
-                              hintText: 'Enter Password',
-                              controller: passwordController,
-                              validate: Validator.validatePassword,
-                              obs: true,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Privacy(VehiclesCubit.get(context).value),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            if (state is SignInLoading)
-                              Column(
-                                children: const [
-                                  Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.orange,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 14,
-                                  )
-                                ],
-                              )
-                            else
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 12.0),
-                                child: CustomButton(
-                                  function: () {
-                                    if (!formKey.currentState!.validate()||VehiclesCubit.get(context).value==false) {
-                                      showToast(
-                                          msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
-                                    }
-                                   else if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==true) {
-
-                                      AuthCubit.get(context).signIn(LoginModel(
-                                          password: passwordController.text.trim(),
-                                          userName: emailController.text.trim()));
-                                    }
-                                  },
-                                  text: 'Login',
-                                  color: ColorManager.yellow,
-                                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding:  EdgeInsets.only(bottom:0.4.sh),
+                    child:
+                    SafeArea(
+                      child: CustomCard(
+                        widget: Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 15,
                               ),
-                            NoAccount(),
-                            NotLogged()
-                          ],
-                        ),
+                              const Logo(),
+                              TitleText(
+                                title: 'Login',
+                              ),
+                              CustomTextFormField(
+                                padding: 40.0,
+                                hintText: 'Enter E-mail',
+                                controller: emailController,
+                                validate: Validator.validateEmail,
+                              ),
+                              CustomTextFormField(
+                                padding: 40.0,
+                                hintText: 'Enter Password',
+                                controller: passwordController,
+                                validate: Validator.validatePassword,
+                                obs: true,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Privacy(VehiclesCubit.get(context).value),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              if (state is SignInLoading)
+                                Column(
+                                  children: const [
+                                    Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 14,
+                                    )
+                                  ],
+                                )
+                              else
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 12.0),
+                                  child: CustomButton(
+                                    function: () {
+                                      if (!formKey.currentState!.validate()||VehiclesCubit.get(context).value==false) {
+                                        showToast(
+                                            msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
+                                      }
+                                     else if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==true) {
 
+                                        AuthCubit.get(context).signIn(LoginModel(
+                                            password: passwordController.text.trim(),
+                                            userName: emailController.text.trim()));
+                                      }
+                                    },
+                                    text: 'Login',
+                                    color: ColorManager.yellow,
+                                  ),
+                                ),
+                              NoAccount(),
+                              NotLogged()
+                            ],
+                          ),
+
+                        ),
                       ),
                     ),
                   ),
                 ),
-          ],
-        ),
+            ],
+          ),
               ),
-            ),
-      ),
-    ));
+        ));
 
   }
 }

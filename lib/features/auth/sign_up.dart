@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/features/auth/login.dart';
@@ -9,10 +10,13 @@ import 'package:hoga_load/features/auth/units/profile_image.dart';
 import 'package:hoga_load/features/home/view.dart';
 
 import '../../core/data/models/vehicle/user.dart';
+import '../../core/dialoges/toast.dart';
 import '../../core/validator/validator.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_appbar.dart';
 import '../../widgets/widgets/custom_button.dart';
+import '../../widgets/widgets/custom_privacy.dart';
+import '../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import 'domain/auth_cubit.dart';
 import 'domain/auth_states.dart';
 
@@ -45,8 +49,8 @@ class SignUp extends StatelessWidget {
       }
       return Column(
         children: [
-          const SizedBox(
-            height: 18,
+           SizedBox(
+            height: 30.h,
           ),
           CustomAppbar(
             title: 'Sign Up',
@@ -57,6 +61,8 @@ class SignUp extends StatelessWidget {
           ),
           Expanded(
             child: SingleChildScrollView(
+              padding:  EdgeInsets.only(bottom:0.4.sh),
+
               child: CustomCard(
                 widget: Form(
                   key: formKey,
@@ -103,8 +109,13 @@ class SignUp extends StatelessWidget {
                           hintText: 'Enter Password',
                           controller: passwordController,
                           validate: Validator.validatePassword),
+
                       const SizedBox(
-                        height: 25,
+                        height: 15,
+                      ),
+                      Privacy(VehiclesCubit.get(context).value),
+                      const SizedBox(
+                        height: 5,
                       ),
                       if (state is SignUpLoading)
                         const Center(
@@ -115,7 +126,11 @@ class SignUp extends StatelessWidget {
                       else
                         CustomButton(
                           function: () {
-                            if (formKey.currentState!.validate()) {
+                            if (VehiclesCubit.get(context).value==false) {
+                              showToast(
+                                  msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
+                            }
+                            if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==false) {
                               AuthCubit.get(context).signUp(User(
                                   firstName: firstNameController!.text.trim(),
                                   lastName: lastNameController!.text.trim(),

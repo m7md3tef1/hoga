@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/data/local/cacheHelper.dart';
 import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/core/router/router.dart';
+import 'package:hoga_load/features/add_update_card/cubit/addCard_cubit.dart';
 import 'package:hoga_load/features/auth/domain/auth_cubit.dart';
 import 'package:hoga_load/features/home/controller.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_cubit.dart';
@@ -73,6 +74,8 @@ class MyApp extends StatelessWidget {
               // ..getJop()
               ..addJopCubit),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
+        BlocProvider(create: (_) => AddCardCubit()),
+
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()

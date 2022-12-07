@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   var validate;
   var function;
   bool? obs;
+  double? padding;
 
   CustomTextFormField({
     super.key,
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validate,
     this.function,
     this.keyBoardType,
+  this.padding
   });
 
   @override
@@ -29,6 +31,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: TextFormField(
+        scrollPadding: EdgeInsets.only(bottom:padding??0),
         validator: validate,
         controller: controller,
         keyboardType: keyBoardType,

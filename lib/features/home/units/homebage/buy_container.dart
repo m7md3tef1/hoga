@@ -64,7 +64,7 @@ String? price;
               ),
             ),
           ]),
-           Image(image: AssetImage(image!)),
+           Image(image: NetworkImage(image!),height: 200.sp,width: 200.sp,),
           CustomText(
             text: "$loadsNo Load Postings",
             fontSize: 18.sp,

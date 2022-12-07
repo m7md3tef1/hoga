@@ -17,6 +17,7 @@ import '../../core/data/models/card_model.dart';
 import '../../core/keys/keys.dart';
 import '../../core/master_cubit/getDataForm_cubit.dart';
 import '../../core/master_cubit/getDataForm_state.dart';
+import '../../core/validator/validator.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
 import '../auth/units/cant_login.dart';
@@ -48,7 +49,7 @@ class AddUpdateCardView extends StatelessWidget {
                         physics: BouncingScrollPhysics(),
                         child: Padding(
                           padding: EdgeInsets.only(top: 22.0),
-                          child: Form(),
+                          child: FormCard(),
                         ))),
           ],
         ),

@@ -52,8 +52,11 @@ class _PlanBodyState extends State<PlanBody> {
               BlocConsumer<PlansCubit, PlansStates>(
                listener: (context, state) {},
               builder: (context, state) {
-                  return ListView.builder(
-                    itemCount: PlansCubit.get(context).plansList.length>3?3:PlansCubit.get(context).plansList.length,
+
+                 return
+                   MediaQuery.of(context).orientation==Orientation.portrait?
+                   ListView.builder(
+                    itemCount: PlansCubit.get(context).plansList.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context,index){
@@ -64,11 +67,24 @@ class _PlanBodyState extends State<PlanBody> {
                 jobsNo: PlansCubit.get(context).plansList[index].totalNumberOfJobs,
                 productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
                 price: PlansCubit.get(context).plansList[index].price,
-                  image:'assets/images/30day.png');
+                  image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}');
 
 
-    });
-                }
+    }):GridView.builder(
+                     itemCount: PlansCubit.get(context).plansList.length,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.8),
+                itemBuilder: (context,index)=>                    BuyContainer(text:PlansCubit.get(context).plansList[index].title,
+                loadsNo:PlansCubit.get(context).plansList[index].totalNumberOfLoads,
+                vehiclesNo: PlansCubit.get(context).plansList[index].totalNumberOfVehicles,
+                jobsNo: PlansCubit.get(context).plansList[index].totalNumberOfJobs,
+                productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
+                price: PlansCubit.get(context).plansList[index].price,
+                image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}'));
+
+              }
               ),
 
 ]

@@ -23,7 +23,8 @@ class body extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 249,
+          height:MediaQuery.of(context).orientation==Orientation.portrait?
+           249:300,
           width: 1.sw,
           decoration: const BoxDecoration(
             color: ColorManager.primaryColor,
@@ -33,7 +34,10 @@ class body extends StatelessWidget {
           ),
           child: Padding(
 
-            padding: EdgeInsets.only(top: 15.h, bottom: 30.h,right: 30.w,left: 30.w),
+            padding: EdgeInsets.only(top: 15.h, bottom: 30.h,right:
+            MediaQuery.of(context).orientation==Orientation.portrait?
+            30.w:100.w ,left: MediaQuery.of(context).orientation==Orientation.portrait?
+            30.w:100.w),
             child: Center(
                 child: Swiper(
               autoplay: true,
@@ -57,7 +61,7 @@ class body extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 23.r, right: 23.r, bottom: 8.h, top: 8.h),
+                              left: 23.w, right: 23.w, bottom: 8.h, top: 8.h),
                           child: CustomText(
                             align: TextAlign.start,
                             text: text[index],
