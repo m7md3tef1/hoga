@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart'as v;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
@@ -36,138 +36,134 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: BlocConsumer<AuthCubit, AuthStates>(
-            listener: (BuildContext context, state) {
-      if (state is SignUpSuccess) {
-        MagicRouter.navigateAndReplacement(Login());
-        image = null;
-        AuthCubit.get(context).image = null;
-      }
-    }, builder: (BuildContext context, state) {
-      if (state is ImageCamera || state is ImageGallery) {
-        image = AuthCubit.get(context).image;
-      }
-      return Column(
-        children: [
-           SizedBox(
-            height: 30.h,
-          ),
-          CustomAppbar(
-            title: 'Sign Up',
-            hideIcons: true,
-          ),
-          const SizedBox(
-            height: 18,
-          ),
+    return v.KeyboardVisibilityBuilder(
+            builder: (context, visible) => Padding(
+              padding:  EdgeInsets.only(bottom: visible? .31.sh:0),
+              child: Scaffold(
+          body: BlocConsumer<AuthCubit, AuthStates>(
+                listener: (BuildContext context, state) {
+        if (state is SignUpSuccess) {
+          MagicRouter.navigateAndReplacement(Login());
+          image = null;
+          AuthCubit.get(context).image = null;
+        }
+      }, builder: (BuildContext context, state) {
+        if (state is ImageCamera || state is ImageGallery) {
+          image = AuthCubit.get(context).image;
+        }
+        return Column(
+          children: [
+               SizedBox(
+                height: 30.h,
+              ),
+              CustomAppbar(
+                title: 'Sign Up',
+                hideIcons: true,
+              ),
+              const SizedBox(
+                height: 18,
+              ),
 
-          Expanded(
-            child: KeyboardVisibilityBuilder(
-          builder: (context, visible) => SafeArea(
-            bottom: false,
-            top: false,
-            child: SingleChildScrollView(
-reverse: true,
-                  child: Padding(
-                    padding:  EdgeInsets.only(bottom:MediaQuery.of(context).viewInsets.bottom),
-                    child: CustomCard(
-                      widget: Form(
-                        key: formKey,
-                        child: Column(
+              Expanded(
+                child:  SingleChildScrollView(
+                  child: CustomCard(
+                  widget: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        ProfileImage(image),
+                        Row(
                           children: [
+                            Expanded(
+                                child: CustomTextFormField(
+                              hintText: 'First Name',
+                              controller: firstNameController,
+                              validate: Validator.validateName,
+                            )),
                             const SizedBox(
-                              height: 15,
+                              width: 25,
                             ),
-                            ProfileImage(image),
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: CustomTextFormField(
-                                  hintText: 'First Name',
-                                  controller: firstNameController,
-                                  validate: Validator.validateName,
-                                )),
-                                const SizedBox(
-                                  width: 25,
-                                ),
-                                Expanded(
-                                    child: CustomTextFormField(
-                                  hintText: 'Last Name',
-                                  controller: lastNameController,
-                                  validate: Validator.validateName,
-                                )),
-                              ],
-                            ),
-                            CustomTextFormField(
-                              hintText: 'Enter E-mail',
-                              controller: emailController,
-                              validate: Validator.validateEmail,
-                            ),
-                            CustomTextFormField(
-                              hintText: 'Enter Phone Number',
-                              controller: phoneController,
-                              validate: Validator.validateEmpty,
-                            ),
-                            CustomTextFormField(
-                                hintText: 'Enter Address',
-                                controller: addressController,
-                                validate: Validator.validateEmpty),
-                            CustomTextFormField(
-                                hintText: 'Enter Password',
-                                controller: passwordController,
-                                validate: Validator.validatePassword),
-
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Privacy(VehiclesCubit.get(context).value),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            if (state is SignUpLoading)
-                              const Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.orange,
-                                ),
-                              )
-                            else
-                              CustomButton(
-                                function: () {
-                                  if (VehiclesCubit.get(context).value==false) {
-                                    showToast(
-                                        msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
-                                  }
-                                  if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==false) {
-                                    AuthCubit.get(context).signUp(User(
-                                        firstName: firstNameController!.text.trim(),
-                                        lastName: lastNameController!.text.trim(),
-                                        email: emailController!.text.trim(),
-                                        contactNumber: phoneController!.text.trim(),
-                                        password: passwordController!.text.trim(),
-                                        address: addressController!.text.trim()));
-                                  }
-                                },
-                                text: 'Sign Up',
-                                color: ColorManager.yellow,
-                              ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            HaveAccount()
+                            Expanded(
+                                child: CustomTextFormField(
+                              hintText: 'Last Name',
+                              controller: lastNameController,
+                              validate: Validator.validateName,
+                            )),
                           ],
                         ),
-                      ),
+                        CustomTextFormField(
+                          hintText: 'Enter E-mail',
+                          controller: emailController,
+                          validate: Validator.validateEmail,
+                        ),
+                        CustomTextFormField(
+                          hintText: 'Enter Phone Number',
+                          controller: phoneController,
+                          validate: Validator.validateEmpty,
+                        ),
+                        CustomTextFormField(
+                            hintText: 'Enter Address',
+                            controller: addressController,
+                            validate: Validator.validateEmpty),
+                        CustomTextFormField(
+                            hintText: 'Enter Password',
+                            controller: passwordController,
+                            validate: Validator.validatePassword),
+
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Privacy(VehiclesCubit.get(context).value),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        if (state is SignUpLoading)
+                          const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.orange,
+                            ),
+                          )
+                        else
+                          CustomButton(
+                            function: () {
+                              if (VehiclesCubit.get(context).value==false) {
+                                showToast(
+                                    msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
+                              }
+                              if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==false) {
+                                AuthCubit.get(context).signUp(User(
+                                    firstName: firstNameController!.text.trim(),
+                                    lastName: lastNameController!.text.trim(),
+                                    email: emailController!.text.trim(),
+                                    contactNumber: phoneController!.text.trim(),
+                                    password: passwordController!.text.trim(),
+                                    address: addressController!.text.trim()));
+                              }
+                            },
+                            text: 'Sign Up',
+                            color: ColorManager.yellow,
+                          ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        HaveAccount()
+                      ],
                     ),
                   ),
+              ),
                 ),
-          ),
+                ),
+
+              const SizedBox(
+                height: 20,
+              ),
+          ],
+        );
+      })),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
-      );
-    }));
+    );
   }
 }

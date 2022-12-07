@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart'as v;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
@@ -31,30 +31,26 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: BlocConsumer<AuthCubit, AuthStates>(
-        listener: (BuildContext context, state) {
-          if (state is SignInSuccess) {
-            MagicRouter.navigateAndReplacement(const Home());
-          }
-        },
-        builder: (context, state) => Column(
-          children: [
-            CustomAppbar(title: 'Login', hideIcons: true),
-            const SizedBox(
-              height: 18,
-            ),
-            Expanded(
-              child: KeyboardVisibilityBuilder(
-                builder: (context, visible) => SafeArea(
-                  bottom: false,
-                  top: false,
-                  child: SingleChildScrollView(
-                    reverse: true,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: CustomCard(
+    return v.KeyboardVisibilityBuilder(
+      builder: (context, visible) =>
+       Padding(
+         padding:  EdgeInsets.only(bottom: visible? .31.sh:0),
+         child: Scaffold(
+          body: BlocConsumer<AuthCubit, AuthStates>(
+            listener: (BuildContext context, state) {
+              if (state is SignInSuccess) {
+                MagicRouter.navigateAndReplacement(const Home());
+              }
+            },
+            builder: (context, state) => Column(
+              children: [
+                CustomAppbar(title: 'Login', hideIcons: true),
+                const SizedBox(
+                  height: 18,
+                ),
+                Expanded(
+                  child:  SingleChildScrollView(
+                    child: CustomCard(
                         widget: Form(
                           key: formKey,
                           child: Column(
@@ -111,6 +107,7 @@ class Login extends StatelessWidget {
                                             msg:
                                                 'You need to agree with the terms and conditions and policies.',
                                             state: ToastedStates.ERROR);
+                                        print('this bottom     '+MediaQuery.of(context).viewInsets.bottom.toString());
                                       } else if (formKey.currentState!
                                               .validate() &&
                                           VehiclesCubit.get(context).value ==
@@ -122,6 +119,7 @@ class Login extends StatelessWidget {
                                                     .trim(),
                                                 userName: emailController.text
                                                     .trim()));
+                                        print('this bottom     '+MediaQuery.of(context).viewInsets.bottom.toString());
                                       }
                                     },
                                     text: 'Login',
@@ -134,14 +132,14 @@ class Login extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
                   ),
-                ),
-              ),
+                  ),
+
+              ],
             ),
-          ],
-        ),
+          ),
       ),
+       ),
     );
   }
 }
