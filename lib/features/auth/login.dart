@@ -31,6 +31,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+
         body: BlocConsumer<AuthCubit, AuthStates>(
           listener: (BuildContext context, state) {
             if (state is SignInSuccess) {
