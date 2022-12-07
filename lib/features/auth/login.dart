@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
@@ -31,26 +32,28 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-
-        body: BlocConsumer<AuthCubit, AuthStates>(
-          listener: (BuildContext context, state) {
-            if (state is SignInSuccess) {
-              MagicRouter.navigateAndReplacement(const Home());
-            }
-          },
-          builder: (context, state) =>
-              SafeArea(
-                child: Column(
-            children: [
-                CustomAppbar(title: 'Login', hideIcons: true),
-                const SizedBox(
-                  height: 18,
-                ),
-                Expanded(
+      body: BlocConsumer<AuthCubit, AuthStates>(
+        listener: (BuildContext context, state) {
+          if (state is SignInSuccess) {
+            MagicRouter.navigateAndReplacement(const Home());
+          }
+        },
+        builder: (context, state) => Column(
+          children: [
+            CustomAppbar(title: 'Login', hideIcons: true),
+            const SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: KeyboardVisibilityBuilder(
+                builder: (context, visible) => SafeArea(
+                  bottom: false,
+                  top: false,
                   child: SingleChildScrollView(
-                    padding:  EdgeInsets.only(bottom:0.4.sh),
-                    child:
-                    SafeArea(
+                    reverse: true,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: CustomCard(
                         widget: Form(
                           key: formKey,
@@ -101,15 +104,24 @@ class Login extends StatelessWidget {
                                   padding: const EdgeInsets.only(bottom: 12.0),
                                   child: CustomButton(
                                     function: () {
-                                      if (!formKey.currentState!.validate()||VehiclesCubit.get(context).value==false) {
+                                      if (!formKey.currentState!.validate() ||
+                                          VehiclesCubit.get(context).value ==
+                                              false) {
                                         showToast(
-                                            msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
-                                      }
-                                     else if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==true) {
-
-                                        AuthCubit.get(context).signIn(LoginModel(
-                                            password: passwordController.text.trim(),
-                                            userName: emailController.text.trim()));
+                                            msg:
+                                                'You need to agree with the terms and conditions and policies.',
+                                            state: ToastedStates.ERROR);
+                                      } else if (formKey.currentState!
+                                              .validate() &&
+                                          VehiclesCubit.get(context).value ==
+                                              true) {
+                                        AuthCubit.get(context).signIn(
+                                            LoginModel(
+                                                password: passwordController
+                                                    .text
+                                                    .trim(),
+                                                userName: emailController.text
+                                                    .trim()));
                                       }
                                     },
                                     text: 'Login',
@@ -120,16 +132,16 @@ class Login extends StatelessWidget {
                               NotLogged()
                             ],
                           ),
-
                         ),
                       ),
                     ),
                   ),
                 ),
-            ],
-          ),
               ),
-        ));
-
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

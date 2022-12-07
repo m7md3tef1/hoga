@@ -14,6 +14,7 @@ import '../../../core/data/models/jobs/get_jop.dart';
 import '../../../core/master_cubit/getDataForm_cubit.dart';
 import '../../../core/master_cubit/getDataForm_state.dart';
 import '../../../core/widgets/custom_card.dart';
+import '../../home/view.dart';
 import '../cubit/getJop_cubit.dart';
 
 part 'units/add_jop_form.dart';
@@ -29,11 +30,14 @@ class AddJopView extends StatelessWidget {
   GetJop? jopModel;
   bool isEdit;
   bool isFilter;
-
+  GlobalKey<ScaffoldState> uploadedProductsScaffoldKey =
+  GlobalKey<ScaffoldState>();
   int? index;
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return Scaffold(
+      drawer: OnDrawer(),
+      key: uploadedProductsScaffoldKey,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +47,7 @@ class AddJopView extends StatelessWidget {
                     ? 'Edit Job'
                     : isFilter
                         ? 'Search Job'
-                        : 'Add Job'),
+                        : 'Add Job',scaffoldKey: uploadedProductsScaffoldKey,),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),

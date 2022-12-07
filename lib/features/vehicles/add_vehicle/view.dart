@@ -17,6 +17,7 @@ import '../../../core/keys/keys.dart';
 import '../../../core/master_cubit/getDataForm_cubit.dart';
 import '../../../core/master_cubit/getDataForm_state.dart';
 import '../../../core/widgets/custom_card.dart';
+import '../../home/view.dart';
 import '../get_vehicles/cubit/vehicle_cubit.dart';
 import '../get_vehicles/cubit/vehicle_states.dart';
 
@@ -43,10 +44,13 @@ class AddVehiclesView extends StatelessWidget {
   bool isLoad;
   bool isLoadFilter;
   bool isLoadEdit;
-
+  GlobalKey<ScaffoldState> uploadedProductsScaffoldKey =
+  GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return Scaffold(
+      drawer: const OnDrawer(),
+      key: uploadedProductsScaffoldKey,
       body: SafeArea(
         child: BlocConsumer<VehiclesCubit, VehicleStates>(
           listener: (BuildContext context, state) {
@@ -67,7 +71,7 @@ class AddVehiclesView extends StatelessWidget {
                                 ? "Add a New Load"
                                 : isEdit
                                     ? "Edit Vehicle"
-                                    : 'Add a New Vehicle'),
+                                    : 'Add a New Vehicle',scaffoldKey: uploadedProductsScaffoldKey,),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -126,7 +130,7 @@ class AddVehiclesView extends StatelessWidget {
                                   child: Container(
                                       height: 30,
                                       width: 30,
-                                      child: CircularProgressIndicator()))
+                                      child: const CircularProgressIndicator()))
                               : InkWell(
                                   onTap: () async {
                                     if (isLoadFilter) {
@@ -203,7 +207,7 @@ class AddVehiclesView extends StatelessWidget {
                                                       ? "Edit Vehicle"
                                                       : 'Add new vehicle',
                                       color: ColorManager.yellow)),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           )
                         ],

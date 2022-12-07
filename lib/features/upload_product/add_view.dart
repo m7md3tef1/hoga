@@ -14,6 +14,7 @@ import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 import '../../core/master_cubit/getDataForm_state.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../core/master_cubit/getDataForm_cubit.dart';
+import '../home/view.dart';
 
 part 'units/add_product_form.dart';
 
@@ -22,25 +23,26 @@ part 'units/add_product_form.dart';
   GetProductModel? productModel;
   bool isEdit;
     bool isFilter;
-
+    GlobalKey<ScaffoldState> uploadedProductsScaffoldKey =
+    GlobalKey<ScaffoldState>();
     int? index;
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppbar(title: isEdit?'Edit Products':isFilter?'Search Product':'Add Product'),
-            Expanded(child: SingleChildScrollView(
-                physics:BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 22.0),
-                  child: Form(productModel: productModel,isEdit: isEdit,index: index,isFilter: isFilter,),
-                ))),
+    return Scaffold(
+      drawer: OnDrawer(),
+      key: uploadedProductsScaffoldKey,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomAppbar(title: isEdit?'Edit Products':isFilter?'Search Product':'Add Product',scaffoldKey: uploadedProductsScaffoldKey,),
+          Expanded(child: SingleChildScrollView(
+              physics:BouncingScrollPhysics(),
+              child: Padding(
+                padding: EdgeInsets.only(top: 22.0),
+                child: Form(productModel: productModel,isEdit: isEdit,index: index,isFilter: isFilter,),
+              ))),
 
-          ],
-        ),
+        ],
       ),
     );
   }

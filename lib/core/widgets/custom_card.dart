@@ -18,14 +18,14 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          right: 15, left: 15, top: 22, bottom: bottomPadding ?? 25),
+          right: 15, left: 15, top: 22, bottom: bottomPadding ?? 25.sp),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
           padding: EdgeInsetsDirectional.only(
               start: paddingInStart ?? 12.sp,
               end: paddingInEnd ?? 14.sp,
-              bottom: bottomPadding ?? 0),
+              bottom: bottomPadding ??15.sp),
           child: widget,
         ),
       ),
