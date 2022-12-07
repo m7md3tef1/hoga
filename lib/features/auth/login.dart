@@ -38,92 +38,91 @@ class Login extends StatelessWidget {
             MagicRouter.navigateAndReplacement(const Home());
           }
         },
-        builder: (context, state) => 
+        builder: (context, state) =>
             SingleChildScrollView(
-              child: 
+              child:
               SafeArea(
-                child: Column(
-          children: [
-                CustomAppbar(title: 'Login', hideIcons: true),
-                const SizedBox(
-                  height: 18,
-                ),
-                SingleChildScrollView(
-                  child:
-                  SafeArea(
-                    child: CustomCard(
-                      widget: Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const Logo(),
-                            TitleText(
-                              title: 'Login',
-                            ),
-                            CustomTextFormField(
-                              hintText: 'Enter E-mail',
-                              controller: emailController,
-                              validate: Validator.validateEmail,
-                            ),
-                            CustomTextFormField(
-                              hintText: 'Enter Password',
-                              controller: passwordController,
-                              validate: Validator.validatePassword,
-                              obs: true,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Privacy(VehiclesCubit.get(context).value),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            if (state is SignInLoading)
-                              Column(
-                                children: const [
-                                  Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.orange,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 14,
-                                  )
-                                ],
-                              )
-                            else
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 12.0),
-                                child: CustomButton(
-                                  function: () {
-                                    if (!formKey.currentState!.validate()||VehiclesCubit.get(context).value==false) {
-                                      showToast(
-                                          msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
-                                    }
-                                   else if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==true) {
 
-                                      AuthCubit.get(context).signIn(LoginModel(
-                                          password: passwordController.text.trim(),
-                                          userName: emailController.text.trim()));
-                                    }
-                                  },
-                                  text: 'Login',
-                                  color: ColorManager.yellow,
+                child: Padding(
+                  padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: Column(
+          children: [
+                  CustomAppbar(title: 'Login', hideIcons: true),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  CustomCard(
+                    widget: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const Logo(),
+                          TitleText(
+                            title: 'Login',
+                          ),
+                          CustomTextFormField(
+                            hintText: 'Enter E-mail',
+                            controller: emailController,
+                            validate: Validator.validateEmail,
+                          ),
+                          CustomTextFormField(
+                            hintText: 'Enter Password',
+                            controller: passwordController,
+                            validate: Validator.validatePassword,
+                            obs: true,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Privacy(VehiclesCubit.get(context).value),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          if (state is SignInLoading)
+                            Column(
+                              children: const [
+                                Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.orange,
+                                  ),
                                 ),
+                                SizedBox(
+                                  height: 14,
+                                )
+                              ],
+                            )
+                          else
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: CustomButton(
+                                function: () {
+                                  if (!formKey.currentState!.validate()||VehiclesCubit.get(context).value==false) {
+                                    showToast(
+                                        msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
+                                  }
+                                 else if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==true) {
+
+                                    AuthCubit.get(context).signIn(LoginModel(
+                                        password: passwordController.text.trim(),
+                                        userName: emailController.text.trim()));
+                                  }
+                                },
+                                text: 'Login',
+                                color: ColorManager.yellow,
                               ),
-                            NoAccount(),
-                            NotLogged()
-                          ],
-                        ),
+                            ),
+                          NoAccount(),
+                          NotLogged()
+                        ],
                       ),
                     ),
                   ),
-                ),
           ],
         ),
+                ),
               ),
             ),
       ),

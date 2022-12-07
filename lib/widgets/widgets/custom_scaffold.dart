@@ -15,14 +15,12 @@ class CustomScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: ColorManager.backgroundColor,
-        bottomNavigationBar: navBar,
-        body: body,
-        drawer: drawer,
-      ),
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: ColorManager.backgroundColor,
+      bottomNavigationBar: navBar,
+      body: body,
+      drawer: drawer,
     );
   }
 }
