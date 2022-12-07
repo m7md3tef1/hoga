@@ -20,8 +20,8 @@ class WaveShape extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper oldClipper) => true;
 }
-class listView extends StatelessWidget {
-  const listView({Key? key}) : super(key: key);
+class TeamList extends StatelessWidget {
+  const TeamList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class listView extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.r ),
         ),
-        child: ListView.builder(
+        child:      MediaQuery.of(context).orientation == Orientation.portrait? ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
             itemCount: list.length,
@@ -78,7 +78,60 @@ class listView extends StatelessWidget {
                       height:14.h ,
                     ),
                   ],
-                )),
+                )):Container(
+         // height: 800,
+                  child: GridView.builder(
+          itemCount:list.length ,
+            shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.9),
+            itemBuilder: (context,index)=> Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+          children: [
+              ClipPath(
+                clipper: WaveShape(),
+                child: SizedBox(
+                    width: 1.sw,
+                    height: 315.h,
+                    child:Image(image: AssetImage(list[index].img)) ,
+                ),),
+
+
+              CustomText(
+                align: TextAlign.center,
+                text: list[index].name,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700,
+              ),
+              SizedBox(
+                height:6.h ,
+              ),
+              CustomText(
+                align: TextAlign.center,
+                text: list[index].jop,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFFAEAEAE),
+              ),
+              SizedBox(
+                height:14.h ,
+              ),
+              CustomText(
+                align: TextAlign.center,
+                text: list[index].desc,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF858585),
+              ),
+              SizedBox(
+                height:14.h ,
+              ),
+          ],
+        ),
+            )),
+                )
       ),
     );
   }

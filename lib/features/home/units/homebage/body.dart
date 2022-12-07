@@ -23,7 +23,7 @@ class body extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 249.h,
+          height: 249,
           width: 1.sw,
           decoration: const BoxDecoration(
             color: ColorManager.primaryColor,
@@ -32,7 +32,8 @@ class body extends StatelessWidget {
                 fit: BoxFit.fill),
           ),
           child: Padding(
-            padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+
+            padding: EdgeInsets.only(top: 15.h, bottom: 30.h,right: 30.w,left: 30.w),
             child: Center(
                 child: Swiper(
               autoplay: true,
@@ -40,6 +41,7 @@ class body extends StatelessWidget {
               pagination: const SwiperPagination(
                 builder: SwiperPagination.rect,
                 alignment: Alignment.bottomCenter,
+
               ),
               itemCount: text.length,
               itemBuilder: (context, index) => Container(
@@ -65,7 +67,7 @@ class body extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 23.r, right: 23.r),
+                          padding: EdgeInsets.only(left: 23.r, right: 23.r,bottom: 30.sp),
                           child: Container(
                             decoration: BoxDecoration(
                                 border:

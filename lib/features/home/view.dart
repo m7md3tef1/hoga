@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldStateKey,
-      bottomNavigationBar: const _BottomBar(),
+      bottomNavigationBar:  _BottomBar(),
       drawer: const OnDrawer(),
       body: BlocConsumer<HomeCubit, HomeStates>(
         listener: (_, s) {},

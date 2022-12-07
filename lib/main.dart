@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()
-              ..updateProfile
+              //..updateProfile
               ..getUserProfileData()
               ..getVehicleTypesCubit()
               ..getSubscriptionData()

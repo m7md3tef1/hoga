@@ -26,7 +26,7 @@ class CustomContainerBlog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 166.h,
+            height: MediaQuery.of(context).orientation == Orientation.portrait?166.h:266,
             width: 1.sw,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -118,7 +118,19 @@ class CustomContainerBlog extends StatelessWidget {
                         const SizedBox(
                           width: 5,
                         ),
-                        Align(
+
+                        MediaQuery.of(context).orientation == Orientation.portrait? Expanded(
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: CustomText(
+                              align: TextAlign.start,
+                              text: '${blogs.enableComment} Comment(s)',
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ): Align(
                           alignment: Alignment.topLeft,
                           child: CustomText(
                             align: TextAlign.start,

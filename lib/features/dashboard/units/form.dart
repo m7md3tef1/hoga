@@ -13,6 +13,9 @@ class FormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
         builder: (context, state) {
+          print(firstnameController.text);
+          print("firstnameController");
+
           firstnameController.text =
               UpdateProfileCubit.get(context).profileData.firstName ?? '';
 
@@ -109,7 +112,7 @@ class FormView extends StatelessWidget {
                                   }
                                 },
                                 text: 'Update Profile',
-                                color: ColorManager.secondaryColor,
+                                color: ColorManager.yellow,
                               ),
                             ),
                           Padding(
@@ -121,7 +124,7 @@ class FormView extends StatelessWidget {
                                 MagicRouter.navigateTo(Login());
                               },
                               text: 'Log out',
-                              color: ColorManager.secondaryColor,
+                              color: ColorManager.yellow,
                             ),
                           )
                         ],

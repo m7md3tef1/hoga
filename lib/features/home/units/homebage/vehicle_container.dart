@@ -34,65 +34,68 @@ var function;
               ),
             ],
             color: ColorManager.whiteColor),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20.h,
-            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20.h,
+              ),
 
-            Container(
-              decoration: BoxDecoration(
-                color: isColor?const Color(0xFFff8c09).withOpacity(0.3):Colors.transparent,
-                borderRadius: BorderRadius.circular(10)
+              Container(
+                decoration: BoxDecoration(
+                  color: isColor?const Color(0xFFff8c09).withOpacity(0.3):Colors.transparent,
+                  borderRadius: BorderRadius.circular(10)
 
+                ),
+                child: Image(
+                    height: 80,
+                    width: 80,
+                    image:  AssetImage(image)),
               ),
-              child: Image(
-                  height: 80.h,
-                  width: 80.w,
-                  image:  AssetImage(image)),
-            ),
-            Expanded(
-              child: CustomText(
-                text: text,
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFF000000),
+              Expanded(
+                child: CustomText(
+                  text: text,
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w700,
+                  color: const Color(0xFF000000),
+                ),
               ),
-            ),
-            Expanded(
-              child: CustomText(
-                text: hint,
-                fontSize: 16.sp,
-                align: TextAlign.center,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF000000),
+              Expanded(
+                child: CustomText(
+                  text: hint,
+                  fontSize: 16.sp,
+                  align: TextAlign.center,
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFF000000),
+                ),
               ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap:()async{
-                      await function;
-                      MagicRouter.navigateTo(pageRoute);
-                    },
-                    child: CustomText(
-                      text:  more,
-                      color: color,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap:()async{
+                        await function;
+                        MagicRouter.navigateTo(pageRoute);
+                      },
+                      child: CustomText(
+                        text:  more,
+                        color: color,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                   Icon(
-                    Icons.arrow_right_alt,
-                    color: color,
-                  ),
-                ],
+                     Icon(
+                      Icons.arrow_right_alt,
+                      color: color,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

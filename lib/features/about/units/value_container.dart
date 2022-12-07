@@ -20,12 +20,12 @@ class ValueContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.r),
               color: ColorManager.whiteColor),
           child: Padding(
-            padding: const EdgeInsets.only(bottom:8.0),
+            padding: const EdgeInsets.only(bottom:8.0,top: 30),
             child: Column(
               children: [
                 Container(
-                  height: 170.h,
-                  width: 1.sw,
+                  height:MediaQuery.of(context).orientation == Orientation.portrait? 170.h:230,
+                  width: 250.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
                       image:  DecorationImage(
