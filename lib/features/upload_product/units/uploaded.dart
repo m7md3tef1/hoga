@@ -24,7 +24,7 @@ class _UploadedState extends State<Uploaded> {
       }
     }, builder: (context, state) {
       return ProductsCubit.get(context).testLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(
               color: ColorManager.yellow,
             ))
