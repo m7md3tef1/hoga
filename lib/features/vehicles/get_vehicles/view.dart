@@ -33,37 +33,38 @@ class _VehiclesViewState extends State<VehiclesView> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomAppbar(title: 'Vehicles'),
-          SizedBox(
-            height: 22.h,
-          ),
-          CustomSearchRow(
-            1,
-            function: () {
-              MagicRouter.navigateTo(FilterVehicle());
-            },
-          ),
-          SizedBox(
-            height: 21.h,
-          ),
-          Expanded(child:
-          RefreshIndicator(
-              color: Colors.orange,
-              backgroundColor: Colors.white,
-              onRefresh: () async {
-                print('refresh');
-                await VehiclesCubit.get(context).resetPage();
-                print("page is " + '${VehiclesCubit.get(context).page}');
-                await VehiclesCubit.get(context).getVehicleCubit(
-                    page: VehiclesCubit.get(context).page, isFilter: false);
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomAppbar(title: 'Vehicles'),
+            SizedBox(
+              height: 22.h,
+            ),
+            CustomSearchRow(
+              1,
+              function: () {
+                MagicRouter.navigateTo(FilterVehicle());
               },
-              child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),child: Body())))
-        ],
+            ),
+            SizedBox(
+              height: 21.h,
+            ),
+            Expanded(child:
+            RefreshIndicator(
+                color: Colors.orange,
+                backgroundColor: Colors.white,
+                onRefresh: () async {
+                  print('refresh');
+                  await VehiclesCubit.get(context).resetPage();
+                  print("page is " + '${VehiclesCubit.get(context).page}');
+                  await VehiclesCubit.get(context).getVehicleCubit(
+                      page: VehiclesCubit.get(context).page, isFilter: false);
+                },
+                child: Body()))
+          ],
+        ),
       ),
     );
   }

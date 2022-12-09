@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 30,),
+        SizedBox(height: 30.sp,),
         CustomAppbar(title: 'Home Screen',),
         Expanded(
           child: Padding(

@@ -36,6 +36,7 @@ class _JobsViewState extends State<JobsView> {
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: 30.sp,),
           CustomAppbar(title: 'Jobs'),
           SizedBox(
             height: 22.h,
@@ -61,9 +62,7 @@ class _JobsViewState extends State<JobsView> {
                 print("page is "+'${JopCubit.get(context).page}');
                 await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
               },
-              child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Body())))
+              child: Body()))
         ],
       ),
     );

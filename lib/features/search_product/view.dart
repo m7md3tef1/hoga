@@ -36,37 +36,46 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomAppbar(title: 'Products'),
-          SizedBox(
-            height: 22.h,
-          ),
-          CustomSearchRow(
-            3,
-            function: () {
-              MagicRouter.navigateTo(AddProductsView(
-                isFilter: true,
-              ));
-            },
-          ),
-          SizedBox(
-            height: 21.h,
-          ),
-          Expanded(child:
-          RefreshIndicator(
-              color: Colors.orange,
-              backgroundColor: Colors.white,
-              onRefresh: () async {
-                print('refresh');
-                await ProductsCubit.get(context).resetPage();
-                print("page is " + '${ProductsCubit.get(context).page}');
-                await ProductsCubit.get(context)
-                    .getProduct(page: ProductsCubit.get(context).page);
+      body: SizedBox(
+        height: 1.sh,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 30.sp,),
+            CustomAppbar(title: 'Products'),
+            SizedBox(
+              height: 22.h,
+            ),
+            CustomSearchRow(
+              3,
+              function: () {
+                MagicRouter.navigateTo(AddProductsView(
+                  isFilter: true,
+                ));
               },
-              child: SingleChildScrollView(child: Body())))
-        ],
+            ),
+            SizedBox(
+              height: 21.h,
+            ),
+
+            Expanded(child:
+            RefreshIndicator(
+                color: Colors.orange,
+                backgroundColor: Colors.white,
+                onRefresh: () async {
+                  print('refresh');
+                  await ProductsCubit.get(context).resetPage();
+                  print("page is " + '${ProductsCubit.get(context).page}');
+                  await ProductsCubit.get(context)
+                      .getProduct(page: ProductsCubit.get(context).page);
+                },
+                child:
+                Body()
+
+            ))
+          ],
+        ),
       ),
     );
   }

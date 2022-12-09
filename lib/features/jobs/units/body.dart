@@ -13,14 +13,14 @@ class Body extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 1.sh,
+    return SizedBox(
+      height: 0.65.sh,
       child: Scrollbar(
         thickness: 15,
         trackVisibility: true,
         child: ListView(
           physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
+          shrinkWrap: false,
           scrollDirection: Axis.horizontal,
           children: [
             Column(
@@ -62,10 +62,9 @@ class Body extends StatelessWidget {
                           return Center(child: CustomText(text: state.msg));
                         } else if (state is GetSearchSuccess) {
                           return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
+                             // physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
-                                print('jjjjjjjjjjj');
                                 print('~~~~~~~~~~~~ ${state.jopList.length}');
 
                                 if (index == state.jopList.length) {
@@ -282,10 +281,9 @@ class Body extends StatelessWidget {
                               });
                         } else if (state is GetJopSuccess) {
                           return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
+                             // physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
-                                print('llllllll');
 
                                 if (index == state.jopList.length) {
                                   return Padding(
@@ -583,10 +581,9 @@ class Body extends StatelessWidget {
                               });
                         } else {
                           return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
+                            //  physics: const NeverScrollableScrollPhysics(),
                               itemCount: JopCubit.get(context).jopList.length,
                               itemBuilder: (context, index) {
-                                print('llllllll');
 
                                 return Container(
                                   color: index.isEven

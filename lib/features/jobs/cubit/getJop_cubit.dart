@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/models/jobs/get_jop.dart';
+import 'package:hoga_load/core/data/repository/jobs_repo.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_states.dart';
 import '../../../core/data/models/jobs/GetJop_model.dart';
@@ -72,7 +73,7 @@ class JopCubit extends Cubit<AddJopStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        ProductRepo.getJop('jobs', self,
+        JobsRepo.getJop('jobs', self,
                 titleController: titleController,
                 productModel: productModel,
                 city2: city2,
@@ -176,7 +177,7 @@ class JopCubit extends Cubit<AddJopStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         emit(AddJopLoading());
-        ProductRepo.searchJob('jops', 0, productModel: getJopModel)
+        JobsRepo.searchJob('jops', 0, productModel: getJopModel)
             .then((value) => {
                   print('..................................'),
                   print(value),
@@ -254,7 +255,7 @@ class JopCubit extends Cubit<AddJopStates> {
       } else {
         print('---------- ${productModel!.toJson()}');
         emit(AddJopLoading());
-        ProductRepo.addJop(context: context, jopModel: productModel)
+        JobsRepo.addJop(context: context, jopModel: productModel)
             .then((value) => {
                   print('Add Jop Success'),
                   print(value),
@@ -284,7 +285,7 @@ class JopCubit extends Cubit<AddJopStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        ProductRepo.editJop(jopModel)
+        JobsRepo.editJop(jopModel)
             .then((value) => {
                   print('Edit Jop Success'),
                   print(value),
@@ -311,7 +312,7 @@ class JopCubit extends Cubit<AddJopStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        ProductRepo.deleteJop(jopId)
+        JobsRepo.deleteJop(jopId)
             .then((value) => {
                   print('Delete Jop Success'),
                   print(value),

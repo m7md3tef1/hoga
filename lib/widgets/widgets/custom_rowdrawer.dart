@@ -31,7 +31,7 @@ class CustomRowDrawer extends StatelessWidget {
           if (beforeNavigate != null) {
             beforeNavigate!();
           }
-          MagicRouter.navigateTo(navigatename);
+          MagicRouter.navigateAndReplacement(navigatename);
         },
         child: Row(
           children: [
