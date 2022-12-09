@@ -590,7 +590,7 @@ class _FormCardState extends State<FormCard> {
                   ),
                   InkWell(
 onTap: (){
-  MagicRouter.navigateTo(const Home());
+  MagicRouter.navigateTo( Home());
 },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

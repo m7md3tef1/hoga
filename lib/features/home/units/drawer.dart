@@ -36,7 +36,7 @@ class OnDrawer extends StatelessWidget {
               text: 'Home',
               isHome: true,
               icon: Icons.home,
-              navigatename: const Home(),
+              navigatename:  Home(),
             ),
             CustomRowDrawer(
               text: 'Upload Load',

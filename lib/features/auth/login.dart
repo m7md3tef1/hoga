@@ -37,7 +37,7 @@ class Login extends StatelessWidget {
           body: BlocConsumer<AuthCubit, AuthStates>(
             listener: (BuildContext context, state) {
               if (state is SignInSuccess) {
-                MagicRouter.navigateAndPopUntilFirstPage(const Home());
+                MagicRouter.navigateAndPopUntilFirstPage( Home());
               }
             },
             builder: (context, state) => Column(

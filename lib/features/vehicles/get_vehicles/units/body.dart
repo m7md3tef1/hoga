@@ -274,7 +274,7 @@ class Body extends StatelessWidget {
                                                   ? 'other'
                                                   : state.vehicleList[index]
                                                       .equipmentTypes2!
-                                                      .toString(),
+                                                      .toString().replaceAll("[", "")..replaceAll("]", ""),
                                               align: TextAlign.center,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
@@ -286,7 +286,7 @@ class Body extends StatelessWidget {
                                                   ? 'other'
                                                   : state.vehicleList[index]
                                                       .vehicleSizes2!
-                                                      .toString(),
+                                                      .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.center,
                                               color: Colors.green,
                                               fontSize: 12.sp,
@@ -374,10 +374,10 @@ class Body extends StatelessWidget {
                                               .page
                                               .toString(),
                                           style:
-                                              TextStyle(color: Colors.white),
+                                              const TextStyle(color: Colors.white),
                                         ),
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                       InkWell(
                                         onTap: () {
                                           int page =
@@ -501,7 +501,7 @@ class Body extends StatelessWidget {
                                                   ? 'other'
                                                   : state.vehicleList[index]
                                                       .equipmentTypes2!
-                                                      .toString(),
+                                                      .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.center,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
@@ -515,7 +515,7 @@ class Body extends StatelessWidget {
                                                   ? 'other'
                                                   : state.vehicleList[index]
                                                       .equipmentTypes2!
-                                                      .toString(),
+                                                      .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.center,
                                               color: Colors.green,
                                               fontSize: 12.sp,
@@ -722,7 +722,7 @@ class Body extends StatelessWidget {
                                                 : VehiclesCubit.get(context)
                                                     .vehicleList[index]
                                                     .equipmentTypes2!
-                                                    .toString(),
+                                                    .toString().replaceAll("[", "").replaceAll("]", ""),
                                             align: TextAlign.center,
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w500),
@@ -737,7 +737,7 @@ class Body extends StatelessWidget {
                                                 : VehiclesCubit.get(context)
                                                     .vehicleList[index]
                                                     .vehicleSizes2!
-                                                    .toString(),
+                                                    .toString().replaceAll("[", "").replaceAll("]", ""),
                                             align: TextAlign.center,
                                             color: Colors.green,
                                             fontSize: 12.sp,

@@ -251,7 +251,7 @@ class Body extends StatelessWidget {
                                               width: 0.2.sw,
                                               text: state.loadList[index]
                                                   .equipmentTypes2!
-                                                  .toString(),
+                                                  .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.center,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
@@ -260,7 +260,7 @@ class Body extends StatelessWidget {
 //                                  height: 20.h,
                                               text: state.loadList[index]
                                                   .vehicleSizes2!
-                                                  .toString(),
+                                                  .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.end,
                                               color: Colors.green,
                                               fontSize: 12.sp,
@@ -466,7 +466,7 @@ class Body extends StatelessWidget {
                                                   ? 'other'
                                                   : state.loadList[index]
                                                       .equipmentTypes2!
-                                                      .toString(),
+                                                      .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.center,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
@@ -478,7 +478,7 @@ class Body extends StatelessWidget {
                                                   ? 'other'
                                                   : state.loadList[index]
                                                       .vehicleSizes2!
-                                                      .toString(),
+                                                      .toString().replaceAll("[", "").replaceAll("]", ""),
                                               align: TextAlign.end,
                                               color: Colors.green,
                                               fontSize: 12.sp,
@@ -680,7 +680,7 @@ class Body extends StatelessWidget {
                                                     .loadList[index]
                                                     .equipmentTypes!
                                                     .first
-                                                    .title ??
+                                                    .title.toString().replaceAll("[", "").replaceAll("]", "") ??
                                                 'other',
                                             align: TextAlign.end,
                                             fontSize: 12.sp,
@@ -700,7 +700,7 @@ class Body extends StatelessWidget {
                                                     .loadList[index]
                                                     .vehicleSizes!
                                                     .first
-                                                    .title
+                                                    .title.toString().replaceAll("[", "").replaceAll("]", "")
                                                 : 'other',
                                             align: TextAlign.end,
                                             color: Colors.green,
