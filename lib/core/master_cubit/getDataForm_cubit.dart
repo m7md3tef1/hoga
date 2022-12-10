@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -17,9 +16,7 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
   List<AddVehicle> stateList = [];
   List<AddVehicle> cityList = [];
 
-//  List<AddVehicle> countryDestintionList = [];
-//  List<AddVehicle> stateDestintionList = [];
-//  List<AddVehicle> cityDestintionList = [];
+
 
   List<AddVehicle> productList = [];
   List<AddVehicle> jopTypeList=[];

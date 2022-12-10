@@ -34,6 +34,32 @@ class Bottom extends StatefulWidget {
 
 class _BottomState extends State<Bottom> {
   int i = 1;
+  List images = [
+    'assets/images/load.png',
+    'assets/images/vehicle_icon.png',
+    'assets/images/product.png',
+    'assets/images/jop.png'
+  ];
+  List name = ['Loads', 'Vehicles', 'Products', 'Jops'];
+  List navigate = [
+    const LoadsView(),
+    const VehiclesView(),
+    const SearchView(),
+    CustomScaffold(body: JobsView())
+  ];
+  List hint = [
+    'Go through our available list of loads.',
+    'Choose your desired vehicle from our system.',
+    'Checkout available item for sale and purchase.',
+    'Upload your jobs here.'
+  ];
+  List color = [
+    const Color(0xFF2DB6FA),
+    const Color(0xFFF68C09),
+    const Color(0xFF08DA4E),
+    const Color(0xFFE9222C)
+  ];
+  List isColor = [false, true, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +90,12 @@ class _BottomState extends State<Bottom> {
             height: 8.h,
           ),
           Container(
-            height: MediaQuery.of(context).orientation == Orientation.portrait? 190.h:250,
-            width: MediaQuery.of(context).orientation == Orientation.portrait? 0.9.sw:270.w,
+            height: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 190.h
+                : 250,
+            width: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 0.9.sw
+                : 270.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
                 image: const DecorationImage(
@@ -162,13 +192,20 @@ class _BottomState extends State<Bottom> {
                       ' Mention your required items',
                       'A user can also post items that he needs to purchase with description and approximate price.'),
           Container(
-            height: MediaQuery.of(context).orientation == Orientation.portrait? 190.h:250,
-            width: MediaQuery.of(context).orientation == Orientation.portrait? 0.9.sw:270.w,
+            height: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 190.h
+                : 250,
+            width: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 0.9.sw
+                : 270.w,
             decoration:
-
                 BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
             child: const Image(
-                image: AssetImage('assets/images/Rectangle 26.png',),fit: BoxFit.fill,),
+              image: AssetImage(
+                'assets/images/Rectangle 26.png',
+              ),
+              fit: BoxFit.fill,
+            ),
           ),
           SizedBox(
             height: 50.h,
@@ -196,43 +233,92 @@ class _BottomState extends State<Bottom> {
               color: const Color(0xFF000000),
             ),
           ),
-          VehicleContainer(
-            'assets/images/load.png',
-            const LoadsView(),
-            'Loads',
-            'Go through our available list of loads.',
-            'Read More',
-            const Color(0xFF2DB6FA),
-            function: LoadsCubit.get(context).getLoad(self: 0, isFilter: false),
-          ),
-          VehicleContainer(
-            'assets/images/vehicle_icon.png',
-            const VehiclesView(),
-            'Vehicles',
-            'Choose your desired vehicle from our system.',
-            'Read More',
-            const Color(0xFFF68C09),
-            isColor: true,
-            function: VehiclesCubit.get(context).getVehicleCubit(context,self: 0),
-          ),
-          VehicleContainer(
-            'assets/images/product.png',
-            const SearchView(),
-            'Products',
-            'Checkout available item for sale and purchase.',
-            'Read More',
-            const Color(0xFF08DA4E),
-            function: ProductsCubit.get(context).getProduct(),
-          ),
-          VehicleContainer(
-            'assets/images/jop.png',
-            CustomScaffold(body: JobsView()),
-            'Jobs',
-            'Upload your jobs here.',
-            'Read More',
-            const Color(0xFFE9222C),
-            function: JopCubit.get(context).getJops(isFilter: false),
-          ),
+          MediaQuery.of(context).orientation == Orientation.portrait
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (context, index) => Column(
+                        children: [
+                          VehicleContainer(
+                            'assets/images/load.png',
+                            const LoadsView(),
+                            'Loads',
+                            'Go through our available list of loads.',
+                            'Read More',
+                            const Color(0xFF2DB6FA),
+                            function: LoadsCubit.get(context)
+                                .getLoad(self: 0, isFilter: false),
+                          ),
+                          VehicleContainer(
+                            'assets/images/vehicle_icon.png',
+                            const VehiclesView(),
+                            'Vehicles',
+                            'Choose your desired vehicle from our system.',
+                            'Read More',
+                            const Color(0xFFF68C09),
+                            isColor: true,
+                            function: VehiclesCubit.get(context)
+                                .getVehicleCubit(context, self: 0),
+                          ),
+                          VehicleContainer(
+                            'assets/images/product.png',
+                            const SearchView(),
+                            'Products',
+                            'Checkout available item for sale and purchase.',
+                            'Read More',
+                            const Color(0xFF08DA4E),
+                            function: ProductsCubit.get(context).getProduct(),
+                          ),
+                          VehicleContainer(
+                            'assets/images/jop.png',
+                            CustomScaffold(body: JobsView()),
+                            'Jobs',
+                            'Upload your jobs here.',
+                            'Read More',
+                            const Color(0xFFE9222C),
+                            function:
+                                JopCubit.get(context).getJops(isFilter: false),
+                          ),
+                        ],
+                      ))
+              : Container(
+                  // height: 800,
+                  child: GridView.builder(
+                      itemCount: name.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, childAspectRatio: 0.9),
+                      itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                VehicleContainer(
+                                  images[index],
+                                  navigate[index],
+                                  name[index],
+                                  hint[index],
+                                  'Read More',
+                                  color[index],
+                                  isColor: isColor[index],
+                                  function: index == 0
+                                      ? LoadsCubit.get(context)
+                                          .getLoad(self: 0, isFilter: false)
+                                      : index == 1
+                                          ? VehiclesCubit.get(context)
+                                              .getVehicleCubit(context, self: 0)
+                                          : index == 2
+                                              ? ProductsCubit.get(context)
+                                                  .getProduct()
+                                              : JopCubit.get(context)
+                                                  .getJops(isFilter: false),
+                                ),
+                              ],
+                            ),
+                          )),
+                ),
           PlanBody(),
           SizedBox(
             height: 30.h,

@@ -9,7 +9,7 @@ import '../../../add_update_card/view.dart';
 
 class BuyContainer extends StatelessWidget {
   BuyContainer({this.text, this.loadsNo,this.jobsNo,this.productNo,this.vehiclesNo,
-  this.price,this.image,super.key});
+  this.price,this.basePrice,this.image,super.key});
   String? text;
   int? loadsNo;
     int? vehiclesNo;
@@ -17,6 +17,7 @@ class BuyContainer extends StatelessWidget {
     int? productNo;
 
 String? price;
+  String? basePrice;
   String? image;
 
   @override
@@ -45,12 +46,20 @@ String? price;
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w800,
                     ),
-                  ),
+                  ), basePrice!=null?
+                  CustomText(
+                    text: basePrice,
+                    fontSize: 40.sp,
+                    color: Colors.red,
+                    textDecoration: TextDecoration.lineThrough,
+                    fontWeight: FontWeight.w800,
+                  ):const Text(''),
                   CustomText(
                     text: price,
                     fontSize: 40.sp,
                     fontWeight: FontWeight.w800,
                   ),
+
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: CustomText(
@@ -64,7 +73,7 @@ String? price;
               ),
             ),
           ]),
-           Image(image: NetworkImage(image!),height: 200.sp,width: 200.sp,),
+           Expanded(child: Image(image: NetworkImage(image!),height: 200.sp,width: 200.sp,)),
           CustomText(
             text: "$loadsNo Load Postings",
             fontSize: 18.sp,

@@ -29,7 +29,7 @@ void main() async {
   await CacheHelper.init();
   BlocOverrides.runZoned(() {
     runApp(DevicePreview(
-        enabled: false,
+        enabled: true,
         builder: (context) {
           return const MyApp();
         }));

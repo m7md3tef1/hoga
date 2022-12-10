@@ -67,6 +67,7 @@ class _PlanBodyState extends State<PlanBody> {
                 jobsNo: PlansCubit.get(context).plansList[index].totalNumberOfJobs,
                 productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
                 price: PlansCubit.get(context).plansList[index].price,
+                  basePrice:PlansCubit.get(context).plansList[index].basePrice,
                   image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}');
 
 
@@ -82,6 +83,7 @@ class _PlanBodyState extends State<PlanBody> {
                 jobsNo: PlansCubit.get(context).plansList[index].totalNumberOfJobs,
                 productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
                 price: PlansCubit.get(context).plansList[index].price,
+                    basePrice:PlansCubit.get(context).plansList[index].basePrice,
                 image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}'));
 
               }
