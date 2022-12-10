@@ -68,8 +68,9 @@ class VehicleRepo {
     isFilter == true
         ? response =
     await Api().getHttp(url: 'vehicles', authToken: token, data: {
-      "per_page":10,"page":page,
-
+      "per_page": 10,
+      "paginate":1 ,
+      "page":page,
       "equipment_types": equipmentSize,
       "vehicle_attributes": attributes,
       "vehicle_sizes": vehicleSize,
@@ -87,7 +88,9 @@ class VehicleRepo {
             url: 'vehicles',
             authToken: token,
             self: self,
-            data: {"search": val,"per_page":10,"page":page,
+            data: {"search": val,   "per_page": 10,
+              "paginate":1 ,
+              "page":page,
             });
     print(response['records'].length);
     print("length");

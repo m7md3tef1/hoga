@@ -583,6 +583,7 @@ class Body extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final load =
                                   LoadsCubit.get(context).loadList[index];
+
                               return Container(
                                 color: index.isEven
                                     ? Colors.grey[300]
@@ -676,11 +677,19 @@ class Body extends StatelessWidget {
 //                                  height: 30.h,
                                             width: 0.2.sw,
                                             text: LoadsCubit.get(context)
+                                                .loadList[index]
+                                                .equipmentTypes !=
+                                                null &&
+                                                LoadsCubit.get(context)
                                                     .loadList[index]
                                                     .equipmentTypes!
-                                                    .first
-                                                    .title.toString().replaceAll("[", "").replaceAll("]", "") ??
-                                                'other',
+                                                    .isNotEmpty
+                                                ? LoadsCubit.get(context)
+                                                .loadList[index]
+                                                .equipmentTypes!
+                                                .first
+                                                .title.toString().replaceAll("[", "").replaceAll("]", "")
+                                                : 'other',
                                             align: TextAlign.end,
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w500),

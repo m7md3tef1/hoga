@@ -82,7 +82,11 @@ class ProductsCubit extends Cubit<AddProductStates> {
                       print(myProductList.length),
                     }
                   else
-                    {productList = value, emit(GetProductsSuccess(value))}
+                    {productList = value, emit(GetProductsSuccess(value)),
+
+                      print('Get My Product Response'),
+                      print(productList.length),
+                    }
                 })
             .onError((error, stackTrace) => {
                   myVehiclesLoading = true,

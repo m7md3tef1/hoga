@@ -35,7 +35,8 @@ class LoadsRepo {
         ? response = await Api()
             .getHttp(url: 'loads', authToken: token, self: self, data: {
             "per_page": 10,
-            "page": page,
+            "paginate":1 ,
+            "page":page,
             "equipment_types": equipmentSize,
             "vehicle_attributes": attributes,
             "vehicle_sizes": vehicleSize,
@@ -49,14 +50,17 @@ class LoadsRepo {
                 DataFormCubit.get(context).stateDestinationID,
             "destination_city_id": DataFormCubit.get(context).cityDestinationID,
           })
-        : response = await Api()
-            .getHttp(url: 'loads', authToken: token, self: self, data: {
+        :
+    response = await Api()
+            .getHttp(url: 'loads', data: {
             "search": val,
             "per_page": 10,
-            "page": page,
+            "paginate":1 ,
+            "page":page
+
           });
 
-    print('length >>>>>>>> ${response['records'].last}');
+    print('length load >>>>>>>> ${response['records'].length}');
 
     List<Vehicles> loadsList = [];
     for (int i = 0; i < response['records'].length; i++) {

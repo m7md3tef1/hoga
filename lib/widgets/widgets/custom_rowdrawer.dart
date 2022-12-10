@@ -25,14 +25,22 @@ class CustomRowDrawer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          if (isHome) {
-            Home.scaffoldStateKey.currentState!.closeDrawer();
-          }
+
           if (beforeNavigate != null) {
             beforeNavigate!();
           }
-          MagicRouter.navigateAndReplacement(navigatename);
-        },
+          MagicRouter.navigateAndPopUntilFirstPage(navigatename);
+          if (isHome&&Home.scaffoldStateKey.currentState!=null) {
+            print('close drawer');
+            Home.scaffoldStateKey.currentState!.closeDrawer();
+          }
+          if (Scaffold.of(context).isDrawerOpen) {
+            print('close drawer');
+
+            Scaffold.of(context).closeDrawer();
+
+        }
+          },
         child: Row(
           children: [
             icon == null

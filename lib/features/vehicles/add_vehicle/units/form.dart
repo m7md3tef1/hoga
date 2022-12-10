@@ -33,9 +33,19 @@ class _FormInfoState extends State<FormInfo> {
   @override
   void initState() {
     super.initState();
-
+VehiclesCubit.get(context).vehicleClearData(context);
+print('clearr done');
 
     if (widget.isEdit || widget.isLoadEdit) {
+      print(widget.vehiclesModel!.equipmentTypes!.last.id);
+
+      print('widget.vehiclesModel!.equipmentTypes!.first.id');
+      widget.vehiclesModel!.equipmentTypes?.forEach((element) {print(element.id);VehiclesCubit.get(context).equipmentType.add(element.id); });
+      widget.vehiclesModel!.attributes?.forEach((element) {print(element.id);VehiclesCubit.get(context).attributes.add(element.id); });
+      widget.vehiclesModel!.vehicleSizes?.forEach((element) {print(element.id);VehiclesCubit.get(context).vehcleSize.add(element.id); });
+      widget.vehiclesModel!.vehicleTypes?.forEach((element) {print(element.id);VehiclesCubit.get(context).vehcleType.add(element.id); });
+
+
       date = widget.vehiclesModel!.availabilityDate!;
       cityDestination = widget.vehiclesModel!.destinationCity != null
           ? widget.vehiclesModel!.destinationCity!.title!

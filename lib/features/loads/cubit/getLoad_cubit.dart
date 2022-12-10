@@ -21,10 +21,10 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   List<Vehicles> loadList = [];
   List<Vehicles> myloadList = [];
 
-  List equipmentType = [];
-  List attributes = [];
-  List vehcleType = [];
-  List vehcleSize = [];
+//  List equipmentType = [];
+//  List attributes = [];
+//  List vehcleType = [];
+//  List vehcleSize = [];
 
   bool isAccessToken = true;
   bool testLoading = true;
@@ -63,7 +63,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
       attributes2,
       vehicleSize2,
       vehicleType2,
-      isFilter,
+      isFilter=false,
       context}) {
     myVehiclesLoading = true;
     emit(AddLoadLoading());
@@ -98,11 +98,15 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                     {
                       loadList = value,
                       print('**********************'),
+                      print('loadList.length'),
                       print(loadList.length),
                       emit(GetLoadsSuccess(value)),
+                     // VehiclesCubit.get(context).vehicleClearData(context),
+
                       if (isFilter = true)
                         {
-                          // VehiclesCubit.get(context).vehicleClearData(context),
+                         // VehiclesCubit.get(context).vehicleClearData(context),
+
                           // showToast(msg: 'Success', state: ToastedStates.SUCCESS)
                         }
                     },

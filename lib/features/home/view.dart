@@ -11,6 +11,7 @@ import 'package:hoga_load/features/home/states.dart';
 import 'package:hoga_load/features/packages/view.dart';
 import 'package:hoga_load/features/subscribtion_details/view.dart';
 import 'package:hoga_load/features/upload_product/view.dart';
+import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_notloggedin.dart';
 import 'package:hoga_load/widgets/widgets/custom_rowdrawer.dart';
 import '../../core/data/local/cacheHelper.dart';
@@ -27,22 +28,49 @@ part 'units/nav_bar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
+  Future<bool?> showWarning(BuildContext context)async =>showDialog<bool>(
+      context: context, builder: (context)=>
+      AlertDialog(
+        title: const Text('Do You want to exit the app?'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              children: [
+                SizedBox(width: 35.sp,),
+                Expanded(child: CustomButton(function: ()=>Navigator.pop(context,false), text: 'No',height: 37.sp,font: 15)),
+                SizedBox(width: 35.sp,),
+                Expanded(child: CustomButton(function: ()=>Navigator.pop(context,true), text: 'Yes',height: 37.sp,font: 15,)),
+                SizedBox(width: 35.sp,),
 
+              ],
+            ),
+          ),
+
+        ],
+      )
+  );
   static GlobalKey<ScaffoldState> scaffoldStateKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const OnDrawer(),
-      key: scaffoldStateKey,
-      bottomNavigationBar:  _BottomBar(),
+    return WillPopScope(
+      onWillPop: ()async{
+        final shouldPop=await showWarning(context);
+        return shouldPop??false;
+      },
+      child: Scaffold(
+        drawer: const OnDrawer(),
+        key: scaffoldStateKey,
+        bottomNavigationBar:  _BottomBar(),
 
-      body: BlocConsumer<HomeCubit, HomeStates>(
-        listener: (_, s) {},
-        builder: (context, s) {
-          return HomeCubit.get(context)
-              .bottomScreens[HomeCubit.get(context).currentIndex];
-        },
+        body: BlocConsumer<HomeCubit, HomeStates>(
+          listener: (_, s) {},
+          builder: (context, s) {
+            return HomeCubit.get(context)
+                .bottomScreens[HomeCubit.get(context).currentIndex];
+          },
+        ),
       ),
     );
   }

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/core/color_manager/color_manager.dart';
 
 import 'custom_text.dart';
 
 class CustomButton extends StatelessWidget {
   var function;
   String? text;
-  var width;
+  double? width;
+  double? height;
+
   var color;
   var colorborder;
   var colortext;
-  var font;
+  double? font;
   var icon;
   CustomButton(
       {Key? key,
@@ -20,22 +23,23 @@ class CustomButton extends StatelessWidget {
       required this.text,
       this.font,
       this.width,
+        this.height,
       this.icon,
-      required this.color})
+       this.color=ColorManager.yellow})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: function,
       child: Container(
-          width: 1.sw,
-         // height: 48.h,
+          width:width?? 1.sw,
+          height: height??48.h,
           decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(10.r),
               border: Border.all(
                   color:
-                      colorborder == null ? Colors.transparent : colorborder)),
+                      colorborder ?? Colors.transparent)),
           child: Center(
               child: Padding(
                 padding:  EdgeInsets.symmetric(vertical: 10.sp),
@@ -46,8 +50,8 @@ class CustomButton extends StatelessWidget {
                 Expanded(
                   child: CustomText(
                     text: text,
-                    color: colortext == null ? Colors.black : colortext,
-                    fontSize: font == null ? 20.sp : font,
+                    color: colortext ?? Colors.black,
+                    fontSize: font ?? 20.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
