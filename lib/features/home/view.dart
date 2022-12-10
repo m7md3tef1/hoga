@@ -54,6 +54,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('token');
+    print( CacheHelper.getString(SharedKeys.token));
     return WillPopScope(
       onWillPop: ()async{
         final shouldPop=await showWarning(context);

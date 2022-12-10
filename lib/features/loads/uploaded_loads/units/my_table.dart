@@ -42,6 +42,8 @@ class MyTable extends StatelessWidget {
                           //VehiclesCubit.get(context).editVehicleCubit(context:context,vehicleId:VehiclesCubit.get(context).vehicleList[index].id);
                         },
                         deleteFunc: () {
+                          print('delete load');
+                          print(LoadsCubit.get(context).myloadList[index].id);
                           LoadsCubit.get(context).deleteLoadsCubit(
                               LoadsCubit.get(context).myloadList[index].id);
                         },

@@ -99,6 +99,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   searchProducts(GetProductModel productModel) {
+    emit(AddProductLoading());
+
     searchList.clear();
     print("cubit search product");
 
@@ -135,6 +137,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   addProductCubit({context, GetProductModel? productModel}) async {
+    print('###################################################### ${productModel!.toJson()}');
+
 
     emit(AddProductLoading());
     String fileName = image != null ? image!.path.split('/').last : '';
@@ -239,6 +243,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
 
 
   editProductCubit(GetProductModel? productModel) {
+    print('###################################################### ${productModel!.toJson()}');
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));

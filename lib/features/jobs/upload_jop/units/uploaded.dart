@@ -18,9 +18,9 @@ class _UploadedState extends State<Uploaded> {
   Widget build(BuildContext context) {
     return BlocConsumer<JopCubit, AddJopStates>(
         listener: (BuildContext context, Object? state) {
-      if (state is DeleteSuccess || state is EditSuccess) {
-        Navigator.pop(context);
-      }
+          if (state is DeleteSuccess || state is EditSuccess) {
+          JopCubit.get(context).getJops(self: 1, isFilter: false, context: context);
+    }
     }, builder: (context, state) {
       return JopCubit.get(context).testLoading
           ? const Center(

@@ -321,6 +321,8 @@ class JopCubit extends Cubit<AddJopStates> {
   }
 
   deleteJopCubit(jopId) {
+    emit(DeleteLoading());
+
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));

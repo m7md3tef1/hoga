@@ -554,6 +554,7 @@ class _FormInfoState extends State<FormInfo> {
                                 widget.isEdit
                                     ? JopCubit.get(context)
                                         .editJopCubit(GetJopModel(
+                                  id:widget.jopModel!.id,
                                         jopCategortId: jopCategoryId,
                                         jopTypeId: jopTypeId1,
                                         title: JopCubit.get(context)

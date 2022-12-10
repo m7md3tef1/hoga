@@ -14,7 +14,9 @@ class MyJopTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return uploadedTableJop(
       child: BlocConsumer<JopCubit, AddJopStates>(
-          listener: (BuildContext context, Object? state) {},
+          listener: (BuildContext context, Object? state) {
+
+          },
           builder: (context, state) {
             return     RefreshIndicator(
             color: Colors.orange,
@@ -24,7 +26,7 @@ class MyJopTable extends StatelessWidget {
             JopCubit.get(context).getJops(self: 1, isFilter: false, context: context);
             },
               child: ListView.builder(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: JopCubit.get(context).jopList.length,
                   itemBuilder: (context, index) {
                     return Container(
@@ -39,6 +41,9 @@ class MyJopTable extends StatelessWidget {
                               index: index));
                         },
                         deleteFunc: () {
+                          print(index);
+                          print(JopCubit.get(context).jopList[index].id);
+                          print('job id');
                           JopCubit.get(context).deleteJopCubit(
                               JopCubit.get(context).jopList[index].id);
                         },

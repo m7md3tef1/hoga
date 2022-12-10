@@ -22,17 +22,24 @@ class _FormState extends State<Form> {
   String city = '';
   String product = '';
   String? buyOrSell;
-
   int? countryId;
   int? stateId;
-  int? cityId;
+  String? cityId;
   int? productId;
   List productType = ['Buy', 'Sell'];
   bool loading = false;
+  String? imageFile;
 
   @override
   void initState() {
     super.initState();
+    buyOrSell=null;
+    product='';
+    ProductsCubit.get(context).nameController.text='';
+    ProductsCubit.get(context).priceController.text='';
+    ProductsCubit.get(context).descController.text='';
+
+
     if (widget.isEdit) {
       print('@@@@@@@@@@@@@@@@${widget.productModel!.toJson()}');
       buyOrSell = widget.productModel!.buyOrSell;
@@ -44,7 +51,17 @@ class _FormState extends State<Form> {
           widget.productModel!.description == null
               ? ""
               : widget.productModel!.description!;
+      city=widget.productModel!.city==null?'other':widget.productModel!.city!.title!;
+      country=widget.productModel!.country==null?'other':widget.productModel!.country!.title!;
+      state=widget.productModel!.state==null?'other':widget.productModel!.state!.title!;
+      product=widget.productModel!.productType==null?'other':widget.productModel!.productType!.title!;
+//      productId=widget.productModel!.productType!.id!;
+//      cityId=widget.productModel!.city!.id!.toString();
+//      countryId=widget.productModel!.country!.id!;
+      stateId=widget.productModel!.state!.id!;
 
+
+      imageFile=widget.productModel!.productImage!;
       ProductsCubit.get(context).img64 = widget.productModel!.productImage!;
     }
   }
@@ -52,7 +69,11 @@ class _FormState extends State<Form> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductsCubit, AddProductStates>(
-        listener: (BuildContext context, state) {},
+        listener: (BuildContext context, state) {
+          if (state is GetSearchSuccess){
+            Navigator.pop(context);
+          }
+        },
         builder: (BuildContext context, s) {
           return CustomCard(
             widget: BlocConsumer<DataFormCubit, AddDataFormStates>(
@@ -67,6 +88,7 @@ class _FormState extends State<Form> {
                           children: [
                             InkWell(
                               onTap: () {
+                                widget.isEdit?MagicRouter.navigateTo(const UploadProductsView()):
                                 Navigator.pop(context);
                               },
                               child: const Icon(
@@ -78,8 +100,8 @@ class _FormState extends State<Form> {
                                 text: widget.isEdit
                                     ? "EDIT PRODUCT"
                                     : widget.isFilter
-                                        ? 'Filter'
-                                        : 'ADD ',
+                                        ? 'SEARCH PRODUCT'
+                                        : 'ADD PRODUCT ',
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -337,7 +359,38 @@ class _FormState extends State<Form> {
                                   showModalBottomSheet(
                                     context: context,
                                     builder: (context) {
-                                      return ListView.builder(
+                                      return
+
+                                        DataFormCubit.get(context).cityList.isEmpty
+                                            ? InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              city = 'other';
+                                              Navigator.of(context).pop();
+                                              cityId = 'other';
+                                            });
+                                          },
+                                          child: Padding(
+                                            padding:  EdgeInsets.only(
+                                                top: 8.0,
+                                                bottom: 0.4.sh,
+                                                right: 8,
+                                                left: 8),
+
+
+                                              child: Text(
+                                                'other',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+
+                                                    color: Colors.black,
+                                                    fontSize: 20.sp),
+                                              ),
+
+                                          ),
+                                        ):
+
+                                        ListView.builder(
                                           itemCount: DataFormCubit.get(context)
                                               .cityList
                                               .length,
@@ -353,7 +406,7 @@ class _FormState extends State<Form> {
                                                             DataFormCubit.get(
                                                                     context)
                                                                 .cityList[index]
-                                                                .id!;
+                                                                .id!.toString();
                                                         city =
                                                             DataFormCubit.get(
                                                                     context)
@@ -592,10 +645,13 @@ class _FormState extends State<Form> {
                                       Expanded(
                                         child: Center(
                                           child: Text(
-                                            ProductsCubit.get(context).image !=
-                                                    null
-                                                ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-                                                : '    No File chosen',
+                                            widget.isEdit?
+                                            imageFile !=
+                                                    null?imageFile!
+                                               // ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+                                                : '    No File chosen':
+                  ProductsCubit.get(context).image!=null ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+                                                 : '    No File chosen',
                                             style: TextStyle(
                                                 color: const Color(0xFF757575),
                                                 fontWeight: FontWeight.w400,
@@ -675,7 +731,7 @@ class _FormState extends State<Form> {
                                                       .text,
                                               productImage:
                                                   ProductsCubit.get(context)
-                                                      .img64));
+                                                      .image));
                                     } else if (widget.isFilter) {
                                       await ProductsCubit.get(context)
                                           .searchProducts(GetProductModel(
@@ -687,16 +743,25 @@ class _FormState extends State<Form> {
                                       ));
                                     } else {
                                       print('!!!!!!!!!!!!!!!!!!!!!!!');
+                                      print(ProductsCubit.get(context)
+                                          .priceController
+                                          .text);
+                                      print(cityId);
+                                      print(ProductsCubit.get(context)
+                                          .priceController
+                                          );
                                       print(GetProductModel(
                                               buyOrSell: buyOrSell,
                                               productName:
                                                   ProductsCubit.get(context)
                                                       .nameController
                                                       .text,
-                                              priceInt: int.parse(
+                                              priceInt: ProductsCubit.get(context)
+                                                  .priceController
+                                                  .text.isNotEmpty?int.parse(
                                                   ProductsCubit.get(context)
                                                       .priceController
-                                                      .text),
+                                                      .text):null,
                                               productTypeId: productId,
                                               countryPost: countryId,
                                               statePost: stateId,
@@ -718,14 +783,16 @@ class _FormState extends State<Form> {
                                                       ProductsCubit.get(context)
                                                           .nameController
                                                           .text,
-                                                  priceInt: int.parse(
+                                                  priceInt: ProductsCubit.get(context)
+                                                      .priceController
+                                                      .text.isNotEmpty?int.parse(
                                                       ProductsCubit.get(context)
                                                           .priceController
-                                                          .text),
+                                                          .text):null,
                                                   productTypeId: productId,
                                                   countryPost: countryId,
                                                   statePost: stateId,
-                                                  cityPost: cityId,
+                                                  cityPost: cityId.toString(),
                                                   description:
                                                       ProductsCubit.get(context)
                                                           .descController

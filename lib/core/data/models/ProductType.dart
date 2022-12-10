@@ -4,8 +4,8 @@ class ProductType {
       this.title,});
 
   ProductType.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']??0;
+    title = json['title']??'other';
   }
   int? id;
   String? title;

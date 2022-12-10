@@ -136,7 +136,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                   showToast(
                       msg: 'Delete Success', state: ToastedStates.SUCCESS),
                 })
-            .onError((error, stackTrace) => {
+            .catchError((error) => {
                   emit(DeleteFailed()),
                   print(error),
                   showToast(msg: error.toString(), state: ToastedStates.ERROR),

@@ -9,6 +9,7 @@ class JobsRepo{
 
   static addJopTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
+    print('token is >>>>>>>>>>>>>>>>>>>>>>>>>>>>$token');
     return await Api().getHttp(url: "profile/current-subscription", authToken: token);
   }
   static Future<List<GetJop>> getJop(url, self,
@@ -63,6 +64,9 @@ class JobsRepo{
   }
   static deleteJop(productId) async {
     String token = await CacheHelper.getString(SharedKeys.token);
+    print('token is >>>>>>>>>>>>>>>>>>>>>>>>>>>>$token');
+    print('Id is >>>>>>>>>>>>>>>>>>>>>>>>>>>>$productId');
+
     return await Api()
         .getHttp(url: "jobs/delete", authToken: token, data: {"id": productId});
   }
@@ -80,6 +84,8 @@ class JobsRepo{
 
   static editJop(GetJopModel? productModel) async {
     String token = await CacheHelper.getString(SharedKeys.token);
+    print('token is >>>>>>>>>>>>>>>>>>>>>>>>>>>>$token');
+    print('Id is >>>>>>>>>>>>>>>>>>>>>>>>>>>>${productModel!.id}');
     return await Api().postHttp(
         url: "jobs/update", authToken: token, data: productModel!.toJson());
   }
