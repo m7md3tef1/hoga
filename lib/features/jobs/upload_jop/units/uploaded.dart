@@ -11,7 +11,7 @@ class _UploadedState extends State<Uploaded> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    JopCubit.get(context).addJopCubitTest();
+    JopCubit.get(context).addJobCubitTest();
   }
 
   @override
@@ -27,7 +27,7 @@ class _UploadedState extends State<Uploaded> {
               child: CircularProgressIndicator(
               color: ColorManager.yellow,
             ))
-          : JopCubit.get(context).isAccessToken
+          : JopCubit.get(context).isAllowed
               ? CustomCard(
                   widget: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 11.sp),
@@ -54,59 +54,7 @@ class _UploadedState extends State<Uploaded> {
                     ),
                   ),
                 )
-              : Upgrade();
+              :JopCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): Upgrade();
     });
   }
 }
-/*
- CustomCard(
-                  widget: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 11.sp),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 18.h,
-                        ),
-                        CustomCardTitle(
-                          text: 'UPLOADED JOP',
-                        ),
-                        JopCubit.get(context).myJopList.isEmpty
-                            ? Expanded(
-                                child: Column(
-                                  children: [
-                                    CustomNoContainer(text: 'Jop'),
-                                  ],
-                                ),
-                              )
-                            : const MyJopTable(),
-                        Button1()
-                      ],
-                    ),
-                  ),
-                ),
-CustomCard(
-      widget: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 11.sp),
-        child:Column(
-          children: [
-            SizedBox(
-              height: 18.h,
-            ),
-            CustomCardTitle(
-              text: 'UPLOADED JOP',
-            ),
-
-            JopCubit.get(context).jopList.isEmpty
-                ? Expanded(
-              child: Column(
-                children: [
-                  CustomNoContainer(text: 'jop'),
-                ],
-              ),
-            ) : const MyJopTable(),
-            Button()
-          ],
-        ),
-      ),
-    );
- */

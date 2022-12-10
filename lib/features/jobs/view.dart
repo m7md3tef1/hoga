@@ -53,16 +53,7 @@ class _JobsViewState extends State<JobsView> {
               height: 21.h,
             ),
             Expanded(child:
-            RefreshIndicator(
-                color: Colors.orange,
-                backgroundColor: Colors.white,
-                onRefresh: ()async{
-                  print('refresh');
-                  await JopCubit.get(context).getPage();
-                  print("page is "+'${JopCubit.get(context).page}');
-                  await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
-                },
-                child: Body()))
+            Body())
           ],
         ),
       ),

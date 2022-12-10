@@ -15,61 +15,67 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 0.65.sh,
-      child: Scrollbar(
-        thickness: 15,
-        trackVisibility: true,
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: false,
-          scrollDirection: Axis.horizontal,
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                  child: Container(
-                    height: 43.h,
-                    width: 0.2.sw * 7,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15))),
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 7,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                            width: 0.2.sw,
-                            child: CustomText(
-                              text: titlesList[index],
-                              fontSize: 12.sp,
-                              align: TextAlign.start,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          );
-                        }),
-                  ),
+      child:
+      ListView(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: false,
+        scrollDirection: Axis.horizontal,
+        children: [
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                child: Container(
+                  height: 43.h,
+                  width: 0.2.sw * 7,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15))),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 7,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          width: 0.2.sw,
+                          child: CustomText(
+                            text: titlesList[index],
+                            fontSize: 12.sp,
+                            align: TextAlign.start,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        );
+                      }),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    width: 0.2.sw * 7,
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: 0.2.sw * 7,
+                  child: RefreshIndicator(
+                    color: Colors.orange,
+                    backgroundColor: Colors.white,
+                    onRefresh: ()async{
+                      print('refresh');
+                      await JopCubit.get(context).resetPage();
+                      print("page is "+'${JopCubit.get(context).page}');
+                      await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );},
                     child: BlocConsumer<JopCubit, AddJopStates>(
                       builder: (context, state) {
                         if (state is GetJopFailed && state is GetSearchFailed) {
                           return Center(child: CustomText(text: state.msg));
                         } else if (state is GetSearchSuccess) {
                           return ListView.builder(
-                              physics: const AlwaysScrollableScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
                                 print('~~~~~~~~~~~~ ${state.jopList.length}');
 
                                 if (index == state.jopList.length) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
+                                    padding: const EdgeInsets.only(top: 10,bottom: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -287,7 +293,7 @@ class Body extends StatelessWidget {
 
                                 if (index == state.jopList.length) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
+                                    padding: const EdgeInsets.only(top: 10,bottom: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -498,7 +504,6 @@ class Body extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: 10,
                               itemBuilder: (context, index) {
-                                print('llllllll');
 
                                 return Container(
                                   color: index.isEven
@@ -715,11 +720,11 @@ class Body extends StatelessWidget {
                       },
                     ),
                   ),
-                )
-              ],
-            ),
-          ],
-        ),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

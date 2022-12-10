@@ -26,8 +26,9 @@ class LoadsCubit extends Cubit<AddLoadStates> {
 //  List vehcleType = [];
 //  List vehcleSize = [];
 
-  bool isAccessToken = true;
-  bool testLoading = true;
+  bool isAllowed = false;
+  bool testLoading = false;
+  bool unAuthProblem = false;
   bool myVehiclesLoading = true;
 
   int page = 1;
@@ -167,8 +168,12 @@ class LoadsCubit extends Cubit<AddLoadStates> {
     });
   }
 
-  addLoadsCubitTest({context}) {
+
+
+  addLoadCubitTest({context}) {
     testLoading = true;
+    isAllowed=false;
+    emit(CheckAddLoadLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -178,28 +183,40 @@ class LoadsCubit extends Cubit<AddLoadStates> {
       } else {
         LoadsRepo.addLoadsTest(context: context)
             .then((value) => {
-                  testLoading = false,
-                })
-            .catchError((error) {
-          if (error.toString().contains('Unauthorized Access') ||
-              error.toString().contains('no credit left')) {
-            testLoading = false;
-            isAccessToken = false;
-            emit(AddTestFailed(error.toString()));
-            print('oooooooooooooooooo');
+          print('then'),
+          testLoading = false,
+          print(value['record']['subscription_details']['total_loads_remain']),
+          if(value['record']['subscription_details']['total_loads_remain']==null||
+              value['record']['subscription_details']['total_loads_remain']==0){
+            isAllowed=false,
+            emit(AddTestSuccess()),
+
+          }else{
+            print("addVehicleCubitTest"),
+            isAllowed=true,
+            emit(AddTestSuccess()),
+
           }
-          testLoading = false;
-          emit(AddTestFailed(error.toString()));
 
-          print('Add Vehicle Test Failed');
+        })
+            .catchError((error) => {
+          if(error.toString().contains('401')){
+            unAuthProblem=true
+          },
+          print('erorr >>>>>>>>$error'),
+          print(error),
+          isAllowed=false,
+          testLoading = false,
+          emit(AddTestFailed(error.toString())),
+          print('Add Vehicle Test Failed'),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
-          print(error);
-
-          //showToast(msg: error.toString(), state: ToastedStates.ERROR);
         });
+
       }
     });
   }
+
 
   addLoadsCubit({context}) {
     connectivity.checkConnectivity().then((value) async {

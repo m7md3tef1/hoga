@@ -9,7 +9,7 @@ class JobsRepo{
 
   static addJopTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "jobs/add", authToken: token);
+    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
   }
   static Future<List<GetJop>> getJop(url, self,
       {GetJop? productModel,

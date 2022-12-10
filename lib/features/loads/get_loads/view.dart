@@ -54,18 +54,7 @@ class _LoadsViewState extends State<LoadsView> {
               height: 21.h,
             ),
             Expanded(child:
-            RefreshIndicator(
-                color: Colors.orange,
-                backgroundColor: Colors.white,
-                onRefresh: () async {
-                  print('refresh');
-                  await LoadsCubit.get(context).resetPage();
-                  print("page is " + '${LoadsCubit.get(context).page}');
-                  await LoadsCubit.get(context)
-                      .getLoad(pag: LoadsCubit.get(context).page, isFilter: false);
-                },
-
-                    child: Body()))
+            Body())
           ],
         ),
       ),

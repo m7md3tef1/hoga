@@ -71,8 +71,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(
             create: (_) => JopCubit()
-              // ..getJop()
-              ..addJopCubit),
+
+        ),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
         BlocProvider(create: (_) => AddCardCubit()),
 

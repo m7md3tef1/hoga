@@ -52,7 +52,7 @@ class ProductRepo {
 
   static addProductTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "products/add", authToken: token);
+    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
   }
 
   static delete(productId) async {

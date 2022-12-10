@@ -58,20 +58,7 @@ class _SearchViewState extends State<SearchView> {
             ),
 
             Expanded(child:
-            RefreshIndicator(
-                color: Colors.orange,
-                backgroundColor: Colors.white,
-                onRefresh: () async {
-                  print('refresh');
-                  await ProductsCubit.get(context).resetPage();
-                  print("page is " + '${ProductsCubit.get(context).page}');
-                  await ProductsCubit.get(context)
-                      .getProduct(page: ProductsCubit.get(context).page);
-                },
-                child:
-                Body()
-
-            ))
+            Body())
           ],
         ),
       ),

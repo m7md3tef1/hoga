@@ -287,6 +287,6 @@ class LoadsRepo {
 
   static addLoadsTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "loads/add", authToken: token);
+    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
   }
 }

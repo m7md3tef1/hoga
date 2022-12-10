@@ -10,9 +10,9 @@ class UploadedLoad extends StatefulWidget {
 class _UploadedLoadState extends State<UploadedLoad> {
   @override
   void initState() {
-    // TODO: implement initState
+    print('init upload Load Test');
     super.initState();
-    LoadsCubit.get(context).addLoadsCubitTest();
+    LoadsCubit.get(context).addLoadCubitTest();
   }
 
   @override
@@ -20,14 +20,14 @@ class _UploadedLoadState extends State<UploadedLoad> {
     return BlocConsumer<LoadsCubit, AddLoadStates>(
         listener: (BuildContext context, Object? state) {},
         builder: (context, state) {
-          print("is access token ${LoadsCubit.get(context).isAccessToken}");
+          print("is access token ${LoadsCubit.get(context).isAllowed}");
 
           return LoadsCubit.get(context).testLoading
               ? const Center(
                   child: CircularProgressIndicator(
                   color: ColorManager.yellow,
                 ))
-              : LoadsCubit.get(context).isAccessToken
+              : LoadsCubit.get(context).isAllowed
                   ? CustomCard(
                       widget: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 11.sp),
@@ -57,7 +57,7 @@ class _UploadedLoadState extends State<UploadedLoad> {
                         ),
                       ),
                     )
-                  : UpgradeMember();
+                  :LoadsCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): UpgradeMember();
         });
   }
 }

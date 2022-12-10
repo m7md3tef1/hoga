@@ -7,12 +7,15 @@ class FormInfo extends StatefulWidget {
       this.vehiclesModel,
       this.isEdit = false,
       this.isLoadEdit = false,
+        this.isLoad=false,
       this.index})
       : super(key: key);
   bool isFilter;
   Vehicles? vehiclesModel;
   bool isEdit;
   bool isLoadEdit;
+  bool isLoad;
+
   int? index;
   @override
   State<FormInfo> createState() => _FormInfoState();
@@ -133,7 +136,7 @@ print('clearr done');
                         child: CustomText(
                           text: widget.isLoadEdit
                               ? 'Edit Load'
-                              : 'ADD VEHICLE',
+                              :widget.isLoad?'ADD LOAD':widget.isFilter?'EDIT': 'ADD VEHICLE',
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                         ),

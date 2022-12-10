@@ -31,8 +31,9 @@ class ProductsCubit extends Cubit<AddProductStates> {
 
   String? img64;
   List<GetProductModel> productList = [];
-  bool isAccessToken = true;
+  bool isAllowed = false;
   bool testLoading = false;
+  bool unAuthProblem = false;
   bool myVehiclesLoading = false;
   int page = 1;
   String searchValue = '';
@@ -189,9 +190,10 @@ class ProductsCubit extends Cubit<AddProductStates> {
     emit(ImageGallery());
     print('img64' + img64!);
   }
-
   addProductCubitTest({context}) {
     testLoading = true;
+    isAllowed=false;
+    emit(CheckAddProductLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -201,28 +203,40 @@ class ProductsCubit extends Cubit<AddProductStates> {
       } else {
         ProductRepo.addProductTest(context: context)
             .then((value) => {
-                  testLoading = false,
-                })
-            .catchError((error) {
-          if (error.toString().contains('Unauthorized Access') ||
-              error.toString().contains('no credit left')) {
-            testLoading = false;
-            isAccessToken = false;
-            emit(AddTestFailed(error.toString()));
-            print('oooooooooooooooooo');
+          print('then'),
+          testLoading = false,
+          print(value['record']['subscription_details']['total_products_remain']),
+          if(value['record']['subscription_details']['total_products_remain']==null||
+              value['record']['subscription_details']['total_products_remain']==0){
+            isAllowed=false,
+            emit(AddTestSuccess()),
+
+          }else{
+            print("addVehicleCubitTest"),
+            isAllowed=true,
+            emit(AddTestSuccess()),
+
           }
-          testLoading = false;
-          emit(AddTestFailed(error.toString()));
 
-          print('Add Product Test Failed');
+        })
+            .catchError((error) => {
+          if(error.toString().contains('401')){
+            unAuthProblem=true
+          },
+          print('erorr >>>>>>>>$error'),
+          print(error),
+          isAllowed=false,
+          testLoading = false,
+          emit(AddTestFailed(error.toString())),
+          print('Add Vehicle Test Failed'),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
-          print(error);
-
-          //showToast(msg: error.toString(), state: ToastedStates.ERROR);
         });
+
       }
     });
   }
+
 
   editProductCubit(GetProductModel? productModel) {
     connectivity.checkConnectivity().then((value) async {

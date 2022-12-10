@@ -28,7 +28,7 @@ class _UploadedState extends State<Uploaded> {
               child: CircularProgressIndicator(
               color: ColorManager.yellow,
             ))
-          : ProductsCubit.get(context).isAccessToken
+          : ProductsCubit.get(context).isAllowed
               ? CustomCard(
                   widget: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 11.sp),
@@ -54,7 +54,7 @@ class _UploadedState extends State<Uploaded> {
                     ),
                   ),
                 )
-              : UpgradeMember();
+              :ProductsCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): UpgradeMember();
     });
   }
 }

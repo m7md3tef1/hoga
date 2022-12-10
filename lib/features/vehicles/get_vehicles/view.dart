@@ -52,17 +52,7 @@ class _VehiclesViewState extends State<VehiclesView> {
               height: 21.h,
             ),
             Expanded(child:
-            RefreshIndicator(
-                color: Colors.orange,
-                backgroundColor: Colors.white,
-                onRefresh: () async {
-                  print('refresh');
-                  await VehiclesCubit.get(context).resetPage();
-                  print("page is " + '${VehiclesCubit.get(context).page}');
-                  await VehiclesCubit.get(context).getVehicleCubit(context,
-                      page: VehiclesCubit.get(context).page, isFilter: false);
-                },
-                child: Body()))
+            Body())
           ],
         ),
       ),

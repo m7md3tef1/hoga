@@ -7,6 +7,9 @@ class AddProductLoading extends AddProductStates {}
 class AddSuccess extends AddProductStates {}
 
 class AddingProduct extends AddProductStates {}
+class AddTestSuccess extends AddProductStates {}
+class CheckAddProductLoading extends AddProductStates {}
+
 
 class AddFailed extends AddProductStates {}
 

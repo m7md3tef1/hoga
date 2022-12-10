@@ -82,6 +82,7 @@ class AddVehiclesView extends StatelessWidget {
                               isEdit: isEdit,
                               isLoadEdit: isLoadEdit,
                               index: index,
+                              isLoad: isLoad,
                               isFilter: isLoadFilter,
                             ),
                           ),

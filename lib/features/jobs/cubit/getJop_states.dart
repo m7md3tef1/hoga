@@ -55,6 +55,9 @@ class DeleteFailed extends AddJopStates {}
 class EditSuccess extends AddJopStates {}
 
 class EditFailed extends AddJopStates {}
+class AddTestSuccess extends AddJopStates {}
+class CheckAddJobLoading extends AddJopStates {}
+
 
 class NetworkFailed extends AddJopStates {
   final String msg;

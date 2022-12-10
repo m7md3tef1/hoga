@@ -26,8 +26,9 @@ class JopCubit extends Cubit<AddJopStates> {
   TextEditingController descController = TextEditingController();
 
   List<GetJop> myJopList = [];
-  bool isAccessToken = true;
+  bool isAllowed = false;
   bool testLoading = false;
+  bool unAuthProblem = false;
   bool myJopLoading = false;
 
   int page = 1;
@@ -209,10 +210,10 @@ class JopCubit extends Cubit<AddJopStates> {
     DataFormCubit.get(context).shiftTIme = '';
     DataFormCubit.get(context).jopTitle = '';
   }
-
-  addJopCubitTest({context}) {
+  addJobCubitTest({context}) {
     testLoading = true;
-    emit(Loading());
+    isAllowed=false;
+    emit(CheckAddJobLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -222,27 +223,40 @@ class JopCubit extends Cubit<AddJopStates> {
       } else {
         JobsRepo.addJopTest(context: context)
             .then((value) => {
-                  testLoading = false,
-                  showToast(msg: 'success', state: ToastedStates.SUCCESS),
-                })
-            .catchError((error) {
-          if (error.toString().contains('Unauthorized Access') ||
-              error.toString().contains('no credit left')) {
-            testLoading = false;
-            isAccessToken = false;
-            emit(AddTestFailed(error.toString()));
-            print('oooooooooooooooooo');
+          print('then'),
+          testLoading = false,
+          print(value['record']['subscription_details']['total_jobs_remain']),
+          if(value['record']['subscription_details']['total_jobs_remain']==null||
+              value['record']['subscription_details']['total_jobs_remain']==0){
+            isAllowed=false,
+            emit(AddTestSuccess()),
+
+          }else{
+            print("addVehicleCubitTest"),
+            isAllowed=true,
+            emit(AddTestSuccess()),
+
           }
-          testLoading = false;
-          emit(AddTestFailed(error.toString()));
 
-          print('Add Jop Test Failed');
+        })
+            .catchError((error) => {
+          if(error.toString().contains('401')){
+            unAuthProblem=true
+          },
+          print('erorr >>>>>>>>$error'),
+          print(error),
+          isAllowed=false,
+          testLoading = false,
+          emit(AddTestFailed(error.toString())),
+          print('Add Vehicle Test Failed'),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
-          print(error);
         });
+
       }
     });
   }
+
 
   addJopCubit({context, GetJopModel? productModel}) {
     connectivity.checkConnectivity().then((value) async {

@@ -243,14 +243,14 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                       emit(GetVehicleSuccess(value)),
                       print('Get Vehice Response'),
                       print(myVehicleList.length),
-                      vehicleClearData(context)
+                      //vehicleClearData(context)
                     }
                   else
                     {
                       vehicleList = value,
                       print('length >>>> ${vehicleList.length}'),
                       emit(GetVehicleSuccess(value)),
-                      vehicleClearData(context),
+                      //vehicleClearData(context),
                     },
                 })
             .onError((error, stackTrace) => {
@@ -297,7 +297,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   print('Edit Vehicle Success'),
                   print(value),
                   emit(EditSuccess()),
-                  vehicleClearData(context),
+                 // vehicleClearData(context),
                   showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
                 })
             .catchError((error, stackTrace) => {
@@ -382,7 +382,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   emit(AddFailed(error.toString())),
           showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
-          vehicleClearData(context),
+         // vehicleClearData(context),
                   print('Add Vehicle Failed'),
                   print(error),
                 });
@@ -390,11 +390,5 @@ class VehiclesCubit extends Cubit<VehicleStates> {
     });
   }
 
-  addOther(){
-    vehiclesTypeList.add(AddVehicle(title: 'other'));
-    vehicleSizeList.add(AddVehicle(title: 'other'));
-    attributesList.add(AddVehicle(title: 'other'));
-    equipmentList.add(AddVehicle(title: 'other'));
 
-  }
 }
