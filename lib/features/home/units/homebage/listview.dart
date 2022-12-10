@@ -78,7 +78,8 @@ class TeamList extends StatelessWidget {
                       height:14.h ,
                     ),
                   ],
-                )):Container(
+                )):
+        Container(
          // height: 800,
                   child: GridView.builder(
           itemCount:list.length ,
@@ -90,13 +91,15 @@ class TeamList extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: Column(
           children: [
-              ClipPath(
-                clipper: WaveShape(),
-                child: SizedBox(
-                    width: 1.sw,
-                    height: 315.h,
-                    child:Image(image: AssetImage(list[index].img)) ,
-                ),),
+              Expanded(
+                child: ClipPath(
+                  clipper: WaveShape(),
+                  child: SizedBox(
+                      width: 1.sw,
+                      height: 315.h,
+                      child:Image(image: AssetImage(list[index].img)) ,
+                  ),),
+              ),
 
 
               CustomText(
@@ -116,7 +119,7 @@ class TeamList extends StatelessWidget {
                 color: const Color(0xFFAEAEAE),
               ),
               SizedBox(
-                height:14.h ,
+                height:6.h ,
               ),
               CustomText(
                 align: TextAlign.center,
