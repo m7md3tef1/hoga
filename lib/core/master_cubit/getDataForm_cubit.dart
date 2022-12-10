@@ -16,6 +16,11 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
   List<AddVehicle> countryList = [];
   List<AddVehicle> stateList = [];
   List<AddVehicle> cityList = [];
+
+//  List<AddVehicle> countryDestintionList = [];
+//  List<AddVehicle> stateDestintionList = [];
+//  List<AddVehicle> cityDestintionList = [];
+
   List<AddVehicle> productList = [];
   List<AddVehicle> jopTypeList=[];
   List<AddVehicle> jopCategoryList=[];

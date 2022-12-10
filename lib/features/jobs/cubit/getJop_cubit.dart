@@ -4,10 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/models/jobs/get_jop.dart';
 import 'package:hoga_load/core/data/repository/jobs_repo.dart';
-import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_states.dart';
 import '../../../core/data/models/jobs/GetJop_model.dart';
-import '../../../core/data/repository/product_repo.dart';
+import '../../../core/data/repository/vehicle_repo.dart';
 import '../../../core/dialoges/toast.dart';
 import '../../../core/master_cubit/getDataForm_cubit.dart';
 
@@ -121,7 +120,7 @@ class JopCubit extends Cubit<AddJopStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         emit(AddJopLoading());
-        VehicleRepo.getJop('jobs')
+        JobsRepo.getJop2('jobs')
             .then((value) => {
                   print('..................................'),
                   print(value),
@@ -221,7 +220,7 @@ class JopCubit extends Cubit<AddJopStates> {
             msg: 'Check your internet connection and try again',
             state: ToastedStates.ERROR);
       } else {
-        VehicleRepo.addJopTest(context: context)
+        JobsRepo.addJopTest(context: context)
             .then((value) => {
                   testLoading = false,
                   showToast(msg: 'success', state: ToastedStates.SUCCESS),

@@ -36,13 +36,11 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: SizedBox(
-        height: 1.sh,
+      body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 30.sp,),
             CustomAppbar(title: 'Products'),
             SizedBox(
               height: 22.h,

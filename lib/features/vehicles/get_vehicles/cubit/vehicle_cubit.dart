@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hoga_load/core/data/models/response.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/features/home/view.dart';
@@ -37,11 +36,14 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   bool? value=false;
   var valueType;
 
-  bool isAccessToken = true;
-  bool testLoading = true;
+  bool isAllowed = false;
+  bool testLoading = false;
+  bool unAuthProblem = false;
+
   bool myVehiclesLoading = true;
 
   getAttributesCubit() {
+    attributesList.clear();
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -51,7 +53,9 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   print('..................................'),
                   print(value),
                   attributesList = value,
-                  emit(GetAttributesSuccess(value)),
+          attributesList.add(AddVehicle(title: 'other')),
+
+          emit(GetAttributesSuccess(value)),
                   //  attributesBoxValue=List.filled(attributesList.length, false),
                 })
             .onError((error, stackTrace) =>
@@ -61,6 +65,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   getEquipmentsCubit() {
+    equipmentList.clear();
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -70,6 +75,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   print('..................................'),
                   print(value),
                   equipmentList = value,
+          equipmentList.add(AddVehicle(title: 'other')),
                   emit(GetEquipmentSuccess(value)),
                   //equipmentBoxValue=List.filled(equipmentList.length, false),
                 })
@@ -80,6 +86,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   getVehicleSizesCubit() {
+    vehicleSizeList.clear();
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -89,8 +96,11 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   print('..................................'),
                   print(value),
                   vehicleSizeList = value,
-                  emit(GetVehicleSizeSuccess(value)),
-                  // vehcleSizeBoxValue=List.filled(vehicleSizeList.length, false),
+          vehicleSizeList.add(AddVehicle(title: 'other')),
+
+          emit(GetVehicleSizeSuccess(value)),
+//                   vehcleSizeBoxValue=List.filled(vehicleSizeList.length, false),
+
                 })
             .onError((error, stackTrace) =>
                 {emit(GetVehicleSizeFailed(error.toString())), print(error)});
@@ -99,6 +109,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   getVehicleTypesCubit() {
+    vehiclesTypeList.clear();
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -108,6 +119,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   print('..................................'),
                   print(value),
                   vehiclesTypeList = value,
+          vehiclesTypeList.add(AddVehicle(title: 'other')),
                   emit(GetVehiclesTypeSuccess(value)),
                   //vehcleTypeBoxValue=List.filled(vehiclesTypeList.length, false),
                 })
@@ -118,11 +130,13 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   vehicleClearData(context) {
-    print('adada');
+    print('clear vehcle data');
     equipmentType.clear();
     attributes.clear();
     vehcleType.clear();
     vehcleSize.clear();
+    weightController.clear();
+    instructionsController.clear();
     DataFormCubit.get(context).cityOriginID = '';
     DataFormCubit.get(context).countryOriginID = '';
     DataFormCubit.get(context).countryDestinationID = '';
@@ -133,34 +147,36 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   changeCheckBox(boxKey, index, val) {
+
+
     if (boxKey == MasterKeys.vehicleSize.name) {
       print('zzzzzzz ${vehcleSize.length}');
       val
-          ? vehcleSize.add(vehicleSizeList[index].id)
-          : vehcleSize.remove(vehicleSizeList[index].id);
+          ? vehcleSize.add(vehicleSizeList[index].id??'other')
+          : vehcleSize.remove(vehicleSizeList[index].id??'other');
     }
 
     if (boxKey == MasterKeys.vehicleTypes.name) {
       val
-          ? vehcleType.add(vehiclesTypeList[index].id)
-          : vehcleType.remove(vehiclesTypeList[index].id);
+          ? vehcleType.add(vehiclesTypeList[index].id??'other')
+          : vehcleType.remove(vehiclesTypeList[index].id??'other');
     }
     if (boxKey == MasterKeys.attributes.name) {
       val
-          ? attributes.add(attributesList[index].id)
-          : attributes.remove(attributesList[index].id);
+          ? attributes.add(attributesList[index].id??'other')
+          : attributes.remove(attributesList[index].id??'other');
     }
     if (boxKey == MasterKeys.equipmentTypes.name) {
       val
-          ? equipmentType.add(equipmentList[index].id)
-          : equipmentType.remove(equipmentList[index].id);
+          ? equipmentType.add(equipmentList[index].id??'other')
+          : equipmentType.remove(equipmentList[index].id??'other');
     }
     // emit(ChangeBox());
 
-    print(vehcleSize);
-    print(attributes);
-    print(equipmentType);
-    print(vehcleType);
+    print('vehcleSize $vehcleSize');
+    print('attributes $attributes');
+    print("equipmentType $equipmentType");
+    print('vehcleType $vehcleType');
 
     print('+++++++++++++++++++++++++++++++++++');
   }
@@ -191,6 +207,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   getVehicleCubit(
+      context,
       {self,
       page,
       val,
@@ -199,17 +216,18 @@ class VehiclesCubit extends Cubit<VehicleStates> {
       vehicleSize2,
       vehicleType2,
       isFilter,
-      context}) {
+      }) {
     myVehiclesLoading = true;
     emit(VehicleLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        VehicleRepo.getVehicles(self,
+        VehicleRepo.getVehicles(
+          context,
+            self,
                 page: page,
                 val: val,
-                context: context,
                 isFilter: isFilter,
                 vehicleSize: vehicleSize2,
                 vehicleType: vehicleType2,
@@ -225,14 +243,14 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                       emit(GetVehicleSuccess(value)),
                       print('Get Vehice Response'),
                       print(myVehicleList.length),
-                      vehicleClearData(Home.scaffoldStateKey.currentContext)
+                      vehicleClearData(context)
                     }
                   else
                     {
                       vehicleList = value,
                       print('length >>>> ${vehicleList.length}'),
                       emit(GetVehicleSuccess(value)),
-                      vehicleClearData(Home.scaffoldStateKey.currentContext),
+                      vehicleClearData(context),
                     },
                 })
             .onError((error, stackTrace) => {
@@ -240,53 +258,10 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   emit(GetVehicleFailed(error.toString())),
                   print(stackTrace),
                   print('erorr >>>>>>>>$error'),
-                  vehicleClearData(Home.scaffoldStateKey.currentContext),
                 });
       }
     });
   }
-//  searchVehicles(context,{val,equipmentSize2,attributes2,vehicleSize2,vehicleType2}) {
-//      searchList.clear();
-//      print("cubit");
-//      print(equipmentSize2);
-//      print(vehicleSize2);
-//
-//
-//      connectivity.checkConnectivity().then((value)async{
-//      if(ConnectivityResult.none == value){
-//        emit(NetworkFailed("Check your internet connection and try again"));
-//      }else{
-//        VehicleRepo.searchVehicles(search: val,equipmentSize: equipmentSize2,vehicleSize: vehicleSize2,
-//            attributes: attributes2,vehicleType: vehicleType2,context: context).then((value) => {
-//          print('..................................'),
-//          print(value),
-//          print("value2"),
-//
-//          if(value.isNotEmpty){
-//            print("value"),
-//            print('..................................'),
-//            print(value),
-//            searchList=value,
-//            emit(GetSearchSuccess(searchList)),
-//            vehicleClearData(context),
-//
-//
-//          }else{
-//            emit(GetSearchFailed('Nothing found try again')),
-//            vehicleClearData(context),
-//
-//          }
-//
-//        }).onError((error, stackTrace) => {
-//          emit(GetSearchFailed(error.toString())),
-//          vehicleClearData(context),
-//          print(error)
-//
-//        });
-//      }
-//
-//    });
-//  }
 
   deleteVehicleCubit(vehicleId) {
     connectivity.checkConnectivity().then((value) async {
@@ -301,7 +276,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   showToast(
                       msg: 'Delete Success', state: ToastedStates.SUCCESS),
                 })
-            .onError((error, stackTrace) => {
+            .catchError((error, stackTrace) => {
                   emit(DeleteFailed()),
                   print(error),
                   showToast(msg: error.toString(), state: ToastedStates.ERROR),
@@ -316,11 +291,13 @@ class VehiclesCubit extends Cubit<VehicleStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
+
         VehicleRepo.editVehicle(context: context, vehicleId: vehicleId)
             .then((value) => {
                   print('Edit Vehicle Success'),
                   print(value),
                   emit(EditSuccess()),
+                  vehicleClearData(context),
                   showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
                 })
             .catchError((error, stackTrace) => {
@@ -335,7 +312,8 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
   addVehicleCubitTest({context}) {
     testLoading = true;
-    emit(Loading());
+    isAllowed=false;
+    emit(CheckAddVehicleLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -345,25 +323,36 @@ class VehiclesCubit extends Cubit<VehicleStates> {
       } else {
         VehicleRepo.addVehicleTest(context: context)
             .then((value) => {
-                  testLoading = false,
+              print('then'),
+          testLoading = false,
+          print(value['record']['subscription_details']['total_vehicles_remain']),
+             if(value['record']['subscription_details']['total_vehicles_remain']==null||
+                 value['record']['subscription_details']['total_vehicles_remain']==0){
+                 isAllowed=false,
+               emit(AddTestSuccess()),
+
+            }else{
+               print("addVehicleCubitTest"),
+               isAllowed=true,
+               emit(AddTestSuccess()),
+
+             }
+
                 })
-            .catchError((error) {
-          if (error.toString().contains('Unauthorized Access') ||
-              error.toString().contains('no credit left')) {
-            testLoading = false;
-            isAccessToken = false;
-            emit(AddTestFailed(error.toString()));
-            print('oooooooooooooooooo');
-          }
-          testLoading = false;
-          emit(AddTestFailed(error.toString()));
+            .catchError((error) => {
+          if(error.toString().contains('401')){
+            unAuthProblem=true
+          },
+          print('erorr >>>>>>>>$error'),
+          print(error),
+          isAllowed=false,
+          testLoading = false,
+          emit(AddTestFailed(error.toString())),
+          print('Add Vehicle Test Failed'),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
-          print('Add Vehicle Test Failed');
-
-          print(error);
-
-          //showToast(msg: error.toString(), state: ToastedStates.ERROR);
         });
+
       }
     });
   }
@@ -384,17 +373,28 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   emit(AddSuccess()),
                   if (isLoad)
                     LoadsCubit.get(context).getLoad(self: 1, isFilter: false),
-                  vehicleClearData(Home.scaffoldStateKey.currentContext),
-                  showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
+                 // vehicleClearData(Home.scaffoldStateKey.currentContext),
+          vehicleClearData(context),
+
+          showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
                 })
             .catchError((error, stack) => {
                   emit(AddFailed(error.toString())),
-                  vehicleClearData(Home.scaffoldStateKey.currentContext),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
+          vehicleClearData(context),
                   print('Add Vehicle Failed'),
-                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
                   print(error),
                 });
       }
     });
+  }
+
+  addOther(){
+    vehiclesTypeList.add(AddVehicle(title: 'other'));
+    vehicleSizeList.add(AddVehicle(title: 'other'));
+    attributesList.add(AddVehicle(title: 'other'));
+    equipmentList.add(AddVehicle(title: 'other'));
+
   }
 }

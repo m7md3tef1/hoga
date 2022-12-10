@@ -23,60 +23,62 @@ class CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      height: 100.h,
-      width: double.infinity,
-      child: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.sp),
-          child: Column(
-            children: [
-              Center(child: Image(
-                  height: 60.h,
-                  width: 1.sw,
-                  image: const AssetImage(AppImages.logo))),
-              Row(
-                mainAxisAlignment:
-                (hideIcons == null || !hideIcons!) && icon != null
-                    ? MainAxisAlignment.spaceBetween
-                    : (hideIcons == null || !hideIcons!)
-                    ? MainAxisAlignment.start
-                    : MainAxisAlignment.center,
-                children: [
-                  if (hideIcons == null || !hideIcons!)
-                    InkWell(
-                        onTap: () {
-                          print('clicked');
-                          if (scaffoldKey != null) {
-                            print('clicked2');
+    return SafeArea(
+      child: Container(
+        color: Colors.white,
+        height: 100.h,
+        width: double.infinity,
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.sp),
+            child: Column(
+              children: [
+                Center(child: Image(
+                    height: 60.h,
+                    width: 1.sw,
+                    image: const AssetImage(AppImages.logo))),
+                Row(
+                  mainAxisAlignment:
+                  (hideIcons == null || !hideIcons!) && icon != null
+                      ? MainAxisAlignment.spaceBetween
+                      : (hideIcons == null || !hideIcons!)
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.center,
+                  children: [
+                    if (hideIcons == null || !hideIcons!)
+                      InkWell(
+                          onTap: () {
+                            print('clicked');
+                            if (scaffoldKey != null) {
+                              print('clicked2');
 
-                            scaffoldKey!.currentState!.openDrawer();
-                          } else {
-                            Home.scaffoldStateKey.currentState!.openDrawer();
-                          }
+                              scaffoldKey!.currentState!.openDrawer();
+                            } else {
+                              Home.scaffoldStateKey.currentState!.openDrawer();
+                            }
 
-                        },
-                        child: SvgPicture.asset(AppImages.menu)),
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: CustomText(
-                        text: title,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
+                          },
+                          child: SvgPicture.asset(AppImages.menu)),
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: CustomText(
+                          text: title,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                  if ((hideIcons == null || !hideIcons!))
-                    InkWell(
-                        onTap: () {
-                          MagicRouter.navigateTo( DashboardView());
-                        },
-                        child: const Icon(Icons.account_circle_outlined)),
-                ],
-              ),
-            ],
+                    if ((hideIcons == null || !hideIcons!))
+                      InkWell(
+                          onTap: () {
+                            MagicRouter.navigateTo( DashboardView());
+                          },
+                          child: const Icon(Icons.account_circle_outlined)),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

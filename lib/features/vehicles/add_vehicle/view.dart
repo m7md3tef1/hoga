@@ -4,15 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/data/models/vehicle/vehicles.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
-import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
-
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_checkbox.dart';
-import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
-
 import '../../../core/keys/keys.dart';
 import '../../../core/master_cubit/getDataForm_cubit.dart';
 import '../../../core/master_cubit/getDataForm_state.dart';
@@ -54,7 +50,7 @@ class AddVehiclesView extends StatelessWidget {
       body: SafeArea(
         child: BlocConsumer<VehiclesCubit, VehicleStates>(
           listener: (BuildContext context, state) {
-            if (state is AddSuccess) {
+            if (state is AddSuccess||state is EditSuccess) {
               Navigator.pop(context);
             }
           },
@@ -68,10 +64,10 @@ class AddVehiclesView extends StatelessWidget {
                         : isLoadFilter
                             ? 'Search'
                             : isLoad
-                                ? "Add a New Load"
+                                ? "Add  New Load"
                                 : isEdit
                                     ? "Edit Vehicle"
-                                    : 'Add a New Vehicle',scaffoldKey: uploadedProductsScaffoldKey,),
+                                    : 'Add  New Vehicle',scaffoldKey: uploadedProductsScaffoldKey,),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -125,7 +121,7 @@ class AddVehiclesView extends StatelessWidget {
                             padding: EdgeInsets.only(top: 22),
                             child: Instructions(),
                           ),
-                          state is AddingLoad
+                          state is AddingLoad||state is EditSuccess
                               ? Center(
                                   child: Container(
                                       height: 30,

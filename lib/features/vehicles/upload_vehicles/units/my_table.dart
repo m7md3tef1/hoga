@@ -15,11 +15,11 @@ class MyTable extends StatelessWidget {
               onRefresh: () async {
                 print('refresh');
                 await VehiclesCubit.get(context).resetPage();
-                await VehiclesCubit.get(context).getVehicleCubit(
+                await VehiclesCubit.get(context).getVehicleCubit(context,
                     page: VehiclesCubit.get(context).page, self: 1);
               },
               child: ListView.builder(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: VehiclesCubit.get(context).myVehicleList.length,
                   itemBuilder: (context, index) {
                     return Container(

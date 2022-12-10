@@ -39,7 +39,8 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
   @override
   void initState() {
     super.initState();
-    VehiclesCubit.get(context).getVehicleCubit(self: 1);
+    print('init upload vehicle');
+    VehiclesCubit.get(context).getVehicleCubit(context,self: 1);
     VehiclesCubit.get(context).page=1;
 
   }
@@ -57,7 +58,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
               title: 'Uploaded VEHICLES'.toUpperCase(),
               scaffoldKey: uploadedVehiclesScaffoldKey,
             ),
-          ! CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn(): const Expanded(child: Uploaded()),
+          ! CacheHelper.getBool(SharedKeys.isLogin)?const CustomNotLoggedIn(): const Expanded(child: Uploaded()),
             //MyTable(),
           ],
         ),

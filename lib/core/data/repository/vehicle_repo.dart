@@ -53,14 +53,13 @@ class VehicleRepo {
     return getProfileList;
   }
 
-  static Future<List<Vehicles>> getVehicles(self,
+  static Future<List<Vehicles>> getVehicles(context,self,
       {val,
         page,
         equipmentSize,
         attributes,
         vehicleSize,
         vehicleType,
-        context,
         isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
 
@@ -135,17 +134,6 @@ class VehicleRepo {
     return blogsList;
   }
 
-  static Future<List<GetJop>> getJop(url) async {
-    String token = await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url, authToken: token);
-
-    List<GetJop> productsList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      GetJop blogModel = GetJop.fromJson(response['records'][i]);
-      productsList.add(blogModel);
-    }
-    return productsList;
-  }
 
   static Future<List<Packages>> getPackage() async {
     String token = await CacheHelper.getString(SharedKeys.token);
@@ -177,16 +165,18 @@ class VehicleRepo {
         VehiclesCubit.get(context).attributes.toString());
     print("vehicleSize" + VehiclesCubit.get(context).vehcleSize.toString());
     print("vehicleType" + VehiclesCubit.get(context).vehcleType.toString());
-    print("origin_country_id" +
+    print("countryOriginID" +
         DataFormCubit.get(context).countryOriginID.toString());
-    print("origin_country_id" +
+    print("stateOriginID" +
         DataFormCubit.get(context).stateOriginID.toString());
-    print("origin_country_id" +
+    print("cityOriginID" +
         DataFormCubit.get(context).cityOriginID.toString());
-    print("origin_country_id" +
+    print("countryDestinationID" +
         DataFormCubit.get(context).countryDestinationID.toString());
-    print("origin_country_id" +
+    print("stateDestinationID" +
         DataFormCubit.get(context).stateDestinationID.toString());
+    print("cityDestinationID" +
+        DataFormCubit.get(context).cityDestinationID.toString());
     String token = await CacheHelper.getString(SharedKeys.token);
 
     return await Api()
@@ -234,6 +224,24 @@ class VehicleRepo {
 
   static addVehicle({context, isLoad}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
+
+    print("repooo");
+    print("equipment_types" + DataFormCubit.get(context).dateTime.toString());
+    print("vehicle_attributes" +
+        VehiclesCubit.get(context).attributes.toString());
+    print("vehicleSize" + VehiclesCubit.get(context).vehcleSize.toString());
+    print("vehicleType" + VehiclesCubit.get(context).vehcleType.toString());
+    print("countryOriginID" +
+        DataFormCubit.get(context).countryOriginID.toString());
+    print("stateOriginID" +
+        DataFormCubit.get(context).stateOriginID.toString());
+    print("cityOriginID" +
+        DataFormCubit.get(context).cityOriginID.toString());
+    print("countryDestinationID" +
+        DataFormCubit.get(context).countryDestinationID.toString());
+    print("stateDestinationID" +
+        DataFormCubit.get(context).stateDestinationID.toString());
+
     return await Api().postHttp(
         url: isLoad ? "loads/add" : "vehicles/add",
         authToken: token,
@@ -282,59 +290,15 @@ class VehicleRepo {
 
   static addVehicleTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "vehicles/add", authToken: token);
+    print( token);
+    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
   }
 
-  static addJop({context}) async {
-    String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "jobs/add", authToken: token, data: {
-      "availability_date": DataFormCubit.get(context).dateTime.toString(),
-      "equipment_types": VehiclesCubit.get(context)
-          .equipmentType
-          .toString()
-          .replaceAll(",", "-")
-          .replaceAll("[", "")
-          .replaceAll("]", "")
-          .replaceAll(" ", ""),
-      "vehicle_attributes": VehiclesCubit.get(context)
-          .attributes
-          .toString()
-          .replaceAll(",", "-")
-          .replaceAll("[", "")
-          .replaceAll("]", "")
-          .replaceAll(" ", ""),
-      "vehicle_sizes": VehiclesCubit.get(context)
-          .vehcleSize
-          .toString()
-          .replaceAll(",", "-")
-          .replaceAll("[", "")
-          .replaceAll("]", "")
-          .replaceAll(" ", ""),
-      "vehicle_types": VehiclesCubit.get(context)
-          .vehcleType
-          .toString()
-          .replaceAll(",", "-")
-          .replaceAll("[", "")
-          .replaceAll("]", "")
-          .replaceAll(" ", ""),
-      "origin_country": DataFormCubit.get(context).countryOriginID,
-      "origin_state": DataFormCubit.get(context).stateOriginID,
-      "origin_city": DataFormCubit.get(context).cityOriginID,
-      "destination_country": DataFormCubit.get(context).countryDestinationID,
-      "destination_state": DataFormCubit.get(context).stateDestinationID,
-      "destination_city": DataFormCubit.get(context).cityDestinationID,
-      "weight": VehiclesCubit.get(context).weightController,
-      "instructions": VehiclesCubit.get(context).instructionsController,
-    });
-  }
   static cancel() async {
     String token = await CacheHelper.getString(SharedKeys.token);
     return await Api().postHttp(
         url: "profile/current-subscription/cancel", authToken: token);
   }
 
-  static addJopTest({context}) async {
-    String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "jobs/add", authToken: token);
-  }
+
 }

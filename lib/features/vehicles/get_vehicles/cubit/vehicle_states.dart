@@ -11,6 +11,7 @@ class AddingLoad extends VehicleStates {}
 
 class AddSuccess extends VehicleStates {}
 class AddPage extends VehicleStates {}
+class AddTestSuccess extends VehicleStates {}
 
 
 class AddFailed extends VehicleStates {
@@ -31,7 +32,7 @@ class DeleteSuccess extends VehicleStates {}
 
 class DeleteFailed extends VehicleStates {}
 
-class Loading extends VehicleStates {}
+class CheckAddVehicleLoading extends VehicleStates {}
 
 class GetAttributesSuccess extends VehicleStates {
   List<AddVehicle> attributesList = [];

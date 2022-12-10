@@ -60,7 +60,7 @@ class FilterVehicle extends StatelessWidget {
                                 onTap: ()async{
                                   print('filter Search');
                                  await VehiclesCubit.get(context).getVehicleCubit(
-                                     context:context,
+                                     context,
                                     isFilter: true,
                                     equipmentSize2:
                                     VehiclesCubit.get(context).equipmentType.toString()

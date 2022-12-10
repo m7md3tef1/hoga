@@ -213,7 +213,7 @@ class _BottomState extends State<Bottom> {
             'Read More',
             const Color(0xFFF68C09),
             isColor: true,
-            function: VehiclesCubit.get(context).getVehicleCubit(self: 0),
+            function: VehiclesCubit.get(context).getVehicleCubit(context,self: 0),
           ),
           VehicleContainer(
             'assets/images/product.png',

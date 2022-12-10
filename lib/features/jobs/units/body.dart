@@ -62,7 +62,7 @@ class Body extends StatelessWidget {
                           return Center(child: CustomText(text: state.msg));
                         } else if (state is GetSearchSuccess) {
                           return ListView.builder(
-                             // physics: const NeverScrollableScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
                                 print('~~~~~~~~~~~~ ${state.jopList.length}');
@@ -281,7 +281,7 @@ class Body extends StatelessWidget {
                               });
                         } else if (state is GetJopSuccess) {
                           return ListView.builder(
-                             // physics: const NeverScrollableScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               itemCount: state.jopList.length + 1,
                               itemBuilder: (context, index) {
 
@@ -581,7 +581,7 @@ class Body extends StatelessWidget {
                               });
                         } else {
                           return ListView.builder(
-                            //  physics: const NeverScrollableScrollPhysics(),
+                             physics: const BouncingScrollPhysics(),
                               itemCount: JopCubit.get(context).jopList.length,
                               itemBuilder: (context, index) {
 

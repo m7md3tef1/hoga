@@ -33,37 +33,38 @@ class _JobsViewState extends State<JobsView> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body:
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 30.sp,),
-          CustomAppbar(title: 'Jobs'),
-          SizedBox(
-            height: 22.h,
-          ),
-          CustomSearchRow(
-            4,
-            function: () {
-              MagicRouter.navigateTo(AddJopView(
-                isFilter: true,
-              ));
-            },
-          ),
-          SizedBox(
-            height: 21.h,
-          ),
-          Expanded(child:
-          RefreshIndicator(
-              color: Colors.orange,
-              backgroundColor: Colors.white,
-              onRefresh: ()async{
-                print('refresh');
-                await JopCubit.get(context).getPage();
-                print("page is "+'${JopCubit.get(context).page}');
-                await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
+      SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomAppbar(title: 'Jobs'),
+            SizedBox(
+              height: 22.h,
+            ),
+            CustomSearchRow(
+              4,
+              function: () {
+                MagicRouter.navigateTo(AddJopView(
+                  isFilter: true,
+                ));
               },
-              child: Body()))
-        ],
+            ),
+            SizedBox(
+              height: 21.h,
+            ),
+            Expanded(child:
+            RefreshIndicator(
+                color: Colors.orange,
+                backgroundColor: Colors.white,
+                onRefresh: ()async{
+                  print('refresh');
+                  await JopCubit.get(context).getPage();
+                  print("page is "+'${JopCubit.get(context).page}');
+                  await JopCubit.get(context).getJops(page:JopCubit.get(context).page,isFilter: false );
+                },
+                child: Body()))
+          ],
+        ),
       ),
     );
   }

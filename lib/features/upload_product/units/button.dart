@@ -17,7 +17,7 @@ class Button extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: CustomButton(
-          text: '+ Add',
+          text:  isUpgradeMember?'Subscribe':'+ Add',
           icon: Icons.add,
           color: ColorManager.yellow,
           function: () {

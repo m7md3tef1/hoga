@@ -62,7 +62,7 @@ class Body extends StatelessWidget {
                         ));
                       } else if (state is GetSearchSuccess) {
                         return ListView.builder(
-                            //physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.vehicleList.length + 1,
                             itemBuilder: (context, index) {
                               if (index == state.vehicleList.length) {
@@ -81,6 +81,7 @@ class Body extends StatelessWidget {
                                                 .resetPage();
                                             VehiclesCubit.get(context)
                                                 .getVehicleCubit(
+                                                context,
                                                     page: VehiclesCubit.get(
                                                             context)
                                                         .page,
@@ -110,6 +111,7 @@ class Body extends StatelessWidget {
                                                         1);
                                             VehiclesCubit.get(context)
                                                 .getVehicleCubit(
+                                                context,
                                                     page: VehiclesCubit.get(
                                                             context)
                                                         .page,
@@ -161,6 +163,7 @@ class Body extends StatelessWidget {
 
                                             VehiclesCubit.get(context)
                                                 .getVehicleCubit(
+                                                context,
                                                     page: VehiclesCubit.get(
                                                             context)
                                                         .page,
@@ -300,7 +303,7 @@ class Body extends StatelessWidget {
                             });
                       } else if (state is GetVehicleSuccess) {
                         return ListView.builder(
-                           // physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.vehicleList.length + 1,
                             itemBuilder: (context, index) {
                               if (index == state.vehicleList.length) {
@@ -319,6 +322,7 @@ class Body extends StatelessWidget {
                                                 .resetPage();
                                             VehiclesCubit.get(context)
                                                 .getVehicleCubit(
+                                                context,
                                                     page: VehiclesCubit.get(
                                                             context)
                                                         .page);
@@ -344,7 +348,7 @@ class Body extends StatelessWidget {
                                                             .page -
                                                         1);
                                             VehiclesCubit.get(context)
-                                                .getVehicleCubit(
+                                                .getVehicleCubit(context,
                                                     page: VehiclesCubit.get(
                                                             context)
                                                         .page);
@@ -393,6 +397,7 @@ class Body extends StatelessWidget {
 
                                             VehiclesCubit.get(context)
                                                 .getVehicleCubit(
+                                                context,
                                                     page: VehiclesCubit.get(
                                                             context)
                                                         .page);
@@ -615,7 +620,7 @@ class Body extends StatelessWidget {
                             });
                       } else {
                         return ListView.builder(
-                          //  physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount:
                                 VehiclesCubit.get(context).vehicleList.length,
                             itemBuilder: (context, index) {

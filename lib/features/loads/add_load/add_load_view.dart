@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
@@ -93,3 +94,4 @@ class AddLoadsView extends StatelessWidget {
     );
   }
 }
+*/

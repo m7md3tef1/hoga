@@ -31,14 +31,13 @@ class CustomSearchRow extends StatelessWidget {
                 child: Center(
                   child: TextFormField(
                     onFieldSubmitted: (val) {
-                      print('hhhhhhhhhhhhhhhhhhhhhhhhh');
                       print(val);
                       if (index == 3) {
                         ProductsCubit.get(context).setSearchVal(val.trim());
                       }
                       index == 1
                           ? VehiclesCubit.get(context)
-                              .getVehicleCubit(val: val.trim())
+                              .getVehicleCubit(context,val: val.trim())
                           : index == 2
                               ? LoadsCubit.get(context)
                                   .getLoad(val: val.trim(), isFilter: false)

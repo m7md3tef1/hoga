@@ -55,7 +55,7 @@ class Body extends StatelessWidget {
                         return Center(child: CustomText(text: state.msg));
                       } else if (state is GetSearchSuccess) {
                         return ListView.builder(
-                           // physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.productList.length + 1,
                             itemBuilder: (context, index) {
                               if (index == state.productList.length) {
@@ -270,7 +270,7 @@ class Body extends StatelessWidget {
                       } else if (state is GetProductsSuccess) {
                         return ListView.builder(
 
-                           // physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.productList.length + 1,
                             itemBuilder: (context, index) {
                               if (index == state.productList.length) {
@@ -560,7 +560,7 @@ class Body extends StatelessWidget {
                             });
                       } else {
                         return ListView.builder(
-                          //  physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount:
                                 ProductsCubit.get(context).productList.length,
                             itemBuilder: (context, index) {

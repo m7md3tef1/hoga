@@ -5,6 +5,12 @@ import '../models/jobs/GetJop_model.dart';
 import '../models/jobs/get_jop.dart';
 
 class JobsRepo{
+
+
+  static addJopTest({context}) async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "jobs/add", authToken: token);
+  }
   static Future<List<GetJop>> getJop(url, self,
       {GetJop? productModel,
         titleController,
@@ -59,6 +65,17 @@ class JobsRepo{
     String token = await CacheHelper.getString(SharedKeys.token);
     return await Api()
         .getHttp(url: "jobs/delete", authToken: token, data: {"id": productId});
+  }
+  static Future<List<GetJop>> getJop2(url) async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    var response = await Api().getHttp(url: url, authToken: token);
+
+    List<GetJop> productsList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      GetJop blogModel = GetJop.fromJson(response['records'][i]);
+      productsList.add(blogModel);
+    }
+    return productsList;
   }
 
   static editJop(GetJopModel? productModel) async {

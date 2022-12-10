@@ -13,19 +13,30 @@ class Api {
           queryParameters: data);
 
       if (response.statusCode == 200) {
+        print('GET REQUEST: $baseUrl$url');
+        print(response.data);
+
         return response.data;
       } else {
         return '';
       }
     } on DioError catch (e) {
-      //  ResponseModel responseModel=ResponseModel.fromJson(e.response!.data);
-      print('------------------------');
-      print(e.error);
-      print('------------------------');
-      return e.error;
+      print('GET REQUEST: $baseUrl$url');
+      if (e.response!.statusCode == 401) {
+        throw Exception(e.response!.data);
+       // return e.response!.statusCode;
+      } else {
+        //  ResponseModel responseModel=ResponseModel.fromJson(e.response!.data);
+        print('------------------------');
+        print(e.response!.data);
+        print(e.error);
+        print('------------------------');
+        //return e.error;
+        throw Exception(e.response!.data);
+
+      }
     }
   }
-
   Future<dynamic> postHttp({required url, data, authToken, queryParams}) async {
     try {
       var response = await Dio().post(baseUrl + '$url',
@@ -38,11 +49,15 @@ class Api {
           ));
 
       if (response.statusCode == 200) {
+        print('Success POST REQUEST: $baseUrl$url');
+        print(response.data);
         print(response.data);
         print(response.statusCode);
         return response.data;
       }
     } on DioError catch (e) {
+      print('Failed POST REQUEST: $baseUrl$url');
+
       // ResponseModel responseModel = ResponseModel.fromJson(e.response!.data);
       print('------------------------');
       print(e.error);
@@ -50,7 +65,7 @@ class Api {
       print('------------------------');
 
 //      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
-      throw Exception(e.error);
+      throw Exception(e.response!.data);
     }
   }
 

@@ -59,7 +59,7 @@ class Body extends StatelessWidget {
                         return Center(child: CustomText(text: state.msg));
                       } else if (state is GetSearchSuccess) {
                         return ListView.builder(
-                            //physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.loadList.length + 1,
                             itemBuilder: (context, index) {
                               if (index == state.loadList.length) {
@@ -274,7 +274,7 @@ class Body extends StatelessWidget {
                             });
                       } else if (state is GetLoadsSuccess) {
                         return ListView.builder(
-                           // physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount: state.loadList.length + 1,
                             itemBuilder: (context, index) {
                               print('llllllll');
@@ -495,7 +495,6 @@ class Body extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: 6,
                             itemBuilder: (context, index) {
-                              print('llllllll');
 
                               return Container(
                                 color: index.isEven
@@ -578,7 +577,7 @@ class Body extends StatelessWidget {
                             });
                       } else {
                         return ListView.builder(
-                           // physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemCount:
                                 LoadsCubit.get(context).loadList.length,
                             itemBuilder: (context, index) {

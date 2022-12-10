@@ -35,38 +35,39 @@ class _LoadsViewState extends State<LoadsView> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body:
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 30.sp,),
-          CustomAppbar(title: 'Loads'),
-          SizedBox(
-            height: 22.h,
-          ),
-          CustomSearchRow(
-            2,
-            function: () {
-              VehiclesCubit.get(context).vehicleClearData(context);
-              MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
-            },
-          ),
-          SizedBox(
-            height: 21.h,
-          ),
-          Expanded(child:
-          RefreshIndicator(
-              color: Colors.orange,
-              backgroundColor: Colors.white,
-              onRefresh: () async {
-                print('refresh');
-                await LoadsCubit.get(context).resetPage();
-                print("page is " + '${LoadsCubit.get(context).page}');
-                await LoadsCubit.get(context)
-                    .getLoad(pag: LoadsCubit.get(context).page, isFilter: false);
+      SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomAppbar(title: 'Loads'),
+            SizedBox(
+              height: 22.h,
+            ),
+            CustomSearchRow(
+              2,
+              function: () {
+                VehiclesCubit.get(context).vehicleClearData(context);
+                MagicRouter.navigateTo(AddVehiclesView(isLoadFilter: true));
               },
+            ),
+            SizedBox(
+              height: 21.h,
+            ),
+            Expanded(child:
+            RefreshIndicator(
+                color: Colors.orange,
+                backgroundColor: Colors.white,
+                onRefresh: () async {
+                  print('refresh');
+                  await LoadsCubit.get(context).resetPage();
+                  print("page is " + '${LoadsCubit.get(context).page}');
+                  await LoadsCubit.get(context)
+                      .getLoad(pag: LoadsCubit.get(context).page, isFilter: false);
+                },
 
-                  child: Body()))
-        ],
+                    child: Body()))
+          ],
+        ),
       ),
     );
   }

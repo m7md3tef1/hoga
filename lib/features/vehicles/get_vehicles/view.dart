@@ -59,7 +59,7 @@ class _VehiclesViewState extends State<VehiclesView> {
                   print('refresh');
                   await VehiclesCubit.get(context).resetPage();
                   print("page is " + '${VehiclesCubit.get(context).page}');
-                  await VehiclesCubit.get(context).getVehicleCubit(
+                  await VehiclesCubit.get(context).getVehicleCubit(context,
                       page: VehiclesCubit.get(context).page, isFilter: false);
                 },
                 child: Body()))
