@@ -52,7 +52,7 @@ class Body extends StatelessWidget {
                     builder: (context, state) {
                       if (state is GetProductsFailed &&
                           state is GetSearchFailed) {
-                        return Center(child: CustomText(text: state.msg));
+                        return Center(child:  Text(state.msg),);
                       } else if (state is GetSearchSuccess) {
                         return ListView.builder(
                             physics: const BouncingScrollPhysics(),

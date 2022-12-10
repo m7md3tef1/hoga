@@ -9,6 +9,7 @@ class Detail extends StatelessWidget {
   Detail(this.load, {super.key}) ;
   Vehicles? load;
 
+
   GlobalKey<ScaffoldState> scaffoldKey=GlobalKey<ScaffoldState>();
 
   @override

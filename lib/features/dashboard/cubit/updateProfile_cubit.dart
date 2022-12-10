@@ -45,11 +45,12 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
 
   getUserProfileData() async {
     var token = await CacheHelper.getString(SharedKeys.token);
+    emit(GetUserProfileLoading());
     var response = Api().getHttp(
       url: 'profile',
       authToken: token,
     );
-    emit(GetUserProfileLoading());
+
     print(response);
     response
         .then((value) => {

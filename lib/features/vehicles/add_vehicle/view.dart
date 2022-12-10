@@ -62,7 +62,7 @@ class AddVehiclesView extends StatelessWidget {
                     title: isLoadEdit
                         ? 'Edit Load'
                         : isLoadFilter
-                            ? 'Search'
+                            ? 'Search Load'
                             : isLoad
                                 ? "Add  New Load"
                                 : isEdit

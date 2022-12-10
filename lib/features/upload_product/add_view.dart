@@ -34,7 +34,7 @@ part 'units/add_product_form.dart';
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomAppbar(title: isEdit?'Edit Products':isFilter?'Search Product':'Add Product',scaffoldKey: uploadedProductsScaffoldKey,),
+          CustomAppbar(title: isEdit?'Edit Products':isFilter?'Search Product':'Add New Product',scaffoldKey: uploadedProductsScaffoldKey,),
           Expanded(child: SingleChildScrollView(
               physics:BouncingScrollPhysics(),
               child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/features/subscribtion_details/units/details.dart';
 import 'package:hoga_load/features/subscribtion_details/units/facilities.dart';
@@ -10,6 +11,8 @@ import '../../core/data/local/cacheHelper.dart';
 import '../../core/keys/keys.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
+import '../dashboard/cubit/UpdateProfile_state.dart';
+import '../dashboard/cubit/updateProfile_cubit.dart';
 
 part 'units/body.dart';
 

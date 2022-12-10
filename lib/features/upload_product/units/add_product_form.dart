@@ -79,7 +79,7 @@ class _FormState extends State<Form> {
                                     ? "EDIT PRODUCT"
                                     : widget.isFilter
                                         ? 'Filter'
-                                        : 'ADD PRODUCT',
+                                        : 'ADD ',
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.w700,
                               ),

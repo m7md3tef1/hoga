@@ -70,7 +70,7 @@ class _FormInfoState extends State<FormInfo> {
                     children: [
                         InkWell(
 
-                         child: Icon(
+                         child: const Icon(
                           Icons.arrow_back_sharp,
                       ),
                          onTap: (){
@@ -79,7 +79,7 @@ class _FormInfoState extends State<FormInfo> {
                        ),
                       Expanded(
                         child: CustomText(
-                          text: widget.isFilter?"Search Job":'ADD JOB',
+                          text: widget.isFilter?"Filter":'ADD ',
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                         ),
