@@ -5,10 +5,32 @@ import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/data/models/jobs/get_jop.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomContainerJop extends StatelessWidget {
   final GetJop jop;
   const CustomContainerJop(this.jop, {Key? key}) : super(key: key);
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+  Future<void> _launchURl(email)async{
+    final Uri params =Uri(
+     scheme: 'mailto',
+      path: email
+    );
+    Uri url=params;
+    if(await canLaunchUrl(url)){
+      await launchUrl(url);
+      print(url);
+    }else{
+      print('could mot launch $url');
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +58,10 @@ class CustomContainerJop extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 8.0, top: 8),
             child: Row(
-              //  mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.person_outline,
                       color: ColorManager.primaryColor,
                       size: 20,
@@ -62,12 +83,12 @@ class CustomContainerJop extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.access_time_outlined,
                         color: ColorManager.primaryColor,
                         size: 20,
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       CustomText(
                         align: TextAlign.start,
                         text: 'createdAt ',
@@ -89,7 +110,7 @@ class CustomContainerJop extends StatelessWidget {
                         fit: BoxFit.cover,
                         color: ColorManager.primaryColor,
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Expanded(
                         child: CustomText(
                           text:
@@ -127,7 +148,6 @@ class CustomContainerJop extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 15.h, left: 8, right: 8),
             child: Column(
-              //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
@@ -139,7 +159,6 @@ class CustomContainerJop extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
                       child: Row(
@@ -153,14 +172,19 @@ class CustomContainerJop extends StatelessWidget {
                             width: 6,
                           ),
                           Expanded(
-                            child: CustomText(
-                              text: jop.user == null
-                                  ? 'other'
-                                  : jop.user!.email.toString(),
-                              align: TextAlign.left,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey,
+                            child: InkWell(
+                              onTap: (){
+                                _launchURl(jop.user!.email!);
+                              },
+                              child: CustomText(
+                                text: jop.user == null
+                                    ? 'other'
+                                    : jop.user!.email,
+                                align: TextAlign.left,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -179,13 +203,18 @@ class CustomContainerJop extends StatelessWidget {
                         const SizedBox(
                           width: 6,
                         ),
-                        CustomText(
-                          text: jop.user == null
-                              ? 'other'
-                              : jop.user!.contactNumber.toString(),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
+                        InkWell(
+                          onTap: (){
+                            _makePhoneCall(jop.user!.contactNumber!).toString();
+                          },
+                          child: CustomText(
+                            text: jop.user == null
+                                ? 'other'
+                                : jop.user!.contactNumber!.toString(),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(
                           width: 6,

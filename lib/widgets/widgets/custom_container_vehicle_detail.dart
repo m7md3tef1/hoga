@@ -6,14 +6,34 @@ import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/features/blogs/blog_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/data/models/vehicle/vehicles.dart';
 import '../../core/router/router.dart';
 
 class CustomContainerVehicle extends StatelessWidget {
   final Vehicles load;
-  CustomContainerVehicle(this.load, {Key? key}) : super(key: key);
+  const CustomContainerVehicle(this.load, {Key? key}) : super(key: key);
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+  Future<void> _launchURl(email)async{
+    final Uri params =Uri(
+        scheme: 'mailto',
+        path: email
+    );
+    String url=params.toString();
+    if(await canLaunch(url)){
+      await launch(url);
+    }else{
+      print('could mot lauch $url');
+    }
 
+  }
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -149,13 +169,18 @@ class CustomContainerVehicle extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          CustomText(
-                            text: load.user == null
-                                ? 'other'
-                                : load.user!.contactNumber.toString(),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          InkWell(
+                            onTap: (){
+                              _makePhoneCall(load.user!.contactNumber!);
+                            },
+                            child: CustomText(
+                              text: load.user == null
+                                  ? 'other'
+                                  : load.user!.contactNumber!.toString(),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey,
+                            ),
                           ),
                           const SizedBox(
                             width: 6,
@@ -172,13 +197,18 @@ class CustomContainerVehicle extends StatelessWidget {
                         const SizedBox(
                           width: 6,
                         ),
-                        CustomText(
-                          text: load.user == null
-                              ? 'other'
-                              : load.user!.email.toString(),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
+                        InkWell(
+                          onTap: (){
+                            _makePhoneCall(load.user!.email!);
+                          },
+                          child: CustomText(
+                            text: load.user == null
+                                ? 'other'
+                                :load.user!.email!.toString(),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),

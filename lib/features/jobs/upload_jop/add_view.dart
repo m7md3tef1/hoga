@@ -36,7 +36,7 @@ class AddJopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: OnDrawer(),
+      drawer: const OnDrawer(),
       key: uploadedProductsScaffoldKey,
       body: SafeArea(
         child: Column(
@@ -46,8 +46,8 @@ class AddJopView extends StatelessWidget {
                 title: isEdit
                     ? 'Edit Job'
                     : isFilter
-                        ? 'Search Job'
-                        : 'Add Job',scaffoldKey: uploadedProductsScaffoldKey,),
+                        ? 'Search Jobs'
+                        : 'Add New Job',scaffoldKey: uploadedProductsScaffoldKey,),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),

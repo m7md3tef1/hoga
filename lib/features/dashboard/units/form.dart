@@ -1,14 +1,44 @@
 part of '../view.dart';
 
-class FormView extends StatelessWidget {
+class FormView extends StatefulWidget {
   FormView({Key? key}) : super(key: key);
+
+  @override
+  State<FormView> createState() => _FormViewState();
+}
+
+class _FormViewState extends State<FormView> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   TextEditingController firstnameController = TextEditingController();
+
   TextEditingController lastnameController = TextEditingController();
+
   TextEditingController usernameController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController addressController = TextEditingController();
+
   TextEditingController phoneController = TextEditingController();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    firstnameController.text =
+        UpdateProfileCubit.get(context).profileData.firstName ?? '';
+
+    lastnameController.text =
+        UpdateProfileCubit.get(context).profileData.lastName ?? '';
+    emailController.text =
+        UpdateProfileCubit.get(context).profileData.email ?? '';
+    phoneController.text =
+        UpdateProfileCubit.get(context).profileData.contactNumber ?? '';
+    usernameController.text =
+        UpdateProfileCubit.get(context).profileData.username ?? '';
+    addressController.text =
+        UpdateProfileCubit.get(context).profileData.address ?? '';
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
