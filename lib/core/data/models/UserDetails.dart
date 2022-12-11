@@ -17,13 +17,13 @@ class UserDetails {
     contactNumber = json['contact_number'];
     profilePicture = json['profile_picture'];
   }
-  int id;
-  String firstName;
-  String lastName;
-  String email;
-  String username;
-  String contactNumber;
-  String profilePicture;
+  int? id;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? username;
+  String? contactNumber;
+  String? profilePicture;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

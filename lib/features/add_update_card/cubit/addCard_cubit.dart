@@ -6,6 +6,7 @@ import 'package:hoga_load/core/dialoges/toast.dart';
 
 import '../../../core/data/api/api.dart';
 import '../../../core/data/local/cacheHelper.dart';
+import '../../../core/data/models/Card.dart';
 import '../../../core/keys/keys.dart';
 import 'addCard_states.dart';
 
@@ -14,7 +15,7 @@ class AddCardCubit extends Cubit<AddCardStates> {
 
   static AddCardCubit get(context) => BlocProvider.of(context);
   Connectivity connectivity = Connectivity();
-
+  Card profileData = Card();
   addCard(CardModel cardModel) {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -59,6 +60,28 @@ class AddCardCubit extends Cubit<AddCardStates> {
 
 
       }
+    });
+  }
+
+  getCard() async {
+    var token = '1670772855';
+    emit(GetUserProfileLoading());
+    var response = Api().getHttp(
+      url: 'payment-method',
+      authToken: token,
+    );
+
+    print(response);
+    response
+        .then((value) => {
+      print('**********'),
+      print(value),
+      profileData = Card.fromJson(value['record']),
+      emit(GetUserProfileSuccess(Card.fromJson(value['record']))),
+    })
+        .onError((error, stackTrace) => {
+      emit(GetUserProfileFailed(error.toString())),
+      print(error),
     });
   }
 

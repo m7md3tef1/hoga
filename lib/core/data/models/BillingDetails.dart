@@ -24,25 +24,25 @@ class BillingDetails {
     email = json['email'];
     lastUpdated = json['last_updated'];
   }
-  String addressLine1;
-  dynamic addressLine2;
-  State state;
-  City city;
-  String country;
-  String postalCode;
-  String name;
-  String email;
-  String lastUpdated;
+  String? addressLine1;
+  String? addressLine2;
+  State? state;
+  City? city;
+  String? country;
+  String? postalCode;
+  String? name;
+  String? email;
+  String? lastUpdated;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['address_line_1'] = addressLine1;
     map['address_line_2'] = addressLine2;
     if (state != null) {
-      map['state'] = state.toJson();
+      map['state'] = state!.toJson();
     }
     if (city != null) {
-      map['city'] = city.toJson();
+      map['city'] = city!.toJson();
     }
     map['country'] = country;
     map['postal_code'] = postalCode;

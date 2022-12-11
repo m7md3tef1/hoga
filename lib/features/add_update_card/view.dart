@@ -7,8 +7,7 @@ import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
-import 'package:hoga_load/widgets/widgets/custom_checkbox.dart';
-import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
+
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
@@ -22,6 +21,7 @@ import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
 import '../auth/units/cant_login.dart';
 import 'cubit/addCard_cubit.dart';
+import 'cubit/addCard_states.dart';
 
 part 'units/form.dart';
 

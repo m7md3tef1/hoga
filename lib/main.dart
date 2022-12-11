@@ -69,13 +69,12 @@ class MyApp extends StatelessWidget {
               ..getJopType()),
         BlocProvider(create: (_) => LoadsCubit()),
         BlocProvider(create: (_) => ProductsCubit()),
-        BlocProvider(
-            create: (_) => JopCubit()
-
-        ),
+        BlocProvider(create: (_) => JopCubit()),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
-        BlocProvider(create: (_) => AddCardCubit()),
-
+        BlocProvider(
+            create: (_) => AddCardCubit()
+              ..getCard()
+              ..profileData),
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()

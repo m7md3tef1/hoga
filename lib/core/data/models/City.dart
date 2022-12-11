@@ -7,8 +7,8 @@ class City {
     id = json['id'];
     title = json['title'];
   }
-  int id;
-  String title;
+  int? id;
+  String? title;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
