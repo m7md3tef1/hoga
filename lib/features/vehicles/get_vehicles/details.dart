@@ -21,15 +21,17 @@ class Detail extends StatelessWidget {
         drawer: const OnDrawer(),
         body:
         Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppbar(title: 'View Vehicles',scaffoldKey: scaffoldKey,),
             Expanded(child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Expanded(child: CustomContainerVehicle(vehicle!)),
               ],
             )),
-            SizedBox(height: 22.h,)
           ],
         ),
       ),

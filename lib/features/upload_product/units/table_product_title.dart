@@ -8,76 +8,73 @@ class UploadedTableProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Expanded(
-      child: ListView(
+      child: SizedBox(
+        height: 0.7.sh,
+
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              height: 0.7.sh,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+              child: Container(
+                  height: 43.h,
+                  width: 1.sw,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex:1,
+                        child: CustomText(
+                          text: "#",
+                          fontSize: 9.sp,
+                          align: TextAlign.start,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Expanded(
+                        flex:2,
+                        child: CustomText(
+                          text: "Product",
+                          fontSize: 9.sp,
+                          align: TextAlign.start,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Expanded(
+                        flex:2,
+                        child: CustomText(
+                          text: "ProductType",
+                          fontSize: 9.sp,
+                          align: TextAlign.start,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Expanded(
+                        flex:2,
+                        child: CustomText(
+                          text: "View(s)",
+                          fontSize: 9.sp,
+                          align: TextAlign.start,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
 
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                    child: Container(
-                        height: 43.h,
-                        width: 1.sw,
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex:1,
-                              child: CustomText(
-                                text: "#",
-                                fontSize: 9.sp,
-                                align: TextAlign.start,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Expanded(
-                              flex:2,
-                              child: CustomText(
-                                text: "Product",
-                                fontSize: 9.sp,
-                                align: TextAlign.start,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Expanded(
-                              flex:2,
-                              child: CustomText(
-                                text: "ProductType",
-                                fontSize: 9.sp,
-                                align: TextAlign.start,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Expanded(
-                              flex:2,
-                              child: CustomText(
-                                text: "View(s)",
-                                fontSize: 9.sp,
-                                align: TextAlign.start,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
+                    ],
+                  )
 
-                          ],
-                        )
-
-                    ),
-                  ),
-                  Expanded(child: child)
-
-                ],
               ),
-
             ),
-          ]),
+            Expanded(child: child)
+
+          ],
+        ),
+
+      ),
     );
   }
 }

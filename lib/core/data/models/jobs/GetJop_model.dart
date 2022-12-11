@@ -57,7 +57,7 @@ class GetJopModel {
   JobType? jobType;
   int? country2;
   int? state2;
-  int? city2;
+  String? city2;
   int? jopTypeId;
   int? salaryInt;
   int? shiftTimeInt;
@@ -100,6 +100,9 @@ class GetJopModel {
     map['country'] = country2;
     map['state'] = state2;
     map['city'] = city2;
+    print(salaryInt);
+    print("salary");
+
     map['salary'] = salaryInt;
     map['shift_time'] = shiftTimeInt;
     map['salary'] = salary;

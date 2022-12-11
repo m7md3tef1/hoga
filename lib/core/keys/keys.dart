@@ -5,7 +5,8 @@
     email,
     token,
     userId,
-    isLogin
+    isLogin,
+    isSubscribe
 
   }
   enum SqlKeys{

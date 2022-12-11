@@ -251,24 +251,29 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 align: TextAlign.start,
                                                 fontWeight: FontWeight.w500),
-                                            Image(
-                                              height: 50,
-                                              width: 0.2.sw,
-                                              image: NetworkImage(state
-                                                          .productList[index]
-                                                          .productImage ==
-                                                      null
-                                                  ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
-                                                  : state.productList[index]
-                                                      .productImage!),
-                                              errorBuilder:
-                                                  (context, error, stackTrace) {
-                                                return Container(
-                                                  width: 0.2.sw,
-                                                  child: const Center(
-                                                      child: Icon(Icons.error)),
-                                                );
-                                              },
+
+
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Image(
+                                                height: 50,
+                                                width: 0.2.sw,
+                                                image: NetworkImage(state
+                                                            .productList[index]
+                                                            .productImage ==
+                                                        null
+                                                    ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
+                                                    : state.productList[index]
+                                                        .productImage!),
+                                                errorBuilder:
+                                                    (context, error, stackTrace) {
+                                                  return Container(
+                                                    width: 0.2.sw,
+                                                    child: const Center(
+                                                        child: Icon(Icons.error)),
+                                                  );
+                                                },
+                                              ),
                                             )
                                           ],
                                         ),

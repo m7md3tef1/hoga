@@ -52,7 +52,7 @@ class GetProductModel {
   AddVehicle? city;
   int? countryPost;
   int? statePost;
-  int? cityPost;
+  String? cityPost;
   User? user;
   String? description;
   String? price;
@@ -67,6 +67,7 @@ class GetProductModel {
     map['buy_or_sell'] = buyOrSell;
     map['product_name'] = productName;
     map['product_type'] = productTypeId;
+    //map['product_image'] = productTypeId;
     map['country'] = countryPost;
     map['state'] = statePost;
     map['city'] = cityPost;

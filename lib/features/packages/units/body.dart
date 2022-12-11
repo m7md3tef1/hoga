@@ -3,6 +3,11 @@ part of'../view.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<PackageCubit, PackageStates>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
     return CustomCard(
       widget: Column(
         children: [
@@ -65,16 +70,23 @@ class Body extends StatelessWidget {
                                       Padding(
                                         padding: EdgeInsets.only(
                                             left: 41.w, right: 13.w),
-                                        child: CustomButton(
-                                          function: () =>
-                                              MagicRouter.navigateTo(
-                                                   AddUpdateCardView()),
-                                          text: 'BUY NOW',
-                                          colortext: const Color(0xFFFDC52F),
-                                          colorborder: const Color(0xFFFDC52F),
-                                          color: Colors.white,
-                                        ),
-                                      ),
+                                        child:state is  PackageSubscribeLoading?
+                            const Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,)):
+                                                                                    CustomButton(
+                                                                                      function: () {
+                        print(PackageCubit.get(context).subscribePackage(PackageCubit.get(context).packageList[PackageCubit.get(context).selectedPackage].id));
+                        print('++++++++++++++++++++++++++++++++++++++');
+                        PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
+                            .packageList[PackageCubit.get(context).selectedPackage].id);
+                        },
+                                                                                          // MagicRouter.navigateTo(
+                                                                                          //      AddUpdateCardView()),
+                                                                                      text: 'BUY NOW',
+                                                                                      colortext: const Color(0xFFFDC52F),
+                                                                                      colorborder: const Color(0xFFFDC52F),
+                                                                                      color: Colors.white,
+                                                                                    )),
+
                                       SizedBox(
                                         height: 30.h,
                                       ),
@@ -102,5 +114,7 @@ class Body extends StatelessWidget {
         ],
       ),
     );
+  },
+);
   }
 }

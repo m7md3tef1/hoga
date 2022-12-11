@@ -16,6 +16,7 @@ String? desc;
         header: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(text: text,align:TextAlign.start,fontSize: 16.sp,fontWeight: FontWeight.w600,color: const Color(0xFF000000),),
@@ -27,6 +28,8 @@ String? desc;
 
 
         expanded: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(text: desc,fontSize: 14.sp,fontWeight: FontWeight.w600,color: const Color(0xFF7B7B7B),),
           ],

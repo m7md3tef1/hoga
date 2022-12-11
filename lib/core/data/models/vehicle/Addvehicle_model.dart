@@ -4,8 +4,8 @@ class AddVehicle {
       this.title,});
 
   AddVehicle.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']==null?0:json['id'];
+    title = json['title']??'other';
   }
   int? id;
   String? title;

@@ -136,7 +136,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                   showToast(
                       msg: 'Delete Success', state: ToastedStates.SUCCESS),
                 })
-            .onError((error, stackTrace) => {
+            .catchError((error) => {
                   emit(DeleteFailed()),
                   print(error),
                   showToast(msg: error.toString(), state: ToastedStates.ERROR),
@@ -250,6 +250,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
 
   searchLoads(context,
       {val, equipmentSize2, attributes2, vehicleSize2, vehicleType2}) {
+    emit(AddLoadLoading());
     searchList.clear();
     print("cubit");
     print(equipmentSize2);

@@ -20,7 +20,7 @@ class _UploadedState extends State<Uploaded> {
     return BlocConsumer<ProductsCubit, AddProductStates>(
         listener: (BuildContext context, Object? state) {
       if (state is DeleteSuccess || state is EditSuccess) {
-        Navigator.pop(context);
+        ProductsCubit.get(context).getProduct(self: 1,);
       }
     }, builder: (context, state) {
       return ProductsCubit.get(context).testLoading

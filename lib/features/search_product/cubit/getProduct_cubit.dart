@@ -99,6 +99,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   searchProducts(GetProductModel productModel) {
+    emit(AddProductLoading());
+
     searchList.clear();
     print("cubit search product");
 
@@ -135,6 +137,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   addProductCubit({context, GetProductModel? productModel}) async {
+    print('###################################################### ${productModel!.toJson()}');
+
 
     emit(AddProductLoading());
     String fileName = image != null ? image!.path.split('/').last : '';
@@ -238,13 +242,45 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
 
-  editProductCubit(GetProductModel? productModel) {
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(NetworkFailed("Check your internet connection and try again"));
-      } else {
-        ProductRepo.editVehicle(productModel)
-            .then((value) => {
+  editProductCubit(GetProductModel? productModel)async {
+    print('###################################################### ${productModel!.toJson()}');
+    print('###################################################### ${image}');
+
+
+    String fileName = image != null ? image!.path.split('/').last : '';
+    FormData formData;
+    image != null?
+     formData = FormData.fromMap({
+    "product_image":
+     await MultipartFile.fromFile(image!.path, filename: fileName)
+        ,
+    "buy_or_sell": productModel.buyOrSell,
+    "product_name": productModel.productName,
+    "product_type": productModel.productTypeId,
+    "country": productModel.countryPost,
+    "city": productModel.cityPost,
+    "state": productModel.statePost,
+    "price": productModel.priceInt,
+    "description": productModel.description,
+       "id": productModel.id
+
+     }):
+     formData = FormData.fromMap({
+    "buy_or_sell": productModel.buyOrSell,
+    "product_name": productModel.productName,
+    "product_type": productModel.productTypeId,
+    "country": productModel.countryPost,
+    "city": productModel.cityPost,
+    "state": productModel.statePost,
+    "price": productModel.priceInt,
+      "id": productModel.id,
+
+      "description": productModel.description
+    });
+    String token = await CacheHelper.getString(SharedKeys.token);
+    return await Api()
+        .postHttp(url: "products/update", authToken: token, data: formData)
+    .then((value) => {
                   print('Edit Vehicle Success'),
                   print(value),
                   emit(EditSuccess()),
@@ -262,8 +298,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
                   print('Edit Vehicle Failed'),
                 });
       }
-    });
-  }
+
+
 
   deleteProductCubit(productId) {
     connectivity.checkConnectivity().then((value) async {

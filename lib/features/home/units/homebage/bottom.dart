@@ -65,7 +65,9 @@ class _BottomState extends State<Bottom> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Column(children: [
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
           CustomText(
             text: 'OUR BUSINESS USP',
             align: TextAlign.center,
@@ -290,7 +292,7 @@ class _BottomState extends State<Bottom> {
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, childAspectRatio: 0.9),
+                              crossAxisCount: 2, childAspectRatio: 1.2),
                       itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.all(10),
                             child: Column(
