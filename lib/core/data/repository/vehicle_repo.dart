@@ -6,6 +6,7 @@ import '../../../features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import '../api/api.dart';
 import '../models/Packages.dart';
 import '../models/Packages_detail.dart';
+import '../models/Upload_adv.dart';
 import '../models/jobs/GetJop_model.dart';
 import '../models/jobs/get_jop.dart';
 import '../models/loads/GetLoads_model.dart';
@@ -159,6 +160,21 @@ class VehicleRepo {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response =
     await Api().getHttp(url: 'advertisements', authToken: token);
+
+    List<PackagesDetail> packageList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      PackagesDetail blogModel = PackagesDetail.fromJson(response['records'][i]);
+      packageList.add(blogModel);
+    }
+    print(response.length);
+    print(packageList.length);
+
+    return packageList;
+  }
+  static Future<List<PackagesDetail>> uploadPackage(PackagesDetail? model) async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    var response =
+    await Api().postHttp(url: 'upload-advertisement', authToken: token,data: model);
 
     List<PackagesDetail> packageList = [];
     for (int i = 0; i < response['records'].length; i++) {

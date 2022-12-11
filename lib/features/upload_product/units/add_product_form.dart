@@ -648,7 +648,7 @@ class _FormState extends State<Form> {
                                             widget.isEdit?
                                             imageFile !=
                                                     null?imageFile!
-                                               // ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+
                                                 : '    No File chosen':
                   ProductsCubit.get(context).image!=null ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
                                                  : '    No File chosen',

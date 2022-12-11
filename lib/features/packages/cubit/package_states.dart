@@ -3,6 +3,7 @@
 import 'package:hoga_load/core/data/models/Packages.dart';
 
 import '../../../core/data/models/Packages_detail.dart';
+import '../../../core/data/models/Upload_adv.dart';
 
 abstract class PackageStates{}
 
@@ -37,6 +38,20 @@ class PackageFailed extends PackageStates{
   PackageFailed(this.msg);
 }
 class GetPackageLoading extends PackageStates{
+
+}
+class UploadPackageSuccess extends PackageStates{
+
+  List<PackagesDetail>attributesList=[];
+  UploadPackageSuccess(this.attributesList);
+}
+
+class UploadPackageFailed extends PackageStates{
+
+  final String msg;
+  UploadPackageFailed(this.msg);
+}
+class UploadPackageLoading extends PackageStates{
 
 }
 

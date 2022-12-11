@@ -15,7 +15,8 @@ import '../../../widgets/widgets/custom_text.dart';
 import '../../search_product/cubit/getProduct__states.dart';
 
 class MyAdvertismentTable extends StatelessWidget {
-  const MyAdvertismentTable({super.key});
+   MyAdvertismentTable({super.key});
+
 
   @override
   Widget build(BuildContext context) {

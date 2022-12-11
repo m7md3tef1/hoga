@@ -21,7 +21,10 @@ class ProductsCubit extends Cubit<AddProductStates> {
   TextEditingController priceController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
+
   File? image;
+  File? image1;
+  //File? image2;
   static ProductsCubit get(context) => BlocProvider.of(context);
   Connectivity connectivity = Connectivity();
 
@@ -182,8 +185,12 @@ class ProductsCubit extends Cubit<AddProductStates> {
 
   pickFromGallery(BuildContext context) async {
     var img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    var img2 = await ImagePicker().pickImage(source: ImageSource.gallery);
     image = File(
       img!.path,
+    );
+    image1 = File(
+      img2!.path,
     );
 
     print(image
@@ -194,6 +201,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
     emit(ImageGallery());
     print('img64' + img64!);
   }
+
+
   addProductCubitTest({context}) {
     testLoading = true;
     isAllowed=false;

@@ -21,7 +21,7 @@ class _UploadedState extends State<Uploaded> {
             CustomCardTitle(
               text: 'UPLOADED ADVERTISEMENTS',
             ),
-            const MyAdvertismentTable(),
+             MyAdvertismentTable(),
 
           ],
         ),
