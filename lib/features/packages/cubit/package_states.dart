@@ -5,6 +5,11 @@ import 'package:hoga_load/core/data/models/Packages.dart';
 abstract class PackageStates{}
 
 class PackageLoading extends PackageStates{}
+class PackageSubscribeSuccess extends PackageStates{}
+class PackageSubscribeFailed extends PackageStates{}
+class PackageSubscribeLoading extends PackageStates{}
+
+
 
 class GetPackageSuccess extends PackageStates{
 

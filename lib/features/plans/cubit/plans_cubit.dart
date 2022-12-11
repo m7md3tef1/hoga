@@ -4,6 +4,7 @@ import 'package:hoga_load/core/data/repository/plans_repo.dart';
 import '../../../core/data/api/api.dart';
 import '../../../core/data/local/cacheHelper.dart';
 import '../../../core/data/models/plans/plans_model.dart';
+import '../../../core/dialoges/toast.dart';
 import '../../../core/keys/keys.dart';
 import 'plans_states.dart';
 
@@ -26,8 +27,10 @@ class PlansCubit extends Cubit<PlansStates> {
                   plansList = value,
                   print("this value--------Plans"),
                   print(value),
-                  emit(GetPlansSuccess(value))
-                })
+                  emit(GetPlansSuccess(value)),
+          //      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
+
+        })
             .onError((error, stackTrace) =>
                 {emit(GetPlansFailed(error.toString())), print(error)});
       }
@@ -76,4 +79,30 @@ class PlansCubit extends Cubit<PlansStates> {
     //  }
     });
   }
+
+
+  subscribePlan(id) {
+    emit(SubscribeLoading());
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        PlansRepo.subscribePlan(id)
+            .then((value) => {
+          print('..................................'),
+          print("this value--------SUBSCRIBEPlans"),
+          print(value),
+          emit(SubscribeSuccess()),
+          showToast(msg: 'Done', state: ToastedStates.SUCCESS),
+
+        })
+            .catchError((error, stackTrace) =>
+        {emit(SubscribeFailed()),
+          showToast(msg: error.toString(), state: ToastedStates.SUCCESS),
+
+          print(error)});
+      }
+    });
+  }
+
 }

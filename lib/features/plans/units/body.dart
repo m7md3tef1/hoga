@@ -70,7 +70,9 @@ class _PlanBodyState extends State<PlanBody> {
                 productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
                 price: PlansCubit.get(context).plansList[index].price,
                   basePrice:PlansCubit.get(context).plansList[index].basePrice,
-                  image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}'),
+                          id:PlansCubit.get(context).plansList[index].id ,
+
+                          image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}'),
                     );
 
 
@@ -80,13 +82,14 @@ class _PlanBodyState extends State<PlanBody> {
                 shrinkWrap: true,
 
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.8),
-                itemBuilder: (context,index)=>                    BuyContainer(text:PlansCubit.get(context).plansList[index].title,
+                itemBuilder: (context,index)=>    BuyContainer(text:PlansCubit.get(context).plansList[index].title,
                 loadsNo:PlansCubit.get(context).plansList[index].totalNumberOfLoads,
                 vehiclesNo: PlansCubit.get(context).plansList[index].totalNumberOfVehicles,
                 jobsNo: PlansCubit.get(context).plansList[index].totalNumberOfJobs,
                 productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
                 price: PlansCubit.get(context).plansList[index].price,
                     basePrice:PlansCubit.get(context).plansList[index].basePrice,
+                id:PlansCubit.get(context).plansList[index].id ,
                 image:'https://hegaload.com/uploads/subscription-images/${PlansCubit.get(context).plansList[index].image}'));
 
               }

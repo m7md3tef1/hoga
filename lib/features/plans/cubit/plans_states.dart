@@ -6,6 +6,10 @@ abstract class PlansStates{}
 class PlansLoading extends PlansStates{}
 
 class NotFreeTrial extends PlansStates{}
+class SubscribeSuccess extends PlansStates{}
+class SubscribeFailed extends PlansStates{}
+class SubscribeLoading extends PlansStates{}
+
 
 
 class GetPlansSuccess extends PlansStates{

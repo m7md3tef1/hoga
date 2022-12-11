@@ -1,7 +1,9 @@
 
 import 'package:hoga_load/core/data/models/plans/plans_model.dart';
 import 'package:hoga_load/features/plans/cubit/plans_cubit.dart';
+import '../../keys/keys.dart';
 import '../api/api.dart';
+import '../local/cacheHelper.dart';
 
 class PlansRepo{
   static Future< List <PlansModel>>  getPlans(isFreeTrial)async{
@@ -38,6 +40,22 @@ class PlansRepo{
 
 
   }
+  static subscribePlan(id) async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    print('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$id');
+    return await Api().postHttp(url: "subscribe/regular-plan", authToken: token,data: {'id':id});
+  }
+  static subscribePackage(id,{fistDate,endDate}) async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    print('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$id');
 
 
+    return
+      fistDate.isEmpty||endDate.isEmpty?
+      await Api().postHttp(url: "subscribe/advertisement-plan", authToken: token, data: {'id':id})
+          :      await Api().postHttp(url: "subscribe/advertisement-plan", authToken: token, data: {'id':id,'from_date':fistDate,
+        'to_date':endDate}
+
+      );
+  }
 }
