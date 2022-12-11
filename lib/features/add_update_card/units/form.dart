@@ -8,11 +8,11 @@ class FormCard extends StatefulWidget {
 }
 
 class _FormCardState extends State<FormCard> {
-  var countryOrigin = '';
+  var countryOrigin;
   var countryCode = 0;
-  var stateOrigin = '';
+  var stateOrigin ;
   var stateCode = 0;
-  var cityOrigin = '';
+  var cityOrigin ;
   var cityCode = 0;
   TextEditingController cardNumberController = TextEditingController();
   TextEditingController monthController = TextEditingController();
@@ -31,10 +31,14 @@ class _FormCardState extends State<FormCard> {
     super.initState();
     cardNumberController.text =
     AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
-
-
+cityOrigin=
+AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
+    countryOrigin=
+    AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+    stateOrigin=
+    AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
     monthController.text =
-    AddCardCubit.get(context).profileData.cardDetails==null?'03':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+    AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
     yearController.text =
     AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
     nameController.text =
@@ -55,29 +59,56 @@ class _FormCardState extends State<FormCard> {
       widget: BlocConsumer<DataFormCubit, AddDataFormStates>(
           listener: (BuildContext context, state) {},
           builder: (BuildContext context, state) {
-
+            print(cardNumberController.text);
+            cardNumberController.text =
+            AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
+            cityOrigin=
+            AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
+            countryOrigin=
+            AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+            stateOrigin=
+            AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
+            monthController.text =
+            AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+            yearController.text =
+            AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
+            nameController.text =
+            AddCardCubit.get(context).profileData.billingDetails==null?'':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
+            emailController.text =
+            AddCardCubit.get(context).profileData.billingDetails==null?'':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
+            contactNumberController.text =
+            AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
+            addressController.text =
+            AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
+            postalCodeController.text =
+            AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
 
             return BlocConsumer<AddCardCubit,AddCardStates>(
               listener: (context,state){},
               builder:(context,state){
+                print(cardNumberController.text);
                 cardNumberController.text =
                 AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
-
+                cityOrigin=
+                AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
+                countryOrigin=
+                AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+                stateOrigin=
+                AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
                 monthController.text =
                 AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
                 yearController.text =
                 AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
                 nameController.text =
-                AddCardCubit.get(context).profileData.userDetails==null?'':   AddCardCubit.get(context).profileData.userDetails!.firstName.toString();
+                AddCardCubit.get(context).profileData.billingDetails==null?'':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
                 emailController.text =
-                AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.email.toString() ;
+                AddCardCubit.get(context).profileData.billingDetails==null?'':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
                 contactNumberController.text =
                 AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
                 addressController.text =
                 AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
                 postalCodeController.text =
                 AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
-
                 return
                   state is GetUserProfileLoading?
                   Form(
@@ -339,9 +370,8 @@ class _FormCardState extends State<FormCard> {
 
                         ),
                         CustomTextField(
-                            hintText: countryOrigin == ''
-                                ? 'Select a Country'
-                                : AddCardCubit.get(context).profileData.billingDetails==null?'':AddCardCubit.get(context).profileData.billingDetails!.country.toString(),
+                         // controller: countryOrigin.toString(),
+                            hintText: countryOrigin == '' ? 'Select a state' : countryOrigin,
                             readOnly: true,
                             color: ColorManager.darkGrey,
                             suffixIcon: InkWell(
@@ -421,8 +451,8 @@ class _FormCardState extends State<FormCard> {
                             : CustomTextField(
                             readOnly: true,
                             color: ColorManager.darkGrey,
-                            hintText:
-                            stateOrigin == '' ? 'Select a state' : AddCardCubit.get(context).profileData.billingDetails==null?'':AddCardCubit.get(context).profileData.billingDetails!.state.toString(),
+                           // controller: stateOrigin.toString(),
+                            hintText: stateOrigin == '' ? 'Select a state' : stateOrigin,
                             suffixIcon: InkWell(
                               onTap: () {
                                 showModalBottomSheet(
@@ -504,8 +534,8 @@ class _FormCardState extends State<FormCard> {
                         )
                             : CustomTextField(
                             readOnly: true,
-                            hintText:
-                            cityOrigin == '' ? 'Select a city' : AddCardCubit.get(context).profileData.billingDetails==null?'':AddCardCubit.get(context).profileData.billingDetails!.city.toString(),
+                          //  controller: cityOrigin.toString(),
+                            hintText: cityOrigin=='' ? 'Select a city' :cityOrigin,
                             color: ColorManager.darkGrey,
                             suffixIcon: InkWell(
                               onTap: () {

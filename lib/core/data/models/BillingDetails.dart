@@ -1,3 +1,5 @@
+import 'package:hoga_load/core/data/models/master/Country.dart';
+
 import 'State.dart';
 import 'City.dart';
 
@@ -28,7 +30,7 @@ class BillingDetails {
   String? addressLine2;
   State? state;
   City? city;
-  String? country;
+  Country? country;
   String? postalCode;
   String? name;
   String? email;

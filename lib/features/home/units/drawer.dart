@@ -59,6 +59,11 @@ class OnDrawer extends StatelessWidget {
               navigatename: const UploadVehiclesView(),
             ),
             CustomRowDrawer(
+              text: 'Upload Advertisment',
+              icon: Icons.shopping_cart_outlined,
+              navigatename: const UploadAdvertismentsView(),
+            ),
+            CustomRowDrawer(
               text: 'Blogs',
               navigatename: const BlogsView(),
             ),

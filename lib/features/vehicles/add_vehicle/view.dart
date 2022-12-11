@@ -41,7 +41,7 @@ class AddVehiclesView extends StatelessWidget {
   bool isLoadFilter;
   bool isLoadEdit;
   GlobalKey<ScaffoldState> uploadedProductsScaffoldKey =
-  GlobalKey<ScaffoldState>();
+      GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +50,7 @@ class AddVehiclesView extends StatelessWidget {
       body: SafeArea(
         child: BlocConsumer<VehiclesCubit, VehicleStates>(
           listener: (BuildContext context, state) {
-            if (state is AddSuccess||state is EditSuccess) {
+            if (state is AddSuccess || state is EditSuccess) {
               Navigator.pop(context);
             }
           },
@@ -59,15 +59,17 @@ class AddVehiclesView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomAppbar(
-                    title: isLoadEdit
-                        ? 'Edit Load'
-                        : isLoadFilter
-                            ? 'Search Load'
-                            : isLoad
-                                ? "Add  New Load"
-                                : isEdit
-                                    ? "Edit Vehicle"
-                                    : 'Add  New Vehicle',scaffoldKey: uploadedProductsScaffoldKey,),
+                  title: isLoadEdit
+                      ? 'Edit Load'
+                      : isLoadFilter
+                          ? 'Search Load'
+                          : isLoad
+                              ? "Add  New Load"
+                              : isEdit
+                                  ? "Edit Vehicle"
+                                  : 'Add  New Vehicle',
+                  scaffoldKey: uploadedProductsScaffoldKey,
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -122,7 +124,7 @@ class AddVehiclesView extends StatelessWidget {
                             padding: EdgeInsets.only(top: 22),
                             child: Instructions(),
                           ),
-                          state is AddingLoad||state is EditSuccess
+                          state is AddingLoad || state is EditSuccess
                               ? Center(
                                   child: Container(
                                       height: 30,

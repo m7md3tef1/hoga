@@ -10,6 +10,7 @@ import '../../core/router/router.dart';
 
 class CustomAppbar extends StatelessWidget {
   String title;
+  var font;
   var icon;
   GlobalKey<ScaffoldState>? scaffoldKey;
   bool? hideIcons;
@@ -17,6 +18,7 @@ class CustomAppbar extends StatelessWidget {
       {Key? key,
         required this.title,
         this.icon,
+        this.font,
         this.hideIcons,
         this.scaffoldKey})
       : super(key: key);
@@ -26,7 +28,7 @@ class CustomAppbar extends StatelessWidget {
     return SafeArea(
       child: Container(
         color: Colors.white,
-        height: 100.h,
+        height: 120.h,
         width: double.infinity,
         child: Center(
           child: Padding(
@@ -64,7 +66,8 @@ class CustomAppbar extends StatelessWidget {
                       child: Center(
                         child: CustomText(
                           text: title,
-                          fontSize: 18.sp,
+                          align: TextAlign.center,
+                          fontSize: font??18.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

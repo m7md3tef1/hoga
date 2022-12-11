@@ -64,7 +64,7 @@ class AddCardCubit extends Cubit<AddCardStates> {
   }
 
   getCard() async {
-    var token = '1670772855';
+    var token = await CacheHelper.getString(SharedKeys.token);
     emit(GetUserProfileLoading());
     var response = Api().getHttp(
       url: 'payment-method',

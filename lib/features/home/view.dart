@@ -20,6 +20,7 @@ import '../../widgets/widgets/custom_scaffold.dart';
 import '../auth/login.dart';
 import '../jobs/upload_jop/view.dart';
 import '../loads/uploaded_loads/view.dart';
+import '../upload_advertisment/view.dart';
 import '../vehicles/upload_vehicles/view.dart';
 import 'controller.dart';
 
