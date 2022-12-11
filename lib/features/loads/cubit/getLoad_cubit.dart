@@ -250,6 +250,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
 
   searchLoads(context,
       {val, equipmentSize2, attributes2, vehicleSize2, vehicleType2}) {
+    emit(AddLoadLoading());
     searchList.clear();
     print("cubit");
     print(equipmentSize2);

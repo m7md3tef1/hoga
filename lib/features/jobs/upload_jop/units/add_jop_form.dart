@@ -28,30 +28,36 @@ class _FormInfoState extends State<FormInfo> {
   int? jopTypeId1;
   int? countryId;
   int? stateId;
-  int? cityId;
+  String? cityId;
   @override
   void initState() {
+
+    JopCubit.get(context).descController.text = '';
+    JopCubit.get(context).titleController.text = '';
+    JopCubit.get(context).shiftController.text = '';
+    JopCubit.get(context).salaryController.text = '';
+    JopCubit.get(context).noOfPostController.text =
+        '';
     super.initState();
     if (widget.isEdit) {
-      country = widget.jopModel!.country!.title!;
-      state = widget.jopModel!.state!.title!;
-      city = widget.jopModel!.city!.title!;
-      jopCategory = widget.jopModel!.country!.title!;
+      country =widget.jopModel!.country==null?'other': widget.jopModel!.country!.title!;
+      state =widget.jopModel!.state==null?'other': widget.jopModel!.state!.title!;
+      city =widget.jopModel!.city==null?'other': widget.jopModel!.city!.title!;
+      jopCategory =widget.jopModel!.country==null?null: widget.jopModel!.country!.title!;
       //  jopTitle=widget.jopModel!.title!;
-      jopType = widget.jopModel!.jobType!.title!;
+      jopType =widget.jopModel!.jobType==null?null: widget.jopModel!.jobType!.title!;
+      jopCategoryId =widget.jopModel!.category==null?null: widget.jopModel!.category!.id!;
+      jopTypeId1 =widget.jopModel!.jobType==null?null: widget.jopModel!.jobType!.id!;
+      countryId =widget.jopModel!.country==null?null: widget.jopModel!.country!.id!;
+      stateId = widget.jopModel!.state==null?null:widget.jopModel!.state!.id!;
+      cityId = widget.jopModel!.city==null?null:widget.jopModel!.city!.id!.toString();
 
-      jopCategoryId = widget.jopModel!.category!.id!;
-      jopTypeId1 = widget.jopModel!.jobType!.id!;
-      countryId = widget.jopModel!.country!.id!;
-      stateId = widget.jopModel!.state!.id!;
-      cityId = widget.jopModel!.city!.id!;
-
-      JopCubit.get(context).descController.text = widget.jopModel!.description!;
-      JopCubit.get(context).titleController.text = widget.jopModel!.title!;
-      JopCubit.get(context).shiftController.text = widget.jopModel!.shiftTime!;
-      JopCubit.get(context).salaryController.text = widget.jopModel!.salary!;
+      JopCubit.get(context).descController.text = widget.jopModel!.description??'';
+      JopCubit.get(context).titleController.text = widget.jopModel!.title??'';
+      JopCubit.get(context).shiftController.text = widget.jopModel!.shiftTime??'';
+      JopCubit.get(context).salaryController.text = widget.jopModel!.salary??'';
       JopCubit.get(context).noOfPostController.text =
-          widget.jopModel!.noOfPosts!.toString();
+          widget.jopModel!.noOfPosts.toString()??'';
     }
   }
 
@@ -59,7 +65,11 @@ class _FormInfoState extends State<FormInfo> {
   Widget build(BuildContext context) {
     return CustomCard(
       widget: BlocConsumer<DataFormCubit, AddDataFormStates>(
-          listener: (BuildContext context, state) {},
+          listener: (BuildContext context, state) {
+            if(state is EditSuccess){
+              Navigator.pop(context);
+            }
+          },
           builder: (BuildContext context, s) {
             return Column(
               children: [
@@ -79,7 +89,7 @@ class _FormInfoState extends State<FormInfo> {
                        ),
                       Expanded(
                         child: CustomText(
-                          text: widget.isFilter?"Filter":'ADD ',
+                          text: widget.isFilter?"Filter":widget.isEdit?'EDIT JOB':'ADD JOB ',
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                         ),
@@ -265,7 +275,37 @@ class _FormInfoState extends State<FormInfo> {
                             showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                return ListView.builder(
+                                return
+
+                                  DataFormCubit.get(context).cityList.isEmpty
+                                      ? InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        city = 'other';
+                                        Navigator.of(context).pop();
+                                        cityId = 'other';
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding:  EdgeInsets.only(
+                                          top: 8.0,
+                                          bottom: 0.4.sh,
+                                          right: 8,
+                                          left: 8),
+
+
+                                      child: Text(
+                                        'other',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+
+                                            color: Colors.black,
+                                            fontSize: 20.sp),
+                                      ),
+
+                                    ),
+                                  ):
+                                  ListView.builder(
                                     itemCount: DataFormCubit.get(context)
                                         .cityList
                                         .length,
@@ -279,7 +319,7 @@ class _FormInfoState extends State<FormInfo> {
                                                   cityId =
                                                       DataFormCubit.get(context)
                                                           .cityList[index]
-                                                          .id!;
+                                                          .id!.toString();
                                                   city =
                                                       DataFormCubit.get(context)
                                                           .cityList[index]
@@ -560,7 +600,9 @@ class _FormInfoState extends State<FormInfo> {
                                         title: JopCubit.get(context)
                                             .titleController
                                             .text,
-                                        salaryInt: int.parse(
+                                        salaryInt:JopCubit.get(context)
+                                            .salaryController
+                                            .text.isEmpty?null: int.parse(
                                             JopCubit.get(context)
                                                 .salaryController
                                                 .text),
@@ -586,11 +628,15 @@ class _FormInfoState extends State<FormInfo> {
                                           title: JopCubit.get(context)
                                               .titleController
                                               .text,
-                                          salaryInt: int.parse(
+                                          salaryInt:JopCubit.get(context)
+                                              .salaryController
+                                              .text.isEmpty?null: int.parse(
                                               JopCubit.get(context)
                                                   .salaryController
                                                   .text),
-                                          noOfPosts: int.parse(
+                                          noOfPosts:JopCubit.get(context)
+                                              .noOfPostController
+                                              .text.isEmpty?null: int.parse(
                                               JopCubit.get(context)
                                                   .noOfPostController
                                                   .text),
@@ -599,7 +645,7 @@ class _FormInfoState extends State<FormInfo> {
                                               .text,
                                           country2: countryId,
                                           state2: stateId,
-                                          city2: cityId,
+                                          city2: cityId.toString(),
                                           description: JopCubit.get(context)
                                               .descController
                                               .text,

@@ -24,7 +24,7 @@ class body extends StatelessWidget {
       children: [
         Container(
           height:MediaQuery.of(context).orientation==Orientation.portrait?
-           249:300,
+           249.sp:300.sp,
           width: 1.sw,
           decoration: const BoxDecoration(
             color: ColorManager.primaryColor,
@@ -49,47 +49,44 @@ class body extends StatelessWidget {
               ),
               itemCount: text.length,
               itemBuilder: (context, index) => Container(
-                height: 130.h,
+                height: 130.sp,
                 decoration: const BoxDecoration(
                   color: Color.fromRGBO(0, 0, 0, 0.7),
                 ),
-                child: Container(
-                  height: 20.h,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 23.w, right: 23.w, bottom: 8.h, top: 8.h),
-                          child: CustomText(
-                            align: TextAlign.start,
-                            text: text[index],
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFFFFFFFF),
-                          ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 23.w, right: 23.w, bottom: 8.h, top: 8.h),
+                        child: CustomText(
+                          align: TextAlign.start,
+                          text: text[index],
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFFFFFFFF),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 23.r, right: 23.r,bottom: 30.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: const Color(0xFFFDC52F))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomText(
-                                align: TextAlign.start,
-                                text: hint[index],
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFFFFFFFF),
-                              ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 23.r, right: 23.r,bottom: 30.sp),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xFFFDC52F))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomText(
+                              align: TextAlign.start,
+                              text: hint[index],
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFFFFFFFF),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

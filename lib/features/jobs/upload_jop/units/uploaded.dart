@@ -39,7 +39,7 @@ class _UploadedState extends State<Uploaded> {
                         CustomCardTitle(
                           text: 'UPLOADED JOB',
                         ),
-                        JopCubit.get(context).jopList.isEmpty
+                        JopCubit.get(context).myJopList.isEmpty
                             ? Expanded(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,

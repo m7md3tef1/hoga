@@ -12,6 +12,7 @@ import 'package:hoga_load/features/vehicles/add_vehicle/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../core/data/local/cacheHelper.dart';
 import '../../../core/keys/keys.dart';
 import '../../../widgets/widgets/custom_notloggedin.dart';

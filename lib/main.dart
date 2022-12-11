@@ -29,7 +29,7 @@ void main() async {
   await CacheHelper.init();
   BlocOverrides.runZoned(() {
     runApp(DevicePreview(
-        enabled: true,
+        enabled: false,
         builder: (context) {
           return const MyApp();
         }));
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        BlocProvider(create: (_) => HomeCubit()),
+        BlocProvider(create: (_) => HomeCubit()..isSubscription()),
         BlocProvider(create: (_) => PlansCubit()..getPlansCubit()
             //  ..checkPlansCubit()
             ),

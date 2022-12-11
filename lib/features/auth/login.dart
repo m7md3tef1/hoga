@@ -9,6 +9,7 @@ import 'package:hoga_load/features/auth/units/card_title.dart';
 import 'package:hoga_load/features/auth/units/custom_no_account.dart';
 import 'package:hoga_load/features/auth/units/customer_text_field.dart';
 import 'package:hoga_load/features/auth/units/logo.dart';
+import 'package:hoga_load/features/home/controller.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import '../../core/dialoges/toast.dart';
@@ -116,7 +117,8 @@ class Login extends StatelessWidget {
                                                     .text
                                                     .trim(),
                                                 userName: emailController.text
-                                                    .trim()));
+                                                    .trim()),context);
+
                                         print('this bottom     '+MediaQuery.of(context).viewInsets.bottom.toString());
                                       }
                                     },

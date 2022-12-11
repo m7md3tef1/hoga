@@ -5,11 +5,16 @@ import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/features/blogs/blog_details.dart';
+import 'package:hoga_load/features/home/units/homebage/expandable.dart';
+import 'package:hoga_load/features/search_product/units/login_details.dart';
+import 'package:hoga_load/features/search_product/units/upgrade_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
+import '../../core/data/local/cacheHelper.dart';
 import '../../core/data/models/loads/GetLoads_model.dart';
 import '../../core/data/models/product/GetProduct_model.dart';
 import '../../core/data/models/vehicle/vehicles.dart';
+import '../../core/keys/keys.dart';
 import '../../core/router/router.dart';
 
 class CustomContainerProduct extends StatelessWidget {
@@ -58,25 +63,32 @@ class CustomContainerProduct extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(12.r),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(bottom: 8.0.w),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
                           align: TextAlign.center,
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
-                          text: ' productType',
+                          text: ' productType: ',
                         ),
-                        CustomText(
-                          align: TextAlign.center,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black38,
-                          text: ': ${product.productType!.title}',
+                        Expanded(
+
+                          child: CustomText(
+                            align: TextAlign.start,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black38,
+                            text: '${product.productType!.title}',
+                          ),
                         ),
                       ],
                     ),
@@ -90,35 +102,17 @@ class CustomContainerProduct extends StatelessWidget {
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
-                          text: ' Purpose',
+                          text: ' Purpose: For ',
                         ),
-                        CustomText(
-                          align: TextAlign.center,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black38,
-                          text: ': For ${product.buyOrSell}',
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 8.0.w),
-                    child: Row(
-                      children: [
-                        CustomText(
-                          align: TextAlign.center,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87,
-                          text: ' Posted On',
-                        ),
-                        CustomText(
-                          align: TextAlign.center,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black38,
-                          text: ': ${product.status.toString()}',
+
+                        Expanded(
+                          child: CustomText(
+                            align: TextAlign.start,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black38,
+                            text: '${product.buyOrSell}',
+                          ),
                         ),
                       ],
                     ),
@@ -132,14 +126,41 @@ class CustomContainerProduct extends StatelessWidget {
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
-                          text: ' Price',
+                          text: ' Posted On: ',
                         ),
+
+                        Expanded(
+                          child: CustomText(
+                            align: TextAlign.start,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black38,
+                            text: '${product.status.toString()}',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8.0.w),
+                    child: Row(
+                      children: [
                         CustomText(
                           align: TextAlign.center,
                           fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black38,
-                          text: ': \$ ${product.price}',
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          text: ' Price: ',
+                        ),
+
+                        Expanded(
+                          child: CustomText(
+                            align: TextAlign.start,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black38,
+                            text: '\$ ${product.price}',
+                          ),
                         ),
                       ],
                     ),
@@ -169,138 +190,150 @@ class CustomContainerProduct extends StatelessWidget {
                 ],
               ),
             ),
-            product.user != null
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        product.user!.profilePicture != null
-                            ? Padding(
-                                padding: EdgeInsets.only(bottom: 8.0.w),
-                                child: Container(
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    height: 50,
-                                    width: 50,
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Image.network(
-                                      product.user!.profilePicture,
-                                      fit: BoxFit.fill,
-                                    )),
-                              )
-                            : Container(),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 8.0.w),
-                          child: Row(
-                            children: [
-                              CustomText(
-                                align: TextAlign.center,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                                text: ' Firstname',
-                              ),
-                              CustomText(
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: !CacheHelper.getBool(SharedKeys.isLogin)?
+              const LoginDetails():
+              product.user != null ?
+              Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          product.user!.profilePicture != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(bottom: 8.0.w),
+                                  child: Container(
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      height: 50,
+                                      width: 50,
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Image.network(
+                                        product.user!.profilePicture,
+                                        fit: BoxFit.cover,
+                                      )),
+                                )
+                              : Container(),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 8.0.w),
+                            child: Row(
+                              children: [
+                                CustomText(
                                   align: TextAlign.center,
                                   fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black38,
-                                  text: ': ${product.user!.firstName}'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 8.0.w),
-                          child: Row(
-                            children: [
-                              CustomText(
-                                align: TextAlign.center,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                                text: ' Lastname',
-                              ),
-                              CustomText(
-                                  align: TextAlign.center,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black38,
-                                  text: ': ${product.user!.lastName}'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 8.0.w),
-                          child: Row(
-                            children: [
-                              CustomText(
-                                align: TextAlign.center,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                                text: ' Email',
-                              ),
-                              Expanded(
-                                child: CustomText(
-                                    align: TextAlign.center,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black38,
-                                    text: ': ${product.user!.email}'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 8.0.w),
-                          child: Row(
-                            children: [
-                              CustomText(
-                                align: TextAlign.center,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                                text: ' Contact Number',
-                              ),
-                              Expanded(
-                                child: CustomText(
-                                    align: TextAlign.center,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black38,
-                                    text: ': ${product.user!.contactNumber}'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        product.user!.address != null
-                            ? Padding(
-                                padding: EdgeInsets.only(bottom: 8.0.w),
-                                child: Row(
-                                  children: [
-                                    CustomText(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  text: ' Firstname: ',
+                                ),
+
+                                Expanded(
+                                  child: CustomText(
                                       align: TextAlign.center,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black87,
-                                      text: ' Address',
-                                    ),
-                                    CustomText(
+                                      fontSize: 17.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black38,
+                                      text: '${product.user!.firstName}'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 8.0.w),
+                            child: Row(
+                              children: [
+                                CustomText(
+                                  align: TextAlign.center,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  text: ' Lastname: ',
+                                ),
+                                Expanded(
+                                  child: CustomText(
+                                      align: TextAlign.center,
+                                      fontSize: 17.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black38,
+                                      text: '${product.user!.lastName}'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 8.0.w),
+                            child: Row(
+                              children: [
+                                CustomText(
+                                  align: TextAlign.center,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  text: ' Email: ',
+                                ),
+                                Expanded(
+                                  child: CustomText(
+                                      align: TextAlign.start,
+                                      fontSize: 17.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black38,
+                                      text: '${product.user!.email}'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 8.0.w),
+                            child: Row(
+                              children: [
+                                CustomText(
+                                  align: TextAlign.center,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  text: ' Contact Number: ',
+                                ),
+                                Expanded(
+                                  child: CustomText(
+                                      align: TextAlign.start,
+                                      fontSize: 17.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black38,
+                                      text: '${product.user!.contactNumber}'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          product.user!.address != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(bottom: 8.0.w),
+                                  child: Row(
+                                    children: [
+                                      CustomText(
                                         align: TextAlign.center,
                                         fontSize: 18.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black38,
-                                        text: ': ${product.user!.address}'),
-                                  ],
-                                ),
-                              )
-                            : Container(),
-                        SizedBox(height: 30)
-                      ],
-                    ),
-                  )
-                : Container(),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black87,
+                                        text: ' Address: ',
+                                      ),
+                                      Expanded(
+                                        child: CustomText(
+                                            align: TextAlign.center,
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black38,
+                                            text: '${product.user!.address}'),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Container(),
+                          SizedBox(height: 30)
+                        ],
+                      ),
+                    ):const UpgradeDetails(),
+            ),
           ],
         ),
       ),

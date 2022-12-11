@@ -115,24 +115,24 @@ class JopCubit extends Cubit<AddJopStates> {
     });
   }
 
-  getJop() {
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(NetworkFailed("Check your internet connection and try again"));
-      } else {
-        emit(AddJopLoading());
-        JobsRepo.getJop2('jobs')
-            .then((value) => {
-                  print('..................................'),
-                  print(value),
-                  jopList = value,
-                  emit(GetJopSuccess(value))
-                })
-            .onError((error, stackTrace) =>
-                {emit(GetJopFailed(error.toString())), print(error)});
-      }
-    });
-  }
+//  getJop() {
+//    connectivity.checkConnectivity().then((value) async {
+//      if (ConnectivityResult.none == value) {
+//        emit(NetworkFailed("Check your internet connection and try again"));
+//      } else {
+//        emit(AddJopLoading());
+//        JobsRepo.getJop2('jobs')
+//            .then((value) => {
+//                  print('..................................'),
+//                  print(value),
+//                  jopList = value,
+//                  emit(GetJopSuccess(value))
+//                })
+//            .onError((error, stackTrace) =>
+//                {emit(GetJopFailed(error.toString())), print(error)});
+//      }
+//    });
+//  }
 
   searchJop(context, val) {
     searchList.clear();
@@ -259,6 +259,8 @@ class JopCubit extends Cubit<AddJopStates> {
 
 
   addJopCubit({context, GetJopModel? productModel}) {
+    print('###################################################### ${productModel!.toJson()}');
+
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -294,30 +296,32 @@ class JopCubit extends Cubit<AddJopStates> {
   }
 
   editJopCubit(GetJopModel? jopModel) {
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(NetworkFailed("Check your internet connection and try again"));
-      } else {
-        JobsRepo.editJop(jopModel)
-            .then((value) => {
-                  print('Edit Jop Success'),
-                  print(value),
-                  emit(EditSuccess()),
-                  showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
-                  descController.text = '',
-                  noOfPostController.text = '',
-                  salaryController.text = '',
-                  titleController.text = '',
-                  shiftController.text = '',
-                })
-            .catchError((error, stackTrace) => {
-                  emit(EditFailed()),
-                  print(error),
-                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
-                  print('Edit Jop Failed'),
-                });
-      }
-    });
+    print('###################################################### ${jopModel!.toJson()}');
+
+//    connectivity.checkConnectivity().then((value) async {
+//      if (ConnectivityResult.none == value) {
+//        emit(NetworkFailed("Check your internet connection and try again"));
+//      } else {
+//        JobsRepo.editJop(jopModel)
+//            .then((value) => {
+//                  print('Edit Jop Success'),
+//                  print(value),
+//                  emit(EditSuccess()),
+//                  showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+//                  descController.text = '',
+//                  noOfPostController.text = '',
+//                  salaryController.text = '',
+//                  titleController.text = '',
+//                  shiftController.text = '',
+//                })
+//            .catchError((error, stackTrace) => {
+//                  emit(EditFailed()),
+//                  print(error),
+//                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
+//                  print('Edit Jop Failed'),
+//                });
+//      }
+//    });
   }
 
   deleteJopCubit(jopId) {

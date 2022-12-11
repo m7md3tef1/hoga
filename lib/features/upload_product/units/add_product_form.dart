@@ -54,11 +54,11 @@ class _FormState extends State<Form> {
       city=widget.productModel!.city==null?'other':widget.productModel!.city!.title!;
       country=widget.productModel!.country==null?'other':widget.productModel!.country!.title!;
       state=widget.productModel!.state==null?'other':widget.productModel!.state!.title!;
-      product=widget.productModel!.productType==null?'other':widget.productModel!.productType!.title!;
-//      productId=widget.productModel!.productType!.id!;
-//      cityId=widget.productModel!.city!.id!.toString();
-//      countryId=widget.productModel!.country!.id!;
-      stateId=widget.productModel!.state!.id!;
+      product=(widget.productModel!.productType==null?null:widget.productModel!.productType!.title!)!;
+      productId=widget.productModel!.productType==null?null:widget.productModel!.productType!.id!;
+      cityId=widget.productModel!.city==null?null:widget.productModel!.city!.id!.toString();
+      countryId=widget.productModel!.country==null?null:widget.productModel!.country!.id!;
+      stateId=widget.productModel!.state==null?null:widget.productModel!.state!.id!;
 
 
       imageFile=widget.productModel!.productImage!;
@@ -70,7 +70,7 @@ class _FormState extends State<Form> {
   Widget build(BuildContext context) {
     return BlocConsumer<ProductsCubit, AddProductStates>(
         listener: (BuildContext context, state) {
-          if (state is GetSearchSuccess){
+          if (state is GetSearchSuccess||state is EditSuccess){
             Navigator.pop(context);
           }
         },
@@ -717,7 +717,9 @@ class _FormState extends State<Form> {
                                                   ProductsCubit.get(context)
                                                       .nameController
                                                       .text,
-                                              priceInt: int.parse(
+                                              priceInt:ProductsCubit.get(context)
+                                                  .priceController
+                                                  .text.isEmpty?null :int.parse(
                                                   ProductsCubit.get(context)
                                                       .priceController
                                                       .text),

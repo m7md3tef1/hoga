@@ -5,12 +5,16 @@ import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/features/blogs/blog_details.dart';
+import 'package:hoga_load/features/search_product/units/upgrade_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/data/local/cacheHelper.dart';
 import '../../core/data/models/loads/GetLoads_model.dart';
 import '../../core/data/models/vehicle/vehicles.dart';
+import '../../core/keys/keys.dart';
 import '../../core/router/router.dart';
+import '../../features/search_product/units/login_details.dart';
 
 class CustomContainerLoad extends StatelessWidget {
   final Vehicles load;
@@ -64,7 +68,7 @@ class CustomContainerLoad extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  flex: 0,
+                  flex: 1,
                   child: Row(
                     children: [
                       Icon(
@@ -75,13 +79,17 @@ class CustomContainerLoad extends StatelessWidget {
                       const SizedBox(
                         width: 6,
                       ),
-                      CustomText(
-                        text: load.user == null
-                            ? 'other'
-                            : load.user!.username.toString(),
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey,
+                      Expanded(
+                        child: CustomText(
+                          text:
+                          !CacheHelper.getBool(SharedKeys.isLogin)?"Login to view Name":
+                          load.user == null
+                              ? 'Upgrade MemberShip to view Name'
+                              : load.user!.username.toString(),
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(
                         width: 6,
@@ -90,7 +98,7 @@ class CustomContainerLoad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -103,7 +111,7 @@ class CustomContainerLoad extends StatelessWidget {
                         child: CustomText(
                           align: TextAlign.start,
                           text: '${load.availabilityDate}',
-                          fontSize: 12.sp,
+                          fontSize: 10.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,
                         ),
@@ -112,7 +120,7 @@ class CustomContainerLoad extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -126,7 +134,7 @@ class CustomContainerLoad extends StatelessWidget {
                       Expanded(
                         child: CustomText(
                           text: '${load.weight} Kg(s)' ?? 'other',
-                          fontSize: 12.sp,
+                          fontSize: 10.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,
                         ),
@@ -159,6 +167,9 @@ class CustomContainerLoad extends StatelessWidget {
                     ],
                   ),
                 ),
+                !CacheHelper.getBool(SharedKeys.isLogin)?
+                const LoginDetails():
+                load.user==null?const UpgradeDetails():
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -4,6 +4,9 @@ import 'package:hoga_load/features/home/states.dart';
 import 'package:hoga_load/features/home/units/homescreen.dart';
 import 'package:hoga_load/features/jobs/view.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
+import '../../core/data/api/api.dart';
+import '../../core/data/local/cacheHelper.dart';
+import '../../core/keys/keys.dart';
 import '../loads/get_loads/view.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/search_product/view.dart';
@@ -36,5 +39,25 @@ class HomeCubit extends Cubit<HomeStates> {
     if (currentIndex == 4) JopCubit.get(context).getJops(isFilter: false);
 
     emit(ChangeBottomNavState());
+  }
+
+  isSubscription()async{
+    print('isSubscription');
+    String token = await CacheHelper.getString(SharedKeys.token);
+    return await Api().getHttp(url: "profile/current-subscription", authToken: token)
+        .then((value) => {
+    if(value['record']['subscription_details']['stripe_id']==null){
+      CacheHelper.putBool(SharedKeys.isSubscribe, false),
+    }else{
+      CacheHelper.putBool(SharedKeys.isSubscribe, true),
+
+    },
+    print('isSubscription'),
+        print(CacheHelper.getBool(SharedKeys.isSubscribe)
+    ),
+
+    emit(Subscription()),
+
+    });
   }
 }

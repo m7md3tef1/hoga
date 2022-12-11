@@ -358,6 +358,8 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   }
 
   addVehicleCubit({context, isLoad}) {
+    emit(AddingLoad());
+
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -365,7 +367,6 @@ class VehiclesCubit extends Cubit<VehicleStates> {
             msg: "Check your internet connection and try again",
             state: ToastedStates.ERROR);
       } else {
-        emit(AddingLoad());
         VehicleRepo.addVehicle(context: context, isLoad: isLoad)
             .then((value) => {
                   print('Add Vehicle Success'),

@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../core/data/api/api.dart';
 import '../../../core/dialoges/toast.dart';
+import '../../home/controller.dart';
 import 'auth_states.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
@@ -18,7 +19,7 @@ class AuthCubit extends Cubit<AuthStates> {
   Connectivity connectivity = Connectivity();
   var image;
 
-  signIn(loginModel) {
+  signIn(loginModel,context) {
     var response = Api().postHttp(url: 'login', data: loginModel.toJson());
     print(response);
     print('login response');
@@ -30,6 +31,7 @@ class AuthCubit extends Cubit<AuthStates> {
               emit(SignInSuccess()),
               CacheHelper.putString(SharedKeys.token, value['auth_token']),
              CacheHelper.putBool(SharedKeys.isLogin, true),
+            HomeCubit.get(context).isSubscription(),
 
         print(value['auth_token']),
               print(response),
