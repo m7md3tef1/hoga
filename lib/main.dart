@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoadsCubit()),
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(create: (_) => JopCubit()),
-        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..packageCubit()..uploadPackageCubit()),
+        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..packageCubit()),
         BlocProvider(
             create: (_) => AddCardCubit()
               ..getCard()
@@ -79,9 +79,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (_) => UpdateProfileCubit()
               //..updateProfile
-              ..getUserProfileData()
-              ..getVehicleTypesCubit()
+              //..getVehicleTypesCubit()
               ..getSubscriptionData()
+              ..getUserProfileData()
               ..profileData),
         BlocProvider(
             create: (_) => BlogsCubit()

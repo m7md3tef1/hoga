@@ -43,17 +43,16 @@ class DashboardView extends StatelessWidget {
                     const CustomNotLoggedIn()
                   ],
                 )
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomAppbar(
-                          title: 'Dashboard',
-                          scaffoldKey: uploadProductScaffoldKey),
-                      FormView(),
-                    ],
-                  ),
-                )),
+              :
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppbar(
+                  title: 'Dashboard',
+                  scaffoldKey: uploadProductScaffoldKey),
+              FormView(),
+            ],
+          )),
     );
   }
 }

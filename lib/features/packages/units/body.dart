@@ -1,6 +1,8 @@
 part of'../view.dart';
 
-class Body extends StatelessWidget {
+class PackageBody extends StatelessWidget {
+  const PackageBody({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PackageCubit, PackageStates>(
@@ -22,7 +24,15 @@ class Body extends StatelessWidget {
           ),
           BlocConsumer<PackageCubit, PackageStates>(
             builder: (context, state) {
-              if (state is GetPackageSuccess) {
+               if ( PackageCubit.get(context). packageLoading) {
+                return SizedBox(
+                    height: .5.sh,
+                    width: 1.sw,
+                    child: const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.orange,
+                    )));
+              } else {
                 return SizedBox(
                   height: .57.sh,
                   width: 1.sw,
@@ -38,75 +48,65 @@ class Body extends StatelessWidget {
                                   .packageList[index]
                                   .title,
                               price:
-                                  '${PackageCubit.get(context).packageList[index].pricePerDay} / Day',
+                              '${PackageCubit.get(context).packageList[index].pricePerDay} / Day',
                               text2: PackageCubit.get(context)
                                   .packageList[index]
                                   .description,
                               conttext1: PackageCubit.get(context)
-                                          .packageList[index]
-                                          .title ==
-                                      "Per Day Package"
+                                  .packageList[index]
+                                  .title ==
+                                  "Per Day Package"
                                   ? '2022-08-07'
                                   : null,
                               conttext2: PackageCubit.get(context)
-                                          .packageList[index]
-                                          .title ==
-                                      "Per Day Package"
+                                  .packageList[index]
+                                  .title ==
+                                  "Per Day Package"
                                   ? 'Total Payable'
                                   : null,
                               totalprice:
-                                  '${PackageCubit.get(context).packageList[index].duration! * int.parse(PackageCubit.get(context).packageList[index].pricePerDay!)}',
+                              '${PackageCubit.get(context).packageList[index].duration! * int.parse(PackageCubit.get(context).packageList[index].pricePerDay!)}',
                             ),
                             index ==
-                                    PackageCubit.get(context)
-                                            .packageList
-                                            .length -
-                                        1
+                                PackageCubit.get(context)
+                                    .packageList
+                                    .length -
+                                    1
                                 ? Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 41.w, right: 13.w),
-                                        child:state is  PackageSubscribeLoading?
-                            const Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,)):
-                                                                                    CustomButton(
-                                                                                      function: () {
-                        print(PackageCubit.get(context).subscribePackage(PackageCubit.get(context).packageList[PackageCubit.get(context).selectedPackage].id));
-                        print('++++++++++++++++++++++++++++++++++++++');
-                        PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
-                            .packageList[PackageCubit.get(context).selectedPackage].id);
-                        },
-                                                                                          // MagicRouter.navigateTo(
-                                                                                          //      AddUpdateCardView()),
-                                                                                      text: 'BUY NOW',
-                                                                                      colortext: const Color(0xFFFDC52F),
-                                                                                      colorborder: const Color(0xFFFDC52F),
-                                                                                      color: Colors.white,
-                                                                                    )),
+                              children: [
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 41.w, right: 13.w),
+                                    child:state is  PackageSubscribeLoading?
+                                    const Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,)):
+                                    CustomButton(
+                                      function: () {
+                                        print(PackageCubit.get(context).subscribePackage(PackageCubit.get(context).packageList[PackageCubit.get(context).selectedPackage].id));
+                                        print('++++++++++++++++++++++++++++++++++++++');
+                                        PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
+                                            .packageList[PackageCubit.get(context).selectedPackage].id);
+                                      },
+                                      // MagicRouter.navigateTo(
+                                      //      AddUpdateCardView()),
+                                      text: 'BUY NOW',
+                                      colortext: const Color(0xFFFDC52F),
+                                      colorborder: const Color(0xFFFDC52F),
+                                      color: Colors.white,
+                                    )),
 
-                                      SizedBox(
-                                        height: 30.h,
-                                      ),
-                                    ],
-                                  )
+                                SizedBox(
+                                  height: 30.h,
+                                ),
+                              ],
+                            )
                                 : Container()
                           ],
                         );
                       }),
                 );
-              } else if (state is PackageLoading) {
-                return SizedBox(
-                    height: .9.sh,
-                    width: 1.sw,
-                    child: const Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.orange,
-                    )));
-              } else {
-                return const Text('No data');
               }
             },
             listener: (BuildContext context, state) {},

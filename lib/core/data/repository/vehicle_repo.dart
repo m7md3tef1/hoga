@@ -140,52 +140,7 @@ class VehicleRepo {
   }
 
 
-  static Future<List<Packages>> getPackage() async {
-    String token = await CacheHelper.getString(SharedKeys.token);
-    var response =
-    await Api().getHttp(url: 'advertisement-packages', authToken: token);
 
-    List<Packages> packageList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      Packages blogModel = Packages.fromJson(response['records'][i]);
-      packageList.add(blogModel);
-    }
-    print(response.length);
-    print(packageList.length);
-
-    return packageList;
-  }
-
-  static Future<List<PackagesDetail>> package() async {
-    String token = await CacheHelper.getString(SharedKeys.token);
-    var response =
-    await Api().getHttp(url: 'advertisements', authToken: token);
-
-    List<PackagesDetail> packageList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      PackagesDetail blogModel = PackagesDetail.fromJson(response['records'][i]);
-      packageList.add(blogModel);
-    }
-    print(response.length);
-    print(packageList.length);
-
-    return packageList;
-  }
-  static Future<List<PackagesDetail>> uploadPackage(PackagesDetail? model) async {
-    String token = await CacheHelper.getString(SharedKeys.token);
-    var response =
-    await Api().postHttp(url: 'upload-advertisement', authToken: token,data: model);
-
-    List<PackagesDetail> packageList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      PackagesDetail blogModel = PackagesDetail.fromJson(response['records'][i]);
-      packageList.add(blogModel);
-    }
-    print(response.length);
-    print(packageList.length);
-
-    return packageList;
-  }
 
   static deleteVehicle(vehicleId) async {
     String token = await CacheHelper.getString(SharedKeys.token);

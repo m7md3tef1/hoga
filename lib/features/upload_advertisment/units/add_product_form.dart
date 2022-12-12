@@ -15,6 +15,7 @@ import '../../../widgets/widgets/custom_button.dart';
 import '../../auth/units/customer_text_field.dart';
 import '../../dashboard/cubit/updateProfile_cubit.dart';
 import '../../home/view.dart';
+import '../../packages/view.dart';
 import '../../search_product/cubit/getProduct__states.dart';
 import '../../search_product/cubit/getProduct_cubit.dart';
 
@@ -38,6 +39,9 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    PackageCubit.get(context).SubscribePackageTest();
+
     imag2 = ProductsCubit.get(context).image1 != null
         ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
         : '    No File chosen';
@@ -57,12 +61,12 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
           return BlocConsumer<PackageCubit,PackageStates>(
             listener: (context,state){},
             builder:(context,state){
-              imag2 = ProductsCubit.get(context).image1 != null
-                  ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-                  : '    No File chosen';
-              imag1 = ProductsCubit.get(context).image != null
-                  ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-                  : '    No File chosen';
+              // imag2 = ProductsCubit.get(context).image1 != null
+              //     ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+              //     : '    No File chosen';
+              // imag1 = ProductsCubit.get(context).image != null
+              //     ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+              //     : '    No File chosen';
               return
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,9 +76,10 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                     font: 18.sp,
                     scaffoldKey: uploadedProductsScaffoldKey,
                   ),
-                  Expanded(
+                  PackageCubit.get(context).testLoading?const Center(child: CircularProgressIndicator(color: Colors.orange,)):
+                  PackageCubit.get(context).isAllowed?Expanded(
                       child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: CustomCard(
@@ -352,7 +357,11 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                     )
                                   ],
                                 )),
-                          ))),
+                          ))):
+                  const Expanded(
+                      child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(), child: PackageBody()))
+                  ,
                 ],
               );
             }

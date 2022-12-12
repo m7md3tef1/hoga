@@ -45,7 +45,7 @@ class PackagesView extends StatelessWidget {
                 ? CustomNotLoggedIn()
                 : Expanded(
                     child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(), child: Body())),
+                        physics: const BouncingScrollPhysics(), child: PackageBody())),
           ],
         ),
       ),

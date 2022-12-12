@@ -44,7 +44,7 @@ class _UploadAdvertismentsViewState extends State<UploadAdvertismentsView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomAppbar(
-              title: 'Uploaded ADVERTISEMENTS',
+              title: 'ADVERTISEMENTS',
               scaffoldKey: uploadedProductsScaffoldKey,
             ),
            ! CacheHelper.getBool(SharedKeys.isLogin)?const CustomNotLoggedIn(): const Expanded(child: Uploaded()),

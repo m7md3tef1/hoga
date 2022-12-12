@@ -18,6 +18,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   Connectivity connectivity = Connectivity();
   List<User>? profileList = [];
   User profileData = User();
+ bool notLogged=false;
+  bool loading=false;
 
   SubscriptionModel subscriptionData = SubscriptionModel();
   updateProfile(updateProfileModel,) async {
@@ -44,8 +46,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   }
 
   getUserProfileData() async {
-    var token = await CacheHelper.getString(SharedKeys.token);
+    loading=true;
     emit(GetUserProfileLoading());
+
+    var token = await CacheHelper.getString(SharedKeys.token);
     var response = Api().getHttp(
       url: 'profile',
       authToken: token,
@@ -54,34 +58,41 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     print(response);
     response
         .then((value) => {
-      print('**********'),
+      print('getUserProfileDataSuccess'),
       print(value),
       profileData = User.fromJson(value['record']),
-      emit(GetUserProfileSuccess(User.fromJson(value['record']))),
+    loading=false,
+        emit(GetUserProfileSuccess(User.fromJson(value['record']))),
     })
         .onError((error, stackTrace) => {
-      emit(GetUserProfileFailed(error.toString())),
+      loading=false,
+
+      notLogged=true,
+
+        emit(GetUserProfileFailed(error.toString())),
+      print('getUserProfileDataFailed'),
+
       print(error),
     });
   }
 
-  getVehicleTypesCubit() {
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(FailedNetwork("Check your internet connection and try again"));
-      } else {
-        VehicleRepo.getProfile('profile')
-            .then((value) => {
-          print('..................................'),
-          print(value),
-          profileList = value,
-          emit(GetProfileSuccess(value))
-        })
-            .onError((error, stackTrace) =>
-        {emit(GetProfileFailed(error.toString())), print(error)});
-      }
-    });
-  }
+  // getVehicleTypesCubit() {
+  //   connectivity.checkConnectivity().then((value) async {
+  //     if (ConnectivityResult.none == value) {
+  //       emit(FailedNetwork("Check your internet connection and try again"));
+  //     } else {
+  //       VehicleRepo.getProfile('profile')
+  //           .then((value) => {
+  //         print('..................................'),
+  //         print(value),
+  //         profileList = value,
+  //         emit(GetProfileSuccess(value))
+  //       })
+  //           .onError((error, stackTrace) =>
+  //       {emit(GetProfileFailed(error.toString())), print(error)});
+  //     }
+  //   });
+  // }
   getSubscriptionData() {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {

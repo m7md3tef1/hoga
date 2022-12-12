@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/models/Packages.dart';
+import 'package:hoga_load/core/data/repository/package_repo.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/packages/cubit/package_states.dart';
 
@@ -15,6 +16,13 @@ class PackageCubit extends Cubit<PackageStates> {
   PackageCubit() : super(PackageLoading());
 
   static PackageCubit get(context) => BlocProvider.of(context);
+
+  bool isAllowed = false;
+  bool testLoading = false;
+  bool unAuthProblem = false;
+  bool packageLoading = false;
+
+
   Connectivity connectivity = Connectivity();
   List<Packages> packageList = [];
   List<PackagesDetail> getPackageList = [];
@@ -29,19 +37,25 @@ class PackageCubit extends Cubit<PackageStates> {
   }
 
   getPackageCubit() {
+    packageLoading=true;
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        VehicleRepo.getPackage()
+        PackageRepo.getPackage()
             .then((value) => {
                   print('..................................'),
                   print(value),
                   packageList = value,
-                  emit(GetPackageSuccess(value))
+        packageLoading=false,
+
+            emit(GetPackageSuccess(value))
                 })
             .onError((error, stackTrace) =>
-                {emit(GetPackageFailed(error.toString())), print(error)});
+                {emit(GetPackageFailed(error.toString())),
+                  packageLoading=false,
+
+                  print(error)});
       }
     });
   }
@@ -51,7 +65,7 @@ class PackageCubit extends Cubit<PackageStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         emit(GetPackageLoading());
-        VehicleRepo.package()
+        PackageRepo.package()
             .then((value) => {
           print('..................................'),
           print(value),
@@ -85,13 +99,14 @@ class PackageCubit extends Cubit<PackageStates> {
       }
     });
   }
+
   uploadPackageCubit({PackagesDetail? model}) {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         emit(UploadPackageLoading());
-        VehicleRepo.uploadPackage(model)
+        PackageRepo.uploadPackage(model)
             .then((value) => {
           print('..................................'),
           print(value),
@@ -104,5 +119,53 @@ class PackageCubit extends Cubit<PackageStates> {
       }
     });
   }
+
+  SubscribePackageTest({context}) {
+    testLoading = true;
+    isAllowed=false;
+    emit(PackageTestLoading());
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+        showToast(
+            msg: 'Check your internet connection and try again',
+            state: ToastedStates.ERROR);
+      } else {
+        PackageRepo.SubscribePackageTest(context: context)
+            .then((value) => {
+          print('then'),
+          testLoading = false,
+          print(value['record']['subscription']['can_upload_ad']),
+          if(value['record']['subscription']['can_upload_ad']==null||
+              value['record']['subscription']['can_upload_ad']=='no'){
+            isAllowed=false,
+            emit(PackageTestSuccess()),
+
+          }else{
+            print("addPACKAGECubitTest"),
+            isAllowed=true,
+            emit(PackageTestSuccess()),
+
+          }
+
+        })
+            .catchError((error) => {
+          if(error.toString().contains('401')){
+            unAuthProblem=true
+          },
+          print('erorr >>>>>>>>$error'),
+          print(error),
+          isAllowed=false,
+          testLoading = false,
+          emit(PackageTestFailed()),
+          print('Add PACKAGE Test Failed'),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
+        });
+
+      }
+    });
+  }
+
 
 }

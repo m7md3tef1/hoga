@@ -18,7 +18,7 @@ class OnDrawer extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: const [
                         Text(
@@ -45,22 +45,22 @@ class OnDrawer extends StatelessWidget {
             ),
             CustomRowDrawer(
               text: 'Upload Product',
-              icon: Icons.shopping_cart_outlined,
+              icon: Icons.add_business_outlined,
               navigatename: const UploadProductsView(),
             ),
             CustomRowDrawer(
               text: 'Upload Job',
-              icon: Icons.work,
+              icon: Icons.work_outline,
               navigatename: const UploadJobsView(),
             ),
             CustomRowDrawer(
               text: 'Upload Vehicle',
-              icon: Icons.shopping_cart_outlined,
+              icon: Icons.local_shipping_outlined,
               navigatename: const UploadVehiclesView(),
             ),
             CustomRowDrawer(
-              text: 'Upload Advertisment',
-              icon: Icons.shopping_cart_outlined,
+              text: 'Upload Advertisement',
+              icon: Icons.featured_video_outlined,
               navigatename: const UploadAdvertismentsView(),
             ),
             CustomRowDrawer(
@@ -89,7 +89,7 @@ class OnDrawer extends StatelessWidget {
             ),
             CustomRowDrawer(
               text: 'Add / Update Card Details',
-              icon: Icons.update,
+              icon: Icons.credit_card,
               navigatename: AddUpdateCardView(),
             ),
             CustomRowDrawer(

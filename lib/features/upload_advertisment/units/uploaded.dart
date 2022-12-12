@@ -9,6 +9,12 @@ class Uploaded extends StatefulWidget {
 
 class _UploadedState extends State<Uploaded> {
   @override
+  void initState() {
+    //PackageCubit.get(context).SubscribePackageTest();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomCard(
       widget: Padding(
@@ -19,7 +25,7 @@ class _UploadedState extends State<Uploaded> {
               height: 18.h,
             ),
             CustomCardTitle(
-              text: 'UPLOADED ADVERTISEMENTS',
+              text: 'ADVERTISEMENTS',
             ),
              MyAdvertismentTable(),
 

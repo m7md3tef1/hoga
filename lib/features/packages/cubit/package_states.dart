@@ -12,6 +12,9 @@ class PackageSubscribeSuccess extends PackageStates{}
 class PackageSubscribeFailed extends PackageStates{}
 class PackageSubscribeLoading extends PackageStates{}
 
+class PackageTestLoading extends PackageStates{}
+class PackageTestSuccess extends PackageStates{}
+class PackageTestFailed extends PackageStates{}
 
 
 class GetPackageSuccess extends PackageStates{

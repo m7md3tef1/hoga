@@ -57,7 +57,7 @@ class _UploadedLoadsViewState extends State<UploadedLoadsView> {
             CustomAppbar(
                 title: 'Uploaded Loads',
                 scaffoldKey: uploadProductScaffoldKey),
-            !CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn():  const Expanded(child: UploadedLoad()),
+            !CacheHelper.getBool(SharedKeys.isLogin)?const CustomNotLoggedIn():  const Expanded(child: UploadedLoad()),
           ],
         ),
       ),
