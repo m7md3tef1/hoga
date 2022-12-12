@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../core/widgets/custom_card.dart';
 import '../../core/widgets/custom_card_title.dart';
 import '../../core/widgets/custom_no_container.dart';
 import '../../features/jobs/upload_jop/units/button.dart';
-import '../../features/vehicles/upload_vehicles/view.dart';
 
 class Upgrade extends StatelessWidget {
   Upgrade({super.key});

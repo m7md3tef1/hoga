@@ -15,21 +15,21 @@ class CardModel {
   );
 
   CardModel.fromJson(dynamic json) {
-    cardNumber = json['card_number'];
+    cardNumber = json['card_number'].toString();
     month = json['exp_month'];
     year = json['exp_year'];
-    cvv = json['cvv'];
-    name = json['name'];
-    email = json['email'];
-    contactNumber = json['contact_number'];
-    address = json['address_line_1'];
-    country = json['country'];
-    state = json['state'];
-    city = json['city'];
-    postalCode = json['postal_code'];
+//    cvv = json['cvv'];
+//    name = json['name'];
+//    email = json['email'];
+//    contactNumber = json['contact_number'];
+//    address = json['address_line_1'];
+//    country = json['country'];
+//    state = json['state'];
+//    city = json['city'];
+//    postalCode = json['postal_code'];
   }
-  int? cardNumber, month, year, cvv, country, state, city;
-  String? name, email, contactNumber, address, postalCode;
+  int?  month, year, cvv, country, state, city;
+  String? name, email, contactNumber, address, postalCode,cardNumber;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -75,12 +75,18 @@ class AddCardCubit extends Cubit<AddCardStates> {
     response
         .then((value) => {
       print('**********'),
+      print('card data'),
+
       print(value),
       profileData = Card.fromJson(value['record']),
+      print(profileData),
+
       emit(GetUserProfileSuccess(Card.fromJson(value['record']))),
     })
         .onError((error, stackTrace) => {
       emit(GetUserProfileFailed(error.toString())),
+     showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
       print(error),
     });
   }
