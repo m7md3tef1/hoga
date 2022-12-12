@@ -21,18 +21,35 @@ import '../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import 'domain/auth_cubit.dart';
 import 'domain/auth_states.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   TextEditingController? emailController = TextEditingController();
+
   TextEditingController? passwordController = TextEditingController();
+
   TextEditingController? firstNameController = TextEditingController();
+
   TextEditingController? lastNameController = TextEditingController();
+
   TextEditingController? phoneController = TextEditingController();
+
   TextEditingController? addressController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   var image;
+
+  @override
+  void initState() {
+    super.initState();
+    image = AuthCubit.get(context).image;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,12 +150,13 @@ class SignUp extends StatelessWidget {
                                 showToast(
                                     msg: 'You need to agree with the terms and conditions and policies.', state: ToastedStates.ERROR);
                               }
-                              if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==false) {
+                              if (formKey.currentState!.validate()&&VehiclesCubit.get(context).value==true) {
                                 AuthCubit.get(context).signUp(User(
                                     firstName: firstNameController!.text.trim(),
                                     lastName: lastNameController!.text.trim(),
                                     email: emailController!.text.trim(),
                                     contactNumber: phoneController!.text.trim(),
+                                    profilePicture:  image.toString(),
                                     password: passwordController!.text.trim(),
                                     address: addressController!.text.trim()));
                               }

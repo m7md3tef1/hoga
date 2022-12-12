@@ -26,7 +26,7 @@ class User {
   String? email;
   String? contactNumber;
   dynamic address;
-  dynamic profilePicture;
+  var profilePicture;
   int? id;
   String?password;
   String? username;
