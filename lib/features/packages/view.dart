@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
+import 'package:hoga_load/core/dialoges/toast.dart';
 import 'package:hoga_load/core/widgets/custom_card_title.dart';
 import 'package:hoga_load/features/home/units/homebage/expandable.dart';
 import 'package:hoga_load/features/home/view.dart';
@@ -15,11 +16,8 @@ import '../../core/router/router.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_button.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
-import '../add_update_card/view.dart';
-import '../auth/units/cant_login.dart';
 import 'cubit/package_cubit.dart';
 import 'cubit/package_states.dart';
-
 part 'units/body.dart';
 
 GlobalKey<ScaffoldState> packagesScaffoldKey = GlobalKey<ScaffoldState>();
@@ -42,10 +40,10 @@ class PackagesView extends StatelessWidget {
             ),
             // ignore: prefer_const_constructors
             !CacheHelper.getBool(SharedKeys.isLogin)
-                ? CustomNotLoggedIn()
-                : Expanded(
+                ? const CustomNotLoggedIn()
+                : const Expanded(
                     child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(), child: PackageBody())),
+                        physics: BouncingScrollPhysics(), child: PackageBody())),
           ],
         ),
       ),

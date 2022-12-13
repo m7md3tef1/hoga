@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/core/dialoges/toast.dart';
 import 'package:hoga_load/features/packages/cubit/package_cubit.dart';
 import 'package:hoga_load/features/packages/cubit/package_states.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
@@ -40,20 +41,21 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
     // TODO: implement initState
     super.initState();
 
-    PackageCubit.get(context).SubscribePackageTest();
 
-    imag2 = ProductsCubit.get(context).image1 != null
-        ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-        : '    No File chosen';
-    imag1 = ProductsCubit.get(context).image != null
-        ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-        : '    No File chosen';
+    PackageCubit.get(context).SubscribePackageTest();
+    //
+    // imag2 = ProductsCubit.get(context).image1 != null
+    //     ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+    //     : '    No File chosen';
+    // imag1 = ProductsCubit.get(context).image != null
+    //     ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
+    //     : '    No File chosen';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: OnDrawer(),
+      drawer: const OnDrawer(),
       key: uploadedProductsScaffoldKey,
       body: BlocConsumer<ProductsCubit, AddProductStates>(
         listener:(context,state){} ,
@@ -76,7 +78,7 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                     font: 18.sp,
                     scaffoldKey: uploadedProductsScaffoldKey,
                   ),
-                  PackageCubit.get(context).testLoading?Expanded(child: const Center(child: CircularProgressIndicator(color: Colors.orange,))):
+                  PackageCubit.get(context).testLoading?const Expanded(child: Center(child: CircularProgressIndicator(color: Colors.orange,))):
                   PackageCubit.get(context).isAllowed?Expanded(
                       child: SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
@@ -316,19 +318,31 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                             child: Align(
                                               alignment: Alignment.bottomLeft,
                                               child: CustomButton(
-                                                text: 'UPLOAD ADVERTISEMENT',
+                                                height: 75.sp,
+                                                text: 'UPLOAD\n ADVERTISEMENT',
                                                 icon: Icons.add,
                                                 color: ColorManager.yellow,
                                                 function: () {
-                                                  PackageCubit.get(context)
-                                                      .uploadPackageCubit(
-                                                      model: PackagesDetail(
-                                                        desktopBanner: imag1,
-                                                        mobileBanner: imag2,
-                                                        link: PackageCubit.get(context)
-                                                            .linkController
-                                                            .toString(),
-                                                      ));
+
+                                                  if(imag1.isEmpty||imag2.isEmpty){
+                                                    showToast(msg: 'You must add a banner', state: ToastedStates.ERROR);
+                                                  }
+                                                  if(linkController.text.isEmpty){
+                                                    showToast(msg: 'You must add a link', state: ToastedStates.ERROR);
+
+                                                  }
+                                                  showToast(msg: 'done', state: ToastedStates.ERROR);
+
+                                                  // PackageCubit.get(context)
+                                                  //     .uploadPackageCubit(
+                                                  //   context,
+                                                  //     model: PackagesDetail(
+                                                  //       desktopBanner: imag1,
+                                                  //       mobileBanner: imag2,
+                                                  //       link: PackageCubit.get(context)
+                                                  //           .linkController
+                                                  //           .toString(),
+                                                  //     ));
                                                   imag1='';
                                                   imag2='';
                                                   ProductsCubit.get(context).image==null;
@@ -336,7 +350,6 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                   PackageCubit.get(context)
                                                       .linkController
                                                       .clear();
-
                                                 },
                                               ),
                                             ),

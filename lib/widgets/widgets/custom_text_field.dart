@@ -21,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   var color;
   var label;
   var name;
+  bool enabled=true;
   CustomTextField(
       {Key? key,
       this.title,
@@ -37,6 +38,7 @@ class CustomTextField extends StatelessWidget {
       this.validate,
       this.suffixIcon,
       this.obscure = false,
+        this.enabled=true,
       this.prefixIcon})
       : super(key: key);
 
@@ -124,6 +126,7 @@ class CustomTextField extends StatelessWidget {
                   left: 14.0.w,
                 ),
                 child: TextFormField(
+                    readOnly: readOnly,
                     keyboardType: keyboardType,
                     obscureText: obscure,
                     onSaved: onSaved,

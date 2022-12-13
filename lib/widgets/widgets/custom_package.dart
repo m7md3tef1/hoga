@@ -29,15 +29,22 @@ class CustomPackage extends StatefulWidget {
   var totalprice;
   TextEditingController? textController=TextEditingController();
   TextEditingController? textController2=TextEditingController();
+  String day = '';
+  String month = '';
+  String year = '';
+  String fromDate = '';
+  String toDate = '';
 
   @override
   State<CustomPackage> createState() => _CustomPackageState();
 }
 
 class _CustomPackageState extends State<CustomPackage> {
-  var _radioValue;
   @override
   Widget build(BuildContext context) {
+    print(PackageCubit.get(context).fromdate);
+    print('PackageCubit.get(context).fromdate');
+
     return Column(
       children: [
         Row(
@@ -107,11 +114,33 @@ class _CustomPackageState extends State<CustomPackage> {
                     padding: EdgeInsets.only(left: 42.w, right: 14.w),
                     child: CustomTextField(
                       height: 50.h,
-                      hintText:
-                      '07-08-2022',
-                      keyboardType: TextInputType.datetime,
-                      controller: widget.textController!,
+                      enabled: false,
+                      readOnly: true,
+                      hintText: PackageCubit.get(context).fromdate == ''||PackageCubit.get(context).fromdate==null ?
+                      'dd-mm-yy' : PackageCubit.get(context).fromdate,
+
+                      //controller: widget.textController!,
+                      suffixIcon: InkWell(
+                          onTap: () async {
+                            DateTime? newDate = await showDatePicker(
+                                initialEntryMode: DatePickerEntryMode.calendarOnly,
+                                context: context,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(3000),
+                                initialDate: DateTime.now());
+                            if (newDate == null) return;
+                            setState(() {
+                              widget.day = newDate.day.toString();
+                              widget.month = newDate.month.toString();
+                              widget.year = newDate.year.toString();
+
+                              widget.fromDate = '${widget.day}/${widget.month}/${widget.year}';
+                              PackageCubit.get(context).fromdate=widget.fromDate;
+                            });
+                          },
+                          child: const Icon(Icons.date_range_outlined)),
                     ),
+
                   ),
                   SizedBox(
                     height: 5.h,
@@ -130,10 +159,31 @@ class _CustomPackageState extends State<CustomPackage> {
                     padding: EdgeInsets.only(left: 42.w, right: 14.w),
                     child: CustomTextField(
                       height: 50.h,
-                      hintText:
-                      '07-08-2022',
-                      keyboardType: TextInputType.datetime,
-                      controller: widget.textController2!,
+                      readOnly: true,
+                      // enabled: false,
+                      hintText: PackageCubit.get(context).todate == '' ||PackageCubit.get(context).todate==null
+                          ? 'dd-mm-yy' : PackageCubit.get(context).todate,
+
+                      //controller: widget.textController!,
+                      suffixIcon: InkWell(
+                          onTap: () async {
+                            DateTime? newDate = await showDatePicker(
+                                initialEntryMode: DatePickerEntryMode.calendarOnly,
+                                context: context,
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(3000),
+                                initialDate: DateTime.now());
+                            if (newDate == null) return;
+                            setState(() {
+                              widget.day = newDate.day.toString();
+                              widget.month = newDate.month.toString();
+                              widget.year = newDate.year.toString();
+
+                              widget.toDate = '${widget.day}/${widget.month}/${widget.year}';
+                              PackageCubit.get(context).todate=widget.toDate;
+                            });
+                          },
+                          child: const Icon(Icons.date_range_outlined)),
                     ),
                   ),
                   SizedBox(

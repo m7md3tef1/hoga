@@ -22,79 +22,98 @@ var function;
       padding:
           EdgeInsets.only(left: 15.w, right: 15.w, bottom: 22.h, top: 22.h),
       child: Container(
-        height: 268.h,
+        height: 278.h,
         width: 1.sw,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
-                offset: const Offset(0, 3),
+                offset: const Offset(0, 5),
                 blurRadius: 0,
                 color: color.withOpacity(1),
               ),
             ],
-            color: ColorManager.whiteColor),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20.h,
-              ),
+            color: Colors.white
+          //  color: Colors.transparent,
 
-              Container(
-                decoration: BoxDecoration(
-                  color: isColor?const Color(0xFFff8c09).withOpacity(0.3):Colors.transparent,
-                  borderRadius: BorderRadius.circular(10)
+        ),
+        child: Container(
+          height: 268.h,
+          width: 1.sw,
+          child: Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: InkWell(
+                onTap:()async{
+                  await function;
+                  MagicRouter.navigateTo(pageRoute);
+                },
+                //splashColor: color.withOpacity(0.5),
+                highlightColor: color.withOpacity(0.4),
 
-                ),
-                child: Image(
-                    height: 80,
-                    width: 80,
-                    image:  AssetImage(image)),
-              ),
-              Expanded(
-                child: CustomText(
-                  text: text,
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF000000),
-                ),
-              ),
-              Expanded(
-                child: CustomText(
-                  text: hint,
-                  fontSize: 16.sp,
-                  align: TextAlign.center,
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFF000000),
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap:()async{
-                        await function;
-                        MagicRouter.navigateTo(pageRoute);
-                      },
-                      child: CustomText(
-                        text:  more,
-                        color: color,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+
+
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 20.h,
                       ),
-                    ),
-                     Icon(
-                      Icons.arrow_right_alt,
-                      color: color,
-                    ),
-                  ],
+
+                      Container(
+                        decoration: BoxDecoration(
+                          color: isColor?const Color(0xFFff8c09).withOpacity(0.3):Colors.transparent,
+                          borderRadius: BorderRadius.circular(10)
+
+                        ),
+                        child: Image(
+                            height: 80,
+                            width: 80,
+                            image:  AssetImage(image)),
+                      ),
+                      Expanded(
+                        child: CustomText(
+                          text: text,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF000000),
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomText(
+                          text: hint,
+                          fontSize: 16.sp,
+                          align: TextAlign.center,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF000000),
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(
+                              text:  more,
+                              color: color,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                             Icon(
+                              Icons.arrow_right_alt,
+                              color: color,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

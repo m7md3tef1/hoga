@@ -133,7 +133,7 @@ class BuyContainer extends StatelessWidget {
                     ),
                     child: Center(
                       child:
-                      state is SubscribeLoading?const CircularProgressIndicator(color: ColorManager.primaryColor,):
+                      state is SubscribeLoading?const CircularProgressIndicator(color: Colors.orange):
                       CustomText(
                         text: 'Buy Now',
                         fontSize: 22.sp,

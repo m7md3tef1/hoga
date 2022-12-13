@@ -48,10 +48,11 @@ class PlansRepo{
   static subscribePackage(id,{fistDate,endDate}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     print('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$id');
+    print(fistDate==null);
 
 
     return
-      fistDate.isEmpty||endDate.isEmpty?
+      fistDate==null||endDate==null?
       await Api().postHttp(url: "subscribe/advertisement-plan", authToken: token, data: {'id':id})
           :      await Api().postHttp(url: "subscribe/advertisement-plan", authToken: token, data: {'id':id,'from_date':fistDate,
         'to_date':endDate}

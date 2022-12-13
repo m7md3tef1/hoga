@@ -17,14 +17,24 @@ import '../../packages/view.dart';
 import '../../search_product/cubit/getProduct__states.dart';
 import 'add_product_form.dart';
 
-class MyAdvertismentTable extends StatelessWidget {
+class MyAdvertismentTable extends StatefulWidget {
    MyAdvertismentTable({super.key});
 
+  @override
+  State<MyAdvertismentTable> createState() => _MyAdvertismentTableState();
+}
 
+class _MyAdvertismentTableState extends State<MyAdvertismentTable> {
+  @override
+  void initState() {
+    PackageCubit.get(context).fromdate='';
+    PackageCubit.get(context).todate='';
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: SizedBox(
         height: 0.7.sh,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -261,5 +271,4 @@ class MyAdvertismentTable extends StatelessWidget {
                     );
                   });
   }
-
 }

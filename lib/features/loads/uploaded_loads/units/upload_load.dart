@@ -25,8 +25,8 @@ class _UploadedLoadState extends State<UploadedLoad> {
           return LoadsCubit.get(context).testLoading
               ? const Center(
                   child: CircularProgressIndicator(
-                  color: ColorManager.yellow,
-                ))
+                    color: Colors.orange,
+                  ))
               : LoadsCubit.get(context).isAllowed
                   ? CustomCard(
                       widget: Padding(

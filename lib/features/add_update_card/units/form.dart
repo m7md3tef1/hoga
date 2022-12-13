@@ -420,7 +420,7 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                     ? const Center(
                                                   child:
                                                   CircularProgressIndicator(
-                                                    color: Colors.green,
+                                                    color: Colors.orange,
                                                   ),
                                                 )
                                                     : Text(
@@ -503,7 +503,7 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                     ? const Center(
                                                   child:
                                                   CircularProgressIndicator(
-                                                    color: Colors.green,
+                                                    color: Colors.orange,
                                                   ),
                                                 )
                                                     : Text(
@@ -581,7 +581,7 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                     ? const Center(
                                                   child:
                                                   CircularProgressIndicator(
-                                                    color: Colors.green,
+                                                    color: Colors.orange,
                                                   ),
                                                 )
                                                     : Text(
@@ -634,7 +634,7 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                               print("PROCEED");
                               if (formKey.currentState!.validate()) {
                                 AddCardCubit.get(context).addCard(CardModel(
-                                    int.parse(cardNumberController.text),
+                                    cardNumberController.text,
                                     int.parse(monthController.text),
                                     int.parse(yearController.text),
                                     int.parse(cvvController.text),

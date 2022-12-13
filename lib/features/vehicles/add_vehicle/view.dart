@@ -129,7 +129,7 @@ class AddVehiclesView extends StatelessWidget {
                                   child: Container(
                                       height: 30,
                                       width: 30,
-                                      child: const CircularProgressIndicator()))
+                                      child: const CircularProgressIndicator(color: Colors.orange,)))
                               : InkWell(
                                   onTap: () async {
                                     if (isLoadFilter) {

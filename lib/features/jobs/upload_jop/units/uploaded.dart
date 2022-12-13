@@ -25,8 +25,7 @@ class _UploadedState extends State<Uploaded> {
       return JopCubit.get(context).testLoading
           ? const Center(
               child: CircularProgressIndicator(
-              color: ColorManager.yellow,
-            ))
+                color: Colors.orange,            ))
           : JopCubit.get(context).isAllowed
               ? CustomCard(
                   widget: Padding(

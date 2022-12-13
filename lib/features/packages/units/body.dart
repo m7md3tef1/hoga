@@ -83,11 +83,30 @@ class PackageBody extends StatelessWidget {
                                     child:state is  PackageSubscribeLoading?
                                     const Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,)):
                                     CustomButton(
-                                      function: () {
-                                        print(PackageCubit.get(context).subscribePackage(PackageCubit.get(context).packageList[PackageCubit.get(context).selectedPackage].id));
+                                      function: ()async {
                                         print('++++++++++++++++++++++++++++++++++++++');
-                                        PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
-                                            .packageList[PackageCubit.get(context).selectedPackage].id);
+                                        if(PackageCubit.get(context).selectedPackage==0){
+                                          if(PackageCubit.get(context).fromdate==null||PackageCubit.get(context).todate==null){
+                                            showToast(msg: 'Add Valid Date', state: ToastedStates.ERROR);
+                                          }else{
+                                            print('first date is ${PackageCubit.get(context).fromdate}');
+                                            print('end date is ${PackageCubit.get(context).fromdate}');
+
+                                           await PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
+                                                .packageList[PackageCubit.get(context).selectedPackage].id,
+                                              endDate: PackageCubit.get(context).todate,firstDate: PackageCubit.get(context).fromdate
+                                            );
+
+                                          }
+
+                                        }else{
+                                          await  PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
+                                              .packageList[PackageCubit.get(context).selectedPackage].id,
+
+                                          );
+
+                                        }
+
                                       },
                                       // MagicRouter.navigateTo(
                                       //      AddUpdateCardView()),
