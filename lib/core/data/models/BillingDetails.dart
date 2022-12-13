@@ -20,7 +20,7 @@ class BillingDetails {
     addressLine2 = json['address_line_2'];
     state = json['state'] != null ? State.fromJson(json['state']) : null;
     city = json['city'] != null ? City.fromJson(json['city']) : null;
-    country = json['country'];
+    //country = json['country'];
     postalCode = json['postal_code'];
     name = json['name'];
     email = json['email'];

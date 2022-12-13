@@ -76,7 +76,7 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                     font: 18.sp,
                     scaffoldKey: uploadedProductsScaffoldKey,
                   ),
-                  PackageCubit.get(context).testLoading?const Center(child: CircularProgressIndicator(color: Colors.orange,)):
+                  PackageCubit.get(context).testLoading?Expanded(child: const Center(child: CircularProgressIndicator(color: Colors.orange,))):
                   PackageCubit.get(context).isAllowed?Expanded(
                       child: SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
@@ -159,18 +159,12 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                     ),
                                                   ),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    FittedBox(
-                                                      child: CustomText(
-                                                        text:
-                                                        'Should have a size of 925px width and 200px height',
-                                                        align: TextAlign.start,
-                                                        color: Colors.grey,
-                                                        fontSize: 10.sp,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                CustomText(
+                                                  text:
+                                                  'Should have a size of 925px width and 200px height',
+                                                  align: TextAlign.start,
+                                                  color: Colors.grey,
+                                                  fontSize: 10.sp,
                                                 ),
                                               ],
                                             ),
@@ -244,18 +238,13 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                     ),
                                                   ),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    FittedBox(
-                                                      child: CustomText(
-                                                        text:
-                                                        'Should have a size of 925px width and 200px height',
-                                                        align: TextAlign.start,
-                                                        color: Colors.grey,
-                                                        fontSize: 10.sp,
-                                                      ),
-                                                    ),
-                                                  ],
+
+                                                CustomText(
+                                                  text:
+                                                  'Should have a size of 925px width and 200px height',
+                                                  align: TextAlign.start,
+                                                  color: Colors.grey,
+                                                  fontSize: 10.sp,
                                                 ),
                                               ],
                                             ),

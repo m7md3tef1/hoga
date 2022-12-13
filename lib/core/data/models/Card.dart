@@ -11,7 +11,7 @@ class Card {
   Card.fromJson(dynamic json) {
     cardDetails = json['card_details'] != null ? CardModel.fromJson(json['card_details']) : null;
     billingDetails = json['billing_details'] != null ? BillingDetails.fromJson(json['billing_details']) : null;
-    userDetails = json['user_details'] != null ? UserDetails.fromJson(json['user_details']) : null;
+   // userDetails = json['user_details'] != null ? UserDetails.fromJson(json['user_details']) : null;
   }
   CardModel? cardDetails;
   BillingDetails? billingDetails;
