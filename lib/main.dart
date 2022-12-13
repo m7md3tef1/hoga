@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..packageCubit()),
         BlocProvider(
             create: (_) => AddCardCubit()
-              ..getCard()
+              ..getCard()..profileData
               ),
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(

@@ -2,7 +2,28 @@ part of '../view.dart';
 
 class OnDrawer extends StatelessWidget {
   const OnDrawer({Key? key}) : super(key: key);
+  Future<bool?> showWarning(BuildContext context)async =>showDialog<bool>(
+      context: context, builder: (context)=>
+      AlertDialog(
+        title: const Text('Do You want to log out?'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              children: [
+                SizedBox(width: 35.sp,),
+                Expanded(child: CustomButton(function: ()=>Navigator.pop(context,false), text: 'No',height: 37.sp,font: 15)),
+                SizedBox(width: 35.sp,),
+                Expanded(child: CustomButton(function: ()=>MagicRouter.navigateTo(Login()), text: 'Yes',height: 37.sp,font: 15,)),
+                SizedBox(width: 35.sp,),
 
+              ],
+            ),
+          ),
+
+        ],
+      )
+  );
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -100,7 +121,8 @@ class OnDrawer extends StatelessWidget {
             CustomRowDrawer(
               text: 'Logout',
               icon: Icons.logout_outlined,
-              navigatename: Login(),
+              ontap:true ,
+            //  navigatename: Login(),
               beforeNavigate: () {
                 CacheHelper.putString(SharedKeys.token, '');
                 CacheHelper.putBool(SharedKeys.isLogin, false);

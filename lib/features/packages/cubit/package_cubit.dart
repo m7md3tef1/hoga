@@ -29,6 +29,7 @@ class PackageCubit extends Cubit<PackageStates> {
   List<PackagesDetail> uploadPackageList = [];
   TextEditingController linkController = TextEditingController();
 
+
   int selectedPackage = 0;
   changeSelectedPackage(int index) {
     print(index);

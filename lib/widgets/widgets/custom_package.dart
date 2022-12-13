@@ -5,6 +5,7 @@ import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/features/add_update_card/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
+import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
 import '../../features/packages/cubit/package_cubit.dart';
 
@@ -26,6 +27,9 @@ class CustomPackage extends StatefulWidget {
   var conttext1;
   var conttext2;
   var totalprice;
+  TextEditingController? textController=TextEditingController();
+  TextEditingController? textController2=TextEditingController();
+
   @override
   State<CustomPackage> createState() => _CustomPackageState();
 }
@@ -101,19 +105,12 @@ class _CustomPackageState extends State<CustomPackage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 42.w, right: 14.w),
-                    child: Container(
-                      height: 55.h,
-                      width: 1.sw,
-                      decoration: BoxDecoration(
-                          color: ColorManager.whiteColor,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(color: Colors.grey)),
-                      child: CustomText(
-                        text: widget.conttext1,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF777777),
-                      ),
+                    child: CustomTextField(
+                      height: 50.h,
+                      hintText:
+                      '07-08-2022',
+                      keyboardType: TextInputType.datetime,
+                      controller: widget.textController!,
                     ),
                   ),
                   SizedBox(
@@ -131,19 +128,12 @@ class _CustomPackageState extends State<CustomPackage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 42.w, right: 14.w),
-                    child: Container(
-                      height: 55.h,
-                      width: 1.sw,
-                      decoration: BoxDecoration(
-                          color: ColorManager.whiteColor,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(color: Colors.grey)),
-                      child: CustomText(
-                        text: widget.conttext1,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF777777),
-                      ),
+                    child: CustomTextField(
+                      height: 50.h,
+                      hintText:
+                      '07-08-2022',
+                      keyboardType: TextInputType.datetime,
+                      controller: widget.textController2!,
                     ),
                   ),
                   SizedBox(

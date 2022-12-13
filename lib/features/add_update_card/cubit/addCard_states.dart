@@ -12,6 +12,10 @@ class GetUserProfileSuccess extends AddCardStates {
   Card profileList = Card();
   GetUserProfileSuccess(this.profileList);
 }
+class GetUserProfileSuccess2 extends AddCardStates {
+ List<Card>  profileList = [];
+ GetUserProfileSuccess2(this.profileList);
+}
 
 class GetUserProfileFailed extends AddCardStates {
   final String msg;

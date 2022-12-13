@@ -29,7 +29,6 @@ class _FormCardState extends State<FormCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(cardNumberController.text);
     cardNumberController.text =
     AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
 cityOrigin=

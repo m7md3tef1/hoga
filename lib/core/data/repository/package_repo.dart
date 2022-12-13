@@ -1,3 +1,5 @@
+import 'package:hoga_load/core/data/models/Card.dart';
+
 import '../../keys/keys.dart';
 import '../api/api.dart';
 import '../local/cacheHelper.dart';
@@ -41,6 +43,21 @@ class PackageRepo{
 
     return packageList;
   }
+  static Future<List<Card>> getCard() async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    var response =
+    await Api().getHttp(url: 'payment-method', authToken: token);
+
+    List<Card> packageList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      Card blogModel = Card.fromJson(response['records'][i]);
+      packageList.add(blogModel);
+    }
+    print(response.length);
+    print(packageList.length);
+
+    return packageList;
+  }
 
   static Future<List<PackagesDetail>> package() async {
     String token = await CacheHelper.getString(SharedKeys.token);
@@ -57,6 +74,7 @@ class PackageRepo{
 
     return packageList;
   }
+
   static Future<List<PackagesDetail>> uploadPackage(PackagesDetail? model) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response =
