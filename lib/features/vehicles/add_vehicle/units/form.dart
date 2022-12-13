@@ -68,9 +68,9 @@ class _FormInfoState extends State<FormInfo> {
           ? widget.vehiclesModel!.originCity!.title!
           : 'other';
       countryDestination = widget.vehiclesModel!.destinationCountry!.title!;
-      countryOrigin = widget.vehiclesModel!.originCountry!.title!;
+      countryOrigin = widget.vehiclesModel!.originCountry!.title!;stateOrigin = widget.vehiclesModel!.originState!.title!;
       stateDestination = widget.vehiclesModel!.destinationState!.title!;
-      stateOrigin = widget.vehiclesModel!.originState!.title!;
+
 
       DataFormCubit.get(context).cityDestinationID =
           widget.vehiclesModel!.destinationCity != null
@@ -80,10 +80,11 @@ class _FormInfoState extends State<FormInfo> {
           widget.vehiclesModel!.originCity != null
               ? widget.vehiclesModel!.originCity!.id!.toString()
               : 'other';
-      DataFormCubit.get(context).countryDestinationID =
-          widget.vehiclesModel!.destinationCountry!.id!.toString();
       DataFormCubit.get(context).countryOriginID =
           widget.vehiclesModel!.originCountry!.id!.toString();
+      DataFormCubit.get(context).countryDestinationID =
+          widget.vehiclesModel!.destinationCountry!.id!.toString();
+
       DataFormCubit.get(context).stateDestinationID =
           widget.vehiclesModel!.destinationState!.id!.toString();
       DataFormCubit.get(context).stateOriginID =

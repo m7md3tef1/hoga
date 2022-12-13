@@ -13,6 +13,7 @@ import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
 import '../../core/data/local/cacheHelper.dart';
 import '../../core/data/models/card_model.dart';
+import '../../core/data/models/vehicle/vehicles.dart';
 import '../../core/keys/keys.dart';
 import '../../core/master_cubit/getDataForm_cubit.dart';
 import '../../core/master_cubit/getDataForm_state.dart';

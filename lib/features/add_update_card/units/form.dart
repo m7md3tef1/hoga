@@ -8,6 +8,7 @@ class FormCard extends StatefulWidget {
 }
 
 class _FormCardState extends State<FormCard> {
+  Vehicles? vehiclesModel;
   var countryOrigin;
   var countryCode = 0;
   var stateOrigin ;
@@ -52,38 +53,21 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
     AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
     postalCodeController.text =
     AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+    //DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
+   // DataFormCubit.get(context).stateOriginID =vehiclesModel!.originState!.id!.toString();
+  //  DataFormCubit.get(context).cityOriginID =vehiclesModel!.originCity!.id!.toString();
+  //  cityOrigin = vehiclesModel!.originCity != null
+    //    ? vehiclesModel!.originCity!.title!
+      //  : 'other';
+    //countryOrigin = vehiclesModel!.originCountry!.title!;stateOrigin = vehiclesModel!.originState!.title!;
   }
 
   @override
   Widget build(BuildContext context) {
     return
     BlocConsumer<DataFormCubit, AddDataFormStates>(
-          listener: (BuildContext context, state) {},
-          builder: (BuildContext context, state) {
-//            print(cardNumberController.text);
-//            cardNumberController.text =
-//            AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
-//            cityOrigin=
-//            AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-//            countryOrigin=
-//            AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
-//            stateOrigin=
-//            AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
-//            monthController.text =
-//            AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
-//            yearController.text =
-//            AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
-//            nameController.text =
-//            AddCardCubit.get(context).profileData.billingDetails==null?'':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
-//            emailController.text =
-//            AddCardCubit.get(context).profileData.billingDetails==null?'':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
-//            contactNumberController.text =
-//            AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
-//            addressController.text =
-//            AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
-//            postalCodeController.text =
-//            AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
-
+          listener: (BuildContext context, s) {},
+          builder: (BuildContext context, s) {
             return BlocConsumer<AddCardCubit,AddCardStates>(
               listener: (context,state){},
               builder:(context,state){
@@ -109,9 +93,16 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                 AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
                 postalCodeController.text =
                 AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
-                cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.city!.id!)!;
-                stateCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.state!.id!)!;
-                //cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.country!.id!)!;
+              //  cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.city!.id!)!;
+              //  stateCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.state!.id!)!;
+           //     cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.country!.id!)!;
+              //  DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
+                //DataFormCubit.get(context).stateOriginID =vehiclesModel!.originState!.id!.toString();
+              //  DataFormCubit.get(context).cityOriginID =vehiclesModel!.originCity!.id!.toString();
+            //    cityOrigin = vehiclesModel!.originCity != null
+              //      ? vehiclesModel!.originCity!.title!
+                //    : 'other';
+                //countryOrigin = vehiclesModel!.originCountry!.title!;stateOrigin = vehiclesModel!.originState!.title!;
 
                 print('cardNumberController.text  ${    cardNumberController.text}');
 
@@ -399,22 +390,21 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
 
                           ),
                           CustomTextField(
-                           // controller: countryOrigin.toString(),
-                              hintText: countryOrigin == '' ? 'Select a state' : countryOrigin,
+                              height: 64.h,
                               readOnly: true,
-                              color: ColorManager.darkGrey,
+                              name: 'Original Country',
+                              hintText:
+                              countryOrigin == '' ? 'Select a Country' : countryOrigin,
                               suffixIcon: InkWell(
                                 onTap: () {
                                   showModalBottomSheet(
                                     context: context,
                                     builder: (context) {
                                       return ListView.builder(
-                                          itemCount: DataFormCubit.get(context)
-                                              .countryList
-                                              .length,
+                                          itemCount:
+                                          DataFormCubit.get(context).countryList.length,
                                           itemBuilder: (context, index) => Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               InkWell(
                                                 onTap: () {
@@ -423,10 +413,6 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                     DataFormCubit.get(context)
                                                         .countryList[index]
                                                         .title!;
-                                                    countryCode =
-                                                    DataFormCubit.get(context)
-                                                        .countryList[index]
-                                                        .id!;
                                                     Navigator.of(context).pop();
                                                     DataFormCubit.get(context)
                                                         .countryOriginID =
@@ -434,6 +420,13 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                             .countryList[index]
                                                             .id!
                                                             .toString();
+                                                    cityOrigin = '';
+                                                    stateOrigin = '';
+
+                                                    DataFormCubit.get(context)
+                                                        .cityOriginID = '';
+                                                    DataFormCubit.get(context)
+                                                        .stateOriginID = '';
                                                   });
                                                   DataFormCubit.get(context).getState(
                                                       DataFormCubit.get(context)
@@ -442,17 +435,7 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                 },
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(8.0),
-                                                  child: DataFormCubit.get(context)
-                                                      .countryList[index]
-                                                      .title ==
-                                                      null
-                                                      ? const Center(
-                                                    child:
-                                                    CircularProgressIndicator(
-                                                      color: Colors.green,
-                                                    ),
-                                                  )
-                                                      : Text(
+                                                  child: Text(
                                                     DataFormCubit.get(context)
                                                         .countryList[index]
                                                         .title!,
@@ -473,15 +456,16 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                   color: ColorManager.blackColor,
                                 ),
                               )),
-                          state is GetStateLoading
+                          s is GetStateLoading
                               ? CustomText(
                             text: 'Loading....',
                           )
                               : CustomTextField(
+                              height: 64.h,
                               readOnly: true,
-                              color: ColorManager.darkGrey,
-                             // controller: stateOrigin.toString(),
-                              hintText: stateOrigin == '' ? 'Select a state' : stateOrigin,
+                              name: 'Original State',
+                              hintText:
+                              stateOrigin == '' ? 'Select a state' : stateOrigin,
                               suffixIcon: InkWell(
                                 onTap: () {
                                   showModalBottomSheet(
@@ -502,10 +486,6 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                     DataFormCubit.get(context)
                                                         .stateList[index]
                                                         .title!;
-                                                    stateCode =
-                                                    DataFormCubit.get(context)
-                                                        .stateList[index]
-                                                        .id!;
                                                     Navigator.of(context).pop();
                                                     DataFormCubit.get(context)
                                                         .stateOriginID =
@@ -513,31 +493,21 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                             .stateList[index]
                                                             .id!
                                                             .toString();
+                                                    cityOrigin = '';
+                                                    DataFormCubit.get(context)
+                                                        .cityOriginID = '';
                                                   });
-                                                  print('sssssssss');
                                                   DataFormCubit.get(context)
-                                                      .getCity(DataFormCubit.get(
-                                                      context)
-                                                      .stateList[index]
-                                                      .title!);
+                                                      .getCity(
+                                                      DataFormCubit.get(context)
+                                                          .stateList[index]
+                                                          .title!);
                                                 },
                                                 child: Padding(
                                                   padding:
                                                   const EdgeInsets.all(8.0),
-                                                  child: DataFormCubit.get(
-                                                      context)
-                                                      .stateList[index]
-                                                      .title ==
-                                                      null
-                                                      ? const Center(
-                                                    child:
-                                                    CircularProgressIndicator(
-                                                      color: Colors.green,
-                                                    ),
-                                                  )
-                                                      : Text(
-                                                    DataFormCubit.get(
-                                                        context)
+                                                  child: Text(
+                                                    DataFormCubit.get(context)
                                                         .stateList[index]
                                                         .title!,
                                                     style: TextStyle(
@@ -557,65 +527,74 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                   color: ColorManager.blackColor,
                                 ),
                               )),
-                          state is GetCityLoading
+                          s is GetCityLoading
                               ? CustomText(
                             text: 'Loading....',
                           )
                               : CustomTextField(
+                              height: 64.h,
                               readOnly: true,
-                            //  controller: cityOrigin.toString(),
-                              hintText: cityOrigin=='' ? 'Select a city' :cityOrigin,
-                              color: ColorManager.darkGrey,
+                              name: 'Original City',
+                              hintText: cityOrigin == '' ? 'Select a city' : cityOrigin,
                               suffixIcon: InkWell(
                                 onTap: () {
+                                  print(
+                                      'city list length is ${DataFormCubit.get(context).cityList.length}');
                                   showModalBottomSheet(
                                     context: context,
                                     builder: (context) {
-                                      return ListView.builder(
+                                      return DataFormCubit.get(context).cityList.isEmpty
+                                          ? InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            cityOrigin = 'other';
+                                            Navigator.of(context).pop();
+                                            DataFormCubit.get(context)
+                                                .cityOriginID = 'other';
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 8.0,
+                                              bottom: 0.5.sh,
+                                              right: 8,
+                                              left: 8),
+                                          child: Center(
+                                            child: Text(
+                                              'other',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20.sp),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                          : ListView.builder(
                                           itemCount: DataFormCubit.get(context)
                                               .cityList
                                               .length,
-                                          itemBuilder: (context, index) => Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    cityOrigin =
-                                                    DataFormCubit.get(context)
-                                                        .cityList[index]
-                                                        .title!;
-                                                    cityCode =
-                                                    DataFormCubit.get(context)
-                                                        .cityList[index]
-                                                        .id!;
-                                                    Navigator.of(context).pop();
-                                                    DataFormCubit.get(context)
-                                                        .cityOriginID =
-                                                        DataFormCubit.get(context)
-                                                            .cityList[index]
-                                                            .id!
-                                                            .toString();
-                                                  });
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(8.0),
-                                                  child: DataFormCubit.get(
-                                                      context)
+                                          itemBuilder: (context, index) {
+                                            return InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  cityOrigin =
+                                                  DataFormCubit.get(context)
                                                       .cityList[index]
-                                                      .title ==
-                                                      null
-                                                      ? const Center(
-                                                    child:
-                                                    CircularProgressIndicator(
-                                                      color: Colors.green,
-                                                    ),
-                                                  )
-                                                      : Text(
-                                                    DataFormCubit.get(
-                                                        context)
+                                                      .title!;
+                                                  Navigator.of(context).pop();
+                                                  DataFormCubit.get(context)
+                                                      .cityOriginID =
+                                                      DataFormCubit.get(context)
+                                                          .cityList[index]
+                                                          .id!
+                                                          .toString();
+                                                });
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Center(
+                                                  child: Text(
+                                                    DataFormCubit.get(context)
                                                         .cityList[index]
                                                         .title!,
                                                     style: TextStyle(
@@ -624,8 +603,8 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ));
+                                            );
+                                          });
                                     },
                                   );
                                 },

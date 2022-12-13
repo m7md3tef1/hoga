@@ -11,6 +11,7 @@ import '../../../core/data/models/Packages_detail.dart';
 import '../../../core/data/models/Upload_adv.dart';
 import '../../../core/data/repository/plans_repo.dart';
 import '../../../core/dialoges/toast.dart';
+import '../../search_product/cubit/getProduct_cubit.dart';
 
 class PackageCubit extends Cubit<PackageStates> {
   PackageCubit() : super(PackageLoading());
@@ -28,6 +29,9 @@ class PackageCubit extends Cubit<PackageStates> {
   List<PackagesDetail> getPackageList = [];
   List<PackagesDetail> uploadPackageList = [];
   TextEditingController linkController = TextEditingController();
+
+  String? fromdate;
+  String? todate;
 
 
   int selectedPackage = 0;
@@ -95,13 +99,15 @@ class PackageCubit extends Cubit<PackageStates> {
         })
             .catchError((error) =>
         {emit(PackageSubscribeFailed()),
+          print("this value--------Plans Failed"),
+
           showToast(msg: error.toString(), state: ToastedStates.ERROR),
           print(error)});
       }
     });
   }
 
-  uploadPackageCubit({PackagesDetail? model}) {
+  uploadPackageCubit(context,{PackagesDetail? model}) {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -113,10 +119,17 @@ class PackageCubit extends Cubit<PackageStates> {
           print(value),
           uploadPackageList = value,
           showToast(msg: 'Upload Success', state: ToastedStates.SUCCESS),
-          emit(UploadPackageSuccess(value))
+
+          emit(UploadPackageSuccess(value)),
+          ProductsCubit.get(context).image1=null,
+          ProductsCubit.get(context).image1=null,
+
         })
             .onError((error, stackTrace) =>
-        {emit(UploadPackageFailed(error.toString())), print(error)});
+        {emit(UploadPackageFailed(error.toString())),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
+          print(error)});
       }
     });
   }

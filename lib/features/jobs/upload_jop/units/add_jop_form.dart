@@ -537,7 +537,7 @@ class _FormInfoState extends State<FormInfo> {
                 if (s is AddJopLoading)
                   Padding(
                     padding: EdgeInsets.only(top: 50.sp, bottom: 15.sp),
-                    child: const Center(child: CircularProgressIndicator()),
+                    child: const Center(child: CircularProgressIndicator(color: Colors.orange,)),
                   ),
                 BlocListener<JopCubit, AddJopStates>(
                   listener: (BuildContext context, state) {
@@ -565,7 +565,7 @@ class _FormInfoState extends State<FormInfo> {
                             child: Container(
                                 height: 30,
                                 width: 30,
-                                child: CircularProgressIndicator()))
+                                child: CircularProgressIndicator(color: Colors.orange,)))
                         : CustomButton(
                             text: widget.isFilter
                                 ? 'Search'

@@ -81,7 +81,7 @@ class form extends StatelessWidget {
                 if (state is ChangeLoading)
                   const Center(
                     child: CircularProgressIndicator(
-                        color: ColorManager.primaryColor),
+                        color: Colors.orange),
                   )
                 else
                   CustomButton(

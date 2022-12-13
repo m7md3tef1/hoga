@@ -114,7 +114,7 @@ class _FormViewState extends State<FormView> {
                                   padding: EdgeInsets.only(top: 17, bottom: 27),
                                   child: Center(
                                     child: CircularProgressIndicator(
-                                        color: ColorManager.primaryColor),
+                                        color: Colors.orange),
                                   ),
                                 )
                               else
