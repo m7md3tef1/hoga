@@ -560,7 +560,7 @@ class _FormInfoState extends State<FormInfo> {
                   },
                   child: Padding(
                     padding: EdgeInsets.only(top: 50.sp, bottom: 15.sp),
-                    child: loading
+                    child: loading ||state is EditLoading
                         ? Center(
                             child: Container(
                                 height: 30,
@@ -592,8 +592,9 @@ class _FormInfoState extends State<FormInfo> {
                                 Navigator.pop(context);
                               } else {
                                 widget.isEdit
-                                    ? JopCubit.get(context)
-                                        .editJopCubit(GetJopModel(
+                                    ? (JopCubit.get(context)
+                                        .editJopCubit(
+                                    GetJopModel(
                                   id:widget.jopModel!.id,
                                         jopCategortId: jopCategoryId,
                                         jopTypeId: jopTypeId1,
@@ -619,7 +620,7 @@ class _FormInfoState extends State<FormInfo> {
                                         description: JopCubit.get(context)
                                             .descController
                                             .text,
-                                      ))
+                                      ),context,))
                                     : JopCubit.get(context).addJopCubit(
                                         context: context,
                                         productModel: GetJopModel(

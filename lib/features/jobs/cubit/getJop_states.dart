@@ -54,7 +54,7 @@ class DeleteSuccess extends AddJopStates {}
 class DeleteFailed extends AddJopStates {}
 
 class EditSuccess extends AddJopStates {}
-
+class EditLoading extends AddJopStates {}
 class EditFailed extends AddJopStates {}
 class AddTestSuccess extends AddJopStates {}
 class CheckAddJobLoading extends AddJopStates {}
