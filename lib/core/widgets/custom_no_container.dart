@@ -20,7 +20,7 @@ class CustomNoContainer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: CustomText(
             align: TextAlign.center,
-            text:isUpgradeMember?"** You do not have a valid subscription plan to post a vehicle detail. Please click below to subscribe.":
+            text:isUpgradeMember?"** You do not have a valid subscription plan to post a $text detail. Please click below to subscribe.":
             'There is no $text uploaded by you.',
             fontSize: 16.sp,
             textHeight: 1.5,

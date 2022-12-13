@@ -7,8 +7,9 @@ import '../../core/widgets/custom_no_container.dart';
 import '../../features/upload_product/units/button.dart';
 
 class UpgradeMember extends StatelessWidget {
-  UpgradeMember({super.key});
+  UpgradeMember(this.text, {super.key});
   bool isUpgradeMember = true;
+  String text;
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -20,14 +21,14 @@ class UpgradeMember extends StatelessWidget {
               height: 18.h,
             ),
             CustomCardTitle(
-              text: 'UPLOADED Vehicles',
+              text: 'UPLOADED $text',
             ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomNoContainer(
-                      text: 'vehicles', isUpgradeMember: isUpgradeMember),
+                      text: text, isUpgradeMember: isUpgradeMember),
                 ],
               ),
             ),

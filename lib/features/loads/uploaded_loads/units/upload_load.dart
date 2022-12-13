@@ -57,7 +57,7 @@ class _UploadedLoadState extends State<UploadedLoad> {
                         ),
                       ),
                     )
-                  :LoadsCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): UpgradeMember();
+                  :LoadsCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): UpgradeMember('Loads');
         });
   }
 }

@@ -54,7 +54,7 @@ class _UploadedState extends State<Uploaded> {
                     ),
                   ),
                 )
-              :ProductsCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): UpgradeMember();
+              :ProductsCubit.get(context).unAuthProblem? const CustomNotLoggedIn(): UpgradeMember('Products');
     });
   }
 }
