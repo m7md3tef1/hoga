@@ -30,46 +30,46 @@ class _FormCardState extends State<FormCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-//
+
 //    cardNumberController.text =
-//    AddCardCubit.get(context).profileData.cardDetails==null?'card number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
-////cityOrigin=
-////AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-////    countryOrigin=
-////    AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
-////    stateOrigin=
-////    AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
+//    AddCardCubit.get(context).profileData.cardDetails==null?'Card Number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
+//cityOrigin=
+//AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
+//   countryOrigin='Select a country';
+//   // AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+//    stateOrigin=
+//    AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
 //    monthController.text =
-//    AddCardCubit.get(context).profileData.cardDetails==null?'month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+//    AddCardCubit.get(context).profileData.cardDetails==null?'Month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
 //    yearController.text =
-//    AddCardCubit.get(context).profileData.cardDetails==null?'year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
+//    AddCardCubit.get(context).profileData.cardDetails==null?'Year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
 //    nameController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
+//    AddCardCubit.get(context).profileData.billingDetails==null?'Name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
 //    emailController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
+//    AddCardCubit.get(context).profileData.billingDetails==null?'Email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
 //    contactNumberController.text =
 //    AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
 //    addressController.text =
 //    AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
 //    postalCodeController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+//    AddCardCubit.get(context).profileData.billingDetails==null?'Postal Code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
 //
-////   if(AddCardCubit.get(context).profileData.billingDetails!=null){
-////     if(AddCardCubit.get(context).profileData.billingDetails!.city!.title!=null){
-////       DataFormCubit.get(context).cityOriginID =AddCardCubit.get(context).profileData.billingDetails!.city!.id==null?'other'
-////           :AddCardCubit.get(context).profileData.billingDetails!.city!.id.toString();
-////     }
+//   if(AddCardCubit.get(context).profileData.billingDetails!=null){
+//     if(AddCardCubit.get(context).profileData.billingDetails!.city!.title!=null){
+//       DataFormCubit.get(context).cityOriginID =AddCardCubit.get(context).profileData.billingDetails!.city!.id==null?'other'
+//           :AddCardCubit.get(context).profileData.billingDetails!.city!.id.toString();
+//     }
 ////     if(AddCardCubit.get(context).profileData.billingDetails!.country!.title!=null){
 ////       DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
 ////     }
-////     if(AddCardCubit.get(context).profileData.billingDetails!.state!.title!=null){
-////       DataFormCubit.get(context).stateOriginID =AddCardCubit.get(context).profileData.billingDetails!.state!.id.toString();
-////     }
+//     if(AddCardCubit.get(context).profileData.billingDetails!.state!.title!=null){
+//       DataFormCubit.get(context).stateOriginID =AddCardCubit.get(context).profileData.billingDetails!.state!.id.toString();
+//     }
 //
-//  // }
-//
-//   print('cardNumberController.text');
-//   print(cardNumberController.text);
+//   }
+
+   print('cardNumberController.text');
+   print(cardNumberController.text);
     //DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
    // DataFormCubit.get(context).stateOriginID =vehiclesModel!.originState!.id!.toString();
   //  DataFormCubit.get(context).cityOriginID =vehiclesModel!.originCity!.id!.toString();
@@ -121,6 +121,59 @@ class _FormCardState extends State<FormCard> {
                     ],
                   )
                  :  state is GetUserProfileFailed?  CustomCard(
+                    widget: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 11.sp),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 18.h,
+                          ),
+                          CustomCardTitle(
+                            text: 'Not Logged IN',
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                height:135.h ,
+                                width: 1.sw,
+                                decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(253, 197, 47, 0.3),
+                                    borderRadius: BorderRadius.circular(10.r)),
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                                    child: CustomText(
+                                      align: TextAlign.center,
+                                      text:"you  must log in first",
+                                      fontSize: 16.sp,
+                                      textHeight: 1.5,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF664D03),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+
+                          Padding(
+                            padding:  EdgeInsets.only(bottom: 27.h,top: 27.h),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: CustomButton(text: 'Login',icon: Icons.add, color: ColorManager.yellow,
+                                function: (){
+                                  MagicRouter.navigateTo(Login());
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+//                  const Center(child: CircularProgressIndicator(color: Colors.orange,),)
+                 :  state is GetUserProfileFailed? CustomCard(
                     widget: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 11.sp),
                       child: Column(

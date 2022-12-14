@@ -26,7 +26,9 @@ class Plans extends StatelessWidget {
             text: '${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found'
                 :UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName}'
                 ' ${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found':
-            UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName} - ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name}',
+            UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName} - '
+                '${UpdateProfileCubit.get(context).subscriptionData.packageDetails==null?'Not Found':
+            UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name}',
           ),
           SizedBox(
             height: 8.h,
@@ -146,7 +148,8 @@ class Plans extends StatelessWidget {
                   child: Center(
                     child: CustomText(
                       align: TextAlign.center,
-                      text: 'Upgrage to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
+                      text: UpdateProfileCubit.get(context).subscriptionData.packageDetails==null?
+                      '':'Upgrage to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
                       'Bronze':UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze')?'Silver':'Gold'
 
                       }"Plan" and\n enjoy more facilities.',
@@ -166,7 +169,7 @@ class Plans extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 12.w, right: 16.w),
                     child: CustomButton(
-                        text: 'Upgrade to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
+                        text:UpdateProfileCubit.get(context).subscriptionData.packageDetails==null?'': 'Upgrade to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
                         'Bronze':UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze')?'Silver':'Gold'
 
                         }" Plan"',

@@ -8,6 +8,9 @@ class PackageBody extends StatelessWidget {
     return BlocConsumer<PackageCubit, PackageStates>(
   listener: (context, state) {
     // TODO: implement listener
+    if(state is PackageSubscribeSuccess){
+      Navigator.pop(context);
+    }
   },
   builder: (context, state) {
     return CustomCard(
