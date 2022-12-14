@@ -1,12 +1,12 @@
 part of '../view.dart';
 
 class Body extends StatelessWidget {
+  var state;
+  Body(this.state);
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      widget: BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
-        listener: (context, state) {},
-        builder: (context, state) => state is GetSubscriptionLoading
+      widget:  state is GetSubscriptionLoading
             ? Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -22,7 +22,7 @@ class Body extends StatelessWidget {
                   const Facilities(),
                 ],
               ),
-      ),
+
     );
   }
 }

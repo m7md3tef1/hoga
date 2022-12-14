@@ -27,19 +27,24 @@ class SubscriptionDetailsView extends StatelessWidget {
       child: Scaffold(
         key: subscriptionScaffoldKey,
         drawer: const OnDrawer(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomAppbar(
-              title: 'Subscription Details',
-              scaffoldKey: subscriptionScaffoldKey,
-            ),
-            !CacheHelper.getBool(SharedKeys.isLogin)
-                ? CustomNotLoggedIn()
-                : Expanded(
-                    child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(), child: Body())),
-          ],
+        body:  BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
+        listener: (context, state) {},
+        builder: (context, state) =>
+             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomAppbar(
+                  title: 'Subscription Details',
+                  scaffoldKey: subscriptionScaffoldKey,
+                ),
+                !CacheHelper.getBool(SharedKeys.isLogin)||UpdateProfileCubit.get(context).  notLogged
+                    ? const CustomNotLoggedIn()
+                    : Expanded(
+                        child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(), child: Body(state))),
+              ],
+            )
+
         ),
       ),
     );

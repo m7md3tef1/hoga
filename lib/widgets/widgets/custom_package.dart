@@ -136,6 +136,8 @@ class _CustomPackageState extends State<CustomPackage> {
 
                               widget.fromDate = '${widget.day}/${widget.month}/${widget.year}';
                               PackageCubit.get(context).fromdate=widget.fromDate;
+                              PackageCubit.get(context).fromdate2=newDate;
+
                             });
                           },
                           child: const Icon(Icons.date_range_outlined)),

@@ -73,6 +73,8 @@ class LoadsCubit extends Cubit<AddLoadStates> {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         print('^^^^^^^^^^^^^^^^^^^^$page');
+        print('^^^^^^^^^^^^^^^^^^^^$self');
+
         LoadsRepo.getLoads(self,
                 page: page,
                 val: val,
@@ -87,7 +89,11 @@ class LoadsCubit extends Cubit<AddLoadStates> {
                   print('value'),
                   if (self == 1)
                     {
+                      print('load self'),
+
                       myloadList = value,
+                      print(myloadList.length),
+
                       //myVehicleLoadList=value,
                       emit(GetLoadsSuccess(value)),
 
@@ -128,7 +134,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        VehicleRepo.deleteVehicle(vehicleId)
+        LoadsRepo.deleteLoads(vehicleId)
             .then((value) => {
                   print('Delete Vehicle Success'),
                   print(value),

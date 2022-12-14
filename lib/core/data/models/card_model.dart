@@ -28,8 +28,9 @@ class CardModel {
 //    city = json['city'];
 //    postalCode = json['postal_code'];
   }
-  int?  month, year, cvv, country, state, city;
+  int?  month, year, cvv, country, state;
   String? name, email, contactNumber, address, postalCode,cardNumber;
+  var city;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

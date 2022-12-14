@@ -108,7 +108,7 @@ class AddCardCubit extends Cubit<AddCardStates> {
 
       emit(GetUserProfileSuccess(Card.fromJson(value['record']))),
     })
-        .onError((error, stackTrace) => {
+        .catchError((error) => {
       emit(GetUserProfileFailed(error.toString())),
      showToast(msg: error.toString(), state: ToastedStates.ERROR),
 

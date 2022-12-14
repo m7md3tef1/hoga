@@ -93,7 +93,7 @@ class PackageBody extends StatelessWidget {
                                             print('end date is ${PackageCubit.get(context).fromdate}');
 
                                            await PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
-                                                .packageList[PackageCubit.get(context).selectedPackage].id,
+                                                .packageList[PackageCubit.get(context).selectedPackage].id,context,
                                               endDate: PackageCubit.get(context).todate,firstDate: PackageCubit.get(context).fromdate
                                             );
 
@@ -101,7 +101,7 @@ class PackageBody extends StatelessWidget {
 
                                         }else{
                                           await  PackageCubit.get(context).subscribePackage(PackageCubit.get(context)
-                                              .packageList[PackageCubit.get(context).selectedPackage].id,
+                                              .packageList[PackageCubit.get(context).selectedPackage].id,context,
 
                                           );
 

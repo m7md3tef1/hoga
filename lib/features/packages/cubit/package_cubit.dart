@@ -33,6 +33,7 @@ class PackageCubit extends Cubit<PackageStates> {
   String? fromdate;
   String? todate;
 
+  DateTime? fromdate2;
 
   int selectedPackage = 0;
   changeSelectedPackage(int index) {
@@ -82,13 +83,13 @@ class PackageCubit extends Cubit<PackageStates> {
       }
     });
   }
-  subscribePackage(id,{firstDate,endDate}) {
+  subscribePackage(id,context,{firstDate,endDate}) {
     emit(PackageSubscribeLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        PlansRepo.subscribePackage(id,fistDate: firstDate,endDate: endDate)
+        PlansRepo.subscribePackage(id,context,fistDate: firstDate,endDate: endDate)
             .then((value) => {
           print('..................................'),
           print("this value--------Plans"),

@@ -112,10 +112,13 @@ class CustomRowDrawer extends StatelessWidget {
           if (beforeNavigate != null) {
             beforeNavigate!();
           }
-          MagicRouter.navigateAndPopUntilFirstPage(navigatename);
           if (isHome&&Home.scaffoldStateKey.currentState!=null) {
             print('close drawer');
             Home.scaffoldStateKey.currentState!.closeDrawer();
+            print('is home true');
+          }else{
+            MagicRouter.navigateAndPopUntilFirstPage(navigatename);
+
           }
           if (Scaffold.of(context).isDrawerOpen) {
             print('close drawer');

@@ -44,7 +44,7 @@ class AddUpdateCardView extends StatelessWidget {
               scaffoldKey: passScaffoldKey,
             ),
             !CacheHelper.getBool(SharedKeys.isLogin)
-                ? CustomNotLoggedIn()
+                ? const CustomNotLoggedIn()
                 : const Expanded(
                     child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),

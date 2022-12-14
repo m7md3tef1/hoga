@@ -23,7 +23,10 @@ class Plans extends StatelessWidget {
             height: 18.h,
           ),
           CustomCardTitle(
-            text: '${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found':UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName} ${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found':UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName} - SILVER PLAN',
+            text: '${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found'
+                :UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName}'
+                ' ${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found':
+            UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName} - ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name}',
           ),
           SizedBox(
             height: 8.h,
@@ -143,7 +146,10 @@ class Plans extends StatelessWidget {
                   child: Center(
                     child: CustomText(
                       align: TextAlign.center,
-                      text: 'Upgrage to "Gold Plan" and\n enjoy more facilities.',
+                      text: 'Upgrage to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
+                      'Bronze':UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze')?'Silver':'Gold'
+
+                      }"Plan" and\n enjoy more facilities.',
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xFF664D03),
@@ -160,7 +166,10 @@ class Plans extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 12.w, right: 16.w),
                     child: CustomButton(
-                        text: 'Upgrade to "Gold Plan"',
+                        text: 'Upgrade to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
+                        'Bronze':UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze')?'Silver':'Gold'
+
+                        }" Plan"',
                         color: const Color(0xFFFDC52F)),
                   ),
                 ),

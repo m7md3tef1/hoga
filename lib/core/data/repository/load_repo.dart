@@ -52,13 +52,15 @@ class LoadsRepo {
           })
         :
     response = await Api()
-            .getHttp(url: 'loads', data: {
+            .getHttp(url: 'loads',self: self, authToken: token, data: {
             "search": val,
             "per_page": 10,
             "paginate":1 ,
-            "page":page
+            "page":page,
+
 
           });
+    print('self >>>>>>>> $self');
 
     print('length load >>>>>>>> ${response['records'].length}');
 
@@ -154,27 +156,31 @@ class LoadsRepo {
 
   static deleteLoads(vehicleId) async {
     String token = await CacheHelper.getString(SharedKeys.token);
+    print('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$vehicleId');
     return await Api().getHttp(
         url: "loads/delete", authToken: token, data: {"id": vehicleId});
   }
 
   static editLoads({context, vehicleId}) async {
+    print('id>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$vehicleId');
     print("repooo");
     print("equipment_types" + DataFormCubit.get(context).dateTime.toString());
     print("vehicle_attributes" +
         VehiclesCubit.get(context).attributes.toString());
     print("vehicleSize" + VehiclesCubit.get(context).vehcleSize.toString());
     print("vehicleType" + VehiclesCubit.get(context).vehcleType.toString());
-    print("origin_country_id" +
+    print("countryOriginID" +
         DataFormCubit.get(context).countryOriginID.toString());
-    print("origin_country_id" +
+    print("stateOriginID" +
         DataFormCubit.get(context).stateOriginID.toString());
-    print("origin_country_id" +
+    print("cityOriginID" +
         DataFormCubit.get(context).cityOriginID.toString());
-    print("origin_country_id" +
+    print("countryDestinationID" +
         DataFormCubit.get(context).countryDestinationID.toString());
-    print("origin_country_id" +
+    print("stateDestinationID" +
         DataFormCubit.get(context).stateDestinationID.toString());
+    print("cityDestinationID" +
+        DataFormCubit.get(context).cityDestinationID.toString());
     String token = await CacheHelper.getString(SharedKeys.token);
 
     return await Api().postHttp(url: "loads/update", authToken: token, data: {
@@ -187,13 +193,13 @@ class LoadsRepo {
           .replaceAll("[", "")
           .replaceAll("]", "")
           .replaceAll(" ", ""),
-      "vehicle_attributes": VehiclesCubit.get(context)
-          .attributes
-          .toString()
-          .replaceAll(",", "-")
-          .replaceAll("[", "")
-          .replaceAll("]", "")
-          .replaceAll(" ", ""),
+//      "vehicle_attributes": VehiclesCubit.get(context)
+//          .attributes
+//          .toString()
+//          .replaceAll(",", "-")
+//          .replaceAll("[", "")
+//          .replaceAll("]", "")
+//          .replaceAll(" ", ""),
       "vehicle_sizes": VehiclesCubit.get(context)
           .vehcleSize
           .toString()

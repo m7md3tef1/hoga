@@ -38,6 +38,9 @@ class _FormInfoState extends State<FormInfo> {
     super.initState();
     VehiclesCubit.get(context).vehicleClearData(context);
     print('clearr done');
+    print(VehiclesCubit.get(context).vehcleSize);
+    print(VehiclesCubit.get(context).attributes);
+
 
     if (widget.isEdit || widget.isLoadEdit) {
       print(widget.vehiclesModel!.equipmentTypes!.last.id);
@@ -52,6 +55,8 @@ class _FormInfoState extends State<FormInfo> {
         VehiclesCubit.get(context).attributes.add(element.id);
       });
       widget.vehiclesModel!.vehicleSizes?.forEach((element) {
+        print('vehcle size');
+
         print(element.id);
         VehiclesCubit.get(context).vehcleSize.add(element.id);
       });

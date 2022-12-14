@@ -112,8 +112,17 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
          subscriptionData = SubscriptionModel.fromJson(value['record']),
           emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
         })
-            .onError((error, stackTrace) =>
-        {emit(GetSubscriptionFailed(error.toString())), print(error)});
+            .catchError((error) =>
+        {
+
+          if(error.toString().contains('401')){
+            notLogged=true,
+          },
+          emit(GetSubscriptionFailed(error.toString())),
+
+          showToast(
+              msg: error.toString(), state: ToastedStates.SUCCESS),
+          print(error)});
 
       }
     });

@@ -32,27 +32,44 @@ class _FormCardState extends State<FormCard> {
     super.initState();
 
     cardNumberController.text =
-    AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
+    AddCardCubit.get(context).profileData.cardDetails==null?'card number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
 cityOrigin=
 AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-    countryOrigin=
-    AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+//    countryOrigin=
+//    AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
     stateOrigin=
     AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
     monthController.text =
-    AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+    AddCardCubit.get(context).profileData.cardDetails==null?'month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
     yearController.text =
-    AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
+    AddCardCubit.get(context).profileData.cardDetails==null?'year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
     nameController.text =
-    AddCardCubit.get(context).profileData.billingDetails==null?'':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
+    AddCardCubit.get(context).profileData.billingDetails==null?'name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
     emailController.text =
-    AddCardCubit.get(context).profileData.billingDetails==null?'':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
+    AddCardCubit.get(context).profileData.billingDetails==null?'email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
     contactNumberController.text =
-    AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
+    AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
     addressController.text =
-    AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
+    AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
     postalCodeController.text =
-    AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+    AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+
+   if(AddCardCubit.get(context).profileData.billingDetails!=null){
+     if(AddCardCubit.get(context).profileData.billingDetails!.city!.title!=null){
+       DataFormCubit.get(context).cityOriginID =AddCardCubit.get(context).profileData.billingDetails!.city!.id==null?'other'
+           :AddCardCubit.get(context).profileData.billingDetails!.city!.id.toString();
+     }
+//     if(AddCardCubit.get(context).profileData.billingDetails!.country!.title!=null){
+//       DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
+//     }
+     if(AddCardCubit.get(context).profileData.billingDetails!.state!.title!=null){
+       DataFormCubit.get(context).stateOriginID =AddCardCubit.get(context).profileData.billingDetails!.state!.id.toString();
+     }
+
+   }
+
+   print('cardNumberController.text');
+   print(cardNumberController.text);
     //DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
    // DataFormCubit.get(context).stateOriginID =vehiclesModel!.originState!.id!.toString();
   //  DataFormCubit.get(context).cityOriginID =vehiclesModel!.originCity!.id!.toString();
@@ -71,64 +88,64 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
             return BlocConsumer<AddCardCubit,AddCardStates>(
               listener: (context,state){},
               builder:(context,state){
-                cardNumberController.text =
-                AddCardCubit.get(context).profileData.cardDetails==null?'Card Number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
-                cityOrigin=
-                AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-//    countryOrigin=
-                //AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
-                stateOrigin=
-                AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
-                monthController.text =
-                AddCardCubit.get(context).profileData.cardDetails==null?'month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
-                yearController.text =
-                AddCardCubit.get(context).profileData.cardDetails==null?'year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
-                nameController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
-                emailController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
-                contactNumberController.text =
-                AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
-                addressController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
-                postalCodeController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
-              //  cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.city!.id!)!;
-              //  stateCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.state!.id!)!;
-           //     cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.country!.id!)!;
-              //  DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
-                //DataFormCubit.get(context).stateOriginID =vehiclesModel!.originState!.id!.toString();
-              //  DataFormCubit.get(context).cityOriginID =vehiclesModel!.originCity!.id!.toString();
-            //    cityOrigin = vehiclesModel!.originCity != null
-              //      ? vehiclesModel!.originCity!.title!
-                //    : 'other';
-                //countryOrigin = vehiclesModel!.originCountry!.title!;stateOrigin = vehiclesModel!.originState!.title!;
-
-                print('cardNumberController.text  ${    cardNumberController.text}');
-
-                print(cardNumberController.text);
 //                cardNumberController.text =
-//                AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
+//                AddCardCubit.get(context).profileData.cardDetails==null?'Card Number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
 //                cityOrigin=
 //                AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-//                countryOrigin=
-//                AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+////    countryOrigin=
+//                //AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
 //                stateOrigin=
 //                AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
 //                monthController.text =
-//                AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+//                AddCardCubit.get(context).profileData.cardDetails==null?'month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
 //                yearController.text =
-//                AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
+//                AddCardCubit.get(context).profileData.cardDetails==null?'year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
 //                nameController.text =
-//                AddCardCubit.get(context).profileData.billingDetails==null?'':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
+//                AddCardCubit.get(context).profileData.billingDetails==null?'name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
 //                emailController.text =
-//                AddCardCubit.get(context).profileData.billingDetails==null?'':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
+//                AddCardCubit.get(context).profileData.billingDetails==null?'email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
 //                contactNumberController.text =
-//                AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
+//                AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
 //                addressController.text =
-//                AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
+//                AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
 //                postalCodeController.text =
-//                AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+//                AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+//              //  cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.city!.id!)!;
+//              //  stateCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.state!.id!)!;
+//           //     cityCode=(AddCardCubit.get(context).profileData.billingDetails==null?null:  AddCardCubit.get(context).profileData!.billingDetails!.country!.id!)!;
+//              //  DataFormCubit.get(context).countryOriginID =vehiclesModel!.originCountry!.id!.toString();
+//                //DataFormCubit.get(context).stateOriginID =vehiclesModel!.originState!.id!.toString();
+//              //  DataFormCubit.get(context).cityOriginID =vehiclesModel!.originCity!.id!.toString();
+//            //    cityOrigin = vehiclesModel!.originCity != null
+//              //      ? vehiclesModel!.originCity!.title!
+//                //    : 'other';
+//                //countryOrigin = vehiclesModel!.originCountry!.title!;stateOrigin = vehiclesModel!.originState!.title!;
+//
+//                print('cardNumberController.text  ${    cardNumberController.text}');
+//
+//                print(cardNumberController.text);
+////                cardNumberController.text =
+////                AddCardCubit.get(context).profileData.cardDetails==null?'':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
+////                cityOrigin=
+////                AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
+////                countryOrigin=
+////                AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+////                stateOrigin=
+////                AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
+////                monthController.text =
+////                AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+////                yearController.text =
+////                AddCardCubit.get(context).profileData.cardDetails==null?'':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
+////                nameController.text =
+////                AddCardCubit.get(context).profileData.billingDetails==null?'':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
+////                emailController.text =
+////                AddCardCubit.get(context).profileData.billingDetails==null?'':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
+////                contactNumberController.text =
+////                AddCardCubit.get(context).profileData.userDetails==null?'':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
+////                addressController.text =
+////                AddCardCubit.get(context).profileData.billingDetails==null?'':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
+////                postalCodeController.text =
+////                AddCardCubit.get(context).profileData.billingDetails==null?'': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
                 return
                   state is GetUserProfileLoading?
                   Column(
@@ -650,9 +667,13 @@ AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddC
                                       int.parse(monthController.text),
                                       int.parse(yearController.text),
                                       int.parse(cvvController.text),
-                                      countryCode,
-                                      stateCode,
-                                      cityCode,
+                                      int.parse(DataFormCubit.get(context)
+                                          .countryOriginID),
+                                      int.parse(DataFormCubit.get(context)
+                                          .stateOriginID),
+                                      DataFormCubit.get(context)
+                                          .cityOriginID=='other'?'other':
+                                          int.parse(DataFormCubit.get(context).cityOriginID),
                                       nameController.text,
                                       emailController.text,
                                       contactNumberController.text,
