@@ -64,30 +64,31 @@ class AddCardCubit extends Cubit<AddCardStates> {
       }
     });
   }
-  getCardCubit() {
-   // packageLoading=true;
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(NetworkFailed("Check your internet connection and try again"));
-      } else {
-        emit(GetUserProfileLoading());
-        PackageRepo.getCard()
-            .then((value) => {
-          print('..................................'),
-          print(value),
-          profileData2 = value,
-       //   packageLoading=false,
 
-          emit(GetUserProfileSuccess2(value))
-        })
-            .onError((error, stackTrace) =>
-        {emit(GetUserProfileFailed(error.toString())),
-      //    packageLoading=false,
-
-          print(error)});
-      }
-    });
-  }
+  // getCardCubit() {
+  //  // packageLoading=true;
+  //   connectivity.checkConnectivity().then((value) async {
+  //     if (ConnectivityResult.none == value) {
+  //       emit(NetworkFailed("Check your internet connection and try again"));
+  //     } else {
+  //       emit(GetUserProfileLoading());
+  //       PackageRepo.getCard()
+  //           .then((value) => {
+  //         print('..................................'),
+  //         print(value),
+  //         profileData2 = value,
+  //      //   packageLoading=false,
+  //
+  //         emit(GetUserProfileSuccess2(value))
+  //       })
+  //           .onError((error, stackTrace) =>
+  //       {emit(GetUserProfileFailed(error.toString())),
+  //     //    packageLoading=false,
+  //
+  //         print(error)});
+  //     }
+  //   });
+  // }
   getCard() async {
     var token = await CacheHelper.getString(SharedKeys.token);
     emit(GetUserProfileLoading());
@@ -103,10 +104,14 @@ class AddCardCubit extends Cubit<AddCardStates> {
       print('card data'),
 
       print(value),
-      profileData = Card.fromJson(value['record']),
-      print(profileData),
+      if(value['record']!=null){
+        profileData = Card.fromJson(value['record']),
+        print(profileData),
 
-      emit(GetUserProfileSuccess(Card.fromJson(value['record']))),
+        emit(GetUserProfileSuccess(profileList:Card.fromJson(value['record']))),
+      },
+      emit(GetUserProfileSuccess()),
+
     })
         .catchError((error) => {
       emit(GetUserProfileFailed(error.toString())),

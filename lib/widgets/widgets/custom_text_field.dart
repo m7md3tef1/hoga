@@ -18,7 +18,9 @@ class CustomTextField extends StatelessWidget {
   bool readOnly;
   var lines;
   var height;
-  var color;
+  Color? color;
+  bool isGreyTextColor=true;
+
   var label;
   var name;
   bool enabled=true;
@@ -37,6 +39,7 @@ class CustomTextField extends StatelessWidget {
       this.onSaved,
       this.validate,
       this.suffixIcon,
+        this.isGreyTextColor=true,
       this.obscure = false,
         this.enabled=true,
       this.prefixIcon})
@@ -66,10 +69,10 @@ class CustomTextField extends StatelessWidget {
                         children: [
                           Text(
                             name,
-                            style: TextStyle(
+                            style:isGreyTextColor? TextStyle(
                                 fontSize: 12.sp,
                                 color: ColorManager.greyColor,
-                                fontWeight: FontWeight.w400),
+                                fontWeight: FontWeight.w400):TextStyle(),
                           ),
                         ],
                       ),
@@ -80,6 +83,9 @@ class CustomTextField extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(left: 14.0.w, bottom: 0.h),
                       child: TextFormField(
+                        style: TextStyle(
+                          color: ColorManager.darkGrey
+                        ),
                           obscureText: obscure,
                           onSaved: onSaved,
                           validator: validate,
@@ -99,6 +105,7 @@ class CustomTextField extends StatelessWidget {
                             prefixIcon: prefixIcon,
                             suffixIcon: suffixIcon,
                             hintText: hintText,
+
                             hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 14.sp,
@@ -107,6 +114,7 @@ class CustomTextField extends StatelessWidget {
                             border: InputBorder.none,
                             focusColor: ColorManager.blackColor,
                           )),
+
                     ),
                   ),
                 ],

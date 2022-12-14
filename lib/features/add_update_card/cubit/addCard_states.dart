@@ -9,8 +9,8 @@ class AddingCardSuccess extends AddCardStates {}
 class GetUserProfileLoading extends AddCardStates {}
 
 class GetUserProfileSuccess extends AddCardStates {
-  Card profileList = Card();
-  GetUserProfileSuccess(this.profileList);
+  Card? profileList = Card();
+  GetUserProfileSuccess({this.profileList});
 }
 class GetUserProfileSuccess2 extends AddCardStates {
  List<Card>  profileList = [];

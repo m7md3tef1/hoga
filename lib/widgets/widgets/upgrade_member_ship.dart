@@ -7,11 +7,17 @@ import '../../core/widgets/custom_no_container.dart';
 import '../../features/upload_product/units/button.dart';
 
 class UpgradeMember extends StatelessWidget {
-  UpgradeMember(this.text, {super.key});
   bool isUpgradeMember = true;
+  bool isSubscriptionPage;
+  UpgradeMember(this.text, {super.key,this.isSubscriptionPage=false});
+
+
   String text;
   @override
   Widget build(BuildContext context) {
+    print(isSubscriptionPage);
+    print("isSubscriptionPage");
+
     return CustomCard(
       widget: Padding(
         padding: EdgeInsets.symmetric(horizontal: 11.sp),
@@ -21,13 +27,13 @@ class UpgradeMember extends StatelessWidget {
               height: 18.h,
             ),
             CustomCardTitle(
-              text: 'UPLOADED $text',
+              text:isSubscriptionPage?'Subscription': 'UPLOADED $text',
             ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CustomNoContainer(
+                  CustomNoContainer(isSubscriptionPage:isSubscriptionPage,
                       text: text, isUpgradeMember: isUpgradeMember),
                 ],
               ),
