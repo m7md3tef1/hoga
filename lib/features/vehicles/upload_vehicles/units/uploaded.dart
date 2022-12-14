@@ -63,7 +63,7 @@ class _UploadedState extends State<Uploaded> {
                   ),
                 ),
               )
-                  :VehiclesCubit.get(context).unAuthProblem? const CustomNotLoggedIn():UpgradeMember();
+                  :VehiclesCubit.get(context).unAuthProblem? const CustomNotLoggedIn():UpgradeMember('Vehicles');
 
 
         });

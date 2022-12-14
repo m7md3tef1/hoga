@@ -295,33 +295,35 @@ class JopCubit extends Cubit<AddJopStates> {
     });
   }
 
-  editJopCubit(GetJopModel? jopModel) {
+  editJopCubit(GetJopModel? jopModel,BuildContext context) {
     print('###################################################### ${jopModel!.toJson()}');
 
-//    connectivity.checkConnectivity().then((value) async {
-//      if (ConnectivityResult.none == value) {
-//        emit(NetworkFailed("Check your internet connection and try again"));
-//      } else {
-//        JobsRepo.editJop(jopModel)
-//            .then((value) => {
-//                  print('Edit Jop Success'),
-//                  print(value),
-//                  emit(EditSuccess()),
-//                  showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
-//                  descController.text = '',
-//                  noOfPostController.text = '',
-//                  salaryController.text = '',
-//                  titleController.text = '',
-//                  shiftController.text = '',
-//                })
-//            .catchError((error, stackTrace) => {
-//                  emit(EditFailed()),
-//                  print(error),
-//                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
-//                  print('Edit Jop Failed'),
-//                });
-//      }
-//    });
+    connectivity.checkConnectivity().then((value) async {
+     if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+       emit(EditLoading());
+        JobsRepo.editJop(jopModel)
+           .then((value) => {
+                  print('Edit Jop Success'),
+                  print(value),
+                  emit(EditSuccess()),
+                  showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+                  descController.text = '',
+                  noOfPostController.text = '',
+                  salaryController.text = '',
+                  titleController.text = '',
+                  shiftController.text = '',
+        Navigator.pop(context)
+                })
+            .catchError((error, stackTrace) => {
+                  emit(EditFailed()),
+                  print(error),
+                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
+                  print('Edit Jop Failed'),
+                });
+      }
+    });
   }
 
   deleteJopCubit(jopId) {

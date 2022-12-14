@@ -19,14 +19,14 @@ class Upgrade extends StatelessWidget {
               height: 18.h,
             ),
             CustomCardTitle(
-              text: 'UPLOADED Job',
+              text: 'UPLOADED Jobs',
             ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomNoContainer(
-                      text: 'Job', isUpgradeMember: isUpgradeMember),
+                      text: 'Jobs', isUpgradeMember: isUpgradeMember),
                 ],
               ),
             ),
