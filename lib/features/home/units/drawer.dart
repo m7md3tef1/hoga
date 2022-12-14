@@ -1,7 +1,8 @@
 part of '../view.dart';
 
 class OnDrawer extends StatelessWidget {
-  const OnDrawer({Key? key}) : super(key: key);
+   OnDrawer({Key? key,this.inHome=false}) : super(key: key);
+   bool inHome=false;
   Future<bool?> showWarning(BuildContext context)async =>showDialog<bool>(
       context: context, builder: (context)=>
       AlertDialog(
@@ -57,6 +58,7 @@ class OnDrawer extends StatelessWidget {
               text: 'Home',
               isHome: true,
               icon: Icons.home,
+              inHome: inHome,
               navigatename:  const Home(),
             ),
             CustomRowDrawer(

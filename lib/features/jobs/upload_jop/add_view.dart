@@ -36,7 +36,7 @@ class AddJopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const OnDrawer(),
+      drawer:  OnDrawer(),
       key: uploadedProductsScaffoldKey,
       body: SafeArea(
         child: Column(

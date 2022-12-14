@@ -121,7 +121,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
           emit(GetSubscriptionFailed(error.toString())),
 
           showToast(
-              msg: error.toString(), state: ToastedStates.SUCCESS),
+              msg: error.toString(), state: ToastedStates.ERROR),
           print(error)});
 
       }

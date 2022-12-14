@@ -21,7 +21,7 @@ class _DetailState extends State<Detail> {
       return SafeArea(
           child: Scaffold(
           key:widget.scaffoldKey ,
-          drawer: const OnDrawer(),
+          drawer:  OnDrawer(),
       body:
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,

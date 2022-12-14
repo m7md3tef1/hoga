@@ -27,6 +27,11 @@ class AddingCardFailed extends AddCardStates {
   AddingCardFailed(this.msg);
 }
 class CancelCardSuccess extends AddCardStates {}
+class CancelCardLoading extends AddCardStates {}
+class AddCardLoading extends AddCardStates {}
+class NoPaymentMethod extends AddCardStates {}
+
+
 
 class CancelCardFailed extends AddCardStates {
   final String msg;

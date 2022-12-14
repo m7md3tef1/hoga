@@ -17,7 +17,7 @@ class Detail extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
         key:scaffoldKey ,
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
       body:
       SingleChildScrollView(
         child: Column(

@@ -24,7 +24,7 @@ class AboutUsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
         key: passScaffoldKey,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

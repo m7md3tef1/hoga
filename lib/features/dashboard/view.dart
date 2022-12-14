@@ -32,7 +32,7 @@ class DashboardView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           key: uploadProductScaffoldKey,
-          drawer: const OnDrawer(),
+          drawer:  OnDrawer(),
           body: !CacheHelper.getBool(SharedKeys.isLogin)
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

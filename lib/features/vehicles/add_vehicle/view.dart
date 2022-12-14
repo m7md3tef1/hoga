@@ -45,7 +45,7 @@ class AddVehiclesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const OnDrawer(),
+      drawer:  OnDrawer(),
       key: uploadedProductsScaffoldKey,
       body: SafeArea(
         child: BlocConsumer<VehiclesCubit, VehicleStates>(

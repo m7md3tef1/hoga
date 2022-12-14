@@ -51,7 +51,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
     return SafeArea(
       child: Scaffold(
         key: uploadedVehiclesScaffoldKey,
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
 
         body: Column(
           children: [
