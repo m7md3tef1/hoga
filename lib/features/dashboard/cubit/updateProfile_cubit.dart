@@ -20,6 +20,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   User profileData = User();
  bool notLogged=false;
   bool loading=false;
+  bool unSubscribe=false;
 
   SubscriptionModel subscriptionData = SubscriptionModel();
   updateProfile(updateProfileModel,) async {
@@ -109,6 +110,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
             .then((value) => {
           print('subscriptionData'),
           print(value),
+          if(value['record']['subscription_details']['subscription_id']==null){
+            unSubscribe=true,
+          },
          subscriptionData = SubscriptionModel.fromJson(value['record']),
           emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
         })
@@ -121,7 +125,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
           emit(GetSubscriptionFailed(error.toString())),
 
           showToast(
-              msg: error.toString(), state: ToastedStates.SUCCESS),
+              msg: error.toString(), state: ToastedStates.ERROR),
           print(error)});
 
       }

@@ -6,11 +6,13 @@ import 'package:hoga_load/features/subscribtion_details/units/facilities.dart';
 import 'package:hoga_load/features/subscribtion_details/units/plans.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
+import 'package:hoga_load/widgets/widgets/upgrade_member.dart';
 
 import '../../core/data/local/cacheHelper.dart';
 import '../../core/keys/keys.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
+import '../../widgets/widgets/upgrade_member_ship.dart';
 import '../dashboard/cubit/UpdateProfile_state.dart';
 import '../dashboard/cubit/updateProfile_cubit.dart';
 
@@ -37,7 +39,7 @@ class SubscriptionDetailsView extends StatelessWidget {
                   title: 'Subscription Details',
                   scaffoldKey: subscriptionScaffoldKey,
                 ),
-                !CacheHelper.getBool(SharedKeys.isLogin)||UpdateProfileCubit.get(context).  notLogged
+                !CacheHelper.getBool(SharedKeys.isLogin)||UpdateProfileCubit.get(context).notLogged
                     ? const CustomNotLoggedIn()
                     : Expanded(
                         child: SingleChildScrollView(
