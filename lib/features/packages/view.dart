@@ -30,7 +30,7 @@ class PackagesView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         key: packagesScaffoldKey,
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

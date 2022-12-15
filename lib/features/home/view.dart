@@ -64,7 +64,7 @@ class Home extends StatelessWidget {
         return shouldPop??false;
       },
       child: Scaffold(
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(inHome: true,),
         key: scaffoldStateKey,
         bottomNavigationBar:  _BottomBar(),
 

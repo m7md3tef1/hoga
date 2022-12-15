@@ -25,7 +25,6 @@ class RecoverPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         key: uploadProductScaffoldKey,
-        drawer: const OnDrawer(),
         body: BlocConsumer<AuthCubit, AuthStates>(
           listener: (BuildContext context, state) {
             if (state is RecoverPassword) {

@@ -49,7 +49,7 @@ class _UploadJobsViewState extends State<UploadJobsView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
         key: uploadedJobsScaffoldKey,
 
         body: Column(

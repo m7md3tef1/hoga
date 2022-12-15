@@ -19,6 +19,7 @@ class AddCardCubit extends Cubit<AddCardStates> {
   Card profileData = Card();
   List<Card> profileData2 = [];
   addCard(CardModel cardModel) {
+    emit(AddCardLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -44,13 +45,14 @@ class AddCardCubit extends Cubit<AddCardStates> {
   }
 
   cancelCard() {
+    emit(CancelCardLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         String token = await CacheHelper.getString(SharedKeys.token);
-        return await Api().postHttp(
-            url: "profile/current-subscription/cancel", authToken: token).then((value) => {
+        return await Api().getHttp(
+            url: "payment-method/remove", authToken: token).then((value) => {
           emit(CancelCardSuccess()),
           print('done'),
           showToast(msg: 'done', state: ToastedStates.SUCCESS)
@@ -109,8 +111,11 @@ class AddCardCubit extends Cubit<AddCardStates> {
         print(profileData),
 
         emit(GetUserProfileSuccess(profileList:Card.fromJson(value['record']))),
-      },
-      emit(GetUserProfileSuccess()),
+      }else{
+        emit(NoPaymentMethod())
+
+      }
+
 
     })
         .catchError((error) => {

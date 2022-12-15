@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
+import 'package:hoga_load/core/dialoges/toast.dart';
 import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
@@ -37,7 +38,7 @@ class AddUpdateCardView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         key: passScaffoldKey,
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

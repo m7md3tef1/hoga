@@ -15,11 +15,15 @@ class CustomRowDrawer extends StatelessWidget {
         this.ontap,
       this.icon,
       this.isHome = false,
-      this.navigatename})
+        this.inHome = false,
+
+        this.navigatename})
       : super(key: key);
   String text;
   Function? beforeNavigate;
   bool isHome = false;
+  bool inHome = false;
+
   var icon;
   var navigatename;
   var ontap;
@@ -59,6 +63,9 @@ class CustomRowDrawer extends StatelessWidget {
             //  ontap;
             final shouldPop=await showWarning(context);
              shouldPop??false;
+             print(isHome);
+            print("isHome");
+
             if (isHome&&Home.scaffoldStateKey.currentState!=null) {
               print('close drawer');
               Home.scaffoldStateKey.currentState!.closeDrawer();
@@ -108,6 +115,13 @@ class CustomRowDrawer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
+          print(inHome);
+          print("isHome");
+          print(isHome);
+             if(!inHome){
+               MagicRouter.navigateAndPopUntilFirstPage(navigatename);
+
+             }
 
           if (beforeNavigate != null) {
             beforeNavigate!();
@@ -116,8 +130,9 @@ class CustomRowDrawer extends StatelessWidget {
             print('close drawer');
             Home.scaffoldStateKey.currentState!.closeDrawer();
             print('is home true');
-          }else{
-            MagicRouter.navigateAndPopUntilFirstPage(navigatename);
+            print(isHome);
+           // Navigator.of(context).maybePop();
+           // MagicRouter.navigateAndPopUntilFirstPage(navigatename);
 
           }
           if (Scaffold.of(context).isDrawerOpen) {

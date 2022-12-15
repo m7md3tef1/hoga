@@ -16,15 +16,15 @@ class BillingDetails {
       this.lastUpdated,});
 
   BillingDetails.fromJson(dynamic json) {
-    addressLine1 = json['address_line_1'];
-    addressLine2 = json['address_line_2'];
-    state = json['state'] != null ? State.fromJson(json['state']) : null;
-    city = json['city'] != null ? City.fromJson(json['city']) : null;
+    addressLine1 = json['address_line_1'].toString();
+   // addressLine2 = json['address_line_2'].toString();
+    //state = json['state'] != null ? State.fromJson(json['state']) : null;
+   // city = json['city'] != null ? City.fromJson(json['city']) : null;
     //country = json['country'];
-    postalCode = json['postal_code'];
-    name = json['name'];
-    email = json['email'];
-    lastUpdated = json['last_updated'];
+    postalCode = json['postal_code'].toString();
+    name = json['name'].toString();
+    email = json['email'].toString();
+   // lastUpdated = json['last_updated'];
   }
   String? addressLine1;
   String? addressLine2;

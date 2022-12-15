@@ -21,7 +21,7 @@ class ContactUsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
         key: passScaffoldKey,
         body: SingleChildScrollView(
           child: Column(

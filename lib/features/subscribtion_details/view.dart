@@ -28,7 +28,7 @@ class SubscriptionDetailsView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         key: subscriptionScaffoldKey,
-        drawer: const OnDrawer(),
+        drawer:  OnDrawer(),
         body:  BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
         listener: (context, state) {},
         builder: (context, state) =>
