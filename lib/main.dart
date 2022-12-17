@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
             create: (_) => UpdateProfileCubit()
               //..updateProfile
               //..getVehicleTypesCubit()
-              ..getSubscriptionData()
+              //..getSubscriptionData()
               ..getUserProfileData()
               ..profileData),
         BlocProvider(

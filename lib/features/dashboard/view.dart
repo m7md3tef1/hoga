@@ -21,10 +21,21 @@ import 'cubit/updateProfile_cubit.dart';
 
 part 'units/form.dart';
 
-class DashboardView extends StatelessWidget {
+class DashboardView extends StatefulWidget {
   DashboardView({Key? key}) : super(key: key);
+
+  @override
+  State<DashboardView> createState() => _DashboardViewState();
+}
+
+class _DashboardViewState extends State<DashboardView> {
   GlobalKey<ScaffoldState> uploadProductScaffoldKey =
       GlobalKey<ScaffoldState>();
+@override
+  void initState() {
+UpdateProfileCubit.get(context).getUserProfileData();
+super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     print(

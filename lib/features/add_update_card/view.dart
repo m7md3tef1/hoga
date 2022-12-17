@@ -29,10 +29,20 @@ import 'cubit/addCard_states.dart';
 
 part 'units/form.dart';
 
-class AddUpdateCardView extends StatelessWidget {
+class AddUpdateCardView extends StatefulWidget {
   AddUpdateCardView({Key? key}) : super(key: key);
-  GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
+  @override
+  State<AddUpdateCardView> createState() => _AddUpdateCardViewState();
+}
+
+class _AddUpdateCardViewState extends State<AddUpdateCardView> {
+  GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
