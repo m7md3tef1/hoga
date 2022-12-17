@@ -40,6 +40,8 @@ super.initState();
   Widget build(BuildContext context) {
     print(
         '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${CacheHelper.getBool(SharedKeys.isLogin)}');
+    print(
+        '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${UpdateProfileCubit.get(context).notLogged}');
     return SafeArea(
       child: Scaffold(
           key: uploadProductScaffoldKey,

@@ -9,7 +9,7 @@ class PackageBody extends StatelessWidget {
   listener: (context, state) {
     // TODO: implement listener
     if(state is PackageSubscribeSuccess){
-      Navigator.pop(context);
+      Navigator.of(context,rootNavigator:true).pop(context) ;
     }
   },
   builder: (context, state) {
@@ -33,7 +33,7 @@ class PackageBody extends StatelessWidget {
                     width: 1.sw,
                     child: const Center(
                         child: CircularProgressIndicator(
-                      color: Colors.orange,
+                      color: ColorManager.primaryColor,
                     )));
               } else {
                 return SizedBox(

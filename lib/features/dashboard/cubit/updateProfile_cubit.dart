@@ -47,6 +47,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   }
 
   getUserProfileData() async {
+    notLogged=false;
     loading=true;
     emit(GetUserProfileLoading());
 
@@ -68,7 +69,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
         .onError((error, stackTrace) => {
       loading=false,
 
-      if(error.toString().contains('401')){
+      if(error.toString().contains('401')||error.toString().contains('422')){
+        print('notLogged=true'),
         notLogged=true,
       },
 
@@ -80,24 +82,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     });
   }
 
-  // getVehicleTypesCubit() {
-  //   connectivity.checkConnectivity().then((value) async {
-  //     if (ConnectivityResult.none == value) {
-  //       emit(FailedNetwork("Check your internet connection and try again"));
-  //     } else {
-  //       VehicleRepo.getProfile('profile')
-  //           .then((value) => {
-  //         print('..................................'),
-  //         print(value),
-  //         profileList = value,
-  //         emit(GetProfileSuccess(value))
-  //       })
-  //           .onError((error, stackTrace) =>
-  //       {emit(GetProfileFailed(error.toString())), print(error)});
-  //     }
-  //   });
-  // }
   getSubscriptionData() {
+    notLogged=false;
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(FailedNetwork("Check your internet connection and try again"));
@@ -115,6 +101,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
           print(value),
           if(value['record']['subscription_details']['subscription_id']==null){
             unSubscribe=true,
+            emit(UnSubscribe()),
           }else{
             subscriptionData = SubscriptionModel.fromJson(value['record']),
             emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
@@ -124,7 +111,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
             .catchError((error) =>
         {
 
-          if(error.toString().contains('401')){
+          if(error.toString().contains('401')||error.toString().contains('422')){
+            print('notLogged=true'),
             notLogged=true,
           },
           emit(GetSubscriptionFailed(error.toString())),
@@ -137,28 +125,6 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     });
   }
 
-  /*
-  getSubscriptionData() async {
-    var token = await CacheHelper.getString(SharedKeys.token);
-    var response = Api().getHttp(
-      url: 'profile/current-subscription',
-      authToken: token,
-    );
-    emit(GetSubscriptionLoading());
-    print(response);
-    response
-        .then((value) => {
-      print('**********'),
-      print(value),
-      subscriptionData = value,
-      emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
-    })
-        .onError((error, stackTrace) => {
-      emit(GetSubscriptionFailed(error.toString())),
-      print(error),
-    });
-  }
-  */
 
   cancelSubscriptionCubit() {
     connectivity.checkConnectivity().then((value) async {

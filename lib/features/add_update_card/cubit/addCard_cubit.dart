@@ -17,7 +17,6 @@ class AddCardCubit extends Cubit<AddCardStates> {
   static AddCardCubit get(context) => BlocProvider.of(context);
   Connectivity connectivity = Connectivity();
   Card profileData = Card();
-  List<Card> profileData2 = [];
   addCard(CardModel cardModel) {
     emit(AddCardLoading());
     connectivity.checkConnectivity().then((value) async {

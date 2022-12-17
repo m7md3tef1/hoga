@@ -50,6 +50,9 @@ class CancelSuccess extends UpdateProfileStates {
 class CancelFailed extends UpdateProfileStates {
 
 }
+class UnSubscribe extends UpdateProfileStates {
+
+}
 
 class FailedNetwork extends UpdateProfileStates {
   final String msg;

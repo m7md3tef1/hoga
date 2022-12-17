@@ -59,7 +59,7 @@ class PackageRepo{
     return packageList;
   }
 
-  static Future<List<PackagesDetail>> package() async {
+  static Future<List<PackagesDetail>> advertisement() async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response =
     await Api().getHttp(url: 'advertisements', authToken: token);
@@ -75,20 +75,14 @@ class PackageRepo{
     return packageList;
   }
 
-  static Future<List<PackagesDetail>> uploadPackage(PackagesDetail? model) async {
+  static  uploadPackage(model) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response =
     await Api().postHttp(url: 'upload-advertisement', authToken: token,data: model);
 
-    List<PackagesDetail> packageList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      PackagesDetail blogModel = PackagesDetail.fromJson(response['records'][i]);
-      packageList.add(blogModel);
-    }
-    print(response.length);
-    print(packageList.length);
 
-    return packageList;
+
+    return response;
   }
 
 }

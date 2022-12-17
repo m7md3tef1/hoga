@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoadsCubit()),
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(create: (_) => JopCubit()),
-        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..packageCubit()),
+        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..advertisementCubit()),
         BlocProvider(
             create: (_) => AddCardCubit()
               ..getCard()..profileData
