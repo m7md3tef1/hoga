@@ -150,7 +150,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
       "product_image": image != null
           ? await MultipartFile.fromFile(image!.path, filename: fileName)
           : '',
-      "buy_or_sell": productModel!.buyOrSell,
+      "buy_or_sell": productModel.buyOrSell,
       "product_name": productModel.productName,
       "product_type": productModel.productTypeId,
       "country": productModel.countryPost,

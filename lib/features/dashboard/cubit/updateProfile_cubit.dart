@@ -18,6 +18,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
   Connectivity connectivity = Connectivity();
   List<User>? profileList = [];
   User profileData = User();
+  User profileData2 = User();
  bool notLogged=false;
   bool loading=false;
   bool unSubscribe=false;
@@ -34,7 +35,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     response
         .then((value) => {
       print(value),
-      profileData = User.fromJson(value['record']),
+      profileData2 = User.fromJson(value['record']),
       emit(UpdateProfileSuccess(User.fromJson(value['record']))),
       showToast(
           msg: 'update Profile successfully',
@@ -46,7 +47,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     });
   }
 
-  getUserProfileData() async {
+  getUserProfileData()  async {
+
     loading=true;
     emit(GetUserProfileLoading());
 
@@ -57,13 +59,15 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     );
 
     print(response);
-    response
+  await  response
         .then((value) => {
       print('getUserProfileDataSuccess'),
       print(value),
       profileData = User.fromJson(value['record']),
+
     loading=false,
         emit(GetUserProfileSuccess(User.fromJson(value['record']))),
+      profileData = User.fromJson(value['record']),
     })
         .onError((error, stackTrace) => {
       loading=false,
@@ -77,23 +81,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     });
   }
 
-  // getVehicleTypesCubit() {
-  //   connectivity.checkConnectivity().then((value) async {
-  //     if (ConnectivityResult.none == value) {
-  //       emit(FailedNetwork("Check your internet connection and try again"));
-  //     } else {
-  //       VehicleRepo.getProfile('profile')
-  //           .then((value) => {
-  //         print('..................................'),
-  //         print(value),
-  //         profileList = value,
-  //         emit(GetProfileSuccess(value))
-  //       })
-  //           .onError((error, stackTrace) =>
-  //       {emit(GetProfileFailed(error.toString())), print(error)});
-  //     }
-  //   });
-  // }
+
   getSubscriptionData() {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {

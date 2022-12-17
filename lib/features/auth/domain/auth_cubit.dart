@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthStates> {
   Connectivity connectivity = Connectivity();
   var image;
 
-  signIn(loginModel,context) {
+  signIn(loginModel,context) async{
     var response = Api().postHttp(url: 'login', data: loginModel.toJson());
     print(response);
     print('login response');
@@ -36,6 +36,8 @@ class AuthCubit extends Cubit<AuthStates> {
         print(value['auth_token']),
               print(response),
               print('Success'),
+      print(value),
+      print(value['record']),
               showToast(
                   msg: 'login Successfully', state: ToastedStates.SUCCESS),
             })

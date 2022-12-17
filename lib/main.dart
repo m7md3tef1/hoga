@@ -81,8 +81,8 @@ class MyApp extends StatelessWidget {
               //..updateProfile
               //..getVehicleTypesCubit()
               ..getSubscriptionData()
-              ..getUserProfileData()
-              ..profileData),
+              ..getUserProfileData()..profileData
+              ),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))
