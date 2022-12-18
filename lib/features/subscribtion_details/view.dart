@@ -20,9 +20,20 @@ part 'units/body.dart';
 
 GlobalKey<ScaffoldState> subscriptionScaffoldKey = GlobalKey<ScaffoldState>();
 
-class SubscriptionDetailsView extends StatelessWidget {
+class SubscriptionDetailsView extends StatefulWidget {
   const SubscriptionDetailsView({Key? key}) : super(key: key);
 
+  @override
+  State<SubscriptionDetailsView> createState() => _SubscriptionDetailsViewState();
+}
+
+class _SubscriptionDetailsViewState extends State<SubscriptionDetailsView> {
+  @override
+  void initState() {
+    UpdateProfileCubit.get(context).getSubscriptionData();
+
+super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(

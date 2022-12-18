@@ -98,7 +98,7 @@ class PlansCubit extends Cubit<PlansStates> {
         })
             .catchError((error, stackTrace) =>
         {emit(SubscribeFailed()),
-          showToast(msg: error.toString(), state: ToastedStates.SUCCESS),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
           print(error)});
       }

@@ -30,29 +30,33 @@ class _FormCardState extends State<FormCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-//    cardNumberController.text =
-//    AddCardCubit.get(context).profileData.cardDetails==null?'Card Number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
+    AddCardCubit.get(context).getCard();
+    AddCardCubit.get(context).profileData;
+  //  print(AddCardCubit.get(context).profileData.cardDetails!.cardNumber);
+    print('AddCardCubit.get(context).profileData.cardDetails!.cardNumber');
+    cardNumberController.text =
+    AddCardCubit.get(context).profileData.cardDetails==null?'card number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
 //cityOrigin=
 //AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-//   countryOrigin='Select a country';
-//   // AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
+//    countryOrigin=
+//    AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
 //    stateOrigin=
 //    AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
-//    monthController.text =
-//    AddCardCubit.get(context).profileData.cardDetails==null?'Month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
-//    yearController.text =
-//    AddCardCubit.get(context).profileData.cardDetails==null?'Year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
-//    nameController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'Name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
-//    emailController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'Email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
-//    contactNumberController.text =
-//    AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
-//    addressController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
-//    postalCodeController.text =
-//    AddCardCubit.get(context).profileData.billingDetails==null?'Postal Code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+    monthController.text =
+    AddCardCubit.get(context).profileData.cardDetails==null?'month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
+    yearController.text =
+    AddCardCubit.get(context).profileData.cardDetails==null?'year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
+    nameController.text =
+    AddCardCubit.get(context).profileData.billingDetails==null?'name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
+    emailController.text =
+    AddCardCubit.get(context).profileData.billingDetails==null?'email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
+    contactNumberController.text =
+    AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
+    addressController.text =
+    AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
+    postalCodeController.text =
+    AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
+      AddCardCubit.get(context).profileData.billingDetails==null?'Postal Code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
 //
 //   if(AddCardCubit.get(context).profileData.billingDetails!=null){
 //     if(AddCardCubit.get(context).profileData.billingDetails!.city!.title!=null){
@@ -89,28 +93,6 @@ class _FormCardState extends State<FormCard> {
             return BlocConsumer<AddCardCubit,AddCardStates>(
               listener: (context,state){},
               builder:(context,state){
-                cardNumberController.text =
-                AddCardCubit.get(context).profileData.cardDetails==null?'card number':AddCardCubit.get(context).profileData.cardDetails!.cardNumber.toString();
-//cityOrigin=
-//AddCardCubit.get(context).profileData.billingDetails==null?'Select a city': AddCardCubit.get(context).profileData.billingDetails!.city!.title.toString();
-//    countryOrigin=
-//    AddCardCubit.get(context).profileData.billingDetails==null?'Select a country':   AddCardCubit.get(context).profileData.billingDetails!.country!.title.toString();
-//    stateOrigin=
-//    AddCardCubit.get(context).profileData.billingDetails==null?'Select a state':  AddCardCubit.get(context).profileData.billingDetails!.state!.title.toString();
-                monthController.text =
-                AddCardCubit.get(context).profileData.cardDetails==null?'month':   AddCardCubit.get(context).profileData.cardDetails!.month.toString();
-                yearController.text =
-                AddCardCubit.get(context).profileData.cardDetails==null?'year':   AddCardCubit.get(context).profileData.cardDetails!.year.toString() ;
-                nameController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'name':   AddCardCubit.get(context).profileData.billingDetails!.name.toString();
-                emailController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'email':  AddCardCubit.get(context).profileData.billingDetails!.email.toString() ;
-                contactNumberController.text =
-                AddCardCubit.get(context).profileData.userDetails==null?'contact number':  AddCardCubit.get(context).profileData.userDetails!.contactNumber.toString() ;
-                addressController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'address':    AddCardCubit.get(context).profileData.billingDetails!.addressLine1.toString();
-                postalCodeController.text =
-                AddCardCubit.get(context).profileData.billingDetails==null?'postal code': AddCardCubit.get(context).profileData.billingDetails!.postalCode.toString();
 
                 return
                   state is GetUserProfileLoading?

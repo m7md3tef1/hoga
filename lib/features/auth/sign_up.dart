@@ -70,9 +70,7 @@ class _SignUpState extends State<SignUp> {
         }
         return Column(
           children: [
-               SizedBox(
-                height: 30.h,
-              ),
+
               CustomAppbar(
                 title: 'Sign Up',
                 hideIcons: true,

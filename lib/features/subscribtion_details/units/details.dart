@@ -136,7 +136,7 @@ class _DetailsState extends State<Details> {
                                                                 .get(context)
                                                                 .cancelSubscriptionCubit();
                                                           },
-                                                          btnText: 'Delete',
+                                                          btnText: 'cancel',
                                                         ));
                                               });
                                             },
