@@ -131,7 +131,7 @@ class Plans extends StatelessWidget {
                         padding: EdgeInsets.only(left: 12.w, right: 16.w),
                         child: CustomButton(
                             function: (){
-                              MagicRouter.navigateTo(PlanBody());
+                              MagicRouter.navigateTo(PlanView());
                             },
                             text: 'SUBSCRIPTION PLANS"',
                             color: const Color(0xFFFDC52F)),
