@@ -23,10 +23,8 @@ import '../../core/widgets/custom_card.dart';
 import '../../core/widgets/custom_card_title.dart';
 import '../../widgets/widgets/custom_notloggedin.dart';
 import '../auth/login.dart';
-import '../auth/units/cant_login.dart';
 import 'cubit/addCard_cubit.dart';
 import 'cubit/addCard_states.dart';
-
 part 'units/form.dart';
 
 class AddUpdateCardView extends StatefulWidget {
@@ -40,7 +38,8 @@ class _AddUpdateCardViewState extends State<AddUpdateCardView> {
   GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 @override
   void initState() {
-    // TODO: implement initState
+  AddCardCubit.get(context).getCard();
+    AddCardCubit.get(context).profileData;
     super.initState();
   }
   @override

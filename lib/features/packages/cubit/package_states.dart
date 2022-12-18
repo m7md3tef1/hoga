@@ -11,6 +11,8 @@ class PackageLoading extends PackageStates{}
 class PackageSubscribeSuccess extends PackageStates{}
 class PackageSubscribeFailed extends PackageStates{}
 class PackageSubscribeLoading extends PackageStates{}
+class ImageGalleryDesktop extends PackageStates{}
+class ImageGalleryMobile extends PackageStates{}
 
 class PackageTestLoading extends PackageStates{}
 class PackageTestSuccess extends PackageStates{}
@@ -44,9 +46,7 @@ class GetPackageLoading extends PackageStates{
 
 }
 class UploadPackageSuccess extends PackageStates{
-
-  List<PackagesDetail>attributesList=[];
-  UploadPackageSuccess(this.attributesList);
+  UploadPackageSuccess();
 }
 
 class UploadPackageFailed extends PackageStates{

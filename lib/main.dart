@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => HomeCubit()..isSubscription()),
         BlocProvider(create: (_) => PlansCubit()..getPlansCubit()
-            //  ..checkPlansCubit()
-            ),
+          //  ..checkPlansCubit()
+        ),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(
             create: (_) => VehiclesCubit()
@@ -55,9 +55,9 @@ class MyApp extends StatelessWidget {
               ..getEquipmentsCubit()
               ..getVehicleSizesCubit()
               ..getVehicleTypesCubit()
-            //   ..getVehicleCubit()
+          //   ..getVehicleCubit()
 
-            ),
+        ),
         BlocProvider(
             create: (_) => DataFormCubit()
               ..getCountry()
@@ -70,19 +70,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoadsCubit()),
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(create: (_) => JopCubit()),
-        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..packageCubit()),
+        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..advertisementCubit()),
         BlocProvider(
             create: (_) => AddCardCubit()
               ..getCard()..profileData
-              ),
+        ),
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()
-              //..updateProfile
-              //..getVehicleTypesCubit()
-              ..getSubscriptionData()
-              ..getUserProfileData()..profileData
-              ),
+            //..updateProfile
+            //..getVehicleTypesCubit()
+            //..getSubscriptionData()
+              ..getUserProfileData()
+              ..profileData),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))

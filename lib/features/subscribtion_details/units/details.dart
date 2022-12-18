@@ -91,18 +91,23 @@ class _DetailsState extends State<Details> {
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF777777),
                                   )
-                                : state is CancelSuccess
+                                : state is CancelSuccess ||UpdateProfileCubit.get(context).subscriptionData.subscriptionDetails!.subscriptionCancelled==1
                                     ? Container(
-                                        decoration: const BoxDecoration(
+                              height: 20.h,
+                              width: 70.w,
+                                        decoration:  BoxDecoration(
+                                          borderRadius: BorderRadius.circular(6.r),
                                             color: Colors.red),
                                         child: CustomText(
                                           align: TextAlign.center,
                                           text: 'Cancelled',
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600,
                                           color: Colors.white,
                                         ),
-                                      )
+                                      ):
+                            state is CancelLoading?
+                            const Center(child: CircularProgressIndicator(color: Colors.orange,),)
                                     : Row(
                                         children: [
                                           Container(

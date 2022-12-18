@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/models/Packages.dart';
 import 'package:hoga_load/core/data/repository/package_repo.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/packages/cubit/package_states.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/data/models/Packages_detail.dart';
 import '../../../core/data/models/Upload_adv.dart';
@@ -34,7 +38,8 @@ class PackageCubit extends Cubit<PackageStates> {
   String? todate;
 
   DateTime? fromdate2;
-
+  var imageDesktop;
+  var imageMobile;
   int selectedPackage = 0;
   changeSelectedPackage(int index) {
     print(index);
@@ -65,13 +70,13 @@ class PackageCubit extends Cubit<PackageStates> {
       }
     });
   }
-  packageCubit() {
+  advertisementCubit() {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         emit(GetPackageLoading());
-        PackageRepo.package()
+        PackageRepo.advertisement()
             .then((value) => {
           print('..................................'),
           print(value),
@@ -108,25 +113,41 @@ class PackageCubit extends Cubit<PackageStates> {
     });
   }
 
-  uploadPackageCubit(context,{PackagesDetail? model}) {
+  uploadPackageCubit(context) {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
         emit(UploadPackageLoading());
-        PackageRepo.uploadPackage(model)
+        String fileName = imageMobile != null ? imageMobile!.path.split('/').last : '';
+        String fileName2 = imageDesktop != null ? imageDesktop!.path.split('/').last : '';
+
+
+        FormData formData = FormData.fromMap({
+          "desktop_banner": imageDesktop != null
+              ? await MultipartFile.fromFile(imageDesktop!.path, filename: fileName2)
+              : '',
+          "mobile_banner": imageMobile != null
+              ? await MultipartFile.fromFile(imageMobile!.path, filename: fileName)
+              : '',
+          "link": linkController.text
+        });
+        PackageRepo.uploadPackage(formData)
             .then((value) => {
           print('..................................'),
           print(value),
-          uploadPackageList = value,
-          showToast(msg: 'Upload Success', state: ToastedStates.SUCCESS),
+          //uploadPackageList = value,
 
-          emit(UploadPackageSuccess(value)),
-          ProductsCubit.get(context).image1=null,
-          ProductsCubit.get(context).image1=null,
+          emit(UploadPackageSuccess()),
+          showToast(msg: 'Upload Success', state: ToastedStates.SUCCESS),
+             print('Upload Success'),
+          imageDesktop==null,
+            imageMobile==null,
+       linkController
+            .clear(),
 
         })
-            .onError((error, stackTrace) =>
+            .catchError((error) =>
         {emit(UploadPackageFailed(error.toString())),
           showToast(msg: error.toString(), state: ToastedStates.ERROR),
 
@@ -180,6 +201,25 @@ class PackageCubit extends Cubit<PackageStates> {
 
       }
     });
+  }
+
+  pickFromGalleryMobile(BuildContext context) async {
+    var img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    imageMobile = File(
+      img!.path,
+    );
+
+
+    emit(ImageGalleryMobile());
+  }
+  pickFromGalleryDesktop(BuildContext context) async {
+    var img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    imageDesktop = File(
+      img!.path,
+    );
+
+
+    emit(ImageGalleryDesktop());
   }
 
 

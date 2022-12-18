@@ -153,6 +153,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
       if (ConnectivityResult.none == value) {
         emit(FailedNetwork("Check your internet connection and try again"));
       } else {
+        emit(CancelLoading());
         VehicleRepo.cancel()
             .then((value) => {
           print('Cancel Success'),

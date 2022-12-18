@@ -30,12 +30,9 @@ class FormAdvertisment extends StatefulWidget {
 }
 
 class _FormAdvertismentState extends State<FormAdvertisment> {
-  String? imageFile;
   GlobalKey<ScaffoldState> uploadedProductsScaffoldKey =
       GlobalKey<ScaffoldState>();
-  TextEditingController linkController = TextEditingController();
-  var imag2 = '';
-  var imag1 = '';
+
   @override
   void initState() {
     // TODO: implement initState
@@ -57,11 +54,14 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
     return Scaffold(
       drawer:  OnDrawer(),
       key: uploadedProductsScaffoldKey,
-      body: BlocConsumer<ProductsCubit, AddProductStates>(
-        listener:(context,state){} ,
-        builder:(context,state){
-          return BlocConsumer<PackageCubit,PackageStates>(
-            listener: (context,state){},
+      body: BlocConsumer<PackageCubit,PackageStates>(
+            listener: (context,state){
+              if( state is UploadPackageSuccess){
+                PackageCubit.get(context).advertisementCubit();
+                PackageCubit.get(context).imageDesktop==null;
+                PackageCubit.get(context).imageMobile==null;
+              }
+            },
             builder:(context,state){
               // imag2 = ProductsCubit.get(context).image1 != null
               //     ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
@@ -118,8 +118,8 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                       BorderRadius.circular(12.r)),
                                                   child: InkWell(
                                                     onTap: () {
-                                                      ProductsCubit.get(context)
-                                                          .pickFromGallery(context);
+                                                      PackageCubit.get(context)
+                                                          .pickFromGalleryDesktop(context);
                                                     },
                                                     child: Row(
                                                       children: [
@@ -146,8 +146,8 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                         Expanded(
                                                           child: Center(
                                                             child: Text(
-                                                              imag1 =ProductsCubit.get(context).image ==null?'    No File chosen':
-                                                              '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
+                                                              PackageCubit.get(context).imageDesktop ==null?'    No File chosen':
+                                                              '${PackageCubit.get(context).imageDesktop.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
                                                               style: TextStyle(
                                                                   color: const Color(
                                                                       0xFF757575),
@@ -197,8 +197,8 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                       BorderRadius.circular(12.r)),
                                                   child: InkWell(
                                                     onTap: () {
-                                                      ProductsCubit.get(context)
-                                                          .pickFromGallery(context);
+                                                      PackageCubit.get(context)
+                                                          .pickFromGalleryMobile(context);
                                                     },
                                                     child: Row(
                                                       children: [
@@ -225,8 +225,8 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                         Expanded(
                                                           child: Center(
                                                             child: Text(
-                                                              imag2 =ProductsCubit.get(context).image1 ==null?'    No File chosen':
-                                                              '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
+                                                              PackageCubit.get(context).imageMobile ==null?'    No File chosen':
+                                                              '${PackageCubit.get(context).imageDesktop.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
                                                               style: TextStyle(
                                                                   color: const Color(
                                                                       0xFF757575),
@@ -324,32 +324,21 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                 color: ColorManager.yellow,
                                                 function: () {
 
-                                                  if(imag1.isEmpty||imag2.isEmpty){
+                                                  if(PackageCubit.get(context).imageDesktop==null||
+                                                      PackageCubit.get(context).imageMobile==null){
                                                     showToast(msg: 'You must add a banner', state: ToastedStates.ERROR);
                                                   }
-                                                  if(linkController.text.isEmpty){
-                                                    showToast(msg: 'You must add a link', state: ToastedStates.ERROR);
+//                                                  if(linkController.text.isEmpty){
+//                                                    showToast(msg: 'You must add a link', state: ToastedStates.ERROR);
+//
+//                                                  }
+                                                  //showToast(msg: 'done', state: ToastedStates.ERROR);
 
-                                                  }
-                                                  showToast(msg: 'done', state: ToastedStates.ERROR);
+                                                   PackageCubit.get(context)
+                                                       .uploadPackageCubit(
+                                                     context);
 
-                                                  // PackageCubit.get(context)
-                                                  //     .uploadPackageCubit(
-                                                  //   context,
-                                                  //     model: PackagesDetail(
-                                                  //       desktopBanner: imag1,
-                                                  //       mobileBanner: imag2,
-                                                  //       link: PackageCubit.get(context)
-                                                  //           .linkController
-                                                  //           .toString(),
-                                                  //     ));
-                                                  imag1='';
-                                                  imag2='';
-                                                  ProductsCubit.get(context).image==null;
-                                                  ProductsCubit.get(context).image1==null;
-                                                  PackageCubit.get(context)
-                                                      .linkController
-                                                      .clear();
+
                                                 },
                                               ),
                                             ),
@@ -367,9 +356,8 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                 ],
               );
             }
-          );
-        }
-      ),
+          )
+
     );
   }
 }
