@@ -505,7 +505,7 @@ class _FormInfoState extends State<FormInfo> {
                   height: 64.h,
                   hintText: 'Enter Financial Package to Offer',
                   name: 'Salary',
-                  //   keyboardType: TextInputType.number,
+                     keyboardType: TextInputType.number,
                   controller: JopCubit.get(context).salaryController,
                 ),
                 CustomTextField(
