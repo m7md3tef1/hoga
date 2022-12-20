@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
-import 'package:hoga_load/features/home/units/homebage/body.dart';
 import 'package:hoga_load/features/home/units/homebage/buttonContainer.dart';
 import 'package:hoga_load/features/home/units/homebage/swiper1.dart';
 import 'package:hoga_load/features/home/units/homebage/swiper2.dart';
@@ -10,8 +9,6 @@ import 'package:hoga_load/features/home/units/homebage/vehicle_container.dart';
 import 'package:hoga_load/features/vehicles/get_vehicles/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
-
-import '../../../blogs/view.dart';
 import '../../../jobs/cubit/getJop_cubit.dart';
 import '../../../jobs/view.dart';
 import '../../../loads/cubit/getLoad_cubit.dart';
@@ -65,9 +62,7 @@ class _BottomState extends State<Bottom> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           CustomText(
             text: 'OUR BUSINESS USP',
             align: TextAlign.center,

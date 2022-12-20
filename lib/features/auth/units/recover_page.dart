@@ -20,7 +20,8 @@ class RecoverPage extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  GlobalKey<ScaffoldState> uploadProductScaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> uploadProductScaffoldKey =
+      GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,62 +32,60 @@ class RecoverPage extends StatelessWidget {
               MagicRouter.navigateAndReplacement(Login());
             }
           },
-          builder: (context,state)=>
-              SafeArea(
-                child: Column(
-                    children: [
-                      CustomAppbar(title: 'Recover Password',  hideIcons: true),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      CustomCard(
-                        widget: Form(
-                          key: formKey,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const Logo(),
-                              TitleText(
-                                title: 'Recover Password',
-                              ),
-                              CustomTextFormField(
-                                hintText: 'Enter a valid E-mail',
-                                controller: emailController,
-                                validate: Validator.validateEmail,
-                              ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-
-                              if (state is RecoverPasswordLoading)
-                                const Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.orange,
-                                  ),
-                                )
-                              else
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 12.0),
-                                child: CustomButton(
-                                  function: () {
-                                    if (formKey.currentState!.validate()) {
-                                      AuthCubit.get(context)
-                                          .notLogged(emailController.text);
-                                    }
-                                  },
-                                  text: 'Send Link',
-                                  color: ColorManager.yellow,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+          builder: (context, state) => SafeArea(
+            child: Column(
+              children: [
+                CustomAppbar(title: 'Recover Password', hideIcons: true),
+                const SizedBox(
+                  height: 18,
                 ),
-              ),
+                CustomCard(
+                  widget: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        const Logo(),
+                        TitleText(
+                          title: 'Recover Password',
+                        ),
+                        CustomTextFormField(
+                          hintText: 'Enter a valid E-mail',
+                          controller: emailController,
+                          validate: Validator.validateEmail,
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        if (state is RecoverPasswordLoading)
+                          const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.orange,
+                            ),
+                          )
+                        else
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            child: CustomButton(
+                              function: () {
+                                if (formKey.currentState!.validate()) {
+                                  AuthCubit.get(context)
+                                      .notLogged(emailController.text);
+                                }
+                              },
+                              text: 'Send Link',
+                              color: ColorManager.yellow,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ));
   }
 }

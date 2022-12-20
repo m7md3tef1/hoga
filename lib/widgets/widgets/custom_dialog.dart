@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/router/router.dart';
@@ -8,13 +5,9 @@ import 'package:hoga_load/core/router/router.dart';
 import 'custom_text.dart';
 
 class CustomDialog extends StatelessWidget {
-  //final String? img;
-//  final bool visibility;
   final String? title;
   final String? desc;
-  const CustomDialog(
-      {Key? key,this.title, this.desc})
-      : super(key: key);
+  const CustomDialog({Key? key, this.title, this.desc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +17,13 @@ class CustomDialog extends StatelessWidget {
         child: Container(
           height: .95.sh,
           width: 1.sw,
-          decoration:
-              BoxDecoration(borderRadius: BorderRadius.circular(25.r)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(25.r)),
           child: AlertDialog(
-
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.r)),
             content: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -43,17 +33,18 @@ class CustomDialog extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         MagicRouter.pop();
                       },
                       child: Container(
-width: 20.w,
-                        decoration: BoxDecoration(color: Colors.grey[400],
-                          border: Border.all(color: Colors.black54)
-
+                        width: 20.w,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[400],
+                            border: Border.all(color: Colors.black54)),
+                        child: CustomText(
+                          text: 'x',
+                          color: Colors.black54,
                         ),
-
-                        child: CustomText(text: 'x',color: Colors.black54,),
                       ),
                     )
                   ],
@@ -62,13 +53,21 @@ width: 20.w,
                   height: 10.sp,
                   child: const Divider(),
                 ),
-                Expanded(child: Text(desc!,textAlign:TextAlign.start,style: TextStyle(fontSize: 12.5.sp,fontWeight: FontWeight.normal,),)),
+                Expanded(
+                    child: Text(
+                  desc!,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 12.5.sp,
+                    fontWeight: FontWeight.normal,
+                  ),
+                )),
                 SizedBox(
                   height: 10.sp,
                   child: const Divider(),
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     MagicRouter.pop();
                   },
                   child: Align(
@@ -76,11 +75,15 @@ width: 20.w,
                     child: Container(
                       width: 50.w,
                       height: 25.h,
-                      decoration: BoxDecoration(color: Colors.grey[500],
-                        borderRadius: BorderRadius.circular(4)
-
+                      decoration: BoxDecoration(
+                          color: Colors.grey[500],
+                          borderRadius: BorderRadius.circular(4)),
+                      child: CustomText(
+                        text: 'close',
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
                       ),
-                      child: CustomText(text: 'close',color: Colors.white,fontWeight: FontWeight.w500,fontSize: 12,),
                     ),
                   ),
                 )

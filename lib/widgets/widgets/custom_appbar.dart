@@ -16,11 +16,11 @@ class CustomAppbar extends StatelessWidget {
   bool? hideIcons;
   CustomAppbar(
       {Key? key,
-        required this.title,
-        this.icon,
-        this.font,
-        this.hideIcons,
-        this.scaffoldKey})
+      required this.title,
+      this.icon,
+      this.font,
+      this.hideIcons,
+      this.scaffoldKey})
       : super(key: key);
 
   @override
@@ -35,17 +35,18 @@ class CustomAppbar extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.sp),
             child: Column(
               children: [
-                Center(child: Image(
-                    height: 60.h,
-                    width: 1.sw,
-                    image: const AssetImage(AppImages.logo))),
+                Center(
+                    child: Image(
+                        height: 60.h,
+                        width: 1.sw,
+                        image: const AssetImage(AppImages.logo))),
                 Row(
                   mainAxisAlignment:
-                  (hideIcons == null || !hideIcons!) && icon != null
-                      ? MainAxisAlignment.spaceBetween
-                      : (hideIcons == null || !hideIcons!)
-                      ? MainAxisAlignment.start
-                      : MainAxisAlignment.center,
+                      (hideIcons == null || !hideIcons!) && icon != null
+                          ? MainAxisAlignment.spaceBetween
+                          : (hideIcons == null || !hideIcons!)
+                              ? MainAxisAlignment.start
+                              : MainAxisAlignment.center,
                   children: [
                     if (hideIcons == null || !hideIcons!)
                       InkWell(
@@ -58,7 +59,6 @@ class CustomAppbar extends StatelessWidget {
                             } else {
                               Home.scaffoldStateKey.currentState!.openDrawer();
                             }
-
                           },
                           child: SvgPicture.asset(AppImages.menu)),
                     Expanded(
@@ -67,7 +67,7 @@ class CustomAppbar extends StatelessWidget {
                         child: CustomText(
                           text: title,
                           align: TextAlign.center,
-                          fontSize: font??18.sp,
+                          fontSize: font ?? 18.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -75,7 +75,7 @@ class CustomAppbar extends StatelessWidget {
                     if ((hideIcons == null || !hideIcons!))
                       InkWell(
                           onTap: () {
-                            MagicRouter.navigateTo( DashboardView());
+                            MagicRouter.navigateTo(DashboardView());
                           },
                           child: const Icon(Icons.account_circle_outlined)),
                   ],

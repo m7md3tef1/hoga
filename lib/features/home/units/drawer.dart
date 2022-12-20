@@ -1,30 +1,44 @@
 part of '../view.dart';
 
 class OnDrawer extends StatelessWidget {
-   OnDrawer({Key? key,this.inHome=false}) : super(key: key);
-   bool inHome=false;
-  Future<bool?> showWarning(BuildContext context)async =>showDialog<bool>(
-      context: context, builder: (context)=>
-      AlertDialog(
-        title: const Text('Do You want to log out?'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              children: [
-                SizedBox(width: 35.sp,),
-                Expanded(child: CustomButton(function: ()=>Navigator.pop(context,false), text: 'No',height: 37.sp,font: 15)),
-                SizedBox(width: 35.sp,),
-                Expanded(child: CustomButton(function: ()=>MagicRouter.navigateTo(Login()), text: 'Yes',height: 37.sp,font: 15,)),
-                SizedBox(width: 35.sp,),
-
-              ],
-            ),
-          ),
-
-        ],
-      )
-  );
+  OnDrawer({Key? key, this.inHome = false}) : super(key: key);
+  bool inHome = false;
+  Future<bool?> showWarning(BuildContext context) async => showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: const Text('Do You want to log out?'),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 35.sp,
+                    ),
+                    Expanded(
+                        child: CustomButton(
+                            function: () => Navigator.pop(context, false),
+                            text: 'No',
+                            height: 37.sp,
+                            font: 15)),
+                    SizedBox(
+                      width: 35.sp,
+                    ),
+                    Expanded(
+                        child: CustomButton(
+                      function: () => MagicRouter.navigateTo(Login()),
+                      text: 'Yes',
+                      height: 37.sp,
+                      font: 15,
+                    )),
+                    SizedBox(
+                      width: 35.sp,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ));
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -59,7 +73,7 @@ class OnDrawer extends StatelessWidget {
               isHome: true,
               icon: Icons.home,
               inHome: inHome,
-              navigatename:  const Home(),
+              navigatename: const Home(),
             ),
             CustomRowDrawer(
               text: 'Upload Load',
@@ -123,8 +137,7 @@ class OnDrawer extends StatelessWidget {
             CustomRowDrawer(
               text: 'Logout',
               icon: Icons.logout_outlined,
-              ontap:true ,
-            //  navigatename: Login(),
+              ontap: true,
               beforeNavigate: () {
                 CacheHelper.putString(SharedKeys.token, '');
                 CacheHelper.putBool(SharedKeys.isLogin, false);

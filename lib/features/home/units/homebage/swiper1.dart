@@ -4,6 +4,7 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 import '../../../../widgets/widgets/custom_text.dart';
 import '../modelSwiper.dart';
+
 class swiper1 extends StatelessWidget {
   const swiper1({Key? key}) : super(key: key);
 
@@ -14,12 +15,9 @@ class swiper1 extends StatelessWidget {
       child: Container(
         height: 300.h,
         child: Swiper(
-          
           autoplay: true,
           pagination: const SwiperPagination(
-
             alignment: Alignment.bottomCenter,
-
           ),
           itemCount: swiperList.length,
           itemBuilder: (context, index) {
@@ -34,11 +32,9 @@ class swiper1 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Column(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,29 +42,28 @@ class swiper1 extends StatelessWidget {
                           Image(
                               width: 15.w,
                               height: 15.h,
-                              image: const AssetImage(
-                                  'assets/images/star.png')),
+                              image:
+                                  const AssetImage('assets/images/star.png')),
                           Image(
                               width: 15.w,
                               height: 15.h,
-                              image: const AssetImage(
-                                  'assets/images/star.png')),
+                              image:
+                                  const AssetImage('assets/images/star.png')),
                           Image(
                               width: 15.w,
                               height: 15.h,
-                              image: const AssetImage(
-                                  'assets/images/star.png')),
+                              image:
+                                  const AssetImage('assets/images/star.png')),
                           Image(
                               width: 15.w,
                               height: 15.h,
-                              image: const AssetImage(
-                                  'assets/images/star.png')),
+                              image:
+                                  const AssetImage('assets/images/star.png')),
                           Image(
                               width: 15.w,
                               height: 15.h,
-                              image: const AssetImage(
-                                  'assets/images/star.png')),
-
+                              image:
+                                  const AssetImage('assets/images/star.png')),
                         ],
                       ),
                       SizedBox(
@@ -90,8 +85,7 @@ class swiper1 extends StatelessWidget {
                       ),
                       CircleAvatar(
                         radius: 40.r,
-                        backgroundImage:
-                        AssetImage(swiperList[index].img),
+                        backgroundImage: AssetImage(swiperList[index].img),
                       ),
                       SizedBox(
                         height: 10.h,

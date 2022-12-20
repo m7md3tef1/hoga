@@ -15,11 +15,6 @@ class UploadedTableTitle extends StatelessWidget {
         child: SizedBox(
           height: 0.55.sh,
           width: 1.sw,
-//=======
-//      child: ListView(children: [
-//        SizedBox(
-//          height: 0.7.sh,
-//>>>>>>> 5a89be26ef60f704f215a5e7be6bcd0f110752d8
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

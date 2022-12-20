@@ -23,8 +23,9 @@ class body extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height:MediaQuery.of(context).orientation==Orientation.portrait?
-           249.sp:300.sp,
+          height: MediaQuery.of(context).orientation == Orientation.portrait
+              ? 249.sp
+              : 300.sp,
           width: 1.sw,
           decoration: const BoxDecoration(
             color: ColorManager.primaryColor,
@@ -33,11 +34,16 @@ class body extends StatelessWidget {
                 fit: BoxFit.fill),
           ),
           child: Padding(
-
-            padding: EdgeInsets.only(top: 15.h, bottom: 30.h,right:
-            MediaQuery.of(context).orientation==Orientation.portrait?
-            30.w:100.w ,left: MediaQuery.of(context).orientation==Orientation.portrait?
-            30.w:100.w),
+            padding: EdgeInsets.only(
+                top: 15.h,
+                bottom: 30.h,
+                right:
+                    MediaQuery.of(context).orientation == Orientation.portrait
+                        ? 30.w
+                        : 100.w,
+                left: MediaQuery.of(context).orientation == Orientation.portrait
+                    ? 30.w
+                    : 100.w),
             child: Center(
                 child: Swiper(
               autoplay: true,
@@ -45,7 +51,6 @@ class body extends StatelessWidget {
               pagination: const SwiperPagination(
                 builder: SwiperPagination.rect,
                 alignment: Alignment.bottomCenter,
-
               ),
               itemCount: text.length,
               itemBuilder: (context, index) => Container(
@@ -69,7 +74,8 @@ class body extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 23.r, right: 23.r,bottom: 30.sp),
+                        padding: EdgeInsets.only(
+                            left: 23.r, right: 23.r, bottom: 30.sp),
                         child: Container(
                           decoration: BoxDecoration(
                               border:

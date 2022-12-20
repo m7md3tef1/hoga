@@ -5,9 +5,6 @@ import 'package:hoga_load/features/subscribtion_details/units/details.dart';
 import 'package:hoga_load/features/subscribtion_details/units/facilities.dart';
 import 'package:hoga_load/features/subscribtion_details/units/plans.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
-import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
-import 'package:hoga_load/widgets/widgets/upgrade_member.dart';
-
 import '../../core/data/local/cacheHelper.dart';
 import '../../core/keys/keys.dart';
 import '../../core/widgets/custom_card.dart';
@@ -42,21 +39,27 @@ super.initState();
         drawer:  OnDrawer(),
         body:  BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
         listener: (context, state) {},
-        builder: (context, state) =>
-             Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomAppbar(
-                  title: 'Subscription Details',
-                  scaffoldKey: subscriptionScaffoldKey,
-                ),
-                !CacheHelper.getBool(SharedKeys.isLogin)||UpdateProfileCubit.get(context).notLogged
-                    ? const CustomNotLoggedIn()
-                    : Expanded(
-                        child: SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(), child: Body(state))),
-              ],
-            )
+        builder: (context, state) {
+     //       print('cancelled -------');
+   // print(UpdateProfileCubit.get(context).subscriptionData.subscriptionDetails!.subscriptionCancelled);
+    return
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomAppbar(
+            title: 'Subscription Details',
+            scaffoldKey: subscriptionScaffoldKey,
+          ),
+          !CacheHelper.getBool(SharedKeys.isLogin) || UpdateProfileCubit
+              .get(context)
+              .notLogged
+              ? const CustomNotLoggedIn()
+              : Expanded(
+              child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(), child: Body(state))),
+        ],
+      );
+    }
 
         ),
       ),

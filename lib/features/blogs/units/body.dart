@@ -10,22 +10,20 @@ class Body extends StatelessWidget {
         builder: (BuildContext context, Object? state) {
           if (state is GetSearchFailed) {
             return Center(child: CustomText(text: state.msg));
-          }
-         else if (state is GetSearchSuccess) {
+          } else if (state is GetSearchSuccess) {
             return ListView.builder(
                 itemCount: state.blogList.length,
                 itemBuilder: (context, index) {
                   return CustomContainerBlog(state.blogList[index]);
                 });
-          }
-          else {
+          } else {
             return ListView.builder(
                 itemCount: BlogsCubit.get(context).blogList.length,
                 itemBuilder: (context, index) {
-                  return CustomContainerBlog(BlogsCubit.get(context).blogList[index]);
+                  return CustomContainerBlog(
+                      BlogsCubit.get(context).blogList[index]);
                 });
           }
-        }
-    );
+        });
   }
 }

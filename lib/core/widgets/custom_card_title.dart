@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../widgets/widgets/custom_text.dart';
+
 class CustomCardTitle extends StatelessWidget {
   String? text;
 
@@ -17,12 +18,15 @@ class CustomCardTitle extends StatelessWidget {
           align: TextAlign.center,
           fontWeight: FontWeight.w700,
         ),
-        SizedBox(height: 14.h,),
+        SizedBox(
+          height: 14.h,
+        ),
         const Divider(
           thickness: 1,
         ),
-        SizedBox(height: 8.h,),
-
+        SizedBox(
+          height: 8.h,
+        ),
       ],
     );
   }

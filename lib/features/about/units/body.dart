@@ -1,4 +1,5 @@
-part of'../view.dart';
+part of '../view.dart';
+
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -22,7 +23,7 @@ class Body extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
           child: CustomText(
             align: TextAlign.start,
             text:
@@ -33,7 +34,7 @@ class Body extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 15.w,right: 15.w),
+          padding: EdgeInsets.only(left: 15.w, right: 15.w),
           child: CustomText(
             align: TextAlign.start,
             text:
@@ -46,8 +47,6 @@ class Body extends StatelessWidget {
         SizedBox(
           height: 22.h,
         ),
-
-
       ],
     );
   }

@@ -6,16 +6,17 @@ import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import '../../../../core/color_manager/color_manager.dart';
 
 class VehicleContainer extends StatelessWidget {
-   VehicleContainer(this.image,this.pageRoute,this.text,this.hint,this.more,this.color,
-    {this.isColor=false,this.function}) ;
-var image;
-String text;
-String hint;
-String more;
-Color color;
-bool isColor;
-var pageRoute;
-var function;
+  VehicleContainer(
+      this.image, this.pageRoute, this.text, this.hint, this.more, this.color,
+      {this.isColor = false, this.function});
+  var image;
+  String text;
+  String hint;
+  String more;
+  Color color;
+  bool isColor;
+  var pageRoute;
+  var function;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,26 +35,25 @@ var function;
               ),
             ],
             color: Colors.white
-          //  color: Colors.transparent,
+            //  color: Colors.transparent,
 
-        ),
+            ),
         child: Container(
           height: 268.h,
           width: 1.sw,
           child: Card(
             elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: InkWell(
-                onTap:()async{
+                onTap: () async {
                   await function;
                   MagicRouter.navigateTo(pageRoute);
                 },
                 //splashColor: color.withOpacity(0.5),
                 highlightColor: color.withOpacity(0.4),
-
-
 
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -63,17 +63,14 @@ var function;
                       SizedBox(
                         height: 20.h,
                       ),
-
                       Container(
                         decoration: BoxDecoration(
-                          color: isColor?const Color(0xFFff8c09).withOpacity(0.3):Colors.transparent,
-                          borderRadius: BorderRadius.circular(10)
-
-                        ),
+                            color: isColor
+                                ? const Color(0xFFff8c09).withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10)),
                         child: Image(
-                            height: 80,
-                            width: 80,
-                            image:  AssetImage(image)),
+                            height: 80, width: 80, image: AssetImage(image)),
                       ),
                       Expanded(
                         child: CustomText(
@@ -97,12 +94,12 @@ var function;
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomText(
-                              text:  more,
+                              text: more,
                               color: color,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                             Icon(
+                            Icon(
                               Icons.arrow_right_alt,
                               color: color,
                             ),

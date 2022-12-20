@@ -1,4 +1,4 @@
-part of'../view.dart';
+part of '../view.dart';
 
 class form extends StatelessWidget {
   form({Key? key}) : super(key: key);
@@ -80,21 +80,20 @@ class form extends StatelessWidget {
                     )),
                 if (state is ChangeLoading)
                   const Center(
-                    child: CircularProgressIndicator(
-                        color: Colors.orange),
+                    child: CircularProgressIndicator(color: Colors.orange),
                   )
                 else
                   CustomButton(
                       function: () {
                         if (formKey.currentState!.validate()) {
-                          ChangePassCubit.get(context).changePass(ChangePassModel(
-                            confirmPass: confirmPassController!.text.trim(),
-                            currentPass: currentPassController!.text.trim(),
-                            newPass: newPassController!.text.trim(),
-                          ),
-
+                          ChangePassCubit.get(context).changePass(
+                            ChangePassModel(
+                              confirmPass: confirmPassController!.text.trim(),
+                              currentPass: currentPassController!.text.trim(),
+                              newPass: newPassController!.text.trim(),
+                            ),
                           );
-                          print( CacheHelper.getString(SharedKeys.token));
+                          print(CacheHelper.getString(SharedKeys.token));
                         }
                       },
                       text: 'CHANGE PASSWORD',

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 showToast(
-    {required String msg, required state, ToastGravity gravity = ToastGravity
-        .BOTTOM}) {
+    {required String msg,
+    required state,
+    ToastGravity gravity = ToastGravity.BOTTOM}) {
   Fluttertoast.showToast(
       msg: msg,
       toastLength: Toast.LENGTH_LONG,

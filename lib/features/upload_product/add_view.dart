@@ -9,7 +9,6 @@ import 'package:hoga_load/features/upload_product/units/table_product_title.dart
 import 'package:hoga_load/features/upload_product/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
-import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
@@ -39,9 +38,9 @@ part 'units/add_product_form.dart';
         children: [
           CustomAppbar(title: isEdit?'Edit Products':isFilter?'Search Product':'Add New Product',scaffoldKey: uploadedProductsScaffoldKey,),
           Expanded(child: SingleChildScrollView(
-              physics:BouncingScrollPhysics(),
+              physics:const BouncingScrollPhysics(),
               child: Padding(
-                padding: EdgeInsets.only(top: 22.0),
+                padding: const EdgeInsets.only(top: 22.0),
                 child: Form(productModel: productModel,isEdit: isEdit,index: index,isFilter: isFilter,),
               ))),
 

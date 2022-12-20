@@ -1,16 +1,17 @@
 class Blogs {
   Blogs({
-      this.id, 
-      this.title, 
-      this.slug, 
-      this.image, 
-      this.keywords, 
-      this.blogContent, 
-      this.blogCategory, 
-      this.blogStatus, 
-      this.enableComment, 
-      this.createdAt, 
-      this.updatedAt,});
+    this.id,
+    this.title,
+    this.slug,
+    this.image,
+    this.keywords,
+    this.blogContent,
+    this.blogCategory,
+    this.blogStatus,
+    this.enableComment,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   Blogs.fromJson(dynamic json) {
     id = json['id'];
@@ -52,5 +53,4 @@ class Blogs {
     map['updated_at'] = updatedAt;
     return map;
   }
-
 }

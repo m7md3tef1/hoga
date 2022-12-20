@@ -8,7 +8,6 @@ class Video extends StatefulWidget {
 }
 
 class _VideoState extends State<Video> {
-
   late YoutubePlayerController _controller;
   late TextEditingController _idController;
   late TextEditingController _seekToController;
@@ -70,22 +69,23 @@ class _VideoState extends State<Video> {
 
   @override
   Widget build(BuildContext context) {
-
-    return    Container(
-            height:MediaQuery.of(context).orientation == Orientation.portrait?250.h:350.h,
-            width: 300.w,
-            child: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: Colors.amber,
-              progressColors: const ProgressBarColors(
-                playedColor: Colors.amber,
-                handleColor: Colors.amberAccent,
-              ),
-              onReady: () {
-                _controller.addListener(listener);
-              },
-            ),
-          );
+    return Container(
+      height: MediaQuery.of(context).orientation == Orientation.portrait
+          ? 250.h
+          : 350.h,
+      width: 300.w,
+      child: YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Colors.amber,
+        progressColors: const ProgressBarColors(
+          playedColor: Colors.amber,
+          handleColor: Colors.amberAccent,
+        ),
+        onReady: () {
+          _controller.addListener(listener);
+        },
+      ),
+    );
   }
 }

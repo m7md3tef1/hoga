@@ -7,17 +7,14 @@ import 'package:hoga_load/features/add_update_card/view.dart';
 import 'package:hoga_load/features/blogs/view.dart';
 import 'package:hoga_load/features/change_password/view.dart';
 import 'package:hoga_load/features/contactus/view.dart';
-import 'package:hoga_load/features/dashboard/view.dart';
 import 'package:hoga_load/features/home/states.dart';
 import 'package:hoga_load/features/packages/view.dart';
 import 'package:hoga_load/features/subscribtion_details/view.dart';
 import 'package:hoga_load/features/upload_product/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
-import 'package:hoga_load/widgets/widgets/custom_notloggedin.dart';
 import 'package:hoga_load/widgets/widgets/custom_rowdrawer.dart';
 import '../../core/data/local/cacheHelper.dart';
 import '../../core/keys/keys.dart';
-import '../../widgets/widgets/custom_scaffold.dart';
 import '../auth/login.dart';
 import '../jobs/upload_jop/view.dart';
 import '../loads/uploaded_loads/view.dart';
@@ -30,44 +27,59 @@ part 'units/nav_bar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-  Future<bool?> showWarning(BuildContext context)async =>showDialog<bool>(
-      context: context, builder: (context)=>
-      AlertDialog(
-        title: const Text('Do You want to exit the app?'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              children: [
-                SizedBox(width: 35.sp,),
-                Expanded(child: CustomButton(function: ()=>Navigator.pop(context,false), text: 'No',height: 37.sp,font: 15)),
-                SizedBox(width: 35.sp,),
-                Expanded(child: CustomButton(function: ()=>Navigator.pop(context,true), text: 'Yes',height: 37.sp,font: 15,)),
-                SizedBox(width: 35.sp,),
-
-              ],
-            ),
-          ),
-
-        ],
-      )
-  );
+  Future<bool?> showWarning(BuildContext context) async => showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: const Text('Do You want to exit the app?'),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 35.sp,
+                    ),
+                    Expanded(
+                        child: CustomButton(
+                            function: () => Navigator.pop(context, false),
+                            text: 'No',
+                            height: 37.sp,
+                            font: 15)),
+                    SizedBox(
+                      width: 35.sp,
+                    ),
+                    Expanded(
+                        child: CustomButton(
+                      function: () => Navigator.pop(context, true),
+                      text: 'Yes',
+                      height: 37.sp,
+                      font: 15,
+                    )),
+                    SizedBox(
+                      width: 35.sp,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ));
   static GlobalKey<ScaffoldState> scaffoldStateKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     print('token');
-    print( CacheHelper.getString(SharedKeys.token));
+    print(CacheHelper.getString(SharedKeys.token));
     return WillPopScope(
-      onWillPop: ()async{
-        final shouldPop=await showWarning(context);
-        return shouldPop??false;
+      onWillPop: () async {
+        final shouldPop = await showWarning(context);
+        return shouldPop ?? false;
       },
       child: Scaffold(
-        drawer:  OnDrawer(inHome: true,),
+        drawer: OnDrawer(
+          inHome: true,
+        ),
         key: scaffoldStateKey,
-        bottomNavigationBar:  _BottomBar(),
-
+        bottomNavigationBar: _BottomBar(),
         body: BlocConsumer<HomeCubit, HomeStates>(
           listener: (_, s) {},
           builder: (context, s) {

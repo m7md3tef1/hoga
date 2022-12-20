@@ -35,8 +35,8 @@ class LoadsRepo {
         ? response = await Api()
             .getHttp(url: 'loads', authToken: token, self: self, data: {
             "per_page": 10,
-            "paginate":1 ,
-            "page":page,
+            "paginate": 1,
+            "page": page,
             "equipment_types": equipmentSize,
             "vehicle_attributes": attributes,
             "vehicle_sizes": vehicleSize,
@@ -50,15 +50,12 @@ class LoadsRepo {
                 DataFormCubit.get(context).stateDestinationID,
             "destination_city_id": DataFormCubit.get(context).cityDestinationID,
           })
-        :
-    response = await Api()
-            .getHttp(url: 'loads',self: self, authToken: token, data: {
+        : response = await Api()
+            .getHttp(url: 'loads', self: self, authToken: token, data: {
             "search": val,
             "per_page": 10,
-            "paginate":1 ,
-            "page":page,
-
-
+            "paginate": 1,
+            "page": page,
           });
     print('self >>>>>>>> $self');
 
@@ -171,10 +168,9 @@ class LoadsRepo {
     print("vehicleType" + VehiclesCubit.get(context).vehcleType.toString());
     print("countryOriginID" +
         DataFormCubit.get(context).countryOriginID.toString());
-    print("stateOriginID" +
-        DataFormCubit.get(context).stateOriginID.toString());
-    print("cityOriginID" +
-        DataFormCubit.get(context).cityOriginID.toString());
+    print(
+        "stateOriginID" + DataFormCubit.get(context).stateOriginID.toString());
+    print("cityOriginID" + DataFormCubit.get(context).cityOriginID.toString());
     print("countryDestinationID" +
         DataFormCubit.get(context).countryDestinationID.toString());
     print("stateDestinationID" +
@@ -193,13 +189,6 @@ class LoadsRepo {
           .replaceAll("[", "")
           .replaceAll("]", "")
           .replaceAll(" ", ""),
-//      "vehicle_attributes": VehiclesCubit.get(context)
-//          .attributes
-//          .toString()
-//          .replaceAll(",", "-")
-//          .replaceAll("[", "")
-//          .replaceAll("]", "")
-//          .replaceAll(" ", ""),
       "vehicle_sizes": VehiclesCubit.get(context)
           .vehcleSize
           .toString()
@@ -226,15 +215,6 @@ class LoadsRepo {
   }
 
   static addLoads({context}) async {
-//    print("equipment_types"+DataFormCubit.get(context).dateTime.toString());
-//    print("vehicle_attributes"+VehiclesCubit.get(context).attributes.toString());
-//    print("vehicleSize"+VehiclesCubit.get(context).vehcleSize.toString());
-//    print("vehicleType"+VehiclesCubit.get(context).vehcleType.toString());
-//    print("origin_country_id"+DataFormCubit.get(context).countryOriginID.toString());
-//    print("origin_country_id"+DataFormCubit.get(context).stateOriginID.toString());
-//    print("origin_country_id"+DataFormCubit.get(context).cityOriginID.toString());
-//    print("origin_country_id"+DataFormCubit.get(context).countryDestinationID.toString());
-//    print("origin_country_id"+DataFormCubit.get(context).stateDestinationID.toString());
     String token = await CacheHelper.getString(SharedKeys.token);
     return await Api().postHttp(url: "loads/add", authToken: token, data: {
       "availability_date": DataFormCubit.get(context).dateTime.toString(),
@@ -274,7 +254,6 @@ class LoadsRepo {
       "destination_city": DataFormCubit.get(context).cityDestinationID,
       "weight": VehiclesCubit.get(context).weightController.text,
       "instructions": VehiclesCubit.get(context).instructionsController.text,
-
       "availability_date": 22,
       "equipment_types": '1',
       "vehicle_attributes": '1',
@@ -287,12 +266,12 @@ class LoadsRepo {
       "destination_state": 14,
       "destination_city": 36,
       "weight": 5678,
-      // "instructions":VehiclesCubit.get(context).instructionsController.text,
     });
   }
 
   static addLoadsTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
+    return await Api()
+        .getHttp(url: "profile/current-subscription", authToken: token);
   }
 }

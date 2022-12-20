@@ -56,9 +56,7 @@ class _SearchViewState extends State<SearchView> {
             SizedBox(
               height: 21.h,
             ),
-
-            Expanded(child:
-            Body())
+            Expanded(child: Body())
           ],
         ),
       ),

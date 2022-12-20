@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart'as v;
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart'
+    as v;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
@@ -9,7 +10,6 @@ import 'package:hoga_load/features/auth/units/card_title.dart';
 import 'package:hoga_load/features/auth/units/custom_no_account.dart';
 import 'package:hoga_load/features/auth/units/customer_text_field.dart';
 import 'package:hoga_load/features/auth/units/logo.dart';
-import 'package:hoga_load/features/home/controller.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import '../../core/dialoges/toast.dart';
@@ -31,14 +31,13 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return v.KeyboardVisibilityBuilder(
-      builder: (context, visible) =>
-       Padding(
-         padding:  EdgeInsets.only(bottom: visible? .31.sh:0),
-         child: Scaffold(
+      builder: (context, visible) => Padding(
+        padding: EdgeInsets.only(bottom: visible ? .31.sh : 0),
+        child: Scaffold(
           body: BlocConsumer<AuthCubit, AuthStates>(
             listener: (BuildContext context, state) {
               if (state is SignInSuccess) {
-                MagicRouter.navigateAndReplacement( const Home());
+                MagicRouter.navigateAndReplacement(const Home());
               }
             },
             builder: (context, state) => Column(
@@ -48,98 +47,99 @@ class Login extends StatelessWidget {
                   height: 18,
                 ),
                 Expanded(
-                  child:  SingleChildScrollView(
+                  child: SingleChildScrollView(
                     child: CustomCard(
-                        widget: Form(
-                          key: formKey,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const Logo(),
-                              TitleText(
-                                title: 'Login',
-                              ),
-                              CustomTextFormField(
-                                padding: 40.0,
-                                hintText: 'Enter E-mail',
-                                controller: emailController,
-                                validate: Validator.validateEmail,
-                              ),
-                              CustomTextFormField(
-                                padding: 40.0,
-                                hintText: 'Enter Password',
-                                controller: passwordController,
-                                validate: Validator.validatePassword,
-                                obs: true,
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Privacy(VehiclesCubit.get(context).value),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              if (state is SignInLoading)
-                                Column(
-                                  children: const [
-                                    Center(
-                                      child: CircularProgressIndicator(
-                                        color: Colors.orange,
-                                      ),
+                      widget: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const Logo(),
+                            TitleText(
+                              title: 'Login',
+                            ),
+                            CustomTextFormField(
+                              padding: 40.0,
+                              hintText: 'Enter E-mail',
+                              controller: emailController,
+                              validate: Validator.validateEmail,
+                            ),
+                            CustomTextFormField(
+                              padding: 40.0,
+                              hintText: 'Enter Password',
+                              controller: passwordController,
+                              validate: Validator.validatePassword,
+                              obs: true,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Privacy(VehiclesCubit.get(context).value),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            if (state is SignInLoading)
+                              Column(
+                                children: const [
+                                  Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.orange,
                                     ),
-                                    SizedBox(
-                                      height: 14,
-                                    )
-                                  ],
-                                )
-                              else
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 12.0),
-                                  child: CustomButton(
-                                    function: () {
-                                      if (!formKey.currentState!.validate() ||
-                                          VehiclesCubit.get(context).value ==
-                                              false) {
-                                        showToast(
-                                            msg:
-                                                'You need to agree with the terms and conditions and policies.',
-                                            state: ToastedStates.ERROR);
-                                        print('this bottom     '+MediaQuery.of(context).viewInsets.bottom.toString());
-                                      } else if (formKey.currentState!
-                                              .validate() &&
-                                          VehiclesCubit.get(context).value ==
-                                              true) {
-                                        AuthCubit.get(context).signIn(
-                                            LoginModel(
-                                                password: passwordController
-                                                    .text
-                                                    .trim(),
-                                                userName: emailController.text
-                                                    .trim()),context);
-
-                                        print('this bottom     '+MediaQuery.of(context).viewInsets.bottom.toString());
-                                      }
-                                    },
-                                    text: 'Login',
-                                    color: ColorManager.yellow,
                                   ),
+                                  SizedBox(
+                                    height: 14,
+                                  )
+                                ],
+                              )
+                            else
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: CustomButton(
+                                  function: () {
+                                    if (!formKey.currentState!.validate() ||
+                                        VehiclesCubit.get(context).value ==
+                                            false) {
+                                      showToast(
+                                          msg:
+                                              'You need to agree with the terms and conditions and policies.',
+                                          state: ToastedStates.ERROR);
+                                      print(
+                                          'this bottom     ${MediaQuery.of(context).viewInsets.bottom}');
+                                    } else if (formKey.currentState!
+                                            .validate() &&
+                                        VehiclesCubit.get(context).value ==
+                                            true) {
+                                      AuthCubit.get(context).signIn(
+                                          LoginModel(
+                                              password: passwordController.text
+                                                  .trim(),
+                                              userName:
+                                                  emailController.text.trim()),
+                                          context);
+
+                                      print(
+                                          'this bottom     ${MediaQuery.of(context).viewInsets.bottom}');
+                                    }
+                                  },
+                                  text: 'Login',
+                                  color: ColorManager.yellow,
                                 ),
-                              NoAccount(),
-                              NotLogged()
-                            ],
-                          ),
+                              ),
+                            NoAccount(),
+                            NotLogged()
+                          ],
                         ),
                       ),
+                    ),
                   ),
-                  ),
-
+                ),
               ],
             ),
           ),
+        ),
       ),
-       ),
     );
   }
 }

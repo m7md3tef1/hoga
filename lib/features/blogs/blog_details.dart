@@ -14,7 +14,6 @@ import '../../core/keys/keys.dart';
 import '../../core/router/router.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../core/widgets/custom_card_title.dart';
-import '../../widgets/widgets/custom_notloggedin.dart';
 import '../auth/login.dart';
 
 class BlogDetails extends StatelessWidget {
@@ -55,11 +54,11 @@ class BlogDetails extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.folder_open,
                               color: ColorManager.primaryColor,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 6,
                             ),
                             CustomText(
@@ -72,11 +71,11 @@ class BlogDetails extends StatelessWidget {
                       Expanded(
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.bookmark_border,
                               color: ColorManager.primaryColor,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 6,
                             ),
                             CustomText(

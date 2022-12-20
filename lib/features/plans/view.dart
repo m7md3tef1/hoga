@@ -18,18 +18,18 @@ class PlanView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-
-        body:
-    Column(
+        body: Column(
       children: [
         CustomAppbar(title: 'SUBSCRIPTION PLANS'),
-        SizedBox(height: 22.h,),
-        !CacheHelper.getBool(SharedKeys.isLogin)?CustomNotLoggedIn(): Expanded(child:
-        SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: PlanBody())),
+        SizedBox(
+          height: 22.h,
+        ),
+        !CacheHelper.getBool(SharedKeys.isLogin)
+            ? const CustomNotLoggedIn()
+            : Expanded(
+                child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(), child: PlanBody())),
       ],
     ));
   }
 }
-

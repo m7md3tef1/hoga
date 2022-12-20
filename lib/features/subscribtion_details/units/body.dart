@@ -6,10 +6,11 @@ class Body extends StatelessWidget {
   bool subscription = true;
   @override
   Widget build(BuildContext context) {
+    print('cancelled -------');
+    print(UpdateProfileCubit.get(context).subscriptionData.subscriptionDetails!.subscriptionCancelled);
     return
        state is GetSubscriptionLoading
              ?  SizedBox(
-                 // width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height*0.5,
                  child: const Center(
                      child: CircularProgressIndicator(

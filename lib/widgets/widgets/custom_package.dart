@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hoga_load/core/color_manager/color_manager.dart';
-import 'package:hoga_load/core/router/router.dart';
-import 'package:hoga_load/features/add_update_card/view.dart';
-import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
-
 import '../../features/packages/cubit/package_cubit.dart';
 
 class CustomPackage extends StatefulWidget {
@@ -27,8 +22,8 @@ class CustomPackage extends StatefulWidget {
   var conttext1;
   var conttext2;
   var totalprice;
-  TextEditingController? textController=TextEditingController();
-  TextEditingController? textController2=TextEditingController();
+  TextEditingController? textController = TextEditingController();
+  TextEditingController? textController2 = TextEditingController();
   String day = '';
   String month = '';
   String year = '';
@@ -82,7 +77,7 @@ class _CustomPackageState extends State<CustomPackage> {
                   text: widget.price,
                   fontWeight: FontWeight.w500,
                   fontSize: 16.sp,
-                  color: Color(0xFFFDC52F),
+                  color: const Color(0xFFFDC52F),
                 ),
               ],
             )
@@ -116,14 +111,17 @@ class _CustomPackageState extends State<CustomPackage> {
                       height: 50.h,
                       enabled: false,
                       readOnly: true,
-                      hintText: PackageCubit.get(context).fromdate == ''||PackageCubit.get(context).fromdate==null ?
-                      'dd-mm-yy' : PackageCubit.get(context).fromdate,
+                      hintText: PackageCubit.get(context).fromdate == '' ||
+                              PackageCubit.get(context).fromdate == null
+                          ? 'dd-mm-yy'
+                          : PackageCubit.get(context).fromdate,
 
                       //controller: widget.textController!,
                       suffixIcon: InkWell(
                           onTap: () async {
                             DateTime? newDate = await showDatePicker(
-                                initialEntryMode: DatePickerEntryMode.calendarOnly,
+                                initialEntryMode:
+                                    DatePickerEntryMode.calendarOnly,
                                 context: context,
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(3000),
@@ -134,15 +132,15 @@ class _CustomPackageState extends State<CustomPackage> {
                               widget.month = newDate.month.toString();
                               widget.year = newDate.year.toString();
 
-                              widget.fromDate = '${widget.day}/${widget.month}/${widget.year}';
-                              PackageCubit.get(context).fromdate=widget.fromDate;
-                              PackageCubit.get(context).fromdate2=newDate;
-
+                              widget.fromDate =
+                                  '${widget.day}/${widget.month}/${widget.year}';
+                              PackageCubit.get(context).fromdate =
+                                  widget.fromDate;
+                              PackageCubit.get(context).fromdate2 = newDate;
                             });
                           },
                           child: const Icon(Icons.date_range_outlined)),
                     ),
-
                   ),
                   SizedBox(
                     height: 5.h,
@@ -163,14 +161,17 @@ class _CustomPackageState extends State<CustomPackage> {
                       height: 50.h,
                       readOnly: true,
                       // enabled: false,
-                      hintText: PackageCubit.get(context).todate == '' ||PackageCubit.get(context).todate==null
-                          ? 'dd-mm-yy' : PackageCubit.get(context).todate,
+                      hintText: PackageCubit.get(context).todate == '' ||
+                              PackageCubit.get(context).todate == null
+                          ? 'dd-mm-yy'
+                          : PackageCubit.get(context).todate,
 
                       //controller: widget.textController!,
                       suffixIcon: InkWell(
                           onTap: () async {
                             DateTime? newDate = await showDatePicker(
-                                initialEntryMode: DatePickerEntryMode.calendarOnly,
+                                initialEntryMode:
+                                    DatePickerEntryMode.calendarOnly,
                                 context: context,
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(3000),
@@ -181,8 +182,9 @@ class _CustomPackageState extends State<CustomPackage> {
                               widget.month = newDate.month.toString();
                               widget.year = newDate.year.toString();
 
-                              widget.toDate = '${widget.day}/${widget.month}/${widget.year}';
-                              PackageCubit.get(context).todate=widget.toDate;
+                              widget.toDate =
+                                  '${widget.day}/${widget.month}/${widget.year}';
+                              PackageCubit.get(context).todate = widget.toDate;
                             });
                           },
                           child: const Icon(Icons.date_range_outlined)),

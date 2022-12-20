@@ -15,7 +15,7 @@ class BlogsCubit extends Cubit<BlogsState> {
   Connectivity connectivity = Connectivity();
   List<Blogs> searchList = [];
   List<Blogs> blogList = [];
-  String category='';
+  String category = '';
   getBlogsCubit(token) {
     print(token);
     connectivity.checkConnectivity().then((value) async {
@@ -91,22 +91,18 @@ class BlogsCubit extends Cubit<BlogsState> {
     });
   }
 
-  getComment(){}
+  getComment() {}
 
-  getCategory(id){
+  getCategory(id) {
     BlogRepo.getCategory(id)
         .then((value) => {
-      print('..................................'),
-      category = value,
-      print("this value--------category"),
-      print(value),
-      //  print(value[1].title),
-      emit(BlogCategory())
-    })
+              print('..................................'),
+              category = value,
+              print("this value--------category"),
+              print(value),
+              emit(BlogCategory())
+            })
         .onError((error, stackTrace) =>
-    {
-      emit(GetBlogFailed(error.toString())), print(error)});
+            {emit(GetBlogFailed(error.toString())), print(error)});
   }
-
-
 }

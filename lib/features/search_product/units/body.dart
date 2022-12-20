@@ -7,9 +7,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 0.65.sh,
-      child:
-
-      ListView(
+      child: ListView(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: false,
         scrollDirection: Axis.horizontal,
@@ -71,7 +69,8 @@ class Body extends StatelessWidget {
                                 if (index == state.productList.length) {
                                   print('condition true');
                                   return Padding(
-                                    padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -133,7 +132,7 @@ class Body extends StatelessWidget {
                                                 : Colors.grey[400],
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Container(
                                           height: 24,
                                           width: 24,
@@ -147,11 +146,11 @@ class Body extends StatelessWidget {
                                             ProductsCubit.get(context)
                                                 .page
                                                 .toString(),
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: const TextStyle(
+                                                color: Colors.white),
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         InkWell(
                                           onTap: () {
                                             int page =
@@ -221,7 +220,6 @@ class Body extends StatelessWidget {
                                               fontWeight: FontWeight.w500,
                                             ),
                                             CustomText(
-//                                height: 20.h,o
                                                 width: 0.2.sw,
                                                 text: state.productList[index]
                                                         .productName ??
@@ -232,7 +230,6 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
-//                                  height: 20.h,
                                                 width: 0.2.sw,
                                                 text: state.productList[index]
                                                             .productType ==
@@ -251,10 +248,9 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 align: TextAlign.start,
                                                 fontWeight: FontWeight.w500),
-
-
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
                                               child: Image(
                                                 height: 50,
                                                 width: 0.2.sw,
@@ -265,12 +261,13 @@ class Body extends StatelessWidget {
                                                     ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
                                                     : state.productList[index]
                                                         .productImage!),
-                                                errorBuilder:
-                                                    (context, error, stackTrace) {
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
                                                   return Container(
                                                     width: 0.2.sw,
                                                     child: const Center(
-                                                        child: Icon(Icons.error)),
+                                                        child:
+                                                            Icon(Icons.error)),
                                                   );
                                                 },
                                               ),
@@ -284,7 +281,6 @@ class Body extends StatelessWidget {
                               });
                         } else if (state is GetProductsSuccess) {
                           return ListView.builder(
-
                               physics: const AlwaysScrollableScrollPhysics(),
                               itemCount: state.productList.length + 1,
                               itemBuilder: (context, index) {
@@ -293,9 +289,9 @@ class Body extends StatelessWidget {
                                   print(index);
                                   print(state.productList.length);
 
-
                                   return Padding(
-                                    padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -432,18 +428,14 @@ class Body extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                           CustomText(
-//                                height: 20.h,o
                                               width: 0.2.sw,
                                               text: state.productList[index]
                                                       .productName ??
                                                   'other',
-                                              //   text: '',
-
                                               align: TextAlign.start,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
-//                                  height: 20.h,
                                               width: 0.2.sw,
                                               text: state.productList[index]
                                                           .productType ==
@@ -467,21 +459,9 @@ class Body extends StatelessWidget {
                                             width: 0.2.sw,
                                             imageUrl: state.productList[index]
                                                 .productImage!,
-                                            // placeholder: (context, url) =>
-                                            //     Container(
-                                            //         height: 15,
-                                            //         width: 15,
-                                            //         margin: EdgeInsets.all(5),
-                                            //         child: Center(
-                                            //           child:
-                                            //               CircularProgressIndicator(
-                                            //             strokeWidth: 2,
-                                            //             color: Colors.orange,
-                                            //           ),
-                                            //         )),
                                             errorWidget:
                                                 (context, url, error) =>
-                                                    Icon(Icons.error),
+                                                    const Icon(Icons.error),
                                           ),
                                         ],
                                       ),
@@ -606,7 +586,6 @@ class Body extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                           CustomText(
-//                                height: 20.h,o
                                               width: 0.2.sw,
                                               text: ProductsCubit.get(context)
                                                       .productList[index]
@@ -618,7 +597,6 @@ class Body extends StatelessWidget {
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
-//                                  height: 20.h,
                                               width: 0.2.sw,
                                               text: ProductsCubit.get(context)
                                                           .productList[index]

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
-import 'package:hoga_load/core/data/models/product/GetProduct_model.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_cubit.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
@@ -37,7 +36,7 @@ class CustomSearchRow extends StatelessWidget {
                       }
                       index == 1
                           ? VehiclesCubit.get(context)
-                              .getVehicleCubit(context,val: val.trim())
+                              .getVehicleCubit(context, val: val.trim())
                           : index == 2
                               ? LoadsCubit.get(context)
                                   .getLoad(val: val.trim(), isFilter: false)

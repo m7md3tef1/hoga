@@ -7,18 +7,12 @@ import 'package:hoga_load/features/packages/cubit/package_states.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
-
 import '../../../core/color_manager/color_manager.dart';
-import '../../../core/data/models/Packages_detail.dart';
-import '../../../core/data/models/Upload_adv.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../widgets/widgets/custom_button.dart';
-import '../../auth/units/customer_text_field.dart';
 import '../../dashboard/cubit/updateProfile_cubit.dart';
 import '../../home/view.dart';
 import '../../packages/view.dart';
-import '../../search_product/cubit/getProduct__states.dart';
-import '../../search_product/cubit/getProduct_cubit.dart';
 
 class FormAdvertisment extends StatefulWidget {
   const FormAdvertisment({
@@ -38,54 +32,44 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
     // TODO: implement initState
     super.initState();
 
-
     PackageCubit.get(context).SubscribePackageTest();
-    //
-    // imag2 = ProductsCubit.get(context).image1 != null
-    //     ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-    //     : '    No File chosen';
-    // imag1 = ProductsCubit.get(context).image != null
-    //     ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-    //     : '    No File chosen';
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:  OnDrawer(),
-      key: uploadedProductsScaffoldKey,
-      body: BlocConsumer<PackageCubit,PackageStates>(
-            listener: (context,state){
-              if( state is UploadPackageSuccess){
-                PackageCubit.get(context).advertisementCubit();
-                PackageCubit.get(context).imageDesktop==null;
-                PackageCubit.get(context).imageMobile==null;
-              }
-            },
-            builder:(context,state){
-              // imag2 = ProductsCubit.get(context).image1 != null
-              //     ? '${ProductsCubit.get(context).image1.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-              //     : '    No File chosen';
-              // imag1 = ProductsCubit.get(context).image != null
-              //     ? '${ProductsCubit.get(context).image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}'
-              //     : '    No File chosen';
-              return
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomAppbar(
-                    title: 'UPLOAD ADVERTISEMENT BANNER',
-                    font: 18.sp,
-                    scaffoldKey: uploadedProductsScaffoldKey,
-                  ),
-                  PackageCubit.get(context).testLoading?const Expanded(child: Center(child: CircularProgressIndicator(color: Colors.orange,))):
-                  PackageCubit.get(context).isAllowed?Expanded(
-                      child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: CustomCard(
-                                widget: Column(
+        drawer: OnDrawer(),
+        key: uploadedProductsScaffoldKey,
+        body: BlocConsumer<PackageCubit, PackageStates>(
+            listener: (context, state) {
+          if (state is UploadPackageSuccess) {
+            PackageCubit.get(context).advertisementCubit();
+            PackageCubit.get(context).imageDesktop == null;
+            PackageCubit.get(context).imageMobile == null;
+          }
+        }, builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomAppbar(
+                title: 'UPLOAD ADVERTISEMENT BANNER',
+                font: 18.sp,
+                scaffoldKey: uploadedProductsScaffoldKey,
+              ),
+              PackageCubit.get(context).testLoading
+                  ? const Expanded(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                      color: Colors.orange,
+                    )))
+                  : PackageCubit.get(context).isAllowed
+                      ? Expanded(
+                          child: SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: CustomCard(
+                                    widget: Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -93,14 +77,16 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.symmetric(
-                                                vertical: 8.0, horizontal: 14.w),
+                                                vertical: 8.0,
+                                                horizontal: 14.w),
                                             child: Column(
                                               //   mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
                                                     CustomText(
-                                                      text: 'Banner for Desktop Devices',
+                                                      text:
+                                                          'Banner for Desktop Devices',
                                                       align: TextAlign.start,
                                                       color: Colors.grey,
                                                       fontSize: 12.sp,
@@ -112,14 +98,18 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                   width: 1.sw,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: ColorManager.greyColor),
-                                                      color: ColorManager.whiteColor,
+                                                          color: ColorManager
+                                                              .greyColor),
+                                                      color: ColorManager
+                                                          .whiteColor,
                                                       borderRadius:
-                                                      BorderRadius.circular(12.r)),
+                                                          BorderRadius.circular(
+                                                              12.r)),
                                                   child: InkWell(
                                                     onTap: () {
                                                       PackageCubit.get(context)
-                                                          .pickFromGalleryDesktop(context);
+                                                          .pickFromGalleryDesktop(
+                                                              context);
                                                     },
                                                     child: Row(
                                                       children: [
@@ -127,10 +117,12 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                           height: 64.h,
                                                           width: 106.w,
                                                           decoration: BoxDecoration(
-                                                              color: Colors.grey[100],
+                                                              color: Colors
+                                                                  .grey[100],
                                                               borderRadius:
-                                                              BorderRadius.circular(
-                                                                  12.r)),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.r)),
                                                           child: Center(
                                                             child: Text(
                                                               'Choose File',
@@ -138,22 +130,30 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                                   color: const Color(
                                                                       0xFF757575),
                                                                   fontWeight:
-                                                                  FontWeight.w400,
-                                                                  fontSize: 14.sp),
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize:
+                                                                      14.sp),
                                                             ),
                                                           ),
                                                         ),
                                                         Expanded(
                                                           child: Center(
                                                             child: Text(
-                                                              PackageCubit.get(context).imageDesktop ==null?'    No File chosen':
-                                                              '${PackageCubit.get(context).imageDesktop.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
+                                                              PackageCubit.get(
+                                                                              context)
+                                                                          .imageDesktop ==
+                                                                      null
+                                                                  ? '    No File chosen'
+                                                                  : '${PackageCubit.get(context).imageDesktop.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
                                                               style: TextStyle(
                                                                   color: const Color(
                                                                       0xFF757575),
                                                                   fontWeight:
-                                                                  FontWeight.w400,
-                                                                  fontSize: 14.sp),
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize:
+                                                                      14.sp),
                                                             ),
                                                           ),
                                                         )
@@ -163,7 +163,7 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                 ),
                                                 CustomText(
                                                   text:
-                                                  'Should have a size of 925px width and 200px height',
+                                                      'Should have a size of 925px width and 200px height',
                                                   align: TextAlign.start,
                                                   color: Colors.grey,
                                                   fontSize: 10.sp,
@@ -173,13 +173,15 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                           ),
                                           Padding(
                                             padding: EdgeInsets.symmetric(
-                                                vertical: 8.0, horizontal: 14.w),
+                                                vertical: 8.0,
+                                                horizontal: 14.w),
                                             child: Column(
                                               children: [
                                                 Row(
                                                   children: [
                                                     CustomText(
-                                                      text: 'Banner for Mobile Devices',
+                                                      text:
+                                                          'Banner for Mobile Devices',
                                                       align: TextAlign.start,
                                                       color: Colors.grey,
                                                       fontSize: 12.sp,
@@ -191,14 +193,18 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                   width: 1.sw,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          color: ColorManager.greyColor),
-                                                      color: ColorManager.whiteColor,
+                                                          color: ColorManager
+                                                              .greyColor),
+                                                      color: ColorManager
+                                                          .whiteColor,
                                                       borderRadius:
-                                                      BorderRadius.circular(12.r)),
+                                                          BorderRadius.circular(
+                                                              12.r)),
                                                   child: InkWell(
                                                     onTap: () {
                                                       PackageCubit.get(context)
-                                                          .pickFromGalleryMobile(context);
+                                                          .pickFromGalleryMobile(
+                                                              context);
                                                     },
                                                     child: Row(
                                                       children: [
@@ -206,10 +212,12 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                           height: 64.h,
                                                           width: 106.w,
                                                           decoration: BoxDecoration(
-                                                              color: Colors.grey[100],
+                                                              color: Colors
+                                                                  .grey[100],
                                                               borderRadius:
-                                                              BorderRadius.circular(
-                                                                  12.r)),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.r)),
                                                           child: Center(
                                                             child: Text(
                                                               'Choose File',
@@ -217,22 +225,30 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                                   color: const Color(
                                                                       0xFF757575),
                                                                   fontWeight:
-                                                                  FontWeight.w400,
-                                                                  fontSize: 14.sp),
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize:
+                                                                      14.sp),
                                                             ),
                                                           ),
                                                         ),
                                                         Expanded(
                                                           child: Center(
                                                             child: Text(
-                                                              PackageCubit.get(context).imageMobile ==null?'    No File chosen':
-                                                              '${PackageCubit.get(context).imageDesktop.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
+                                                              PackageCubit.get(
+                                                                              context)
+                                                                          .imageMobile ==
+                                                                      null
+                                                                  ? '    No File chosen'
+                                                                  : '${PackageCubit.get(context).imageDesktop.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker')}',
                                                               style: TextStyle(
                                                                   color: const Color(
                                                                       0xFF757575),
                                                                   fontWeight:
-                                                                  FontWeight.w400,
-                                                                  fontSize: 14.sp),
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize:
+                                                                      14.sp),
                                                             ),
                                                           ),
                                                         )
@@ -240,10 +256,9 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                     ),
                                                   ),
                                                 ),
-
                                                 CustomText(
                                                   text:
-                                                  'Should have a size of 925px width and 200px height',
+                                                      'Should have a size of 925px width and 200px height',
                                                   align: TextAlign.start,
                                                   color: Colors.grey,
                                                   fontSize: 10.sp,
@@ -263,7 +278,8 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                   child: Row(
                                                     children: [
                                                       CustomText(
-                                                        text: 'Link to Redirect Users',
+                                                        text:
+                                                            'Link to Redirect Users',
                                                         align: TextAlign.start,
                                                         color: Colors.grey,
                                                         fontSize: 10.sp,
@@ -274,31 +290,36 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                                 CustomTextField(
                                                   height: 50.h,
                                                   hintText:
-                                                  'Please enter link with http:// or https://',
-                                                  keyboardType: TextInputType.url,
-                                                  controller: PackageCubit.get(context)
-                                                      .linkController,
+                                                      'Please enter link with http:// or https://',
+                                                  keyboardType:
+                                                      TextInputType.url,
+                                                  controller:
+                                                      PackageCubit.get(context)
+                                                          .linkController,
                                                 ),
                                               ],
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.only(top: 5.h, left: 14.w),
+                                            padding: EdgeInsets.only(
+                                                top: 5.h, left: 14.w),
                                             child: Container(
                                                 height: 100.h,
                                                 width: 1.sw,
                                                 decoration: BoxDecoration(
                                                     color: Colors.grey[200],
                                                     borderRadius:
-                                                    BorderRadius.circular(12.r)),
+                                                        BorderRadius.circular(
+                                                            12.r)),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
                                                   child: CustomText(
                                                     align: TextAlign.start,
                                                     color: Colors.grey[800],
                                                     fontSize: 10.sp,
                                                     text:
-                                                    'NOTE : Please note your advertisement will be published by admin only. If there is any communication required, our team will contact with you at ${UpdateProfileCubit.get(context).profileData.email ?? ''} and ${UpdateProfileCubit.get(context).profileData.contactNumber ?? ''}',
+                                                        'NOTE : Please note your advertisement will be published by admin only. If there is any communication required, our team will contact with you at ${UpdateProfileCubit.get(context).profileData.email ?? ''} and ${UpdateProfileCubit.get(context).profileData.contactNumber ?? ''}',
                                                   ),
                                                 )),
                                           ),
@@ -308,57 +329,64 @@ class _FormAdvertismentState extends State<FormAdvertisment> {
                                               thickness: 1,
                                             ),
                                           ),
-                                          state is UploadPackageLoading?const Center(
-                                            child: CircularProgressIndicator(color: Colors.orange,),
-                                          )
-                                              :
-                                          Padding(
-                                            padding:
-                                            EdgeInsets.only(bottom: 15.h, top: 10.h),
-                                            child: Align(
-                                              alignment: Alignment.bottomLeft,
-                                              child: CustomButton(
-                                                height: 75.sp,
-                                                text: 'UPLOAD\n ADVERTISEMENT',
-                                                icon: Icons.add,
-                                                color: ColorManager.yellow,
-                                                function: () {
+                                          state is UploadPackageLoading
+                                              ? const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.orange,
+                                                  ),
+                                                )
+                                              : Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 15.h, top: 10.h),
+                                                  child: Align(
+                                                    alignment:
+                                                        Alignment.bottomLeft,
+                                                    child: CustomButton(
+                                                      height: 75.sp,
+                                                      text:
+                                                          'UPLOAD\n ADVERTISEMENT',
+                                                      icon: Icons.add,
+                                                      color:
+                                                          ColorManager.yellow,
+                                                      function: () {
+                                                        if (PackageCubit.get(
+                                                                        context)
+                                                                    .imageDesktop ==
+                                                                null ||
+                                                            PackageCubit.get(
+                                                                        context)
+                                                                    .imageMobile ==
+                                                                null) {
+                                                          showToast(
+                                                              msg:
+                                                                  'You must add a banner',
+                                                              state:
+                                                                  ToastedStates
+                                                                      .ERROR);
+                                                        }
 
-                                                  if(PackageCubit.get(context).imageDesktop==null||
-                                                      PackageCubit.get(context).imageMobile==null){
-                                                    showToast(msg: 'You must add a banner', state: ToastedStates.ERROR);
-                                                  }
-//                                                  if(linkController.text.isEmpty){
-//                                                    showToast(msg: 'You must add a link', state: ToastedStates.ERROR);
-//
-//                                                  }
-                                                  //showToast(msg: 'done', state: ToastedStates.ERROR);
-
-                                                   PackageCubit.get(context)
-                                                       .uploadPackageCubit(
-                                                     context);
-
-
-                                                },
-                                              ),
-                                            ),
-                                          ),
+                                                        PackageCubit.get(
+                                                                context)
+                                                            .uploadPackageCubit(
+                                                                context);
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
                                         ],
                                       ),
                                     )
                                   ],
                                 )),
-                          ))):
-                  const Expanded(
-                      child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(), child: PackageBody()))
-                  ,
-                ],
-              );
-            }
-          )
-
-    );
+                              )))
+                      : const Expanded(
+                          child: SingleChildScrollView(
+                              physics: BouncingScrollPhysics(),
+                              child: PackageBody())),
+            ],
+          );
+        }));
   }
 }
 /*

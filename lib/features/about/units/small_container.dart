@@ -13,16 +13,13 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(left:15.h,bottom: 15.h),
+      padding: EdgeInsets.only(left: 15.h, bottom: 15.h),
       child: Container(
         decoration: BoxDecoration(
             color: ColorManager.whiteColor,
-          borderRadius: BorderRadius.circular(12.r)
-        ),
-
-
+            borderRadius: BorderRadius.circular(12.r)),
         child: Padding(
-          padding:  EdgeInsets.symmetric(vertical: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

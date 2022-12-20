@@ -7,8 +7,6 @@ import '../models/jobs/get_jop.dart';
 import '../models/product/GetProduct_model.dart';
 
 class ProductRepo {
-
-
   static Future<List<GetProductModel>> getProducts(url, self,
       {GetProductModel? productModel, val, page}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
@@ -52,7 +50,8 @@ class ProductRepo {
 
   static addProductTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
+    return await Api()
+        .getHttp(url: "profile/current-subscription", authToken: token);
   }
 
   static delete(productId) async {
@@ -66,6 +65,4 @@ class ProductRepo {
     return await Api().postHttp(
         url: "products/update", authToken: token, data: productModel!.toJson());
   }
-
-
 }

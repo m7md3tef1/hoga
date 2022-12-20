@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthStates> {
   Connectivity connectivity = Connectivity();
   var image;
 
-  signIn(loginModel,context) async{
+  signIn(loginModel, context) async {
     var response = Api().postHttp(url: 'login', data: loginModel.toJson());
     print(response);
     print('login response');
@@ -30,14 +30,13 @@ class AuthCubit extends Cubit<AuthStates> {
               print(value),
               emit(SignInSuccess()),
               CacheHelper.putString(SharedKeys.token, value['auth_token']),
-             CacheHelper.putBool(SharedKeys.isLogin, true),
-            HomeCubit.get(context).isSubscription(),
-
-        print(value['auth_token']),
+              CacheHelper.putBool(SharedKeys.isLogin, true),
+              HomeCubit.get(context).isSubscription(),
+              print(value['auth_token']),
               print(response),
               print('Success'),
-      print(value),
-      print(value['record']),
+              print(value),
+              print(value['record']),
               showToast(
                   msg: 'login Successfully', state: ToastedStates.SUCCESS),
             })
@@ -57,9 +56,8 @@ class AuthCubit extends Cubit<AuthStates> {
         .then((value) => {
               print(value),
               emit(SignUpSuccess()),
-    CacheHelper.putBool(SharedKeys.isLogin, true),
-
-        showToast(
+              CacheHelper.putBool(SharedKeys.isLogin, true),
+              showToast(
                   msg: 'Sign up successfully', state: ToastedStates.SUCCESS),
             })
         .onError((error, stackTrace) => {

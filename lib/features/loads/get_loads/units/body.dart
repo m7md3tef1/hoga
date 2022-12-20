@@ -53,15 +53,15 @@ class Body extends StatelessWidget {
                 flex: 1,
                 child: Container(
                   width: 0.2.sw * 7,
-                  child:  RefreshIndicator(
+                  child: RefreshIndicator(
                     color: Colors.orange,
                     backgroundColor: Colors.white,
                     onRefresh: () async {
                       print('refresh');
                       await LoadsCubit.get(context).resetPage();
                       print("page is " + '${LoadsCubit.get(context).page}');
-                      await LoadsCubit.get(context)
-                          .getLoad(pag: LoadsCubit.get(context).page, isFilter: false);
+                      await LoadsCubit.get(context).getLoad(
+                          pag: LoadsCubit.get(context).page, isFilter: false);
                     },
                     child: BlocConsumer<LoadsCubit, AddLoadStates>(
                       builder: (context, state) {
@@ -124,7 +124,7 @@ class Body extends StatelessWidget {
                                                     : Colors.grey[400],
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Container(
                                           height: 24,
                                           width: 24,
@@ -138,11 +138,11 @@ class Body extends StatelessWidget {
                                             LoadsCubit.get(context)
                                                 .page
                                                 .toString(),
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: const TextStyle(
+                                                color: Colors.white),
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         InkWell(
                                           onTap: () {
                                             int page =
@@ -207,7 +207,6 @@ class Body extends StatelessWidget {
                                               fontWeight: FontWeight.w500,
                                             ),
                                             CustomText(
-//                                height: 20.h,o
                                                 width: 0.2.sw,
                                                 text: state
                                                         .loadList[index]
@@ -218,7 +217,6 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
-//                                  height: 20.h,
                                                 width: 0.2.sw,
                                                 text: state.loadList[index]
                                                             .originState ==
@@ -244,7 +242,6 @@ class Body extends StatelessWidget {
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
                                                 width: 0.2.sw,
-//                                  height: 20.h,
                                                 text: state.loadList[index]
                                                             .destinationState ==
                                                         null
@@ -257,20 +254,22 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
-//                                  height: 30.h,
                                                 width: 0.2.sw,
                                                 text: state.loadList[index]
                                                     .equipmentTypes2!
-                                                    .toString().replaceAll("[", "").replaceAll("]", ""),
+                                                    .toString()
+                                                    .replaceAll("[", "")
+                                                    .replaceAll("]", ""),
                                                 align: TextAlign.center,
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
                                                 width: 0.2.sw,
-//                                  height: 20.h,
                                                 text: state.loadList[index]
                                                     .vehicleSizes2!
-                                                    .toString().replaceAll("[", "").replaceAll("]", ""),
+                                                    .toString()
+                                                    .replaceAll("[", "")
+                                                    .replaceAll("]", ""),
                                                 align: TextAlign.end,
                                                 color: Colors.green,
                                                 fontSize: 12.sp,
@@ -335,7 +334,7 @@ class Body extends StatelessWidget {
                                                     : Colors.grey[400],
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Container(
                                           height: 24,
                                           width: 24,
@@ -349,11 +348,11 @@ class Body extends StatelessWidget {
                                             LoadsCubit.get(context)
                                                 .page
                                                 .toString(),
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: const TextStyle(
+                                                color: Colors.white),
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         InkWell(
                                           onTap: () {
                                             int page =
@@ -416,7 +415,6 @@ class Body extends StatelessWidget {
                                               fontWeight: FontWeight.w500,
                                             ),
                                             CustomText(
-//                                height: 20.h,o
                                                 width: 0.2.sw,
                                                 text: state
                                                         .loadList[index]
@@ -427,7 +425,6 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
-//                                  height: 20.h,
                                                 width: 0.2.sw,
                                                 text: state.loadList[index]
                                                             .originState ==
@@ -453,7 +450,6 @@ class Body extends StatelessWidget {
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
                                                 width: 0.2.sw,
-//                                  height: 20.h,
                                                 text: state.loadList[index]
                                                             .destinationState ==
                                                         null
@@ -466,7 +462,6 @@ class Body extends StatelessWidget {
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
-//                                  height: 30.h,
                                                 width: 0.2.sw,
                                                 text: state
                                                         .loadList[index]
@@ -475,19 +470,22 @@ class Body extends StatelessWidget {
                                                     ? 'other'
                                                     : state.loadList[index]
                                                         .equipmentTypes2!
-                                                        .toString().replaceAll("[", "").replaceAll("]", ""),
+                                                        .toString()
+                                                        .replaceAll("[", "")
+                                                        .replaceAll("]", ""),
                                                 align: TextAlign.center,
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500),
                                             CustomText(
                                                 width: 0.2.sw,
-//                                  height: 20.h,
                                                 text: state.loadList[index]
                                                         .vehicleSizes2!.isEmpty
                                                     ? 'other'
                                                     : state.loadList[index]
                                                         .vehicleSizes2!
-                                                        .toString().replaceAll("[", "").replaceAll("]", ""),
+                                                        .toString()
+                                                        .replaceAll("[", "")
+                                                        .replaceAll("]", ""),
                                                 align: TextAlign.end,
                                                 color: Colors.green,
                                                 fontSize: 12.sp,
@@ -504,7 +502,6 @@ class Body extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: 6,
                               itemBuilder: (context, index) {
-
                                 return Container(
                                   color: index.isEven
                                       ? Colors.grey[300]
@@ -618,7 +615,6 @@ class Body extends StatelessWidget {
                                             fontWeight: FontWeight.w500,
                                           ),
                                           CustomText(
-//                                height: 20.h,o
                                               width: 0.2.sw,
                                               text: LoadsCubit.get(context)
                                                           .loadList[index]
@@ -636,7 +632,6 @@ class Body extends StatelessWidget {
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
-//                                  height: 20.h,
                                               width: 0.2.sw,
                                               text: LoadsCubit.get(context)
                                                           .loadList[index]
@@ -668,7 +663,6 @@ class Body extends StatelessWidget {
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
-//                                  height: 20.h,
                                               text: LoadsCubit.get(context)
                                                           .loadList[index]
                                                           .destinationState ==
@@ -683,28 +677,29 @@ class Body extends StatelessWidget {
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
-//                                  height: 30.h,
                                               width: 0.2.sw,
                                               text: LoadsCubit.get(context)
-                                                  .loadList[index]
-                                                  .equipmentTypes !=
-                                                  null &&
-                                                  LoadsCubit.get(context)
+                                                              .loadList[index]
+                                                              .equipmentTypes !=
+                                                          null &&
+                                                      LoadsCubit.get(context)
+                                                          .loadList[index]
+                                                          .equipmentTypes!
+                                                          .isNotEmpty
+                                                  ? LoadsCubit.get(context)
                                                       .loadList[index]
                                                       .equipmentTypes!
-                                                      .isNotEmpty
-                                                  ? LoadsCubit.get(context)
-                                                  .loadList[index]
-                                                  .equipmentTypes!
-                                                  .first
-                                                  .title.toString().replaceAll("[", "").replaceAll("]", "")
+                                                      .first
+                                                      .title
+                                                      .toString()
+                                                      .replaceAll("[", "")
+                                                      .replaceAll("]", "")
                                                   : 'other',
                                               align: TextAlign.end,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500),
                                           CustomText(
                                               width: 0.2.sw,
-//                                  height: 20.h,
                                               text: LoadsCubit.get(context)
                                                               .loadList[index]
                                                               .vehicleSizes !=
@@ -717,7 +712,10 @@ class Body extends StatelessWidget {
                                                       .loadList[index]
                                                       .vehicleSizes!
                                                       .first
-                                                      .title.toString().replaceAll("[", "").replaceAll("]", "")
+                                                      .title
+                                                      .toString()
+                                                      .replaceAll("[", "")
+                                                      .replaceAll("]", "")
                                                   : 'other',
                                               align: TextAlign.end,
                                               color: Colors.green,

@@ -10,6 +10,4 @@ abstract class AppImages {
   static const String shoppingCart = imagesPath + 'Shopping_Cart_01.svg';
   static const String usersGroup = imagesPath + 'Users_Group.svg';
   static const String logo = imagesPath + 'logo.png';
-
-
 }

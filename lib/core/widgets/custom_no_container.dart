@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../widgets/widgets/custom_text.dart';
+
 class CustomNoContainer extends StatelessWidget {
   String? text;
   bool isUpgradeMember;
-  bool isSubscriptionPage=false;
-  CustomNoContainer({ required this.text,this.isUpgradeMember=false,isSubscriptionPage=false});
+  bool isSubscriptionPage = false;
+  CustomNoContainer(
+      {super.key, required this.text,
+      this.isUpgradeMember = false,
+      isSubscriptionPage = false});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      height:135.h ,
+    return Container(
+      height: 135.h,
       width: 1.sw,
       decoration: BoxDecoration(
           color: const Color.fromRGBO(253, 197, 47, 0.3),
@@ -21,8 +25,9 @@ class CustomNoContainer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: CustomText(
             align: TextAlign.center,
-            text:isUpgradeMember?"** You do not have a valid subscription plan ${isSubscriptionPage?'':'to post a $text detail'}. Please click below to subscribe.":
-            'There is no $text uploaded by you.',
+            text: isUpgradeMember
+                ? "** You do not have a valid subscription plan ${isSubscriptionPage ? '' : 'to post a $text detail'}. Please click below to subscribe."
+                : 'There is no $text uploaded by you.',
             fontSize: 16.sp,
             textHeight: 1.5,
             fontWeight: FontWeight.w500,

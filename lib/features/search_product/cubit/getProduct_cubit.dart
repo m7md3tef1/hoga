@@ -65,7 +65,6 @@ class ProductsCubit extends Cubit<AddProductStates> {
 
   getProduct({self, val, page}) {
     emit(AddProductLoading());
-    //myProductList=[];
     myVehiclesLoading = true;
     print('%%%%%%%%%%%%% $page');
     connectivity.checkConnectivity().then((value) async {
@@ -86,8 +85,9 @@ class ProductsCubit extends Cubit<AddProductStates> {
                       print(myProductList.length),
                     }
                   else
-                    {productList = value, emit(GetProductsSuccess(value)),
-
+                    {
+                      productList = value,
+                      emit(GetProductsSuccess(value)),
                       print('Get My Product Response'),
                       print(productList.length),
                     }
@@ -140,8 +140,8 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   addProductCubit({context, GetProductModel? productModel}) async {
-    print('###################################################### ${productModel!.toJson()}');
-
+    print(
+        '###################################################### ${productModel!.toJson()}');
 
     emit(AddProductLoading());
     String fileName = image != null ? image!.path.split('/').last : '';
@@ -202,10 +202,9 @@ class ProductsCubit extends Cubit<AddProductStates> {
     print('img64' + img64!);
   }
 
-
   addProductCubitTest({context}) {
     testLoading = true;
-    isAllowed=false;
+    isAllowed = false;
     emit(CheckAddProductLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -216,99 +215,94 @@ class ProductsCubit extends Cubit<AddProductStates> {
       } else {
         ProductRepo.addProductTest(context: context)
             .then((value) => {
-          print('then'),
-          testLoading = false,
-          print(value['record']['subscription_details']['total_products_remain']),
-          if(value['record']['subscription_details']['total_products_remain']==null||
-              value['record']['subscription_details']['total_products_remain']==0){
-            isAllowed=false,
-            emit(AddTestSuccess()),
-
-          }else{
-            print("addVehicleCubitTest"),
-            isAllowed=true,
-            emit(AddTestSuccess()),
-
-          }
-
-        })
+                  print('then'),
+                  testLoading = false,
+                  print(value['record']['subscription_details']
+                      ['total_products_remain']),
+                  if (value['record']['subscription_details']
+                              ['total_products_remain'] ==
+                          null ||
+                      value['record']['subscription_details']
+                              ['total_products_remain'] ==
+                          0)
+                    {
+                      isAllowed = false,
+                      emit(AddTestSuccess()),
+                    }
+                  else
+                    {
+                      print("addVehicleCubitTest"),
+                      isAllowed = true,
+                      emit(AddTestSuccess()),
+                    }
+                })
             .catchError((error) => {
-          if(error.toString().contains('401')){
-            unAuthProblem=true
-          },
-          print('erorr >>>>>>>>$error'),
-          print(error),
-          isAllowed=false,
-          testLoading = false,
-          emit(AddTestFailed(error.toString())),
-          print('Add Vehicle Test Failed'),
-          showToast(msg: error.toString(), state: ToastedStates.ERROR),
-
-        });
-
+                  if (error.toString().contains('401')) {unAuthProblem = true},
+                  print('erorr >>>>>>>>$error'),
+                  print(error),
+                  isAllowed = false,
+                  testLoading = false,
+                  emit(AddTestFailed(error.toString())),
+                  print('Add Vehicle Test Failed'),
+                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
+                });
       }
     });
   }
 
-
-  editProductCubit(GetProductModel? productModel)async {
-    print('###################################################### ${productModel!.toJson()}');
+  editProductCubit(GetProductModel? productModel) async {
+    print(
+        '###################################################### ${productModel!.toJson()}');
     print('###################################################### ${image}');
-
 
     String fileName = image != null ? image!.path.split('/').last : '';
     FormData formData;
-    image != null?
-     formData = FormData.fromMap({
-    "product_image":
-     await MultipartFile.fromFile(image!.path, filename: fileName)
-        ,
-    "buy_or_sell": productModel.buyOrSell,
-    "product_name": productModel.productName,
-    "product_type": productModel.productTypeId,
-    "country": productModel.countryPost,
-    "city": productModel.cityPost,
-    "state": productModel.statePost,
-    "price": productModel.priceInt,
-    "description": productModel.description,
-       "id": productModel.id
-
-     }):
-     formData = FormData.fromMap({
-    "buy_or_sell": productModel.buyOrSell,
-    "product_name": productModel.productName,
-    "product_type": productModel.productTypeId,
-    "country": productModel.countryPost,
-    "city": productModel.cityPost,
-    "state": productModel.statePost,
-    "price": productModel.priceInt,
-      "id": productModel.id,
-
-      "description": productModel.description
-    });
+    image != null
+        ? formData = FormData.fromMap({
+            "product_image":
+                await MultipartFile.fromFile(image!.path, filename: fileName),
+            "buy_or_sell": productModel.buyOrSell,
+            "product_name": productModel.productName,
+            "product_type": productModel.productTypeId,
+            "country": productModel.countryPost,
+            "city": productModel.cityPost,
+            "state": productModel.statePost,
+            "price": productModel.priceInt,
+            "description": productModel.description,
+            "id": productModel.id
+          })
+        : formData = FormData.fromMap({
+            "buy_or_sell": productModel.buyOrSell,
+            "product_name": productModel.productName,
+            "product_type": productModel.productTypeId,
+            "country": productModel.countryPost,
+            "city": productModel.cityPost,
+            "state": productModel.statePost,
+            "price": productModel.priceInt,
+            "id": productModel.id,
+            "description": productModel.description
+          });
     String token = await CacheHelper.getString(SharedKeys.token);
     return await Api()
         .postHttp(url: "products/update", authToken: token, data: formData)
-    .then((value) => {
-                  print('Edit Vehicle Success'),
-                  print(value),
-                  emit(EditSuccess()),
-                  showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
-                  priceController.clear(),
-                  descController.clear(),
-                  nameController.clear(),
-                  img64 = '',
-                  image = null,
-                })
-            .catchError((error, stackTrace) => {
-                  emit(EditFailed()),
-                  print(error),
-                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
-                  print('Edit Vehicle Failed'),
-                });
-      }
-
-
+        .then((value) => {
+              print('Edit Vehicle Success'),
+              print(value),
+              emit(EditSuccess()),
+              showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+              priceController.clear(),
+              descController.clear(),
+              nameController.clear(),
+              img64 = '',
+              image = null,
+            })
+        .catchError((error, stackTrace) => {
+              emit(EditFailed()),
+              print(error),
+              showToast(msg: error.toString(), state: ToastedStates.ERROR),
+              print('Edit Vehicle Failed'),
+            });
+  }
 
   deleteProductCubit(productId) {
     connectivity.checkConnectivity().then((value) async {

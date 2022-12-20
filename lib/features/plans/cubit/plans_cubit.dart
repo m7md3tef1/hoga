@@ -28,9 +28,7 @@ class PlansCubit extends Cubit<PlansStates> {
                   print("this value--------Plans"),
                   print(value),
                   emit(GetPlansSuccess(value)),
-          //      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
-
-        })
+                })
             .onError((error, stackTrace) =>
                 {emit(GetPlansFailed(error.toString())), print(error)});
       }
@@ -51,35 +49,9 @@ class PlansCubit extends Cubit<PlansStates> {
             .getHttp(url: 'profile/current-subscription', authToken: token);
         print(response);
         print('==============================');
-
-//        if (response != null &&
-//            response['record'] != null &&
-//            response['record']['package_details']['name'] != null) {
-//          isFreeTrial = false;
-//          emit(NotFreeTrial());
-//        if (response != null &&
-//            response['record'] != null &&
-//            response['record']['package_details']['name'] != null) {
-//          isFreeTrial = false;
-//          emit(NotFreeTrial());
-        }
-        // response.then((value) => {
-        //   print(value),
-        //   print('kkkkkkkkkkkkkkkkkkkkkkkkk222222'),
-        //
-        //
-        // }).onError((error, stackTrace) => {
-        //   emit(GetPlansFailed(error.toString())),
-        //   print('errrrrrrrrrrrrrrrrr'),
-        //
-        //   print(error)
-        //
-        // });
-     // }
-    //  }
+      }
     });
   }
-
 
   subscribePlan(id) {
     emit(SubscribeLoading());
@@ -89,20 +61,18 @@ class PlansCubit extends Cubit<PlansStates> {
       } else {
         PlansRepo.subscribePlan(id)
             .then((value) => {
-          print('..................................'),
-          print("this value--------SUBSCRIBEPlans"),
-          print(value),
-          emit(SubscribeSuccess()),
-          showToast(msg: 'Done', state: ToastedStates.SUCCESS),
-
-        })
-            .catchError((error, stackTrace) =>
-        {emit(SubscribeFailed()),
-          showToast(msg: error.toString(), state: ToastedStates.ERROR),
-
-          print(error)});
+                  print('..................................'),
+                  print("this value--------SUBSCRIBEPlans"),
+                  print(value),
+                  emit(SubscribeSuccess()),
+                  showToast(msg: 'Done', state: ToastedStates.SUCCESS),
+                })
+            .catchError((error, stackTrace) => {
+                  emit(SubscribeFailed()),
+                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
+                  print(error)
+                });
       }
     });
   }
-
 }

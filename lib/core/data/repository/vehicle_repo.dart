@@ -4,13 +4,6 @@ import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/core/master_cubit/getDataForm_cubit.dart';
 import '../../../features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import '../api/api.dart';
-import '../models/Packages.dart';
-import '../models/Packages_detail.dart';
-import '../models/Upload_adv.dart';
-import '../models/jobs/GetJop_model.dart';
-import '../models/jobs/get_jop.dart';
-import '../models/loads/GetLoads_model.dart';
-import '../models/product/GetProduct_model.dart';
 import '../models/subscribtion/Subscribtion_model.dart';
 import '../models/vehicle/Addvehicle_model.dart';
 import '../models/vehicle/user.dart';
@@ -29,12 +22,13 @@ class VehicleRepo {
   }
 
   static Future<List<SubscriptionModel>> getSubscription(url) async {
-    String token=await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url,authToken: token);
+    String token = await CacheHelper.getString(SharedKeys.token);
+    var response = await Api().getHttp(url: url, authToken: token);
 
     List<SubscriptionModel> attributesList = [];
     for (int i = 0; i < response['records'].length; i++) {
-      SubscriptionModel blogModel = SubscriptionModel.fromJson(response['records'][i]);
+      SubscriptionModel blogModel =
+          SubscriptionModel.fromJson(response['records'][i]);
       attributesList.add(blogModel);
     }
     return attributesList;
@@ -55,45 +49,44 @@ class VehicleRepo {
     return getProfileList;
   }
 
-  static Future<List<Vehicles>> getVehicles(context,self,
+  static Future<List<Vehicles>> getVehicles(context, self,
       {val,
-        page,
-        equipmentSize,
-        attributes,
-        vehicleSize,
-        vehicleType,
-        isFilter}) async {
+      page,
+      equipmentSize,
+      attributes,
+      vehicleSize,
+      vehicleType,
+      isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
 
     var response;
 
     isFilter == true
         ? response =
-    await Api().getHttp(url: 'vehicles', authToken: token, data: {
-      "per_page": 10,
-      "paginate":1 ,
-      "page":page,
-      "equipment_types": equipmentSize,
-      "vehicle_attributes": attributes,
-      "vehicle_sizes": vehicleSize,
-      "vehicle_types": vehicleType,
-      "origin_country_id": DataFormCubit.get(context).countryOriginID,
-      "origin_state_id": DataFormCubit.get(context).stateOriginID,
-      "origin_city_id": DataFormCubit.get(context).cityOriginID,
-      "destination_country_id":
-      DataFormCubit.get(context).countryDestinationID,
-      "destination_state_id":
-      DataFormCubit.get(context).stateDestinationID,
-      "destination_city_id": DataFormCubit.get(context).cityDestinationID,
-    })
-        : response = await Api().getHttp(
-            url: 'vehicles',
-            authToken: token,
-            self: self,
-            data: {"search": val,   "per_page": 10,
-              "paginate":1 ,
-              "page":page,
-            });
+            await Api().getHttp(url: 'vehicles', authToken: token, data: {
+            "per_page": 10,
+            "paginate": 1,
+            "page": page,
+            "equipment_types": equipmentSize,
+            "vehicle_attributes": attributes,
+            "vehicle_sizes": vehicleSize,
+            "vehicle_types": vehicleType,
+            "origin_country_id": DataFormCubit.get(context).countryOriginID,
+            "origin_state_id": DataFormCubit.get(context).stateOriginID,
+            "origin_city_id": DataFormCubit.get(context).cityOriginID,
+            "destination_country_id":
+                DataFormCubit.get(context).countryDestinationID,
+            "destination_state_id":
+                DataFormCubit.get(context).stateDestinationID,
+            "destination_city_id": DataFormCubit.get(context).cityDestinationID,
+          })
+        : response = await Api()
+            .getHttp(url: 'vehicles', authToken: token, self: self, data: {
+            "search": val,
+            "per_page": 10,
+            "paginate": 1,
+            "page": page,
+          });
     print(response['records'].length);
     print("length");
 
@@ -105,12 +98,11 @@ class VehicleRepo {
       print(response['records'][i]['user'].runtimeType);
       print(response['records'][i]['user'].toString());
 
-
       Vehicles blogModel;
       blogModel = Vehicles.fromJson(response['records'][i]);
-      if(response['records'][i]['user'].toString()=='[]'){
+      if (response['records'][i]['user'].toString() == '[]') {
         print('nullllllll');
-        blogModel.user=null;
+        blogModel.user = null;
       }
       for (var element in blogModel.equipmentTypes!) {
         blogModel.equipmentTypes2!.add(element.title!);
@@ -139,9 +131,6 @@ class VehicleRepo {
     return blogsList;
   }
 
-
-
-
   static deleteVehicle(vehicleId) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     return await Api().getHttp(
@@ -157,10 +146,9 @@ class VehicleRepo {
     print("vehicleType" + VehiclesCubit.get(context).vehcleType.toString());
     print("countryOriginID" +
         DataFormCubit.get(context).countryOriginID.toString());
-    print("stateOriginID" +
-        DataFormCubit.get(context).stateOriginID.toString());
-    print("cityOriginID" +
-        DataFormCubit.get(context).cityOriginID.toString());
+    print(
+        "stateOriginID" + DataFormCubit.get(context).stateOriginID.toString());
+    print("cityOriginID" + DataFormCubit.get(context).cityOriginID.toString());
     print("countryDestinationID" +
         DataFormCubit.get(context).countryDestinationID.toString());
     print("stateDestinationID" +
@@ -223,10 +211,9 @@ class VehicleRepo {
     print("vehicleType" + VehiclesCubit.get(context).vehcleType.toString());
     print("countryOriginID" +
         DataFormCubit.get(context).countryOriginID.toString());
-    print("stateOriginID" +
-        DataFormCubit.get(context).stateOriginID.toString());
-    print("cityOriginID" +
-        DataFormCubit.get(context).cityOriginID.toString());
+    print(
+        "stateOriginID" + DataFormCubit.get(context).stateOriginID.toString());
+    print("cityOriginID" + DataFormCubit.get(context).cityOriginID.toString());
     print("countryDestinationID" +
         DataFormCubit.get(context).countryDestinationID.toString());
     print("stateDestinationID" +
@@ -269,26 +256,25 @@ class VehicleRepo {
           "origin_state": DataFormCubit.get(context).stateOriginID,
           "origin_city": DataFormCubit.get(context).cityOriginID,
           "destination_country":
-          DataFormCubit.get(context).countryDestinationID,
+              DataFormCubit.get(context).countryDestinationID,
           "destination_state": DataFormCubit.get(context).stateDestinationID,
           "destination_city": DataFormCubit.get(context).cityDestinationID,
           "weight": VehiclesCubit.get(context).weightController.text,
           "instructions":
-          VehiclesCubit.get(context).instructionsController.text,
+              VehiclesCubit.get(context).instructionsController.text,
         });
   }
 
   static addVehicleTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    print( token);
-    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
+    print(token);
+    return await Api()
+        .getHttp(url: "profile/current-subscription", authToken: token);
   }
 
   static cancel() async {
     String token = await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(
-        url: "profile/current-subscription/cancel", authToken: token);
+    return await Api()
+        .postHttp(url: "profile/current-subscription/cancel", authToken: token);
   }
-
-
 }

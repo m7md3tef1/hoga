@@ -17,24 +17,23 @@ class Plans extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
-      listener: (context,state){},
-      builder:(context,state){
-        print('cancelled -------');
-        print(UpdateProfileCubit.get(context).subscriptionData.subscriptionDetails!.subscriptionCancelled);
-        return
-
-          Column(
+        listener: (context, state) {},
+        builder: (context, state) {
+          print('cancelled -------');
+          print(UpdateProfileCubit.get(context)
+              .subscriptionData
+              .subscriptionDetails!
+              .subscriptionCancelled);
+          return Column(
             children: [
               SizedBox(
                 height: 18.h,
               ),
               CustomCardTitle(
-                text: '${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found'
-                    :UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName}'
-                    ' ${UpdateProfileCubit.get(context).subscriptionData.userDetails==null?'Not Found':
-                UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName} - '
-                    '${UpdateProfileCubit.get(context).subscriptionData.packageDetails==null?'Not Found':
-                UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name}',
+                text:
+                    '${UpdateProfileCubit.get(context).subscriptionData.userDetails == null ? 'Not Found' : UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName}'
+                    ' ${UpdateProfileCubit.get(context).subscriptionData.userDetails == null ? 'Not Found' : UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName} - '
+                    '${UpdateProfileCubit.get(context).subscriptionData.packageDetails == null ? 'Not Found' : UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name}',
               ),
               SizedBox(
                 height: 8.h,
@@ -52,14 +51,14 @@ class Plans extends StatelessWidget {
                       ),
                       CustomText(
                         text: UpdateProfileCubit.get(context)
-                            .subscriptionData
-                            .subscriptionDetails ==
-                            null
+                                    .subscriptionData
+                                    .subscriptionDetails ==
+                                null
                             ? 'Not Found'
                             : UpdateProfileCubit.get(context)
-                            .subscriptionData
-                            .subscriptionDetails!
-                            .subscriptionTakenOn,
+                                .subscriptionData
+                                .subscriptionDetails!
+                                .subscriptionTakenOn,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF777777),
@@ -75,21 +74,21 @@ class Plans extends StatelessWidget {
                   Column(
                     children: [
                       CustomText(
-                        text:'Next Invoice',
+                        text: 'Next Invoice',
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF777777),
                       ),
                       CustomText(
                         text: UpdateProfileCubit.get(context)
-                            .subscriptionData
-                            .subscriptionDetails ==
-                            null
+                                    .subscriptionData
+                                    .subscriptionDetails ==
+                                null
                             ? 'Not Found'
                             : UpdateProfileCubit.get(context)
-                            .subscriptionData
-                            .subscriptionDetails!
-                            .subscriptionValidTill,
+                                .subscriptionData
+                                .subscriptionDetails!
+                                .subscriptionValidTill,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF777777),
@@ -101,102 +100,107 @@ class Plans extends StatelessWidget {
               SizedBox(
                 height: 25.h,
               ),
-              state is CancelSuccess ||UpdateProfileCubit.get(context).subscriptionData.subscriptionDetails!.subscriptionCancelled==1 ?
-                Container(
-                  width: 1.sw,
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(253, 197, 47, 0.3),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 13.h,
+              state is CancelSuccess ||
+                      UpdateProfileCubit.get(context)
+                              .subscriptionData
+                              .subscriptionDetails!
+                              .subscriptionCancelled ==
+                          1
+                  ? Container(
+                      width: 1.sw,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(253, 197, 47, 0.3),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      Container(
-                        child: Center(
-                          child: CustomText(
-                            align: TextAlign.center,
-                            text: 'You have cancelled your membership. Please subscribe to explore more',
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF664D03),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 13.h,
                           ),
-                        ),
+                          Container(
+                            child: Center(
+                              child: CustomText(
+                                align: TextAlign.center,
+                                text:
+                                    'You have cancelled your membership. Please subscribe to explore more',
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF664D03),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 12.w, right: 16.w),
+                            child: CustomButton(
+                                function: () {
+                                  MagicRouter.navigateTo(PlanView());
+                                },
+                                text: 'SUBSCRIPTION PLANS"',
+                                color: const Color(0xFFFDC52F)),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 12.h,
+                    )
+                  : Container(
+                      width: 1.sw,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(253, 197, 47, 0.3),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 12.w, right: 16.w),
-                        child: CustomButton(
-                            function: (){
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 13.h,
+                          ),
+                          Container(
+                            child: Center(
+                              child: CustomText(
+                                align: TextAlign.center,
+                                text: UpdateProfileCubit.get(context)
+                                            .subscriptionData
+                                            .packageDetails ==
+                                        null
+                                    ? ''
+                                    : 'Upgrage to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free') ? 'Bronze' : UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze') ? 'Silver' : 'Gold'}"Plan" and\n enjoy more facilities.',
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF664D03),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          InkWell(
+                            onTap: () {
                               MagicRouter.navigateTo(PlanView());
                             },
-                            text: 'SUBSCRIPTION PLANS"',
-                            color: const Color(0xFFFDC52F)),
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                    ],
-                  ),
-                ):
-
-              Container(
-                width: 1.sw,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(253, 197, 47, 0.3),
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 13.h,
-                    ),
-                    Container(
-                      child: Center(
-                        child: CustomText(
-                          align: TextAlign.center,
-                          text: UpdateProfileCubit.get(context).subscriptionData.packageDetails==null?
-                          '':'Upgrage to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
-                          'Bronze':UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze')?'Silver':'Gold'
-
-                          }"Plan" and\n enjoy more facilities.',
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF664D03),
-                        ),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12.w, right: 16.w),
+                              child: CustomButton(
+                                  text: UpdateProfileCubit.get(context)
+                                              .subscriptionData
+                                              .packageDetails ==
+                                          null
+                                      ? ''
+                                      : 'Upgrade to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free') ? 'Bronze' : UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze') ? 'Silver' : 'Gold'}" Plan"',
+                                  color: const Color(0xFFFDC52F)),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        MagicRouter.navigateTo( PlanView());
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 12.w, right: 16.w),
-                        child: CustomButton(
-                            text:UpdateProfileCubit.get(context).subscriptionData.packageDetails==null?'': 'Upgrade to ${UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('free')?
-                            'Bronze':UpdateProfileCubit.get(context).subscriptionData.packageDetails!.name!.toLowerCase().contains('bronze')?'Silver':'Gold'
-
-                            }" Plan"',
-                            color: const Color(0xFFFDC52F)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                  ],
-                ),
-              ),
             ],
           );
-      }
-
-
-    );
+        });
   }
 }

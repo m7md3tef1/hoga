@@ -15,7 +15,6 @@ import 'package:hoga_load/features/plans/cubit/plans_cubit.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/splash/splash_view.dart';
 import 'package:provider/provider.dart';
-
 import 'core/bloc_observer.dart';
 import 'core/master_cubit/getDataForm_cubit.dart';
 import 'features/blogs/bloc/blog_cubit.dart';
@@ -46,18 +45,15 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => HomeCubit()..isSubscription()),
         BlocProvider(create: (_) => PlansCubit()..getPlansCubit()
-          //  ..checkPlansCubit()
-        ),
+            //  ..checkPlansCubit()
+            ),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(
             create: (_) => VehiclesCubit()
               ..getAttributesCubit()
               ..getEquipmentsCubit()
               ..getVehicleSizesCubit()
-              ..getVehicleTypesCubit()
-          //   ..getVehicleCubit()
-
-        ),
+              ..getVehicleTypesCubit()),
         BlocProvider(
             create: (_) => DataFormCubit()
               ..getCountry()
@@ -70,17 +66,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => LoadsCubit()),
         BlocProvider(create: (_) => ProductsCubit()),
         BlocProvider(create: (_) => JopCubit()),
-        BlocProvider(create: (_) => PackageCubit()..getPackageCubit()..advertisementCubit()),
+        BlocProvider(
+            create: (_) => PackageCubit()
+              ..getPackageCubit()
+              ..advertisementCubit()),
         BlocProvider(
             create: (_) => AddCardCubit()
-              ..getCard()..profileData
-        ),
+              ..getCard()
+              ..profileData),
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()
-            //..updateProfile
-            //..getVehicleTypesCubit()
-            //..getSubscriptionData()
               ..getUserProfileData()
               ..profileData),
         BlocProvider(

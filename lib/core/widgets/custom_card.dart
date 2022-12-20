@@ -25,7 +25,7 @@ class CustomCard extends StatelessWidget {
           padding: EdgeInsetsDirectional.only(
               start: paddingInStart ?? 12.sp,
               end: paddingInEnd ?? 14.sp,
-              bottom: bottomPadding ??15.sp),
+              bottom: bottomPadding ?? 15.sp),
           child: widget,
         ),
       ),

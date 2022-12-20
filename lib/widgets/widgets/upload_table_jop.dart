@@ -4,9 +4,15 @@ import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/dialoges/delete_dialoge.dart';
 
 import 'custom_text.dart';
+
 class UploadedTableDataRow extends StatelessWidget {
-  UploadedTableDataRow({super.key,required this.deleteFunc,
-    required this.editFunc, this.tableWeight,required this.origin,required this.tableNumber});
+  UploadedTableDataRow(
+      {super.key,
+      required this.deleteFunc,
+      required this.editFunc,
+      this.tableWeight,
+      required this.origin,
+      required this.tableNumber});
   String? tableNumber;
   String? tableWeight;
   String? origin;
@@ -15,8 +21,8 @@ class UploadedTableDataRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Padding(
-      padding:  const EdgeInsets.symmetric(vertical: 5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -52,9 +58,13 @@ class UploadedTableDataRow extends StatelessWidget {
             child: Row(
               children: [
                 InkWell(
-                  onTap:(){
-                    showDialog(context: context, builder:(context)=> DeleteEditDialog(function: editFunc,btnText: 'Edit',));
-
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => DeleteEditDialog(
+                              function: editFunc,
+                              btnText: 'Edit',
+                            ));
                   },
                   child: CustomText(
                     text: 'Edit',
@@ -64,10 +74,17 @@ class UploadedTableDataRow extends StatelessWidget {
                     color: ColorManager.primaryColor,
                   ),
                 ),
-                SizedBox(width: 5.sp,),
+                SizedBox(
+                  width: 5.sp,
+                ),
                 InkWell(
-                  onTap:(){
-                    showDialog(context: context, builder:(context)=> DeleteEditDialog(function: deleteFunc,btnText: 'Delete',));
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => DeleteEditDialog(
+                              function: deleteFunc,
+                              btnText: 'Delete',
+                            ));
                   },
                   child: CustomText(
                     text: 'Delete',
@@ -77,11 +94,9 @@ class UploadedTableDataRow extends StatelessWidget {
                     color: Colors.red,
                   ),
                 ),
-
               ],
             ),
           ),
-
         ],
       ),
     );

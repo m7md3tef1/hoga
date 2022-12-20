@@ -22,19 +22,16 @@ class CustomContainerJop extends StatelessWidget {
     );
     await launchUrl(launchUri);
   }
-  Future<void> _launchURl(email)async{
-    final Uri params =Uri(
-     scheme: 'mailto',
-      path: email
-    );
-    Uri url=params;
-    if(await canLaunchUrl(url)){
+
+  Future<void> _launchURl(email) async {
+    final Uri params = Uri(scheme: 'mailto', path: email);
+    Uri url = params;
+    if (await canLaunchUrl(url)) {
       await launchUrl(url);
       print(url);
-    }else{
+    } else {
       print('could mot launch $url');
     }
-
   }
 
   @override
@@ -174,79 +171,83 @@ class CustomContainerJop extends StatelessWidget {
                         ],
                       ),
                     ),
-                    !CacheHelper.getBool(SharedKeys.isLogin)?
-                    const LoginDetails():
-                    jop.user==null?const UpgradeDetails():
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.email_outlined,
-                                  color: ColorManager.primaryColor,
-                                  size: 20.h,
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: (){
-                                      _launchURl(jop.user!.email!);
-                                    },
-                                    child: CustomText(
-                                      text: jop.user == null
-                                          ? 'other'
-                                          : jop.user!.email,
-                                      align: TextAlign.left,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.grey,
+                    !CacheHelper.getBool(SharedKeys.isLogin)
+                        ? const LoginDetails()
+                        : jop.user == null
+                            ? const UpgradeDetails()
+                            : Padding(
+                                padding: const EdgeInsets.only(bottom: 30),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.email_outlined,
+                                            color: ColorManager.primaryColor,
+                                            size: 20.h,
+                                          ),
+                                          const SizedBox(
+                                            width: 6,
+                                          ),
+                                          Expanded(
+                                            child: InkWell(
+                                              onTap: () {
+                                                _launchURl(jop.user!.email!);
+                                              },
+                                              child: CustomText(
+                                                text: jop.user == null
+                                                    ? 'other'
+                                                    : jop.user!.email,
+                                                align: TextAlign.left,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 6,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.phone_callback,
+                                          color: ColorManager.primaryColor,
+                                          size: 20.h,
+                                        ),
+                                        const SizedBox(
+                                          width: 6,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            _makePhoneCall(
+                                                    jop.user!.contactNumber!)
+                                                .toString();
+                                          },
+                                          child: CustomText(
+                                            text: jop.user == null
+                                                ? 'other'
+                                                : jop.user!.contactNumber!
+                                                    .toString(),
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 6,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.phone_callback,
-                                color: ColorManager.primaryColor,
-                                size: 20.h,
-                              ),
-                              const SizedBox(
-                                width: 6,
-                              ),
-                              InkWell(
-                                onTap: (){
-                                  _makePhoneCall(jop.user!.contactNumber!).toString();
-                                },
-                                child: CustomText(
-                                  text: jop.user == null
-                                      ? 'other'
-                                      : jop.user!.contactNumber!.toString(),
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 6,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
+                              )
                   ],
                 ),
               )

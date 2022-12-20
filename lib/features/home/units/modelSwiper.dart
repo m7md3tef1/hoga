@@ -24,13 +24,15 @@ List<SwiperModel> swiperList = [
   ),
   SwiperModel(
     img: 'assets/images/4.jpg',
-    text: 'I was skeptical in the beginning due to cost but Hegaload is worth EVERY penny.',
+    text:
+        'I was skeptical in the beginning due to cost but Hegaload is worth EVERY penny.',
     jop: 'Store Owner',
     nameImage: 'jena Karlis',
   ),
   SwiperModel(
     img: 'assets/images/2.jpg',
-    text: 'Hegaload is very easy to use and to find trucks that can cover loads',
+    text:
+        'Hegaload is very easy to use and to find trucks that can cover loads',
     jop: 'Manager',
     nameImage: 'Matt Brandon',
   ),

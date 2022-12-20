@@ -1,5 +1,4 @@
-part of'../view.dart';
-
+part of '../view.dart';
 
 class Contact extends StatelessWidget {
   const Contact({Key? key}) : super(key: key);
@@ -12,15 +11,14 @@ class Contact extends StatelessWidget {
           children: [
             Expanded(
               child: CustomContainer(
-                text:'232' ,
-                hint:'Happy Customers' ,
+                text: '232',
+                hint: 'Happy Customers',
                 image: AppImages.happy,
               ),
             ),
-            
             Expanded(
               child: CustomContainer(
-                text:'521' ,
+                text: '521',
                 hint: 'Vehicles',
                 image: AppImages.vehicle,
               ),
@@ -29,18 +27,16 @@ class Contact extends StatelessWidget {
         ),
         Row(
           children: [
-            
             Expanded(
               child: CustomContainer(
-                text:'1463' ,
-                hint:'Products' ,
+                text: '1463',
+                hint: 'Products',
                 image: AppImages.shoppingCart,
               ),
             ),
-            
             Expanded(
               child: CustomContainer(
-                text:'15' ,
+                text: '15',
                 hint: 'Technical Staffs',
                 image: AppImages.usersGroup,
               ),

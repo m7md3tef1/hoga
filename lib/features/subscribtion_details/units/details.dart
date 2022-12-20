@@ -34,8 +34,6 @@ class _DetailsState extends State<Details> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: name.length,
               itemBuilder: (context, index) {
-
-                //   print(UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName);
                 List detail = [
                   '${UpdateProfileCubit.get(context).subscriptionData.userDetails == null ? 'Not Found' : UpdateProfileCubit.get(context).subscriptionData.userDetails!.firstName.toString()} ${UpdateProfileCubit.get(context).subscriptionData.userDetails == null ? 'Not Found' : UpdateProfileCubit.get(context).subscriptionData.userDetails!.lastName.toString()},',
                   (UpdateProfileCubit.get(context)
@@ -91,12 +89,18 @@ class _DetailsState extends State<Details> {
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF777777),
                                   )
-                                : state is CancelSuccess ||UpdateProfileCubit.get(context).subscriptionData.subscriptionDetails!.subscriptionCancelled==1
+                                : state is CancelSuccess ||
+                                        UpdateProfileCubit.get(context)
+                                                .subscriptionData
+                                                .subscriptionDetails!
+                                                .subscriptionCancelled ==
+                                            1
                                     ? Container(
-                              height: 20.h,
-                              width: 70.w,
-                                        decoration:  BoxDecoration(
-                                          borderRadius: BorderRadius.circular(6.r),
+                                        height: 20.h,
+                                        width: 70.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(6.r),
                                             color: Colors.red),
                                         child: CustomText(
                                           align: TextAlign.center,
@@ -105,55 +109,62 @@ class _DetailsState extends State<Details> {
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white,
                                         ),
-                                      ):
-                            state is CancelLoading?
-                            const Center(child: CircularProgressIndicator(color: Colors.orange,),)
-                                    : Row(
-                                        children: [
-                                          Container(
-                                            height: 20.h,
-                                            width: 58.w,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    ColorManager.primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5.r)),
-                                            child: Center(
-                                              child: CustomText(
-                                                text: 'Active',
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color: ColorManager.whiteColor,
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-
-
-                                              setState(() {
-                                                showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        DeleteEditDialog(
-                                                          function: () async {
-                                                            await UpdateProfileCubit
-                                                                .get(context)
-                                                                .cancelSubscriptionCubit();
-                                                          },
-                                                          btnText: 'cancel',
-                                                        ));
-                                              });
-                                            },
-                                            child: CustomText(
-                                              text: '  Cancel?',
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: const Color(0xFFFDC52F),
+                                      )
+                                    : state is CancelLoading
+                                        ? const Center(
+                                            child: CircularProgressIndicator(
+                                              color: Colors.orange,
                                             ),
                                           )
-                                        ],
-                                      )
+                                        : Row(
+                                            children: [
+                                              Container(
+                                                height: 20.h,
+                                                width: 58.w,
+                                                decoration: BoxDecoration(
+                                                    color: ColorManager
+                                                        .primaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.r)),
+                                                child: Center(
+                                                  child: CustomText(
+                                                    text: 'Active',
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                    color:
+                                                        ColorManager.whiteColor,
+                                                  ),
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) =>
+                                                            DeleteEditDialog(
+                                                              function:
+                                                                  () async {
+                                                                await UpdateProfileCubit
+                                                                        .get(
+                                                                            context)
+                                                                    .cancelSubscriptionCubit();
+                                                              },
+                                                              btnText: 'cancel',
+                                                            ));
+                                                  });
+                                                },
+                                                child: CustomText(
+                                                  text: '  Cancel?',
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      const Color(0xFFFDC52F),
+                                                ),
+                                              )
+                                            ],
+                                          )
                           ],
                         ),
                       ),

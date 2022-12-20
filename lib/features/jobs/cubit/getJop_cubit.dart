@@ -115,25 +115,6 @@ class JopCubit extends Cubit<AddJopStates> {
     });
   }
 
-//  getJop() {
-//    connectivity.checkConnectivity().then((value) async {
-//      if (ConnectivityResult.none == value) {
-//        emit(NetworkFailed("Check your internet connection and try again"));
-//      } else {
-//        emit(AddJopLoading());
-//        JobsRepo.getJop2('jobs')
-//            .then((value) => {
-//                  print('..................................'),
-//                  print(value),
-//                  jopList = value,
-//                  emit(GetJopSuccess(value))
-//                })
-//            .onError((error, stackTrace) =>
-//                {emit(GetJopFailed(error.toString())), print(error)});
-//      }
-//    });
-//  }
-
   searchJop(context, val) {
     searchList.clear();
     JopCubit.get(context).jopList.forEach((i) {
@@ -210,9 +191,10 @@ class JopCubit extends Cubit<AddJopStates> {
     DataFormCubit.get(context).shiftTIme = '';
     DataFormCubit.get(context).jopTitle = '';
   }
+
   addJobCubitTest({context}) {
     testLoading = true;
-    isAllowed=false;
+    isAllowed = false;
     emit(CheckAddJobLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -223,43 +205,44 @@ class JopCubit extends Cubit<AddJopStates> {
       } else {
         JobsRepo.addJopTest(context: context)
             .then((value) => {
-          print('then'),
-          testLoading = false,
-          print(value['record']['subscription_details']['total_jobs_remain']),
-          if(value['record']['subscription_details']['total_jobs_remain']==null||
-              value['record']['subscription_details']['total_jobs_remain']==0){
-            isAllowed=false,
-            emit(AddTestSuccess()),
-
-          }else{
-            print("addVehicleCubitTest"),
-            isAllowed=true,
-            emit(AddTestSuccess()),
-
-          }
-
-        })
+                  print('then'),
+                  testLoading = false,
+                  print(value['record']['subscription_details']
+                      ['total_jobs_remain']),
+                  if (value['record']['subscription_details']
+                              ['total_jobs_remain'] ==
+                          null ||
+                      value['record']['subscription_details']
+                              ['total_jobs_remain'] ==
+                          0)
+                    {
+                      isAllowed = false,
+                      emit(AddTestSuccess()),
+                    }
+                  else
+                    {
+                      print("addVehicleCubitTest"),
+                      isAllowed = true,
+                      emit(AddTestSuccess()),
+                    }
+                })
             .catchError((error) => {
-          if(error.toString().contains('401')){
-            unAuthProblem=true
-          },
-          print('erorr >>>>>>>>$error'),
-          print(error),
-          isAllowed=false,
-          testLoading = false,
-          emit(AddTestFailed(error.toString())),
-          print('Add Vehicle Test Failed'),
-          showToast(msg: error.toString(), state: ToastedStates.ERROR),
-
-        });
-
+                  if (error.toString().contains('401')) {unAuthProblem = true},
+                  print('erorr >>>>>>>>$error'),
+                  print(error),
+                  isAllowed = false,
+                  testLoading = false,
+                  emit(AddTestFailed(error.toString())),
+                  print('Add Vehicle Test Failed'),
+                  showToast(msg: error.toString(), state: ToastedStates.ERROR),
+                });
       }
     });
   }
 
-
   addJopCubit({context, GetJopModel? productModel}) {
-    print('###################################################### ${productModel!.toJson()}');
+    print(
+        '###################################################### ${productModel!.toJson()}');
 
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -268,7 +251,7 @@ class JopCubit extends Cubit<AddJopStates> {
             msg: "Check your internet connection and try again",
             state: ToastedStates.ERROR);
       } else {
-        print('---------- ${productModel!.toJson()}');
+        print('---------- ${productModel.toJson()}');
         emit(AddJopLoading());
         JobsRepo.addJop(context: context, jopModel: productModel)
             .then((value) => {
@@ -295,16 +278,17 @@ class JopCubit extends Cubit<AddJopStates> {
     });
   }
 
-  editJopCubit(GetJopModel? jopModel,BuildContext context) {
-    print('###################################################### ${jopModel!.toJson()}');
+  editJopCubit(GetJopModel? jopModel, BuildContext context) {
+    print(
+        '###################################################### ${jopModel!.toJson()}');
 
     connectivity.checkConnectivity().then((value) async {
-     if (ConnectivityResult.none == value) {
+      if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-       emit(EditLoading());
+        emit(EditLoading());
         JobsRepo.editJop(jopModel)
-           .then((value) => {
+            .then((value) => {
                   print('Edit Jop Success'),
                   print(value),
                   emit(EditSuccess()),
@@ -314,7 +298,7 @@ class JopCubit extends Cubit<AddJopStates> {
                   salaryController.text = '',
                   titleController.text = '',
                   shiftController.text = '',
-        Navigator.pop(context)
+                  Navigator.pop(context)
                 })
             .catchError((error, stackTrace) => {
                   emit(EditFailed()),

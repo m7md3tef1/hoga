@@ -1,8 +1,8 @@
 part of '../view.dart';
 
 class _BottomBar extends StatelessWidget {
-   _BottomBar({Key? key}) : super(key: key);
- int index=0;
+  _BottomBar({Key? key}) : super(key: key);
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
@@ -10,7 +10,7 @@ class _BottomBar extends StatelessWidget {
       builder: (context, state) => BottomNavigationBar(
           currentIndex: HomeCubit.get(context).currentIndex,
           onTap: (i) {
-            index=i;
+            index = i;
             HomeCubit.get(context).changeBottom(i, context);
           },
           showUnselectedLabels: true,
@@ -21,9 +21,15 @@ class _BottomBar extends StatelessWidget {
           unselectedLabelStyle: TextStyle(
               color: Colors.grey, fontSize: 13.sp, fontWeight: FontWeight.w400),
           unselectedItemColor: Colors.grey,
-          selectedItemColor:index==0? Colors.purple:
-          index==1? Colors.green:index==2? Colors.blue:
-          index==3? Colors.orange:Colors.red,
+          selectedItemColor: index == 0
+              ? Colors.purple
+              : index == 1
+                  ? Colors.green
+                  : index == 2
+                      ? Colors.blue
+                      : index == 3
+                          ? Colors.orange
+                          : Colors.red,
           items: [
             BottomNavigationBarItem(
                 backgroundColor: Colors.white,

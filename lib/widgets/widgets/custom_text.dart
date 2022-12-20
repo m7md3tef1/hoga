@@ -17,16 +17,16 @@ class CustomText extends StatelessWidget {
 
   CustomText(
       {Key? key,
-        this.textDecoration,
-        this.textDirection,
-        this.width,
-        this.height,
-        this.align,
-        this.textHeight,
-        required this.text,
-        this.color = ColorManager.blackColor,
-         this.fontSize,
-        this.fontWeight = FontWeight.bold})
+      this.textDecoration,
+      this.textDirection,
+      this.width,
+      this.height,
+      this.align,
+      this.textHeight,
+      required this.text,
+      this.color = ColorManager.blackColor,
+      this.fontSize,
+      this.fontWeight = FontWeight.bold})
       : super(key: key);
 
   @override
@@ -36,17 +36,14 @@ class CustomText extends StatelessWidget {
       height: height,
       child: Center(
         child: Text(
-
           text!,
           textDirection: TextDirection.ltr,
           style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: fontWeight,
-            color: color,
-            height: textHeight,
-             decoration: textDecoration
-          ),
-
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+              color: color,
+              height: textHeight,
+              decoration: textDecoration),
           maxLines: 25,
           textAlign: align,
         ),

@@ -13,22 +13,28 @@ import '../home/view.dart';
 
 part 'units/contact.dart';
 part 'units/form.dart';
+
 class ContactUsView extends StatelessWidget {
-   ContactUsView({Key? key}) : super(key: key);
+  ContactUsView({Key? key}) : super(key: key);
   GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer:  OnDrawer(),
+        drawer: OnDrawer(),
         key: passScaffoldKey,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomAppbar(title: 'Contact Us',scaffoldKey: passScaffoldKey,),
-              SizedBox(height: 22.h,),
+              CustomAppbar(
+                title: 'Contact Us',
+                scaffoldKey: passScaffoldKey,
+              ),
+              SizedBox(
+                height: 22.h,
+              ),
               const Form(),
               SizedBox(
                 height: 22.h,

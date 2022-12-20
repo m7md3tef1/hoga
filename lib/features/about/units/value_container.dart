@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/color_manager/color_manager.dart';
 import '../../../widgets/widgets/custom_text.dart';
+
 class ValueContainer extends StatelessWidget {
   String? image;
   String? title;
   String? desc;
 
-  ValueContainer({this.image, this.title, this.desc});
+  ValueContainer({super.key, this.image, this.title, this.desc});
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +21,33 @@ class ValueContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.r),
               color: ColorManager.whiteColor),
           child: Padding(
-            padding: const EdgeInsets.only(bottom:8.0,top: 30),
+            padding: const EdgeInsets.only(bottom: 8.0, top: 30),
             child: Column(
               children: [
                 Container(
-                  height:MediaQuery.of(context).orientation == Orientation.portrait? 170.h:230,
+                  height:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? 170.h
+                          : 230,
                   width: 250.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      image:  DecorationImage(
-                          image: AssetImage(image!),
-                          fit: BoxFit.cover)),
+                      image: DecorationImage(
+                          image: AssetImage(image!), fit: BoxFit.cover)),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 11.h),
-                          child: CustomText(
-                            text: title,
-                            fontSize: 16.sp,
-                            color: const Color(0xFF012970),
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )),
+                      padding: EdgeInsets.only(top: 11.h),
+                      child: CustomText(
+                        text: title,
+                        fontSize: 16.sp,
+                        color: const Color(0xFF012970),
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )),
                   ],
                 ),
                 Padding(
@@ -53,7 +56,7 @@ class ValueContainer extends StatelessWidget {
                   child: CustomText(
                     align: TextAlign.center,
                     color: const Color(0xFF6C6C6C),
-                    text:desc!,
+                    text: desc!,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                   ),

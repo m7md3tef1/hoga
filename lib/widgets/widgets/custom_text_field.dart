@@ -19,11 +19,11 @@ class CustomTextField extends StatelessWidget {
   var lines;
   var height;
   Color? color;
-  bool isGreyTextColor=true;
+  bool isGreyTextColor = true;
 
   var label;
   var name;
-  bool enabled=true;
+  bool enabled = true;
   CustomTextField(
       {Key? key,
       this.title,
@@ -39,9 +39,9 @@ class CustomTextField extends StatelessWidget {
       this.onSaved,
       this.validate,
       this.suffixIcon,
-        this.isGreyTextColor=true,
+      this.isGreyTextColor = true,
       this.obscure = false,
-        this.enabled=true,
+      this.enabled = true,
       this.prefixIcon})
       : super(key: key);
 
@@ -69,10 +69,12 @@ class CustomTextField extends StatelessWidget {
                         children: [
                           Text(
                             name,
-                            style:isGreyTextColor? TextStyle(
-                                fontSize: 12.sp,
-                                color: ColorManager.greyColor,
-                                fontWeight: FontWeight.w400):TextStyle(),
+                            style: isGreyTextColor
+                                ? TextStyle(
+                                    fontSize: 12.sp,
+                                    color: ColorManager.greyColor,
+                                    fontWeight: FontWeight.w400)
+                                : const TextStyle(),
                           ),
                         ],
                       ),
@@ -83,9 +85,7 @@ class CustomTextField extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(left: 14.0.w, bottom: 0.h),
                       child: TextFormField(
-                        style: TextStyle(
-                          color: ColorManager.darkGrey
-                        ),
+                          style: const TextStyle(color: ColorManager.darkGrey),
                           obscureText: obscure,
                           onSaved: onSaved,
                           validator: validate,
@@ -105,7 +105,6 @@ class CustomTextField extends StatelessWidget {
                             prefixIcon: prefixIcon,
                             suffixIcon: suffixIcon,
                             hintText: hintText,
-
                             hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 14.sp,
@@ -114,7 +113,6 @@ class CustomTextField extends StatelessWidget {
                             border: InputBorder.none,
                             focusColor: ColorManager.blackColor,
                           )),
-
                     ),
                   ),
                 ],

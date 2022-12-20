@@ -35,7 +35,7 @@ class DeleteEditDialog extends StatelessWidget {
             ),
             Expanded(
                 child: CustomButton(
-                    text: btnText=='cancel'?'Ok':btnText,
+                    text: btnText == 'cancel' ? 'Ok' : btnText,
                     function: () {
                       Navigator.pop(context);
                       function!();

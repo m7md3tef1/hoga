@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
 class Expandable extends StatelessWidget {
-   Expandable(this.text,this.desc, {super.key});
-String? text;
-String? desc;
+  Expandable(this.text, this.desc, {super.key});
+  String? text;
+  String? desc;
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +19,38 @@ String? desc;
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(text: text,align:TextAlign.start,fontSize: 16.sp,fontWeight: FontWeight.w600,color: const Color(0xFF000000),),
+              CustomText(
+                text: text,
+                align: TextAlign.start,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF000000),
+              ),
               SizedBox(
-                width: 1.sw,child: const Divider(thickness: 1.5,),),
+                width: 1.sw,
+                child: const Divider(
+                  thickness: 1.5,
+                ),
+              ),
             ],
           ),
         ),
-
-
         expanded: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: desc,fontSize: 14.sp,fontWeight: FontWeight.w600,color: const Color(0xFF7B7B7B),),
+            CustomText(
+              text: desc,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF7B7B7B),
+            ),
           ],
         ),
-        collapsed: const Text('', softWrap: true, ),
-
+        collapsed: const Text(
+          '',
+          softWrap: true,
+        ),
       ),
     );
   }

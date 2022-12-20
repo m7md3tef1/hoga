@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-class ButtonBack extends StatelessWidget {
 
+class ButtonBack extends StatelessWidget {
   const ButtonBack({
     Key? key,
   }) : super(key: key);
@@ -10,17 +10,20 @@ class ButtonBack extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 10.h,),
-
+        SizedBox(
+          height: 10.h,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             InkWell(
-                onTap: ()
-                {
+                onTap: () {
                   Navigator.pop(context);
                 },
-                child:const Icon(Icons.arrow_back_ios,color: Colors.black,)),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                )),
           ],
         ),
       ],

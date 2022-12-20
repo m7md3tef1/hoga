@@ -9,8 +9,13 @@ class CustomScaffold extends StatelessWidget {
   var drawer;
   GlobalKey<ScaffoldState>? scaffoldKey;
 
-
-  CustomScaffold({Key? key, this.appBar, this.drawer, this.body, this.navBar,this.scaffoldKey})
+  CustomScaffold(
+      {Key? key,
+      this.appBar,
+      this.drawer,
+      this.body,
+      this.navBar,
+      this.scaffoldKey})
       : super(key: key);
 
   @override

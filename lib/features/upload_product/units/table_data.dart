@@ -180,10 +180,10 @@ class MyProductTable extends StatelessWidget {
                             .page
                             .toString(),
                         style:
-                        TextStyle(color: Colors.white),
+                        const TextStyle(color: Colors.white),
                       ),
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     InkWell(
                       onTap: () {
                         int page =

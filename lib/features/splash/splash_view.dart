@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
             splashIconSize: 150,
             splash: Image.asset(AppImages.logo),
             nextScreen:
-              Home(),
+              const Home(),
 
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.white));

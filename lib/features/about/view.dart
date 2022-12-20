@@ -15,21 +15,23 @@ part 'units/contact.dart';
 part 'units/our_values.dart';
 part 'units/video.dart';
 
-
 class AboutUsView extends StatelessWidget {
-   AboutUsView({Key? key}) : super(key: key);
+  AboutUsView({Key? key}) : super(key: key);
   GlobalKey<ScaffoldState> passScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        drawer:  OnDrawer(),
+        drawer: OnDrawer(),
         key: passScaffoldKey,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'About Us',scaffoldKey: passScaffoldKey,),
+            CustomAppbar(
+              title: 'About Us',
+              scaffoldKey: passScaffoldKey,
+            ),
             SizedBox(
               height: 22.h,
             ),
@@ -42,14 +44,13 @@ class AboutUsView extends StatelessWidget {
                     SizedBox(
                       height: 38.h,
                     ),
-                     Video(),
+                    const Video(),
                     const Values(),
                     const Contact()
                   ],
                 ),
               ),
             ),
-
           ],
         ),
       ),

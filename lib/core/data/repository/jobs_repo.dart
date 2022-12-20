@@ -4,24 +4,24 @@ import '../local/cacheHelper.dart';
 import '../models/jobs/GetJop_model.dart';
 import '../models/jobs/get_jop.dart';
 
-class JobsRepo{
-
-
+class JobsRepo {
   static addJopTest({context}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     print('token is >>>>>>>>>>>>>>>>>>>>>>>>>>>>$token');
-    return await Api().getHttp(url: "profile/current-subscription", authToken: token);
+    return await Api()
+        .getHttp(url: "profile/current-subscription", authToken: token);
   }
+
   static Future<List<GetJop>> getJop(url, self,
       {GetJop? productModel,
-        titleController,
-        page,
-        city2,
-        country2,
-        state2,
-        jopTypeId,
-        jopCategortId,
-        isFilter}) async {
+      titleController,
+      page,
+      city2,
+      country2,
+      state2,
+      jopTypeId,
+      jopCategortId,
+      isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response;
     print(city2);
@@ -34,7 +34,7 @@ class JobsRepo{
     print(self);
     if (isFilter) {
       response =
-      await Api().getHttp(url: url, authToken: token, self: self, data: {
+          await Api().getHttp(url: url, authToken: token, self: self, data: {
         "per_page": 10,
         "page": page,
         "city": city2,
@@ -62,6 +62,7 @@ class JobsRepo{
 
     return productsList;
   }
+
   static deleteJop(productId) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     print('token is >>>>>>>>>>>>>>>>>>>>>>>>>>>>$token');
@@ -70,6 +71,7 @@ class JobsRepo{
     return await Api()
         .getHttp(url: "jobs/delete", authToken: token, data: {"id": productId});
   }
+
   static Future<List<GetJop>> getJop2(url) async {
     String token = await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(url: url, authToken: token);

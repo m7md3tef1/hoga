@@ -125,29 +125,6 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
     });
   }
 
-  /*
-  getSubscriptionData() async {
-    var token = await CacheHelper.getString(SharedKeys.token);
-    var response = Api().getHttp(
-      url: 'profile/current-subscription',
-      authToken: token,
-    );
-    emit(GetSubscriptionLoading());
-    print(response);
-    response
-        .then((value) => {
-      print('**********'),
-      print(value),
-      subscriptionData = value,
-      emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
-    })
-        .onError((error, stackTrace) => {
-      emit(GetSubscriptionFailed(error.toString())),
-      print(error),
-    });
-  }
-  */
-
   cancelSubscriptionCubit() {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
-import 'package:hoga_load/features/blogs/blog_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../core/data/local/cacheHelper.dart';
 import '../../core/data/models/vehicle/vehicles.dart';
 import '../../core/keys/keys.dart';
-import '../../core/router/router.dart';
 import '../../features/search_product/units/login_details.dart';
 import '../../features/search_product/units/upgrade_details.dart';
 
@@ -25,19 +21,17 @@ class CustomContainerVehicle extends StatelessWidget {
     );
     await launchUrl(launchUri);
   }
-  Future<void> _launchURl(email)async{
-    final Uri params =Uri(
-        scheme: 'mailto',
-        path: email
-    );
-    String url=params.toString();
-    if(await canLaunch(url)){
+
+  Future<void> _launchURl(email) async {
+    final Uri params = Uri(scheme: 'mailto', path: email);
+    String url = params.toString();
+    if (await canLaunch(url)) {
       await launch(url);
-    }else{
+    } else {
       print('could mot lauch $url');
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -80,12 +74,11 @@ class CustomContainerVehicle extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomText(
-                            text:
-                            !CacheHelper.getBool(SharedKeys.isLogin)?"Login to view Name":
-
-                            load.user == null
-                                ? 'Upgrade MemberShip to view Name'
-                                : load.user!.username.toString(),
+                            text: !CacheHelper.getBool(SharedKeys.isLogin)
+                                ? "Login to view Name"
+                                : load.user == null
+                                    ? 'Upgrade MemberShip to view Name'
+                                    : load.user!.username.toString(),
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey,
@@ -107,7 +100,7 @@ class CustomContainerVehicle extends StatelessWidget {
                           color: ColorManager.primaryColor,
                           size: 20.h,
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: CustomText(
                             align: TextAlign.start,
@@ -132,7 +125,7 @@ class CustomContainerVehicle extends StatelessWidget {
                           fit: BoxFit.cover,
                           color: ColorManager.primaryColor,
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Expanded(
                           child: CustomText(
                             text: '${load.weight} Kg(s)' ?? 'other',
@@ -169,68 +162,72 @@ class CustomContainerVehicle extends StatelessWidget {
                       ],
                     ),
                   ),
-                  !CacheHelper.getBool(SharedKeys.isLogin)?
-                  const LoginDetails():
-                  load.user==null?const UpgradeDetails():
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 15.h, top: 15.h),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.phone_callback,
-                              color: ColorManager.primaryColor,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: (){
-                                _makePhoneCall(load.user!.contactNumber!);
-                              },
-                              child: CustomText(
-                                text: load.user == null
-                                    ? 'other'
-                                    : load.user!.contactNumber!.toString(),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 6,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.email_outlined,
-                            color: ColorManager.primaryColor,
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          InkWell(
-                            onTap: (){
-                              _launchURl(load.user!.email!);
-                            },
-                            child: CustomText(
-                              text: load.user == null
-                                  ? 'other'
-                                  :load.user!.email!.toString(),
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
+                  !CacheHelper.getBool(SharedKeys.isLogin)
+                      ? const LoginDetails()
+                      : load.user == null
+                          ? const UpgradeDetails()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: 15.h, top: 15.h),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.phone_callback,
+                                        color: ColorManager.primaryColor,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          _makePhoneCall(
+                                              load.user!.contactNumber!);
+                                        },
+                                        child: CustomText(
+                                          text: load.user == null
+                                              ? 'other'
+                                              : load.user!.contactNumber!
+                                                  .toString(),
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 6,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.email_outlined,
+                                      color: ColorManager.primaryColor,
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _launchURl(load.user!.email!);
+                                      },
+                                      child: CustomText(
+                                        text: load.user == null
+                                            ? 'other'
+                                            : load.user!.email!.toString(),
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
                 ],
               ),
             )

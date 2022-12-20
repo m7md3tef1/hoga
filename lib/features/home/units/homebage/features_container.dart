@@ -11,7 +11,7 @@ class FeaturesContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(top: 16.h),
+      padding: EdgeInsets.only(top: 16.h),
       child: Container(
         height: 53.h,
         width: 1.sw,

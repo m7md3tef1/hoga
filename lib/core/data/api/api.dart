@@ -24,19 +24,16 @@ class Api {
       print('GET REQUEST: $baseUrl$url');
       if (e.response!.statusCode == 401) {
         throw Exception(e.response!.data);
-       // return e.response!.statusCode;
       } else {
-        //  ResponseModel responseModel=ResponseModel.fromJson(e.response!.data);
         print('------------------------');
         print(e.response!.data);
         print(e.error);
         print('------------------------');
-        //return e.error;
         throw Exception(e.response!.data);
-
       }
     }
   }
+
   Future<dynamic> postHttp({required url, data, authToken, queryParams}) async {
     try {
       var response = await Dio().post(baseUrl + '$url',
@@ -57,14 +54,11 @@ class Api {
       }
     } on DioError catch (e) {
       print('Failed POST REQUEST: $baseUrl$url');
-
-      // ResponseModel responseModel = ResponseModel.fromJson(e.response!.data);
       print('------------------------');
       print(e.error);
       print(e.response);
       print('------------------------');
 
-//      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
       throw Exception(e.response!.data);
     }
   }
