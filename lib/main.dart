@@ -77,8 +77,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ChangePassCubit()),
         BlocProvider(
             create: (_) => UpdateProfileCubit()
-              ..getUserProfileData()
-              ..profileData),
+//            ..getSubscriptionData()
+//              ..getUserProfileData()
+//              ..profileData
+        ),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))

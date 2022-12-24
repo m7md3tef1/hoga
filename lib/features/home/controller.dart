@@ -36,7 +36,7 @@ class HomeCubit extends Cubit<HomeStates> {
     if (currentIndex == 2)
       LoadsCubit.get(context).getLoad(self: 0, isFilter: false);
     if (currentIndex == 1) ProductsCubit.get(context).getProduct();
-    if (currentIndex == 4) JopCubit.get(context).getJops(isFilter: false);
+    if (currentIndex == 4) JopCubit.get(context).getJops(isFilter: false,self: 0);
 
     emit(ChangeBottomNavState());
   }

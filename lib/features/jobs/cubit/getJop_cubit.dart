@@ -82,7 +82,7 @@ class JopCubit extends Cubit<AddJopStates> {
                 jopTypeId: jopTypeId,
                 jopCategortId: jopCategortId,
                 page: page,
-                isFilter: isFilter)
+                isFilter: isFilter??false)
             .then((value) => {
                   myJopLoading = false,
                   print('................!!!..................'),

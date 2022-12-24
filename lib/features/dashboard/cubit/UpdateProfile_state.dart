@@ -50,6 +50,7 @@ class CancelSuccess extends UpdateProfileStates {
 class CancelLoading extends UpdateProfileStates {
 
 }
+
 class CancelFailed extends UpdateProfileStates {
 
 }

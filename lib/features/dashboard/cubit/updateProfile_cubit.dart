@@ -103,7 +103,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
           print(value),
           if(value['record']['subscription_details']['subscription_id']==null){
             unSubscribe=true,
+            emit(UnSubscribe()),
           }else{
+            unSubscribe=false,
+
             subscriptionData = SubscriptionModel.fromJson(value['record']),
             emit(GetSubscriptionSuccess(SubscriptionModel.fromJson(value))),
           }

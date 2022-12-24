@@ -23,6 +23,7 @@ class JobsRepo {
       jopCategortId,
       isFilter}) async {
     String token = await CacheHelper.getString(SharedKeys.token);
+    print('page is $page');
     var response;
     print(city2);
     print(jopCategortId);
@@ -49,7 +50,7 @@ class JobsRepo {
           url: url,
           authToken: token,
           self: self,
-          data: {"per_page": 10, "page": page});
+          data: {"per_page": 10, "page": page,"paginate":1});
     }
 
     List<GetJop> productsList = [];
